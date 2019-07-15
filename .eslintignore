@@ -1,0 +1,6 @@
+build/*.js
+config/*.js
+src/assets
+src/views/mall_center/cinema_mgr/cinema_connect/BaseInfo.vue
+src/utils/sha1.js
+src/utils/md5.js

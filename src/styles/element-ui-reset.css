@@ -1,0 +1,71 @@
+.el-button + .el-button {
+  margin-left: 20px;
+}
+.v-modal {
+  opacity: 0.25;
+}
+.el-table th {
+  background-color: #f7f8fa;
+  font-weight: normal;
+  color: #303133 !important;
+}
+.el-table .el-button--medium {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+.el-pager {
+  font-weight: 400;
+}
+.el-dialog__footer {
+  text-align: center;
+}
+.el-dialog__title {
+  position: relative;
+}
+.el-dialog__title:after {
+  content: " ";
+  height: 2px;
+  width: 18px;
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  background-color: #3ca0ec;
+}
+.el-form-item__label {
+  color: #303133;
+}
+.form-collapse.el-collapse {
+  border-top: 0;
+  border-bottom: 0;
+}
+.form-collapse > div > div > .el-collapse-item__header {
+  height: 58px;
+  line-height: 58px;
+  color: #3ca0ec;
+  font-size: 16px;
+  border-bottom-color: #ebeef5;
+}
+.form-collapse > div > .el-collapse-item__wrap {
+  border-bottom: 0;
+}
+.form-collapse > div > .el-collapse-item__wrap > .el-collapse-item__content {
+  padding: 20px 0px 20px 0px;
+}
+.el-checkbox.mr-check {
+  margin-left: 0px;
+}
+.el-checkbox.mr-check:not(:last-child) {
+  margin-right: 30px;
+}
+.el-checkbox.hideInput {
+  margin-left: 0px;
+}
+.el-checkbox.hideInput:not(:last-child) {
+  margin-right: 30px;
+}
+.el-checkbox.hideInput .el-checkbox__input {
+  display: none;
+}
+.el-checkbox.choose-item.isChecked .el-checkbox__label {
+  color: #fff !important;
+}
