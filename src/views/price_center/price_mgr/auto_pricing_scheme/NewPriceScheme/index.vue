@@ -95,9 +95,8 @@
 import RulesList from './components/RulesList'
 import CommonSelect from '@/components/CommonSelect'
 import { getSelectValue } from '@/utils'
-import { getAutoPriceInfo } from '@/api/priceCenter'
 import { createRuleItem } from '@/views/price_center/price_mgr/auto_pricing_scheme/constant'
-import { createAutoPrice, updateAutoPrice } from '@/api/priceCenter'
+import { getAutoPriceInfo, createAutoPrice, updateAutoPrice } from '@/api/priceCenter'
 export default {
   components: {
     RulesList,
@@ -168,9 +167,6 @@ export default {
     }
   },
   watch: {
-    // copyType(val) {
-    //   this.info.copyType = val && val.length > 0 ? val.join(',') : ''
-    // },
     'info.filmType'(val, oldVal) {
       if (+oldVal === 1 && +val === 0) {
         this.info.filmNo = ''
@@ -180,7 +176,7 @@ export default {
   mounted() {
     if (this.$route.query && this.$route.query.id) {
       this.id = this.$route.query.id
-      this.info.if = this.id
+      this.info.id = this.id
       this.getDetial()
     } else {
       this.info.rule.push(createRuleItem())
@@ -206,7 +202,7 @@ export default {
       }
       if (info.filmNo) {
         const filmNoArr = info.filmNo.split(',')
-        const filmNameArr = info.filmNo.split(',')
+        const filmNameArr = info.filmName.split(',')
         this.defaultFilms = filmNoArr.map((v, i) => {
           return {
             value: filmNoArr[i],

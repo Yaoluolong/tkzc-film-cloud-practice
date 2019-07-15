@@ -14,6 +14,7 @@
       </el-form-item>
     </el-form>
     <zm-table :columns="columns" :fetch="loadList" :table-params="tableParams"></zm-table>
+    <pricing-detail v-if="detailPanel.visible" :id="detailPanel.id" @cancel="closeDetailPanel"></pricing-detail>
   </div>
 </template>
 <script>
@@ -21,17 +22,23 @@ import zmTable from '@/components/isNeedComponents/zmTable/index'
 import zmTableMixin from '@/mixins/zmTableMixin'
 import { autoSchemeColumns } from './constant'
 import { getAutoPricePageList, setAutoPriceStatus } from '@/api/priceCenter'
+import PricingDetail from './PricingDetail'
 export default {
   mixins: [zmTableMixin],
   components: {
-    zmTable
+    zmTable,
+    PricingDetail
   },
   data() {
     return {
       params: {
         name: null
       },
-      columns: autoSchemeColumns(this)
+      columns: autoSchemeColumns(this),
+      detailPanel: {
+        visible: false,
+        id: null
+      }
     }
   },
   methods: {
@@ -52,7 +59,18 @@ export default {
       })
       this.loadList()
     },
-    openDetail(row) {},
+    openDetail(row) {
+      this.detailPanel = {
+        visible: true,
+        id: row.id
+      }
+    },
+    closeDetailPanel() {
+      this.detailPanel = {
+        visible: false,
+        id: null
+      }
+    },
     openEdit(row) {
       this.$router.push({
         path: '/price_center/price_mgr/auto_pricing_scheme/edit',

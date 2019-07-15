@@ -5,7 +5,7 @@
       :key="ruleIndex"
       :rule-data="ruleData"
       :rule-index="ruleIndex"
-      :is-show-delete="rules.length>1&&ruleIndex>0"
+      :is-show-delete="rules.length>1"
       :is-show-add="rules.length<maxLength"
       :program-id="programId"
       @on-add="addItem"

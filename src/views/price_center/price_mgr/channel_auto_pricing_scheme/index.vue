@@ -1,8 +1,14 @@
 <template>
   <div class="app-container wp100 hp100 mall-auto-prcie">
-    <div class="df">123456
-      <div class="mall-auto-prcie__menu"></div>
-      <div class="mall-auto-prcie__container flex-one">
+    <div class="df wp100 hp100">
+      <div class="mall-auto-prcie__menu bg-f mr10">
+        <div class="pd15">
+          <el-radio-group v-model="params.type">
+            <el-radio-button v-for="(item, index) in CHANNEL_TYPES" :key="index" :label="item.vaule">{{item.label}}</el-radio-button>
+          </el-radio-group>
+        </div>
+      </div>
+      <div class="mall-auto-prcie__container flex-one bg-f">
         <!-- <pricing-table></pricing-table> -->
       </div>
     </div>
@@ -12,8 +18,9 @@
 // import zmTable from '@/components/isNeedComponents/zmTable/index'
 // import zmTableMixin from '@/mixins/zmTableMixin'
 // import { autoSchemeColumns } from './constant'
-// import { getAutoPricePageList, setAutoPriceStatus } from '@/api/priceCenter'
+import { getChannelPageList } from '@/api/mallCenter'
 import pricingTable from './pricingTable'
+import { CHANNEL_TYPES } from '@/model/type'
 export default {
   // mixins: [zmTableMixin],
   components: {
@@ -21,8 +28,9 @@ export default {
   },
   data() {
     return {
+      CHANNEL_TYPES,
       params: {
-        name: null
+        type: '1'
       }
       // columns: autoSchemeColumns(this)
     }
@@ -32,8 +40,8 @@ export default {
   },
   methods: {
     async loadList() {
-      // const res = await getAutoPricePageList(this.assignQuery(this.params))
-      // this.initialTableData(res.data, res.count)
+      const res = await getChannelPageList(this.assignQuery(this.params))
+      this.initialTableData(res.data, res.count)
     },
     openDetail(row) {},
     openEdit(row) {
@@ -54,11 +62,11 @@ export default {
 //   background-color: #e9eef3;
 // }
 .mall-auto-prcie {
-  padding: 0;
+  // padding: 0;
   margin: 0;
   background-color: #e9eef3;
-  &__header {
-    width: 300px;
+  &__menu {
+    width: 160px;
   }
 }
 </style>

@@ -46,7 +46,6 @@ export default {
   },
   methods: {
     initWeekList() {
-      debugger
       if (this.item.week) this.form.weekList = this.item.week.split(',')
     },
     onChangeWeek(val) {

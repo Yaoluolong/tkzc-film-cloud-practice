@@ -153,14 +153,7 @@ export default {
   },
   watch: {
     defaultSelection(val, oldVal) {
-      if (oldVal || !val) return
-      if (val instanceof Array) {
-        this.options = val.slice(0)
-        this.selections = val.map(v => v[this.selectKey])
-      } else {
-        this.options = [val]
-        this.selections = val[this.selectKey]
-      }
+      this.showDefault(val, oldVal)
     },
     isReload(val) {
       if (val) this.onSearch()
@@ -175,6 +168,7 @@ export default {
       ...this.attrOptions
     }
     this.getType()
+    this.showDefault(this.defaultSelection)
     // 防抖、节流
     this.throttleInputChange = debounce(300, this.onSearch)
     this.debouncedScroll = throttle(300, this.onScroll)
@@ -188,6 +182,16 @@ export default {
   methods: {
     throttleInputChange() {},
     debouncedScroll() {},
+    showDefault(val, oldVal) {
+      if (oldVal || !val) return
+      if (val instanceof Array) {
+        this.options = val.slice(0)
+        this.selections = val.map(v => v[this.selectKey])
+      } else {
+        this.options = [val]
+        this.selections = val[this.selectKey]
+      }
+    },
     onSearch(val = '') {
       this.query.page = 1
       this.query[this.selectName] = val
