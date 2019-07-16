@@ -42,7 +42,7 @@ export default {
     initialTableData(dataList, totalCount) {
       const tableParams = this.tableParams
       tableParams.count = totalCount
-      tableParams.data = Object.freeze(dataList)
+      this.$set(this.tableParams, 'data', Object.freeze(dataList))
     },
     /**
      * 获取table组件的引用

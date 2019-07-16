@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-table
-       v-loading="options.loading"
+      v-loading="options.loading"
       :data="tableParams.data"
       :stripe="tableOpt.stripe"
       :border="tableOpt.border"
@@ -51,7 +51,13 @@
 
             <!-- render -->
             <template v-else>
-              <RenderDom :row="scope.row" :col-index="index" :row-index="scope.$index" :render="column.render" :column="column" />
+              <RenderDom
+                :row="scope.row"
+                :col-index="index"
+                :row-index="scope.$index"
+                :render="column.render"
+                :column="column"
+              />
             </template>
 
             <!-- render button -->
@@ -170,9 +176,9 @@ export default {
       selectionsCache: {
         maps: {},
         total: 0
-      },
+      }
       // 用饿了么的方法获取已选项
-      elSelectionsCache: []
+      // elSelectionsCache: []
     }
   },
   props: {
@@ -295,21 +301,22 @@ export default {
       return this.selectionsCache.total || 0
     },
     // 获取已选数据的数组
-    getSelectionsList(isEl) {
+    getSelectionsList() {
       let list = []
-      if (isEl) {
-        list = this.elSelectionsCache
-      } else {
+      if (this.defaultSelections.length) {
         for (const key in this.selectionsCache.maps) {
           list.push(this.selectionsCache.maps[key])
         }
+      } else {
+        // list = this.elSelectionsCache;
+        list = this.$refs.zmTable.selection.slice(0) || []
       }
       return list
     },
     // 清除所有选择的数据
     clearSelection() {
-      this.$refs.zmTable.clearSelection()
-      this.elSelectionsCache = []
+      this.$refs.zmTable && this.$refs.zmTable.clearSelection()
+      // this.elSelectionsCache = [];
       this.$set(this.selectionsCache, 'maps', {})
       this.$set(this.selectionsCache, 'total', 0)
     },
@@ -338,7 +345,12 @@ export default {
         // 取消删除一行
         this.removeRows([row])
       }
-      this.elSelectionsCache = allRows
+      // this.elSelectionsCache = allRows;
+      this.$emit(
+        'select',
+        this.getSelectionsList(),
+        this.getSelectionsCacheLength()
+      )
     },
     // 表格全选事件
     handleAllSelectionChange(selection) {
@@ -349,6 +361,11 @@ export default {
       } else {
         this.removeRows(dataList)
       }
+      this.$emit(
+        'select-all',
+        this.getSelectionsList(),
+        this.getSelectionsCacheLength()
+      )
     },
     // 添加选中行
     addRows(rows) {

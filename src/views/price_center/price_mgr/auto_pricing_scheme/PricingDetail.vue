@@ -1,37 +1,49 @@
 <template>
-    <zm-panel title="智能定价详情" :visible.sync="visible" @change="closePanel">
-        <el-form label-width="100px">
-            <div class="mtb20">
-                基本信息
+  <zm-panel title="智能定价详情" :visible.sync="visible" @change="closePanel">
+    <el-form label-width="100px">
+      <div class="mtb20">基本信息</div>
+      <el-form-item label="方案名称:">{{info.name}}</el-form-item>
+      <el-form-item label="有效期:">{{info.startDate}}&nbsp;&nbsp;-&nbsp;&nbsp;{{info.endDate}}</el-form-item>
+      <el-form-item label="系统商:">{{info.interfaceName}}</el-form-item>
+      <el-form-item label="区域:" v-if="+info.programType===2">{{info.cinemaGroupName||'全部'}}</el-form-item>
+      <el-form-item label="影片:" v-if="+info.programType===2">{{info.filmName}}</el-form-item>
+      <el-form-item label="制式:" v-if="+info.programType===2">{{info.copyType.join('、')}}</el-form-item>
+    </el-form>
+    <el-form label-width="120px" v-for="(item,index) in info.rule" :key="index">
+      <div class="mtb20">定价规则{{index+1}}</div>
+      <el-form-item label="配置时间:">
+        <div v-if="+item.timeType===1">有效期内，所有时间段可用</div>
+        <div v-else-if="+item.timeType===2">
+          <div v-for="(rule,idx) in item.timeRule" :key="idx">
+            <div>
+              {{idx+1}}. 有效期内，
+              <span v-if="+item.dateType===1">
+                {{getWeekLabel(rule.week)}}
+              </span>
+              <span v-else-if="+item.dateType===2">
+                {{rule.startDate}}&nbsp;-&nbsp;{{rule.endDate}}
+              </span>
             </div>
-            <el-form-item label="方案名称:">{{info.name}}</el-form-item>
-            <el-form-item label="有效期:">{{info.startDate}}&nbsp;&nbsp;-&nbsp;&nbsp;{{info.endDate}}</el-form-item>
-            <el-form-item label="系统商:">{{info.interfaceName}}</el-form-item>
-        </el-form>
-        <el-form label-width="120px" v-for="(item,index) in info.rule" :key="index">
-            <div>定价规则{{index+1}}</div>
-            <el-form-item label="配置时间:" v-if="+item.timeType===1">有效期内，所有时间段可用</el-form-item>
-            <el-form-item label="配置时间:" v-else-if="+item.timeType===2">
-              <div v-for="(rule,idx) in item.timeRule" :key="idx">
-                <div>
-                  有效期内，{{getWeekLabel(rule.week)}}
-                </div>
-                <div>
-                  <!-- <span v-for="(time,i) in rule.time" :key="i">
-                    {{time.startTime}}&nbsp;&nbsp;-&nbsp;&nbsp;{{time.endTime}}
-                    <span>{{(i<rule.time.length-1)?'、':''}}</span>
-                  </span> -->
-                  {{getTimeLabel(rule.time)}}
-                  可用
-                </div>
-              </div>
-            </el-form-item>
-            <el-form-item label="配置时间:" v-else-if="+item.timeType===2">
-            </el-form-item>
-            <el-form-item label="定价方式:">参考第三方价格{{getPricingType(item.priceType)}}</el-form-item>
-            <el-form-item label="配置价格:">参考第三方价格，统一{{+item.type===1?'减少':'增加'}}{{item.price}}元</el-form-item>
-        </el-form>
-    </zm-panel>
+            <div>
+              {{getTimeLabel(rule.time)}}
+              可用
+            </div>
+          </div>
+        </div>
+        <div v-else>
+          <div v-for="(rule,idx) in item.timeRule" :key="idx">
+            {{idx+1}} .有效期内，{{rule.date}}
+            <div>
+              {{getTimeLabel(rule.time)}}
+              可用
+            </div>
+          </div>
+        </div>
+      </el-form-item>
+      <el-form-item label="定价方式:">参考第三方价格{{getPricingType(item.priceType)}}</el-form-item>
+      <el-form-item label="配置价格:">参考第三方价格，统一{{+item.type===1?'减少':'增加'}}{{item.price}}元</el-form-item>
+    </el-form>
+  </zm-panel>
 </template>
 <script>
 import { WEEKS } from '@/model/type'
@@ -77,6 +89,8 @@ export default {
         return res.label
       })
       return strList.join('、')
+    },
+    getDateRangeLabel(rule) {
     },
     getTimeLabel(time) {
       const strList = time.map(v => {

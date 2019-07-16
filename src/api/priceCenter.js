@@ -139,3 +139,20 @@ export function updateAutoPrice(params) {
 export function getAutoPriceInfo(params) {
   return request.post('/systemApi/autoPriceProgram/getInfo', params)
 }
+
+// 获取商家智能定价方案列表
+export function getChannelProgramList(params) {
+  return request.post('/systemApi/autoPriceProgram/getChannelProgramList', params)
+}
+// 添加商家智能定价方案
+export function addChannelProgram(params) {
+  return request.post('/systemApi/autoPriceProgram/addChannelProgram', params)
+}
+// 删除渠道智能定价方案
+export function delChannelProgram(params) {
+  return request.post('/systemApi/autoPriceProgram/delChannelProgram', params)
+}
+// 编辑排序渠道智能定价方案
+export function setSort(params) {
+  return request.post('/systemApi/autoPriceProgram/setSort', params)
+}

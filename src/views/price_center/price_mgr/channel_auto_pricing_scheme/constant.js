@@ -5,43 +5,28 @@ export const autoSchemeColumns = context => {
   return [
     {
       label: '权重',
-      render: (h, row) => {
-        return <span class={isDisable(row)}>{row.name}</span>
-      }
+      prop: 'sort'
     },
     {
       align: 'left',
-      label: '方案名称',
-      render: (h, row) => {
-        return <span class={isDisable(row)}>{row.name}</span>
-      }
+      prop: 'name',
+      label: '方案名称'
     },
     {
       label: '有效日期',
       render: (h, row) => {
-        const start =
-          row.startDate.length > 10
-            ? row.startDate.slice(0, 10)
-            : row.startDate
-        const end =
-          row.endDate.length > 10 ? row.endDate.slice(0, 10) : row.endDate
-        return (
-          <span class={isDisable(row)}>
-            {start}&nbsp;&nbsp;-&nbsp;&nbsp;{end}
-          </span>
-        )
+        return <span>
+          {row.startDate}&nbsp;&nbsp;-&nbsp;&nbsp;{row.endDate}
+        </span>
       }
     },
     {
       label: '状态',
-      render: (h, row) => {
-        return <span class={isDisable(row)}>{row.statusName}</span>
-      }
+      prop: 'statusName'
     },
     {
       label: '操作',
-      fixed: 'right',
-      width: 200,
+      width: 160,
       render: (h, row) => {
         const edit = (
           <el-button
@@ -67,6 +52,44 @@ export const autoSchemeColumns = context => {
             {detail}
           </div>
         )
+      }
+    },
+    {
+      label: '拖动排序',
+      width: 160,
+      render: (h, row) => {
+        return <i class='el-icon-rank'></i>
+      }
+    }
+  ]
+}
+export const chooseAutoSchemeColumns = context => {
+  return [
+    {
+      align: 'left',
+      label: '方案名称',
+      render: (h, row) => {
+        return <span class={isDisable(row)}>{row.name}</span>
+      }
+    },
+    {
+      label: '有效日期',
+      render: (h, row) => {
+        return (
+          <span class={isDisable(row)}>
+            {row.startDate}&nbsp;&nbsp;-&nbsp;&nbsp;{row.endDate}
+          </span>
+        )
+      }
+    },
+    {
+      prop: 'createTime',
+      label: '创建时间'
+    },
+    {
+      label: '状态',
+      render: (h, row) => {
+        return <span class={isDisable(row)}>{row.statusName}</span>
       }
     }
   ]
