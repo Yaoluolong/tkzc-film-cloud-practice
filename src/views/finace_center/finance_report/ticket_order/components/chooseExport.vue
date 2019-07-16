@@ -107,11 +107,14 @@ export default {
       }
     },
     async exportBtn() {
-      let query = {
-        requestType: 'export',
-        orderId: this.exportParams.exportIds || ''
+      let query = {}
+      if (!this.exportParams.exportIds) {
+        query = Object.assign({}, this.exportParams.query, {
+          requestType: 'export',
+          orderId: this.exportParams.exportIds || ''
+          // 缺选中的表头id参数
+        })
       }
-      if (!this.exportParams.exportIds) query = Object.assign({}, query, this.exportParams.query)
       await getOrderPageList(query)
       this.showWaring = true
     },

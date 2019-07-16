@@ -15,15 +15,16 @@
             <el-radio :label="'1'">接收</el-radio>
             <el-radio :label="'2'">拒绝</el-radio>
           </el-radio-group>
-          <span v-else>{{info.status}}</span>
+          <span v-else>{{info.statusName}}</span>
         </el-form-item>
         <el-form-item label="处理时间：" prop="status" v-if="+detailParams.status!==0">
-          <span>{{info.operTime}}</span>
+          <span>{{info.handleTime}}</span>
         </el-form-item>
+        <div v-if="+detailParams.status===0||+detailParams.status===2">
         <el-form-item
           label="备注："
           prop="approvalContent"
-          v-if="+detailParams.status===2||+detailParams.status===0"
+          v-if="+params.status===2"
         >
           <el-input
             :disabled="+detailParams.status===2"
@@ -34,6 +35,7 @@
             placeholder="请输入拒绝理由，不超过300个字"
           ></el-input>
         </el-form-item>
+        </div>
         <el-form-item label="销售订单号" prop="status" v-else>
           <el-button
             type="text"
@@ -89,6 +91,7 @@ export default {
     async submit() {
       const valid = await this.$refs.form.validate()
       if (!valid) return
+      this.params.id = this.id
       await setApprovalStatus(this.params)
       this.$message.success('申请处理成功')
       this.$emit('save-after')

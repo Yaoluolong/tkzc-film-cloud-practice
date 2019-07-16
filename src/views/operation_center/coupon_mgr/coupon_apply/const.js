@@ -51,6 +51,10 @@ export const couponApplyColumns = context => {
 
 // 券申请详情类型
 export const couponApplyDetaliType = info => {
+  const manager = []
+  Array.isArray(info.manager) && info.manager.forEach(e => {
+    manager.push(e.realName)
+  })
   return [
     {
       name: '申请流程名称',
@@ -58,7 +62,7 @@ export const couponApplyDetaliType = info => {
     },
     {
       name: '业务员',
-      render: Array.isArray(info.manager) ? info.manager.join(',') : ''
+      render: Array.isArray(manager) ? manager.join(',') : ''
     },
     {
       name: '申请时间',

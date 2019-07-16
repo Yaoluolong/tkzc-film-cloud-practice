@@ -55,7 +55,7 @@ export default {
           break
         case 'edit':
           this.editId = row.id
-          this.newParams = { name: row.name }
+          this.newParams = { name: row.name, logoImg: row.logoImg }
           this.newPanelShow = true
           break
         case 'del':
