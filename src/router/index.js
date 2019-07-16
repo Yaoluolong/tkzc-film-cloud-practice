@@ -4,8 +4,8 @@ import commonRouter from './common'
 import systemSettingRouter from './systemSetting'
 import mallCenterRouter from './mallCenter'
 import priceCenterRouter from './priceCenter'
-// import financeCenterRouter from './financeCenter'
-// import operationCenterRouter from './operationCenter'
+import financeCenterRouter from './financeCenter'
+import operationCenterRouter from './operationCenter'
 
 Vue.use(Router)
 
@@ -63,21 +63,21 @@ export const asyncRouterMap = [
     component: NavLayout,
     redirect: '/price_center/price_policy_mgr/price_policy_program',
     children: [...priceCenterRouter]
+  },
+  {
+    path: '/finace_center',
+    name: 'finace_center',
+    meta: { title: '财务中心' },
+    component: NavLayout,
+    redirect: '/finace_center/finance_report/ticket_order',
+    children: [...financeCenterRouter]
+  },
+  {
+    path: '/operation_center',
+    name: 'operation_center',
+    meta: { title: '运营中心' },
+    component: NavLayout,
+    redirect: '/operation_center/user_mgr/member_list',
+    children: [...operationCenterRouter]
   }
-  // {
-  //   path: '/finace_center',
-  //   name: 'finace_center',
-  //   meta: { title: '财务中心' },
-  //   component: NavLayout,
-  //   redirect: '/finace_center/finance_report/ticket_order',
-  //   children: [...financeCenterRouter]
-  // },
-  // {
-  //   path: '/operation_center',
-  //   name: 'operation_center',
-  //   meta: { title: '运营中心' },
-  //   component: NavLayout,
-  //   redirect: '/operation_center/user_mgr/member_list',
-  //   children: [...operationCenterRouter]
-  // }
 ]

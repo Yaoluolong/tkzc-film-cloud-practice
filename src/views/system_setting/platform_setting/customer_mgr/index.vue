@@ -1,119 +1,75 @@
 <template>
   <div class="app-container">
-    <el-form inline label-width="120px">
-      <el-form-item label="分销商名称">
-        <customer-selector
-          v-model="query.customer"
-          access-type="couponLimit"
-          select-style="width:230px"
-          :isAddNew="false"
-        ></customer-selector>
-      </el-form-item>
-      <el-form-item label="申请流程名称">
-        <el-input v-model="query.name" clearable placeholder="请输入申请流程名称" class="w230"></el-input>
-      </el-form-item>
-      <el-form-item label="券类型">
-        <remote-select
-          clearable
-          v-model="query.couponStyle"
-          showAllOption
-          placeholder="请选择电影券类型"
-          action="/systemApi/dict/getList"
-          :query="{type:'couponStyle'}"
-          class="w230"
-        ></remote-select>
-      </el-form-item>
-      <el-form-item label="券种类">
-        <remote-select
-          clearable
-          v-model="query.couponType"
-          showAllOption
-          placeholder="请选择电影券种类"
-          action="/systemApi/dict/getList"
-          :query="{type:'couponType'}"
-          class="w230"
-        ></remote-select>
-      </el-form-item>
-      <el-form-item label="申请状态">
-          <remote-select
-          clearable
-          v-model="query.status"
-          showAllOption
-          placeholder="请选择电影券种类"
-          action="/systemApi/dict/getList"
-          :query="{type:'couponApplicationStatus'}"
-          class="w230"
-        ></remote-select>
-      </el-form-item>
-      <el-form-item label="申请时间">
-        <el-date-picker
-          v-model="orderTimeRange"
-          type="daterange"
-          value-format="yyyy-MM-dd"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
-          @change="chooseData"
-          class="w230"
-        ></el-date-picker>
+    <el-form inline label-width="80px">
+      <el-form-item label="客户名称">
+        <el-input v-model="query.name" clearable placeholder="请输入客户名称" class="w230"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" @click="onSearch">查询</el-button>
+        <el-button type="danger" icon="el-icon-plus" @click="onOperateClick('create')">新增</el-button>
       </el-form-item>
     </el-form>
     <zm-table ref="multipleTable" :columns="columns" :fetch="loadList" :table-params="tableParams"></zm-table>
+    <create 
+      :id="editId"
+      v-model="newPanelShow"
+      v-if="newPanelShow"
+      :new-params="newParams"
+      @cancel="closePanel"
+      @save-after="saveAfter"
+    ></create>
   </div>
 </template>
 <script>
-import { getCouponApplyPageList } from '@/api/operationCenter'
-import CustomerSelector from '@/components/CustomerSelector'
+import { getCustomerPageList, deleteCustomer } from '@/api/systemSetting'
 import zmTable from '@/components/isNeedComponents/zmTable'
-import zmPanel from '@/components/isNeedComponents/zmPanel'
 import tableMixin from '@/mixins/zmTableMixin'
-import { couponApplyColumns } from './const'
+import create from './create'
+import { listColumns } from './const'
 export default {
-  name: 'coupon_apply_list',
-  components: { zmTable, zmPanel, CustomerSelector },
+  name: 'company_mgr_list',
+  components: { zmTable, create },
   mixins: [tableMixin],
   computed: {
     columns() {
-      return couponApplyColumns(this)
+      return listColumns(this)
     }
   },
   data() {
     return {
       query: {},
       editId: '',
-      detailPanelShow: false,
-      detailParams: {},
-      orderTimeRange: []
+      newPanelShow: false,
+      newParams: {}
     }
   },
   methods: {
     async loadList() {
-      const res = await getCouponApplyPageList(this.assignQuery(this.query))
+      const res = await getCustomerPageList(this.assignQuery(this.query))
       this.initialTableData(res.data, res.count)
     },
-    chooseData(val) {
-      this.query.creatTimeS = val ? val[0] : ''
-      this.query.creatTimeE = val ? val[1] : ''
-    },
-    onOperateClick(type, row) {
+    async onOperateClick(type, row) {
       switch (type) {
-        case 'detail':
-          this.editId = row.id
-          this.detailParams = row
-          this.detailPanelShow = true
+        case 'create':
+          this.newPanelShow = true
           break
-        case 'subApply':
-          this.$refs.applyDetail.submit()
+        case 'edit':
+          this.editId = row.id
+          this.newParams = { name: row.name }
+          this.newPanelShow = true
+          break
+        case 'del':
+          await deleteCustomer({ id: row.id })
+          break
       }
     },
-    saveAfter() {
-      this.detailPanelShow = false
-      this.onSearch()
+    closePanel() {
+      this.editId = ''
+      this.newPanelShow = false
     },
-    closeDetaliPanel() {
-      this.detailPanelShow = false
+    saveAfter() {
+      this.closePanel()
+      this.onSearch()
     }
   }
 }

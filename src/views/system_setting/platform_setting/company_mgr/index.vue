@@ -25,14 +25,14 @@ import { getCompanyPageList, deleteCompany } from '@/api/systemSetting'
 import zmTable from '@/components/isNeedComponents/zmTable'
 import tableMixin from '@/mixins/zmTableMixin'
 import create from './create'
-import { couponApplyColumns } from './const'
+import { listColumns } from './const'
 export default {
   name: 'company_mgr_list',
   components: { zmTable, create },
   mixins: [tableMixin],
   computed: {
     columns() {
-      return couponApplyColumns(this)
+      return listColumns(this)
     }
   },
   data() {

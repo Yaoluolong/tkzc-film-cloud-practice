@@ -1,4 +1,4 @@
-export const couponApplyColumns = context => {
+export const listColumns = context => {
   return [
     {
       prop: 'name',

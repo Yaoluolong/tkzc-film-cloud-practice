@@ -85,6 +85,23 @@ export function deleteCompany(params) {
 export function updateCompany(params) {
   return request.post('/systemApi/company/update', params)
 }
+// 客户管理
+/* 获取客户列表分页数据*/
+export function getCustomerPageList(params) {
+  return request.get('/systemApi/customer/getPageList', { params: params })
+}
+/* 添加客户*/
+export function createCustomer(params) {
+  return request.post('/systemApi/customer/create', params)
+}
+/* 删除客户*/
+export function deleteCustomer(params) {
+  return request.post('/systemApi/customer/delete', params)
+}
+/* 编辑客户*/
+export function updateCustomer(params) {
+  return request.post('/systemApi/customer/update', params)
+}
 
 // 权限菜单管理
 export function getMenuListByParentId(params) {

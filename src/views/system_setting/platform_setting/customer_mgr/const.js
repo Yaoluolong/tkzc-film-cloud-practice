@@ -1,33 +1,18 @@
-export const couponApplyColumns = context => {
+export const listColumns = context => {
   return [
     {
-      prop: 'operator',
-      label: '分销商名称',
-      minWidth: 120
-    },
-    {
       prop: 'name',
-      label: '申请流程名称',
+      label: '客户名称',
       minWidth: 120
     },
     {
-      prop: 'styleName',
-      label: '券类型',
+      prop: 'createTime',
+      label: '添加时间',
       minWidth: 120
     },
     {
-      prop: 'typeName',
-      label: '券种类',
-      minWidth: 120
-    },
-    {
-      prop: 'number',
-      label: '申请数量（张）',
-      minWidth: 120
-    },
-    {
-      prop: 'statusStr',
-      label: '申请状态',
+      prop: 'operator',
+      label: '创建人',
       minWidth: 120
     },
     {
@@ -36,13 +21,23 @@ export const couponApplyColumns = context => {
       fixed: 'right',
       minWidth: 120,
       render: (h, row) => {
+        const edit = (<el-button
+          type='text'
+          onClick={() => context.onOperateClick('edit', row)}
+        >
+            编辑
+        </el-button>)
+        const del = (<el-button
+          type='text'
+          onClick={() => context.onOperateClick('del', row)}
+        >
+          删除
+        </el-button>)
         return (
-          <el-button
-            type='text'
-            onClick={() => context.onOperateClick('detail', row)}
-          >
-                详情
-          </el-button>
+          <div class='button-group'>
+            { edit }
+            { del }
+          </div>
         )
       }
     }
