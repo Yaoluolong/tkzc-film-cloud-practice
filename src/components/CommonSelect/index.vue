@@ -24,8 +24,8 @@
         :disabled="item.disabled"
         :class="{tc:item[selectKey]==='-1'}"
       ></el-option>
+      <!-- <i slot="suffix" class="el-icon-loading poab" v-show="loading"></i> -->
     </el-select>
-    <i class="el-icon-loading poab" v-show="loading"></i>
   </div>
 </template>
 
@@ -33,6 +33,7 @@
 import { getFilmList } from '@/api/mallCenter'
 import { getCompanyList } from '@/api/systemSetting'
 // import { getFilmIdList } from '@/api/priceCenter'
+import { getCustomerList } from '@/api/operationCenter'
 import { cinemaGroupGetList, getInterfaceTypePageList } from '@/api/mallCenter'
 import { debounce, throttle } from 'throttle-debounce'
 export default {
@@ -126,6 +127,11 @@ export default {
           selectName: 'name',
           id: 'value',
           selectApi: getCompanyList
+        },
+        customerList: { // 客户
+          selectName: 'name',
+          id: 'value',
+          selectApi: getCustomerList
         }
       },
       // 已选值

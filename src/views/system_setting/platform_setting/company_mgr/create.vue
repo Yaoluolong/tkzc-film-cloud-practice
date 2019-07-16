@@ -8,8 +8,8 @@
     class="dialogContainer"
     @close="closePanel"
   >
-  <el-form label-width="80px" :model="params" :rules="rules" ref='form'>
-      <el-form-item label="公司名称">
+  <el-form label-width="80px" :model="params" :rules="rules" ref='form' :validate-on-rule-change="false">
+      <el-form-item label="公司名称" prop="name">
           <el-input v-model="params.name" placeholder="请输入公司名称" clearable class="w230"></el-input>
       </el-form-item>
   </el-form>
@@ -20,8 +20,10 @@
   </el-dialog>
 </template>
 <script>
+import zmSelect from '@/components/isNeedComponents/zmSelect'
 import { createCompany, updateCompany } from '@/api/systemSetting'
 export default {
+  components: { zmSelect },
   props: {
     value: {
       type: Boolean,
@@ -48,7 +50,7 @@ export default {
         name: ''
       },
       rules: {
-        name: { required: true, message: '请输入公司名称', trigger: blur }
+        name: { required: true, message: '请输入公司名称', trigger: 'blur' }
       }
     }
   },

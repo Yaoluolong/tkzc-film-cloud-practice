@@ -28,7 +28,8 @@
       title: String,
       parentId: String,
       level: String,
-      value: [String, Number]
+      value: [String, Number],
+      activeTab: String
     },
     data() {
       return {
@@ -43,14 +44,14 @@
           this.menus = []
           this.$emit('input', '-2')
         } else {
-          this.fetchMenu(val)
+          this.fetchMenu(this.activeTab)
           this.$emit('input', '-2')
         }
       }
     },
     methods: {
-      async fetchMenu() {
-        this.menus = await getMenuListByParentId({ parentId: this.parentId, type: 1 })
+      async fetchMenu(activeTab) {
+        this.menus = await getMenuListByParentId({ parentId: this.parentId, type: activeTab })
         if (!this.menus.find(e => e.id === this.selectMenuId)) {
           this.$emit('input', '-2')
           this.selectMenuId = ''
@@ -59,6 +60,10 @@
       selectMenu(menu) {
         this.$emit('input', menu.id)
         this.selectMenuId = menu.id
+      },
+      clearMenu(isNoMenuId) {
+        this.menus = []
+        this.selectMenuId = isNoMenuId ? this.selectMenuId : ''
       },
       async deleteMenu() {
         if (this.selectDel) {
@@ -71,14 +76,14 @@
           await deleteMenu(checkedIds.join(','))
           this.$message.success('删除成功')
           this.selectDel = false
-          this.fetchMenu()
+          this.fetchMenu(this.activeTab)
         } else {
           this.selectDel = true
         }
       }
     },
     created() {
-      if (this.parentId === '0') { this.fetchMenu() }
+      if (this.parentId === '0') { this.fetchMenu(this.activeTab) }
     }
   }
 </script>
