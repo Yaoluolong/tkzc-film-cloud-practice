@@ -2,7 +2,7 @@
   <zm-panel :title="title" :visible.sync="value" @change="closePanel">
     <div class="hp100">
       <el-form inline label-width="80px" label-position="right" class="mt20 mb20">
-        <query-form ref="queryForm" @change="queryChange" :areaStr="area" :queryParmas="query"></query-form>
+        <query-form ref="queryForm" @change="queryChange" :area-str="area" :query-params="query"></query-form>
         <el-radio-group v-model="cinemaType" class="mb20 ml20" v-if="chooseOption.isShowCinemaType">
           <el-radio label="1">所有影院</el-radio>
           <el-radio label="2">指定影院</el-radio>

@@ -6,7 +6,7 @@
       </el-form-item>
       <div class="choose-box">
         <div v-if="chooseParams.id">
-          <query-form ref="queryForm" @change="queryChange" :areaStr="area" :queryParmas="query"></query-form>
+          <query-form ref="queryForm" @change="queryChange" :area-str="area" :query-params="query"></query-form>
         </div>
         <el-form-item prop="cinemaList">
           <div v-if="chooseParams.id" class="vm mr20">
@@ -147,7 +147,8 @@ export default {
         // _this.chooseParams.cinemaType = _this.params.cinemaType
         // _this.chooseParams.cinemaId = _this.params.cinemaId
         // _this.chooseParams.cinemaList = _this.params.cinemaList
-        // _this.chooseParams.searchParam = _this.params.searchParam
+        _this.chooseParams.searchParam = typeof _this.params.searchParam === 'string' ? JSON.parse(_this.params.searchParam) : _this.params.searchParam
+        _this.chooseParams.area = _this.chooseParams.searchParam.area || ''
         // _this.chooseParams.area =
         // 编辑时调用此接口和可选列表做匹配，可选列表可筛选掉分组中记录的影院
         _this.loading = true
@@ -275,7 +276,7 @@ export default {
       await updateCinemaAdd({
         code: this.chooseParams.code,
         isAdd: '0',
-        cinemaType: this.chooseParams.cinemaType,
+        cinemaType: '2',
         // searchParam:+this.chooseParams.cinemaType===1?JSON.stringify(searchParam):'',
         status: 2,
         type: this.chooseParams.cinemaType
@@ -289,14 +290,17 @@ export default {
       // const params = Object.assign({}, this.params);
       // params.cinemaId = params.cinemaList.map(e => e.value).join(",");
       // params.interfaceTypeId = this.query.interfaceId;
+      const chooseParams = { ...this.chooseParams.searchParam }
+      chooseParams.area = this.chooseParams.area
       const params = {
         name: this.params.name,
         code: this.chooseParams.code,
         id: this.chooseParams.id || '',
+        cinemaType: this.chooseParams.cinemaType,
         searchParam:
           +this.chooseParams.cinemaType === 1 &&
-          JSON.stringify(this.chooseParams.searchParam) !== '{}'
-            ? JSON.stringify(this.chooseParams.searchParam)
+          JSON.stringify(chooseParams) !== '{}'
+            ? JSON.stringify(chooseParams)
             : '',
         interfaceTypeId: this.chooseParams.searchParam.interfaceId || '-1',
         cinemaNum: this.cinemaNum,

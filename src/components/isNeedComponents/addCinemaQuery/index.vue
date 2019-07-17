@@ -52,11 +52,7 @@ export default {
   watch: {
     queryParams: {
       handler(val) {
-        this.query.cinemaThirdNo = val.cinemaThirdNo
-        this.query.provinceId = val.provinceId
-        this.query.cityId = val.cityId
-        this.area = this.areaStr
-        this.interfaceTypeIdArray = val.interfaceId ? val.interfaceId.split(',') : ['-1']
+        this.getInfo(val)
       },
       deep: true
     }
@@ -75,9 +71,18 @@ export default {
     }
   },
   mounted() {
+    if (JSON.parse(JSON.stringify(this.queryParams) !== '{}')) this.getInfo(this.queryParams)
     this.interfaceTypeChange()
   },
   methods: {
+    getInfo(val) {
+      console.log(1111111111)
+      this.query.cinemaThirdNo = val.cinemaThirdNo
+      this.query.provinceId = val.provinceId
+      this.query.cityId = val.cityId
+      this.area = this.areaStr
+      this.interfaceTypeIdArray = val.interfaceId ? val.interfaceId.split(',') : ['-1']
+    },
     // 接口商点击全部时清除其他选项
     interfaceTypeChange() {
       this.interfaceTypeIdArray.forEach(e => {

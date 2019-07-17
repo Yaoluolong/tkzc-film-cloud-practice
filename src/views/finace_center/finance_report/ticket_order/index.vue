@@ -159,7 +159,6 @@ export default {
   filters: {
     // 统计类型
     showSumFliter(value) {
-      console.log(value)
       if (!value) {
         return '暂无标题'
       }
@@ -191,7 +190,6 @@ export default {
       const query = realDeepClone(this.query)
       query.requestType = 'sum'
       this.sumData = await getOrderPageList(query)
-      console.log(this.sumData)
     },
     exportOrders() {
       this.exportVisible = true
