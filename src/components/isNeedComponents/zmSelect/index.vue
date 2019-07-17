@@ -94,6 +94,8 @@ export default {
     this.selectOpt = Object.assign({}, this.selectOpt, this.attrOption)
     this.selectValue = this.attrOption.multiple ? [] : ''
     this.getApiType()
+    // 组件被重复创建但是value值没有变化时
+    if (this.value && this.value.length) this.getInfo(this.value)
   },
   methods: {
     // 回填数据
