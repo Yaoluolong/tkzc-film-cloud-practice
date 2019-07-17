@@ -3,7 +3,7 @@
     <div class="hp100">
       <el-form inline label-width="80px" label-position="right" class="mt20 mb20">
         <query-form ref="queryForm" @change="queryChange" :areaStr="area" :queryParmas="query"></query-form>
-        <el-radio-group v-model="cinemaType" class="mb20 ml20">
+        <el-radio-group v-model="cinemaType" class="mb20 ml20" v-if="chooseOption.isShowCinemaType">
           <el-radio label="1">所有影院</el-radio>
           <el-radio label="2">指定影院</el-radio>
         </el-radio-group>
@@ -32,7 +32,7 @@ import { getCinemaGroupList, updateCinemaAdd } from '@/api/mallCenter'
 import zmTable from '@/components/isNeedComponents/zmTable'
 import zmPanel from '@/components/isNeedComponents/zmPanel'
 import tableMixin from '@/mixins/zmTableMixin'
-import queryForm from '../query'
+import queryForm from '@/components/isNeedComponents/addCinemaQuery'
 import { chooseCinemaColumns } from './const'
 export default {
   components: { zmTable, zmPanel, queryForm },
@@ -47,6 +47,23 @@ export default {
       default() {
         return {}
       }
+    },
+    chooseOption: {
+      type: Object,
+      default() {
+        return {
+          isShowCinemaType: true // 是否需要展示所有和指定按钮
+        }
+      }
+    },
+    apiObj: {
+      type: Object,
+      default() {
+        return {
+          listApi: getCinemaGroupList, // 列表接口
+          operaApi: updateCinemaAdd // 操作接口
+        }
+      }
     }
   },
   data() {
@@ -55,7 +72,7 @@ export default {
       title: '添加影院',
       query: {},
       area: '',
-      cinemaType: '1' // 1所有影院，2指定影院
+      cinemaType: '2' // 1所有影院，2指定影院
     }
   },
   computed: {
@@ -64,7 +81,7 @@ export default {
     }
   },
   created() {
-    this.cinemaType = this.chooseParams.cinemaType || '1'
+    this.cinemaType = this.chooseParams.cinemaType || '2'
     this.query = Object.assign({}, this.query, this.chooseParams.searchParam)
     this.area = this.chooseParams.area
   },
@@ -75,7 +92,7 @@ export default {
       query.code = this.chooseParams.code
       query.type = '2'
       query.cinemaType = this.cinemaType
-      const res = await getCinemaGroupList(this.assignQuery(query))
+      const res = await this.apiObj.listApi(this.assignQuery(query))
       this.initialTableData(res.data, res.count)
       this.loading = false
     },
@@ -100,7 +117,7 @@ export default {
         cinemaList: +this.cinemaType === 2 ? this.getTableSelection() : [],
         searchParam: +this.cinemaType === 1 ? this.query : {},
         area: this.area, // 地区展示，用于所有影院时做回填
-        cinemaType: this.cinemaType,
+        cinemaType: this.cinemaType, // 操作范围 1全部 2指定
         isChoosed: true
       }
       // 添加影院时，如果用户选择所有影院，则直接传出chooseInfo，外部已选列表使用code,cinemaType和searchParam直接调取
@@ -108,7 +125,7 @@ export default {
       // 添加影院
       if (+this.cinemaType === 2) {
         if (chooseInfo.cinemaIds.length) {
-          await updateCinemaAdd({
+          await this.apiObj.operaApi({
             code: this.chooseParams.code,
             isAdd: 1,
             cinemaType: this.cinemaType,

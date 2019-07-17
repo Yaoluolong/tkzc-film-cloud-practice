@@ -10,6 +10,8 @@ export const apiType = {
     selectApi: getCustomerList
   },
   memberList: { // 业务员
+    id: 'id',
+    name: 'realName',
     selectApi: getMemberList
   },
   channelList: { // 商家

@@ -41,6 +41,7 @@
       <el-form-item label="所属客户" prop="customerIds">
         <zm-select
           class="wp100"
+          placeholder="请选择所属客户"
           v-model="params.customerIds"
           select-type="customerList"
           :attrOption="{multiple:true}"
@@ -49,6 +50,7 @@
       <el-form-item label="关联商家" prop="customerIds" v-if="+params.type===3">
         <zm-select
           class="wp100"
+           placeholder="请选择关联商家"
           v-model="params.customerIds"
           select-type="channelList"
           :attrOption="{multiple:true}"
@@ -57,6 +59,7 @@
       <el-form-item label="关联业务员" prop="uesrIds">
         <zm-select
           class="wp100"
+          placeholder="请选择关联业务员"
           v-model="params.uesrIds"
           select-type="memberList"
           :attrOption="{multiple:true}"
@@ -64,7 +67,8 @@
       </el-form-item>
       </div>
       <div v-if="+params.type===4">
-       <el-form-item label="添加影院" prop="uesrIds">
+       <el-form-item label="关联影院" prop="uesrIds">
+<add-cinema></add-cinema>
       </el-form-item>
       </div>
       <el-form-item label="登录密码">
@@ -85,10 +89,11 @@
 
 <script>
 import zmSelect from '@/components/isNeedComponents/zmSelect'
+import addCinema from './components/addCinema'
 import { getUserInfo, createUser, updateUser } from '@/api/systemSetting'
 export default {
   name: 'edit_user',
-  components: { zmSelect },
+  components: { zmSelect, addCinema },
   data() {
     return {
       params: {},
@@ -143,6 +148,7 @@ export default {
     }
   },
   async created() {
+    console.log(this.$route)
     // 编辑
     if (this.$route.query.id) {
       this.isEdit = true

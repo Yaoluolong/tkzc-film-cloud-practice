@@ -76,6 +76,7 @@ export default {
   },
   methods: {
     queryTable(query) {
+      query.type = this.activeTab
       return getUserPageList(query)
     },
     refreshTable() {

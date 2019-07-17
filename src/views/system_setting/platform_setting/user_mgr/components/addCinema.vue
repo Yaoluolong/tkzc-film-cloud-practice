@@ -1,9 +1,11 @@
 <template>
-  <div class="app-container">
+  <div >
+    <el-button
+      type="primary"
+      @click="onOperateClick('addCinema')"
+      v-if="!chooseParams.choosed&&!chooseParams.cinemaList.length"
+    >添加影院</el-button>
     <el-form inline label-width="80px" :model="params" :rules="rules" ref="form">
-      <el-form-item label-width="120px" label="影院分组名称" prop="name">
-        <el-input v-model.trim="params.name" placeholder="请输入影院分组名称,最多10个字" class="w420"></el-input>
-      </el-form-item>
       <div class="choose-box">
         <div v-if="chooseParams.id">
           <query-form ref="queryForm" @change="queryChange" :areaStr="area" :queryParmas="query"></query-form>
@@ -43,12 +45,9 @@
         v-if="cinemaVisible"
         @cancel="closePanel"
         :choose-params="chooseParams"
+        :choose-option="{isShowCinemaType:false}"
         @saveChoose="saveChoose"
       />
-      <el-form-item class="tc mt20">
-        <el-button type="primary" @click="save" v-if="!look">保存</el-button>
-        <el-button @click="colsePage">取消</el-button>
-      </el-form-item>
     </el-form>
   </div>
 </template>
@@ -78,7 +77,7 @@ export default {
     },
     // 禁用删除按钮
     disDelBtn() {
-      return !this.chooseParams.cinemaList.length
+      return Boolean(this.chooseParams.cinemaList.length)
     }
   },
   watch: {
@@ -278,7 +277,6 @@ export default {
       // params.cinemaId = params.cinemaList.map(e => e.value).join(",");
       // params.interfaceTypeId = this.query.interfaceId;
       const params = {
-        name: this.params.name,
         code: this.chooseParams.code,
         id: this.chooseParams.id || '',
         searchParam:
@@ -286,9 +284,12 @@ export default {
           JSON.stringify(this.chooseParams.searchParam) !== '{}'
             ? JSON.stringify(this.chooseParams.searchParam)
             : '',
-        interfaceTypeId: this.chooseParams.searchParam.interfaceId || '-1',
+        interfaceTypeId: this.chooseParams.searchParam.interfaceId,
         cinemaNum: this.cinemaNum,
-        cinemaId: +this.chooseParams.cinemaType === 2 ? this.chooseParams.cinemaIds : '-1'
+        cinemaId:
+          +this.chooseParams.cinemaType === 2
+            ? this.chooseParams.cinemaIds
+            : '-1'
       }
       if (!this.chooseParams.id) delete params.id
       await (this.chooseParams.id
