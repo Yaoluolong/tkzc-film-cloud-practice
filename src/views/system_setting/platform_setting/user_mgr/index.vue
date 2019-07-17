@@ -47,7 +47,7 @@
         <template slot-scope="{row}">
           <el-button
             type="text"
-            @click="$router.push({path:'/system_setting/platform_setting/user_mgr/permission_setting',query:{id:row.id}})"
+            @click="$router.push({path:'/system_setting/platform_setting/user_mgr/permission_setting',query:{id:row.id,type:row.type}})"
           >功能权限</el-button>
           <el-button
             type="text"

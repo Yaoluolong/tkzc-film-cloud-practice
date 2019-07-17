@@ -146,7 +146,7 @@ export default {
       this.isUserPermission = true
     }
     // 获取第一级菜单
-    this.topMenus = await getMenuListByParentId({ parentId: '0', type: 1 })
+    this.topMenus = await getMenuListByParentId({ parentId: '0', type: this.$route.query.type })
     // 编辑
     if (this.isUserPermission) {
       const params = await getPermissionsInfo(this.$route.query.id)
