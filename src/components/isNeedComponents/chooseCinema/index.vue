@@ -112,8 +112,9 @@ export default {
       this.$emit('cancel')
     },
     async onSubmitClick() {
+      const cinemaIds = this.chooseParams.cinemaId ? this.chooseParams.cinemaId.split(',') : [].concat(this.getSelectionIds())
       const chooseInfo = {
-        cinemaIds: +this.cinemaType === 2 ? this.getSelectionIds() : [],
+        cinemaId: +this.cinemaType === 2 ? cinemaIds.join(',') : '',
         cinemaList: +this.cinemaType === 2 ? this.getTableSelection() : [],
         searchParam: +this.cinemaType === 1 ? this.query : {},
         area: this.area, // 地区展示，用于所有影院时做回填
@@ -124,13 +125,13 @@ export default {
       // 如果用户选择指定影院，则调用接口，将对应的参数传入
       // 添加影院
       if (+this.cinemaType === 2) {
-        if (chooseInfo.cinemaIds.length) {
+        if (chooseInfo.cinemaId) {
           await this.apiObj.operaApi({
             code: this.chooseParams.code,
             isAdd: 1,
             cinemaType: this.cinemaType,
             // searchParam: JSON.stDringify(chooseInfo.searchParam) !== '{}' ? JSON.stringify(chooseInfo.searchParam) : '',
-            cinemaIds: chooseInfo.cinemaIds.join(','),
+            cinemaIds: this.getSelectionIds().join(','),
             type: this.cinemaType // 1 覆盖操作 2添加操作
           })
           this.$emit('saveChoose', chooseInfo)

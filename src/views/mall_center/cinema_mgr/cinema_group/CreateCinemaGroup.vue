@@ -35,6 +35,7 @@
           :columns="columns"
           :fetch="loadList"
           :table-params="tableParams"
+          @select="chooseSelect"
           :options="{mutilpleSelect:+chooseParams.cinemaType===2,loading:loading}"
         ></zm-table>
       </div>
@@ -75,24 +76,12 @@ export default {
   computed: {
     columns() {
       return cinemaGroupDetailColumns(this)
-    },
-    // 禁用删除按钮
-    disDelBtn() {
-      return !this.chooseParams.cinemaList.length
-    }
-  },
-  watch: {
-    'chooseParams.cinemaList.length': {
-      handler(val) {
-        console.log(val)
-      }
     }
   },
   data() {
     const cinemaListValid = (rule, value, callback) => {
       if (
-        this.params.cinemaList.length ||
-        this.chooseParams.cinemaList.length
+        this.chooseParams.cinemaId && this.chooseParams.cinemaId.length
       ) {
         callback()
       } else {
@@ -100,14 +89,16 @@ export default {
       }
     }
     return {
+      disDelBtn: true,
       loading: false, // 表格loading
       isStartInfo: true, // 首次加载info
       cinemaVisible: false, // 添加影院窗口开关
       cinemaNum: '', // 已添加的影城数量
       area: '', // 选择所有时展示添加影院时选择的地区
-      chooseParams: {
+      chooseParams: { // 这里开始想弄只传给组件的参数，后面发现参数params里面都有，再优化吧
         // 影院选择参数
         id: '',
+        cinemaId: '', // 指定时存放最终选择的选项
         cinemaList: [],
         code: '',
         searchParam: {}, // 内部选择的查询项
@@ -152,7 +143,11 @@ export default {
           code[code.length - 1] + '' + code[code.length - 2]
         _this.chooseParams.id = id
         _this.params = id ? await getCinemaGroupInfo({ id: id }) : _this.params
-        _this.chooseParams.cinemaType = _this.params.cinemaType
+        _this.chooseParams = Object.assign({}, _this.chooseParams, _this.params)
+        // _this.chooseParams.cinemaType = _this.params.cinemaType
+        // _this.chooseParams.cinemaId = _this.params.cinemaId
+        // _this.chooseParams.cinemaList = _this.params.cinemaList
+        // _this.chooseParams.searchParam = _this.params.searchParam
         // _this.chooseParams.area =
         // 编辑时调用此接口和可选列表做匹配，可选列表可筛选掉分组中记录的影院
         _this.loading = true
@@ -175,7 +170,7 @@ export default {
           : { data: [], count: 0 }
       // 添加影院时选择所有影院的情况下，判断下接口是否有返回影院，表单验证用
       if (+this.query.cinemaType === 1 && this.chooseParams.isChoosed) {
-        this.chooseParams.cinemaList = res.data
+        this.chooseParams.cinemaId = res.data.join(',')
         // this.$refs.form.validateField('cinemaList')
       }
       this.initialTableData(res.data, res.count)
@@ -195,10 +190,17 @@ export default {
         case 'addCinema':
           this.cinemaVisible = true
           break
-        case 'del' || 'delCinema' || 'delQueryCinema':
+        case 'del' :
+          this.operCinema(type, row)
+          break
+        case 'delCinema' :
           this.operCinema(type, row)
           break
       }
+    },
+    // 实时操作表格多选框
+    chooseSelect(msg, msg2) {
+      this.disDelBtn = !msg.length
     },
     closePanel() {
       this.cinemaVisible = false
@@ -220,8 +222,18 @@ export default {
         cinemaIds: +this.chooseParams.cinemaType === 2 ? ids : '',
         type: this.chooseParams.cinemaType
       })
+      // 删除后要删掉chooseParams上的对应值
+      // 操作值转数组.再删除对应id，然后在把剩余的数组转为字符串
+      const realDelCinemaIds = ids.split(',')
+      const realCinemaIds = this.chooseParams.cinemaId.split(',')
+      realDelCinemaIds.forEach(item => {
+        const index = realCinemaIds.findIndex(e => item === e)
+        if (index !== -1) realCinemaIds.splice(index, 1)
+      })
+      this.chooseParams.cinemaId = realCinemaIds.join(',')
       // 操作后清除已选，刷新列表
       this.clearSelection()
+      this.disDelBtn = false
       this.loadList()
     },
     // 筛选id
@@ -288,7 +300,7 @@ export default {
             : '',
         interfaceTypeId: this.chooseParams.searchParam.interfaceId || '-1',
         cinemaNum: this.cinemaNum,
-        cinemaId: +this.chooseParams.cinemaType === 2 ? this.chooseParams.cinemaIds : '-1'
+        cinemaId: +this.chooseParams.cinemaType === 2 ? this.chooseParams.cinemaId : '-1'
       }
       if (!this.chooseParams.id) delete params.id
       await (this.chooseParams.id

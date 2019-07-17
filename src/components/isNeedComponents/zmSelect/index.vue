@@ -81,6 +81,7 @@ export default {
   },
   watch: {
     value(val) {
+      console.log(val, 1111111111111)
       // 只做一次回填
       if (val && val.length && !this.isBackfill) {
         this.getInfo(val)

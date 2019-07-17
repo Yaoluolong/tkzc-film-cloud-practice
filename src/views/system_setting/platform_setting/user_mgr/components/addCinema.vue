@@ -1,11 +1,6 @@
 <template>
   <div >
-    <el-button
-      type="primary"
-      @click="onOperateClick('addCinema')"
-      v-if="!chooseParams.choosed&&!chooseParams.cinemaList.length"
-    >添加影院</el-button>
-    <el-form inline label-width="80px" :model="params" :rules="rules" ref="form">
+    <el-form inline label-width="80px" :model="params"  ref="form">
       <div class="choose-box">
         <div v-if="chooseParams.id">
           <query-form ref="queryForm" @change="queryChange" :areaStr="area" :queryParmas="query"></query-form>
@@ -13,19 +8,13 @@
         <el-form-item prop="cinemaList">
           <div v-if="chooseParams.id" class="vm mr20">
             <el-button type="primary" icon="el-icon-search" @click="onOperateClick('query')">查询</el-button>
-            <!-- <el-button
-              type="primary"
-              icon="el-icon-plus"
-              @click="onOperateClick('delQueryCinema')"
-            >全部选择</el-button>-->
           </div>
           <el-button
             type="primary"
             icon="el-icon-plus"
             @click="onOperateClick('addCinema')"
-          >{{+chooseParams.cinemaType===1&&chooseParams.isChoosed?'修改影院':'添加影院'}}</el-button>
+          >添加影院</el-button>
           <el-button
-            v-if="+chooseParams.cinemaType===2"
             type="danger"
             icon="el-icon-plus"
             @click="onOperateClick('delCinema')"
@@ -37,7 +26,8 @@
           :columns="columns"
           :fetch="loadList"
           :table-params="tableParams"
-          :options="{mutilpleSelect:+chooseParams.cinemaType===2,loading:loading}"
+          @select="chooseSelect"
+          :options="{mutilpleSelect:true,loading:loading,showPagination:false}"
         ></zm-table>
       </div>
       <choose-cinema
@@ -60,15 +50,11 @@ import chooseCinema from '@/components/isNeedComponents/chooseCinema'
 import queryForm from '@/components/isNeedComponents/addCinemaQuery'
 import { cinemaGroupDetailColumns } from './const'
 import {
-  createCinemaGroup,
-  newUpdateCinema,
-  getCinemaGroupInfo,
   getCinemaGroupList,
   saveCinemaAdd,
   updateCinemaAdd
 } from '@/api/mallCenter'
 export default {
-  name: 'create_cinema_group',
   components: { zmTable, chooseCinema, queryForm },
   mixins: [tableMixin],
   computed: {
@@ -80,25 +66,21 @@ export default {
       return Boolean(this.chooseParams.cinemaList.length)
     }
   },
-  watch: {
-    'chooseParams.cinemaList.length': {
-      handler(val) {
-        console.log(val)
+  props: {
+    chooseInfo: {
+      type: Object,
+      default() {
+        return {
+          code: '',
+          cinemaId: '',
+          cinemaType: '2'
+        }
       }
     }
   },
   data() {
-    const cinemaListValid = (rule, value, callback) => {
-      if (
-        this.params.cinemaList.length ||
-        this.chooseParams.cinemaList.length
-      ) {
-        callback()
-      } else {
-        callback(new Error('请添加影院'))
-      }
-    }
     return {
+      disDelBtn: true,
       loading: false, // 表格loading
       isStartInfo: true, // 首次加载info
       cinemaVisible: false, // 添加影院窗口开关
@@ -125,37 +107,26 @@ export default {
         interfaceTypeId: '',
         cinemaId: '',
         cinemaType: '2'
-      },
-      rules: {
-        name: {
-          required: true,
-          max: 10,
-          message: '请输入影院分组名称,最多10个字',
-          trigger: 'blur'
-        },
-        cinemaList: { validator: cinemaListValid, trigger: 'change' }
       }
     }
   },
-  // created() {
-  //   this.getInfo()
-  // },
   methods: {
     async getInfo() {
       const _this = this
       return new Promise(async(resolve, reject) => {
-        const id = _this.$route.query.id || ''
+        // const id = _this.chooseInfo.id || ''
         // 获取code值
         const code = uuid().split('-')
         _this.chooseParams.code =
           code[code.length - 1] + '' + code[code.length - 2]
-        _this.chooseParams.id = id
-        _this.params = id ? await getCinemaGroupInfo({ id: id }) : _this.params
-        _this.chooseParams.cinemaType = _this.params.cinemaType
+        // _this.chooseParams.id = id
+        // 走组件时，从外部传入需要的参数,走页面时直接调用页面的info接口
+        _this.params = _this.chooseInfo
+        _this.chooseParams = Object.assign({}, _this.chooseParams, _this.params)
         // _this.chooseParams.area =
         // 编辑时调用此接口和可选列表做匹配，可选列表可筛选掉分组中记录的影院
         _this.loading = true
-        if (id) await saveCinemaAdd({ code: _this.chooseParams.code, id: id })
+        if (_this.chooseInfo.cinemaId) await saveCinemaAdd({ code: _this.chooseParams.code, cinemaId: _this.chooseInfo.cinemaId })
         _this.isStartInfo = false
         resolve()
       })
@@ -174,7 +145,7 @@ export default {
           : { data: [], count: 0 }
       // 添加影院时选择所有影院的情况下，判断下接口是否有返回影院，表单验证用
       if (+this.query.cinemaType === 1 && this.chooseParams.isChoosed) {
-        this.chooseParams.cinemaList = res.data
+        this.chooseParams.cinemaId = res.data.join(',')
         // this.$refs.form.validateField('cinemaList')
       }
       this.initialTableData(res.data, res.count)
@@ -194,13 +165,20 @@ export default {
         case 'addCinema':
           this.cinemaVisible = true
           break
-        case 'del' || 'delCinema' || 'delQueryCinema':
+        case 'del' :
+          this.operCinema(type, row)
+          break
+        case 'delCinema' :
           this.operCinema(type, row)
           break
       }
     },
     closePanel() {
       this.cinemaVisible = false
+    },
+    // 实时操作表格多选框
+    chooseSelect(msg, msg2) {
+      this.disDelBtn = !msg.length
     },
     // 影院操作
     async operCinema(type, row) {
@@ -219,9 +197,21 @@ export default {
         cinemaIds: +this.chooseParams.cinemaType === 2 ? ids : '',
         type: this.chooseParams.cinemaType
       })
+      // 删除后要删掉chooseParams上的对应值
+      // 操作值转数组.再删除对应id，然后在把剩余的数组转为字符串
+      const realDelCinemaIds = ids.split(',')
+      const realCinemaIds = this.chooseParams.cinemaId.split(',')
+      realDelCinemaIds.forEach(item => {
+        const index = realCinemaIds.findIndex(e => item === e)
+        if (index !== -1) realCinemaIds.splice(index, 1)
+      })
+      this.chooseParams.cinemaId = realCinemaIds.join(',')
       // 操作后清除已选，刷新列表
       this.clearSelection()
+      this.disDelBtn = false
       this.loadList()
+      // 父组件提交
+      this.$emit('change', this.chooseParams)
     },
     // 筛选id
     getCinemaIds(cinemaList) {
@@ -239,9 +229,11 @@ export default {
       if (+chooseInfo.cinemaType === 1) {
         this.query = Object.assign({}, this.query, chooseInfo.searchParam)
       }
+      // 父组件提交
+      this.$emit('change', this.chooseParams)
       this.onSearch()
     },
-    // 全屏加载
+    // // 全屏加载
     fullLoading(loading, text) {
       const fullLoading = this.$loading({
         lock: true,
@@ -268,14 +260,8 @@ export default {
         type: this.chooseParams.cinemaType
       })
       this.fullLoading(false)
-      this.closeTab()
     },
     async save() {
-      const valid = await this.$refs.form.validate()
-      if (!valid) return
-      // const params = Object.assign({}, this.params);
-      // params.cinemaId = params.cinemaList.map(e => e.value).join(",");
-      // params.interfaceTypeId = this.query.interfaceId;
       const params = {
         code: this.chooseParams.code,
         id: this.chooseParams.id || '',
@@ -292,12 +278,9 @@ export default {
             : '-1'
       }
       if (!this.chooseParams.id) delete params.id
-      await (this.chooseParams.id
-        ? newUpdateCinema(params)
-        : createCinemaGroup(params))
-      this.$message.success('保存成功')
-      this.closeTab(true)
-      this.$router.push('/mall_center/cinema_mgr/cinema_group')
+      // await (this.chooseParams.id
+      //   ? newUpdateCinema(params)
+      //   : createCinemaGroup(params))
     }
   }
 }
