@@ -178,7 +178,7 @@ export default [
         name: 'submit_audit',
         hidden: true,
         props: true,
-        component: () => import('@/views/operation_center/coupon_mgr/sold_coupon_list/submitAudit'),
+        component: () => import('@/views/operation_center/coupon_mgr/sold_coupon_list/SubmitAudit'),
         meta: { title: '提出审核', icon: '' }
       },
       {
@@ -208,7 +208,7 @@ export default [
         name: 'progress_sell_register',
         hidden: true,
         props: true,
-        component: () => import('@/views/operation_center/coupon_mgr/progress_order/sellRegister'),
+        component: () => import('@/views/operation_center/coupon_mgr/progress_order/SellRegister'),
         meta: { title: '订单信息', icon: '' }
       },
       {
@@ -243,7 +243,7 @@ export default [
         name: 'view_program',
         hidden: true,
         props: true,
-        component: () => import('@/views/operation_center/coupon_mgr/coupon_program/viewProgram'),
+        component: () => import('@/views/operation_center/coupon_mgr/coupon_program/ViewProgram'),
         meta: { title: '查看已审核规则', icon: '' }
       },
       {
@@ -286,7 +286,7 @@ export default [
         name: 'sold_card',
         hidden: true,
         props: true,
-        component: () => import('@/views/operation_center/gift_card/sold_card_list/soldCard'),
+        component: () => import('@/views/operation_center/gift_card/sold_card_list/SoldCard'),
         meta: { title: '销售电影卡', icon: '' }
       },
       /* {
@@ -310,7 +310,7 @@ export default [
         name: 'gift_card_submit_audit',
         hidden: true,
         props: true,
-        component: () => import('@/views/operation_center/gift_card/sold_card_list/submitAudit'),
+        component: () => import('@/views/operation_center/gift_card/sold_card_list/SubmitAudit'),
         meta: { title: '提交审核', icon: '' }
       },
       {
