@@ -108,13 +108,17 @@ export default {
     },
     async exportBtn() {
       let query = {}
-      if (!this.exportParams.exportIds) {
-        query = Object.assign({}, this.exportParams.query, {
-          requestType: 'export',
-          orderId: this.exportParams.exportIds || ''
-          // 缺选中的表头id参数
-        })
-      }
+      const exportObj = {}
+      this.chooseList.forEach(item => {
+        this.$set(exportObj, item.type, item)
+      })
+      query = Object.assign({}, this.exportParams.query, {
+        requestType: 'export',
+        exportOrderIds: this.exportParams.exportIds || '',
+        orderFilmExport: exportObj.orderFilmExport.ids.join(','),
+        orderFilmInfoExport: exportObj.orderFilmInfoExport.ids.join(',')
+        // 缺选中的表头id参数
+      })
       await getOrderPageList(query)
       this.showWaring = true
     },

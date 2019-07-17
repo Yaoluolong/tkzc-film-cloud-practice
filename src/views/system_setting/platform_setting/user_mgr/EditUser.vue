@@ -165,7 +165,7 @@ export default {
     },
     getChoosedId(msg) {
       this.params.cinemaId = msg.cinemaId
-      this.showAddbtn = msg.isChoosed && msg.cinemaId
+      this.showAddbtn = Boolean(msg.cinemaId)
     },
     async save() {
       const valid = await this.$refs.form.validate()
@@ -194,7 +194,6 @@ export default {
   async created() {
     const code = uuid().split('-')
     this.chooseInfo.code = code[code.length - 1] + '' + code[code.length - 2]
-    console.log(this.$route)
     // 编辑
     if (this.$route.query.id) {
       this.isEdit = true
@@ -202,7 +201,8 @@ export default {
       getUserInfo(this.$route.query.id).then(data => {
         if (data) {
           this.params = data
-          this.chooseInfo.cinemaId = data.cinemaId
+          this.chooseInfo = Object.assign({}, this.chooseInfo, data)
+          this.showAddbtn = Boolean(data.cinemaId)
         }
       })
     }

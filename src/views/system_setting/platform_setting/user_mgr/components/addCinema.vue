@@ -1,6 +1,6 @@
 <template>
   <div >
-    <el-form inline label-width="80px" :model="params"  ref="form">
+    <el-form inline label-width="80px" :model="chooseParams"  ref="form">
       <div class="choose-box">
         <div v-if="chooseParams.id">
           <query-form ref="queryForm" @change="queryChange" :areaStr="area" :queryParmas="query"></query-form>
@@ -43,7 +43,6 @@
 </template>
 
 <script>
-import uuid from 'uuid'
 import zmTable from '@/components/isNeedComponents/zmTable'
 import tableMixin from '@/mixins/zmTableMixin'
 import chooseCinema from '@/components/isNeedComponents/chooseCinema'
@@ -60,10 +59,6 @@ export default {
   computed: {
     columns() {
       return cinemaGroupDetailColumns(this)
-    },
-    // 禁用删除按钮
-    disDelBtn() {
-      return Boolean(this.chooseParams.cinemaList.length)
     }
   },
   props: {
@@ -71,6 +66,7 @@ export default {
       type: Object,
       default() {
         return {
+          id: '',
           code: '',
           cinemaId: '',
           cinemaType: '2'
@@ -100,13 +96,6 @@ export default {
         interfaceId: '',
         provinceId: '',
         cityId: ''
-      },
-      params: {
-        cinemaList: [], // 已选的影院列表-新建用
-        name: '',
-        interfaceTypeId: '',
-        cinemaId: '',
-        cinemaType: '2'
       }
     }
   },
@@ -114,15 +103,9 @@ export default {
     async getInfo() {
       const _this = this
       return new Promise(async(resolve, reject) => {
-        // const id = _this.chooseInfo.id || ''
         // 获取code值
-        const code = uuid().split('-')
-        _this.chooseParams.code =
-          code[code.length - 1] + '' + code[code.length - 2]
-        // _this.chooseParams.id = id
         // 走组件时，从外部传入需要的参数,走页面时直接调用页面的info接口
-        _this.params = _this.chooseInfo
-        _this.chooseParams = Object.assign({}, _this.chooseParams, _this.params)
+        _this.chooseParams = Object.assign({}, _this.chooseParams, JSON.parse(JSON.stringify(_this.chooseInfo)))
         // _this.chooseParams.area =
         // 编辑时调用此接口和可选列表做匹配，可选列表可筛选掉分组中记录的影院
         _this.loading = true

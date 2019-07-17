@@ -99,6 +99,7 @@
       </el-button>
     </div>
     <zm-table
+      ref="multipleTable"
       :columns="columns"
       :fetch="loadList"
       :table-params="tableParams"
@@ -109,11 +110,7 @@
 </template>
 
 <script>
-import {
-  orderStatusType,
-  orderColumns,
-  showSumType
-} from './const'
+import { orderStatusType, orderColumns, showSumType } from './const'
 import zmDatePicker from '@/components/isNeedComponents/zmDatePicker'
 import tableMixin from '@/mixins/zmTableMixin'
 import zmTable from '@/components/isNeedComponents/zmTable'
@@ -126,7 +123,13 @@ import QueryExtPlane from '@/components/QueryExtPlane'
 import chooseExport from './components/chooseExport'
 export default {
   name: 'ticket_order',
-  components: { QueryExtPlane, CityCascader, zmDatePicker, zmTable, chooseExport },
+  components: {
+    QueryExtPlane,
+    CityCascader,
+    zmDatePicker,
+    zmTable,
+    chooseExport
+  },
   mixins: [tableMixin],
   data() {
     return {
@@ -190,7 +193,9 @@ export default {
       this.exportVisible = true
       const query = realDeepClone(this.query)
       this.exportParams.query = query
-      this.exportParams.exportIds = this.getSelectionIds(false, 'orderId').join(',')
+      this.exportParams.exportIds = this.getSelectionIds(false, 'orderId').join(
+        ','
+      )
       // exportData(getOrderPageList, query)
     },
     closeExport() {
