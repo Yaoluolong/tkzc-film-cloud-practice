@@ -116,7 +116,7 @@
 import { getPermissionsInfo, updatePermissions } from '@/api/systemSetting'
 import customerFormSelector from '@/components/customerFormSelector'
 import ChannelAccessFormSelector from '@/components/ChannelAccessFormSelector'
-import interfaceAccessFormSelector from '@/components/interfaceAccessFormSelector'
+import interfaceAccessFormSelector from '@/components/InterfaceAccessFormSelector'
 import CouponSaleDetailSelector from '@/components/CouponSaleDetailSelector'
 export default {
   components: {
