@@ -159,12 +159,15 @@ export default {
   filters: {
     // 统计类型
     showSumFliter(value) {
+      console.log(value)
       if (!value) {
         return '暂无标题'
       }
+      let label
       showSumType.forEach(e => {
-        if (e.key === value) return e.label
+        if (e.key === value) label = e.label
       })
+      return label
     }
   },
   created() {},
@@ -188,6 +191,7 @@ export default {
       const query = realDeepClone(this.query)
       query.requestType = 'sum'
       this.sumData = await getOrderPageList(query)
+      console.log(this.sumData)
     },
     exportOrders() {
       this.exportVisible = true
