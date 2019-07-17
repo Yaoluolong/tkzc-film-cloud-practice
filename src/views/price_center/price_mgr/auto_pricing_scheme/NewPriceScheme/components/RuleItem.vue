@@ -210,7 +210,6 @@ export default {
       const priomiseArry = []
       const form = this.$refs.priceRulesForm && this.$refs.priceRulesForm.validate()
       if (form) priomiseArry.push(form)
-      console.log(this.$refs.timeRuleList)
       const timeRuleList = this.$refs.timeRuleList && this.$refs.timeRuleList.validateAll()
       if (timeRuleList) priomiseArry.push(timeRuleList)
       return Promise.all(priomiseArry)

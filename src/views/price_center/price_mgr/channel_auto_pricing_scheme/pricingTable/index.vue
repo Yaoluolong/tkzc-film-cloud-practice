@@ -7,10 +7,9 @@
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" @click="onSearch">搜索</el-button>
         <el-button type="danger" icon="el-icon-plus" @click="openAddPanel">添加</el-button>
-        <el-button @click="startDragSort">{{dragSortStatus?'完成排序':'编辑排序'}}</el-button>
+        <!-- <el-button @click="startDragSort">{{dragSortStatus?'完成排序':'编辑排序'}}</el-button> -->
       </el-form-item>
     </el-form>
-    <!-- <scroll-table :table-date="tableList" :sort-status="dragSortStatus"></scroll-table> -->
     <zm-table :columns="columns" :fetch="loadList" :table-params="tableParams"></zm-table>
     <pricing-detail v-if="detailPanel.visible" :id="detailPanel.id" @cancel="closeDetailPanel"></pricing-detail>
     <add-panel v-if="addPanelVisible" :id="id" @cancel="colseAddPanel" @after-save="loadList"></add-panel>
@@ -18,7 +17,6 @@
 </template>
 <script>
 import { getChannelProgramList, delChannelProgram, setSort } from '@/api/priceCenter'
-// import ScrollTable from './ScrollTable'
 import PricingDetail from '@/views/price_center/price_mgr/auto_pricing_scheme/PricingDetail'
 import zmTableMixin from '@/mixins/zmTableMixin'
 import zmTable from '@/components/isNeedComponents/zmTable/index'

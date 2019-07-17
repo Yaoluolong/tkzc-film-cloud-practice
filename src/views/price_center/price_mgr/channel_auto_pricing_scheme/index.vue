@@ -31,14 +31,10 @@
   </div>
 </template>
 <script>
-// import zmTable from '@/components/isNeedComponents/zmTable/index'
-// import zmTableMixin from '@/mixins/zmTableMixin'
-// import { autoSchemeColumns } from './constant'
 import { getChannelPageList } from '@/api/mallCenter'
 import pricingTable from './pricingTable'
 import { CHANNEL_TYPES } from '@/model/type'
 export default {
-  // mixins: [zmTableMixin],
   components: {
     pricingTable
   },
@@ -50,7 +46,6 @@ export default {
       },
       channelList: [],
       channelId: null
-      // columns: autoSchemeColumns(this)
     }
   },
   created() {

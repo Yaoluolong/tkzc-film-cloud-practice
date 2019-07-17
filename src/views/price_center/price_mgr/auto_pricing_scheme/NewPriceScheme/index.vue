@@ -223,7 +223,6 @@ export default {
       }
     },
     handleCheckAllChangeHall(val) {
-      console.log(1, val)
       this.$set(
         this.info,
         'copyType',
@@ -268,6 +267,7 @@ export default {
           message: '新建成功!'
         })
       }
+      this.$router.push({ path: '/price_center/price_mgr/auto_pricing_scheme' })
     }
   }
 }

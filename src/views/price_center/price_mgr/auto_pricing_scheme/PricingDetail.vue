@@ -1,6 +1,6 @@
 <template>
   <zm-panel title="智能定价详情" :visible.sync="visible" @change="closePanel">
-    <el-form label-width="100px">
+    <el-form label-width="90px">
       <div class="mtb20">基本信息</div>
       <el-form-item label="方案名称:">{{info.name}}</el-form-item>
       <el-form-item label="有效期:">{{info.startDate}}&nbsp;&nbsp;-&nbsp;&nbsp;{{info.endDate}}</el-form-item>
@@ -9,7 +9,7 @@
       <el-form-item label="影片:" v-if="+info.programType===2">{{info.filmName}}</el-form-item>
       <el-form-item label="制式:" v-if="+info.programType===2">{{info.copyType.join('、')}}</el-form-item>
     </el-form>
-    <el-form label-width="120px" v-for="(item,index) in info.rule" :key="index">
+    <el-form label-width="90px" v-for="(item,index) in info.rule" :key="index">
       <div class="mtb20">定价规则{{index+1}}</div>
       <el-form-item label="配置时间:">
         <div v-if="+item.timeType===1">有效期内，所有时间段可用</div>

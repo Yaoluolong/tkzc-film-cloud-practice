@@ -85,8 +85,6 @@ export default {
     },
     // 更改周期的表单
     onChangeTimeRuleItem({ timeRuleItem, ruleIndex, timeRuleIndex } = {}) {
-      // console.log('onChangeTimeRuleItem', this.rules)
-      console.log(timeRuleItem, ruleIndex, timeRuleIndex)
       this.$set(this.rules[ruleIndex].timeRule, timeRuleIndex, timeRuleItem)
     },
     // 增删TimeRule
