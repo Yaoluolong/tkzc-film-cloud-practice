@@ -70,7 +70,7 @@ export default {
       const valid = await this.$refs.form.validate()
       if (!valid) return
       const params = { ...this.params }
-      if (this.id) params.id = this.id
+      params.id = this.id || ''
       this.id ? await updateCustomer(params) : createCustomer(params)
       this.$message.success('保存成功')
       this.$emit('save-after')

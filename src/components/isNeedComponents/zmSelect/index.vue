@@ -179,7 +179,6 @@ export default {
         if (!(this.selectValue && this.selectValue.length) && !this.attrOption.multiple) this.remoteMethod('')
       } else {
         // 收缩时，更新外部数据
-        console.log(21312312312)
         this.changeSelect(this.selectValue)
       }
     }

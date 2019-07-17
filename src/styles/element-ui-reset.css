@@ -69,3 +69,7 @@
 .el-checkbox.choose-item.isChecked .el-checkbox__label {
   color: #fff !important;
 }
+.el-dialog__body {
+  max-height: 50vh !important;
+  overflow: auto !important;
+}

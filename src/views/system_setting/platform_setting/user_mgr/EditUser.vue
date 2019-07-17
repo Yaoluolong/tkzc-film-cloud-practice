@@ -37,7 +37,7 @@
       </el-form-item>
       <el-form-item label="所属客户" prop="customerIds">
         <zm-select
-        class="wp100"
+          class="wp100"
           v-model="params.customerIds"
           select-type="customerList"
           :attrOption="{multiple:true}"
