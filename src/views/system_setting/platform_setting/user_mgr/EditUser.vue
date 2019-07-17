@@ -26,6 +26,7 @@
           </el-select>
         </tip>
       </el-form-item>
+      <div v-if="+params.type===1">
       <el-form-item label="所属角色" prop="roleId">
         <remote-select
           v-model="params.roleId"
@@ -35,6 +36,8 @@
         ></remote-select>
         <div style="color:#909399">选择所属角色后默认继承角色权限，同时可在成员列表中单独设置权限。</div>
       </el-form-item>
+      </div>
+      <div v-if="+params.type===2||+params.type===3">
       <el-form-item label="所属客户" prop="customerIds">
         <zm-select
           class="wp100"
@@ -43,6 +46,27 @@
           :attrOption="{multiple:true}"
         ></zm-select>
       </el-form-item>
+      <el-form-item label="关联商家" prop="customerIds" v-if="+params.type===3">
+        <zm-select
+          class="wp100"
+          v-model="params.customerIds"
+          select-type="channelList"
+          :attrOption="{multiple:true}"
+        ></zm-select>
+      </el-form-item>
+      <el-form-item label="关联业务员" prop="uesrIds">
+        <zm-select
+          class="wp100"
+          v-model="params.uesrIds"
+          select-type="memberList"
+          :attrOption="{multiple:true}"
+        ></zm-select>
+      </el-form-item>
+      </div>
+      <div v-if="+params.type===4">
+       <el-form-item label="添加影院" prop="uesrIds">
+      </el-form-item>
+      </div>
       <el-form-item label="登录密码">
         <el-input v-model="params.passWord" type="password" placeholder="请输入登录密码"></el-input>
       </el-form-item>

@@ -16,7 +16,8 @@
             </el-form-item>
             <el-form-item >
               <el-button type="primary" icon="el-icon-search"  @click="refreshTable">查询</el-button>
-              <el-button type="success" icon="el-icon-upload2" @click="exportData">导出</el-button>
+              <el-button type="success" icon="el-icon-upload2" @click="exportData">导出汇总</el-button>
+              <el-button type="success" icon="el-icon-upload2" @click="exportDetail">导出明细</el-button>
             </el-form-item>
          </el-form>
          <page-table ref="table" :query="query" :fetch="queryTable">
@@ -111,13 +112,10 @@ export default {
       this.$refs.table.refresh()
     },
     exportData() {
-      /* const loading = this.$loading({
-        lock: true,
-        text: '正在导出订单',
-        spinner: 'el-icon-loading'
-      })*/
-
       exportData(exportCouponOrder, realDeepClone(this.query))
+    },
+    exportDetail() {
+      exportData(exportCouponOrderDetail, realDeepClone(this.query))
     },
     exportOrderData() {
       exportData(exportCouponOrderDetail, realDeepClone({ orderNo: this.orderNo }))

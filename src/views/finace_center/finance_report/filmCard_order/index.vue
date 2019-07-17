@@ -21,7 +21,7 @@
             </el-form-item>
          </el-form>
          <page-table ref="table" :query="query" :fetch="queryTable">
-            <!-- <el-table-column min-width="120"  label="业务人员" align="center" prop="operator" show-overflow-tooltip></el-table-column> -->
+            <el-table-column min-width="120"  label="业务人员" align="center" prop="operator" show-overflow-tooltip></el-table-column>
             <el-table-column min-width="100"  label="客户名称" align="center" prop="customerName"></el-table-column>            
             <el-table-column min-width="110"  label="销售总额" align="center" prop="amount"></el-table-column>
             <el-table-column min-width="110"  label="卡内总点数" align="center" prop="point"></el-table-column>
@@ -42,10 +42,30 @@
             <el-table-column min-width="100"  label="订单状态" align="center" prop="orderStatusName"></el-table-column> -->
             <el-table-column min-width="100"  label="操作" align="center" prop="oper">
               <template slot-scope="{row}">
-                <el-button type="text" @click="$router.push({path:'/finace_center/finance_report/card_sales_order/order_detail', query:{orderNo:row.orderNo}})">查看</el-button>
+                <el-button type="text" @click="openDetail({orderNo:row.orderNo})">查看</el-button>
               </template>
             </el-table-column>
          </page-table>
+         <el-dialog title="电影卡销售订单详情" class="sum-info" :visible.sync="detailDialogVisible" width="700px" @close="resetFields('form')">
+           <div class="item"><span>销售订单号：</span><span>{{params.orderNo}}</span></div>
+           <div class="item"><span>销售时间：</span><span>{{params.saleTime}}</span></div>
+           <div class="item"><span>业务人员：</span><span>{{params.operator}}</span></div>
+           <div class="item"><span>客户名称：</span><span>{{params.customerName}}</span></div>
+           <div class="item"><span>电影卡种类：</span><span>{{params.typeName}}</span></div>
+           <div class="item"><span>销售总数：</span><span>{{params.num}}张</span></div>
+           <div class="item"><span>已激活：</span><span>{{params.countActive}}张</span></div>
+           <div class="item"><span>已绑定：</span><span>{{params.bindNum}}张</span></div>
+           <div class="item"><span>已使用：</span><span>{{params.useNum}}张</span></div>
+           <div class="item"><span>已作废：</span><span>{{params.voidNum}}张</span></div>
+           <div class="item"><span>已冻结：</span><span>{{params.frozenNum}}张</span></div>
+           <div class="item"><span>已过期：</span><span>{{params.overNum}}张</span></div>
+           <div class="item"><span>使用率：</span><span>{{params.usePercet}}（<span style="color:blue;">消费总数除以销售总数）</span></span></div>
+           <div class="item"><span>兑付率：</span><span>{{params.exchangePercet}}（<span style="color:blue;">电影卡实际作用在影片面值上的总额除以销售总额）</span></span></div>
+            <span slot="footer" class="dialog-footer">
+              <el-button type="primary" @click="exportOrderData(params.ordeNo)">导出明细</el-button>
+              <el-button @click="hide" >取 消</el-button>
+            </span>
+          </el-dialog>
     </div>
 </template>
 
@@ -53,7 +73,7 @@
 import { realDeepClone, exportData } from '@/utils'
 import CustomerSelector from '@/components/CustomerSelector'
 import OperatorIdSelector from '@/components/OperatorIdSelector'
-import { getCardOrderPageList, exportCardOrder, exportCardOrderDetail } from '@/api/financeCenter'
+import { getCardOrderPageList, exportCardOrder, getCardOrderInfo, exportCardOrderDetail } from '@/api/financeCenter'
 export default {
   components: { CustomerSelector, OperatorIdSelector },
   name: 'card_sales_order',
@@ -62,7 +82,12 @@ export default {
       cardOrderLimit: 'cardOrderLimit',
       query: {
         time: []
-      }
+      },
+      detailDialogVisible: false,
+      params: {},
+      orderNo: '',
+      diffType: '',
+      ruleText: ''
     }
   },
   methods: {
@@ -83,11 +108,41 @@ export default {
     },
     exportDetail() {
       exportData(exportCardOrderDetail, realDeepClone(this.query))
+    },
+    exportOrderData() {
+      exportData(exportCardOrderDetail, realDeepClone({ orderNo: this.orderNo }))
+    },
+    hide() {
+      this.detailDialogVisible = false
+    },
+    openDetail(agur) {
+      this.ruleText = ''
+      getCardOrderInfo(agur).then(res => {
+        this.params = res
+        this.$set(this, 'orderNo', this.params.orderNo)
+        this.$set(this, 'diffType', this.params.ruleList[0].diffType)
+        this.$set(this, 'ruleText', this.params.ruleList[0].ruleText)
+      })
+      this.detailDialogVisible = true
     }
   }
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+.sum-info{
+  .item{
+    font-size: 16px;
+    padding: 10px;
+    font-weight: bold;
+  }
+  
+}
+</style>
+<style>
+  .el-dialog__body{
+    height:50vh !important;
+    max-height:50vh;
+    overflow:auto !important;
+  }
 </style>
