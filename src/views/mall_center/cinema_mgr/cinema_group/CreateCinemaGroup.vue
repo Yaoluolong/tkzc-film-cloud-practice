@@ -149,7 +149,8 @@ export default {
         _this.chooseParams.searchParam = id
           ? typeof _this.params.searchParam === 'string'
             ? JSON.parse(_this.params.searchParam)
-            : _this.params.searchParam : {}
+            : _this.params.searchParam
+          : {}
         _this.chooseParams.area = _this.chooseParams.searchParam.area || ''
         // _this.chooseParams.area =
         // 编辑时调用此接口和可选列表做匹配，可选列表可筛选掉分组中记录的影院

@@ -148,7 +148,6 @@ export default {
       this.getIsAll(info)
     },
     async getRegion() {
-      debugger
       const data = this.areaInfo.children
       // 不重置组件时，进入时候判断value是否true,省份数组是否已存在，没有则调用接口,并赋初始值
       const res = await getRegionList()
