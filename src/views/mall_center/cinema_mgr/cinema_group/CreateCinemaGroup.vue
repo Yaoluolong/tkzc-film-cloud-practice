@@ -80,9 +80,7 @@ export default {
   },
   data() {
     const cinemaListValid = (rule, value, callback) => {
-      if (
-        this.chooseParams.cinemaId && this.chooseParams.cinemaId.length
-      ) {
+      if (this.chooseParams.cinemaId && this.chooseParams.cinemaId.length) {
         callback()
       } else {
         callback(new Error('请添加影院'))
@@ -95,7 +93,8 @@ export default {
       cinemaVisible: false, // 添加影院窗口开关
       cinemaNum: '', // 已添加的影城数量
       area: '', // 选择所有时展示添加影院时选择的地区
-      chooseParams: { // 这里开始想弄只传给组件的参数，后面发现参数params里面都有，再优化吧
+      chooseParams: {
+        // 这里开始想弄只传给组件的参数，后面发现参数params里面都有，再优化吧
         // 影院选择参数
         id: '',
         cinemaId: '', // 指定时存放最终选择的选项
@@ -147,7 +146,10 @@ export default {
         // _this.chooseParams.cinemaType = _this.params.cinemaType
         // _this.chooseParams.cinemaId = _this.params.cinemaId
         // _this.chooseParams.cinemaList = _this.params.cinemaList
-        _this.chooseParams.searchParam = typeof _this.params.searchParam === 'string' ? JSON.parse(_this.params.searchParam) : _this.params.searchParam
+        _this.chooseParams.searchParam = id
+          ? typeof _this.params.searchParam === 'string'
+            ? JSON.parse(_this.params.searchParam)
+            : _this.params.searchParam : {}
         _this.chooseParams.area = _this.chooseParams.searchParam.area || ''
         // _this.chooseParams.area =
         // 编辑时调用此接口和可选列表做匹配，可选列表可筛选掉分组中记录的影院
@@ -191,10 +193,10 @@ export default {
         case 'addCinema':
           this.cinemaVisible = true
           break
-        case 'del' :
+        case 'del':
           this.operCinema(type, row)
           break
-        case 'delCinema' :
+        case 'delCinema':
           this.operCinema(type, row)
           break
       }
@@ -304,7 +306,10 @@ export default {
             : '',
         interfaceTypeId: this.chooseParams.searchParam.interfaceId || '-1',
         cinemaNum: this.cinemaNum,
-        cinemaId: +this.chooseParams.cinemaType === 2 ? this.chooseParams.cinemaId : '-1'
+        cinemaId:
+          +this.chooseParams.cinemaType === 2
+            ? this.chooseParams.cinemaId
+            : '-1'
       }
       if (!this.chooseParams.id) delete params.id
       await (this.chooseParams.id
