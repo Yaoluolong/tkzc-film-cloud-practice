@@ -5,7 +5,7 @@
       append-to-body
       title="选择城市信息"
       :close-on-click-modal="false"
-      :visible.sync="value"
+      :visible="value"
       :before-close="closeCilck"
       class="dialogContainer"
     >
@@ -141,11 +141,11 @@ export default {
   },
   methods: {
     // 回填并获取父级已选值和全选状态
-    getInfo(data, ids) {
+    getInfo(info, ids) {
       if (!ids || !ids.length) return
       const dataIds = Array.isArray(ids) ? ids : ids.split(',')
-      data.ids = dataIds
-      this.getIsAll(data)
+      info.ids = dataIds
+      this.getIsAll(info)
     },
     async getRegion() {
       const data = this.areaInfo.children

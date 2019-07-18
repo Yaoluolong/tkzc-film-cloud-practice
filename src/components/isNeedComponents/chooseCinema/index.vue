@@ -83,7 +83,7 @@ export default {
   created() {
     this.cinemaType = this.chooseParams.cinemaType || '2'
     this.query = Object.assign({}, this.query, this.chooseParams.searchParam)
-    this.area = this.chooseParams.area
+    this.area = this.chooseParams.area || ''
   },
   methods: {
     async loadList() {

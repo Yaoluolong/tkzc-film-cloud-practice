@@ -17,6 +17,7 @@
       <!-- v-if="couponInfoLoaded || !$route.query.orderNo" -->
       <div slot="header">
         <span>销售电影券基础信息，销售员：{{couponInfo.operator||name}}</span>
+        <span v-if="couponInfo.resellerOperator">申请人：{{couponInfo.resellerOperator}}</span>
       </div>
       <el-form
         label-width="140px"
@@ -27,14 +28,25 @@
         ref="couponInfoForm"
       >
         <el-form-item label="分销商客户名称:" prop="customer">
-          <customer-selector
+          <zm-select
+            class="vm w320"
+            v-model="couponInfo.customer"
+            select-type="customerList"
+            placeholder="请选择分销商客户名称"
+          ></zm-select>
+          <!-- <customer-selector
             v-model="couponInfo.customer"
             v-if="couponInfo.customer || !$route.query.orderNo"
             :isAddNew="false"
-          ></customer-selector>
+          ></customer-selector> -->
         </el-form-item>
         <el-form-item label="业务员所属公司:" prop="companyId">
-          <zm-select class="vm w320" v-model="couponInfo.companyId" select-type="companyList" placeholder="请选择业务员所属公司"></zm-select>
+          <zm-select
+            class="vm w320"
+            v-model="couponInfo.companyId"
+            select-type="companyList"
+            placeholder="请选择业务员所属公司"
+          ></zm-select>
         </el-form-item>
         <div>
           <el-form-item label="电影券种类:" prop="type" style="display:inline-block;width: 450px;">
@@ -78,7 +90,7 @@
             <el-input
               v-model.trim="couponInfo.num"
               placeholder="0"
-              style="width:100px;"
+              class="w100 mr10"
               :disabled="couponInfo.style=='Z'||!couponInfo.style"
             ></el-input>张
             <span
@@ -88,11 +100,11 @@
             <span style="margin-left:20px;color:gray" v-show="couponInfo.style!=='Z'">只能是数值，且必须大于0</span>
           </el-form-item>
           <el-form-item label="销售总额:" prop="amount">
-            <el-input v-model.trim="couponInfo.amount" placeholder="0.00" style="width:100px;"></el-input>元
+            <el-input v-model.trim="couponInfo.amount" placeholder="0.00" class="w100 mr10"></el-input>元
             <span style="margin-left:20px;color:gray">只能是数值，且必须大于0</span>
           </el-form-item>
           <el-form-item label="销售单价:" prop="unitPrice">
-            <el-input v-model.trim="couponInfo.unitPrice" placeholder="0.00" style="width:100px;"></el-input>元
+            <el-input v-model.trim="couponInfo.unitPrice" placeholder="0.00" class="w100 mr10"></el-input>元
             <span style="margin-left:20px;color:gray">只能是数值，限2位小数，如果销售单价未填写则最后系统将按照（销售总额除以销售数量）来计算</span>
           </el-form-item>
           <el-form-item label="电影券有效期:" prop="time">
@@ -589,6 +601,7 @@ import FilmComplement from '@/views/operation_center/FilmComplement'
 import StandardComplement from '@/views/operation_center/StandardComplement'
 import HallComplement from '@/views/operation_center/HallComplement'
 import {
+  getCouponApplyInfo,
   getInvoiceTypeList,
   createCouponOrder,
   getCouponOrderInfo,
@@ -1213,9 +1226,29 @@ export default {
         }
       ])
       this.complementChange('2', settlementType)
+    },
+    // 外部申请时请求info数据
+    async getApplyInfo() {
+      const res = this.$route.query.applyId ? await getCouponApplyInfo({ id: this.$route.query.applyId }) : {}
+      // 只给对应字段防止出错
+      this.couponInfo = {
+        resellerCouponApplicationId: this.$route.query.applyId || '', // 申请单id
+        customer: res.customerId,
+        resellerOperator: res.resellerOperator,
+        style: res.couponStyle,
+        type: res.couponType,
+        remark: res.content,
+        businessType: '1', // 目前只有团体票业务先写死
+        num: res.number,
+        startTime: res.startTime,
+        endTime: res.endTime
+      }
+      // 时间组件的需要的数组要支持双向绑定
+      this.$set(this.couponInfo, 'time', [res.startTime, res.endTime])
     }
   },
   async created() {
+    if (this.$route.query.applyId) this.getApplyInfo()
     if (this.$route.query.orderNo) {
       const _this = this
       getCouponOrderInfo(this.$route.query.orderNo).then(res => {

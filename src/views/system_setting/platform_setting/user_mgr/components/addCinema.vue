@@ -106,7 +106,6 @@ export default {
         // 获取code值
         // 走组件时，从外部传入需要的参数,走页面时直接调用页面的info接口
         _this.chooseParams = Object.assign({}, _this.chooseParams, JSON.parse(JSON.stringify(_this.chooseInfo)))
-        // _this.chooseParams.area =
         // 编辑时调用此接口和可选列表做匹配，可选列表可筛选掉分组中记录的影院
         _this.loading = true
         if (_this.chooseInfo.cinemaId) await saveCinemaAdd({ code: _this.chooseParams.code, cinemaId: _this.chooseInfo.cinemaId })
@@ -142,7 +141,7 @@ export default {
     onOperateClick(type, row) {
       switch (type) {
         case 'query':
-          this.$refs.queryFrom.querySubmit()
+          this.$refs.queryForm.querySubmit()
           this.onSearch()
           break
         case 'addCinema':

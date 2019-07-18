@@ -20,7 +20,6 @@
         placeholder="选择地区模糊查询"
         class="w200"
         @focus="onOperateClick('area')"
-        @keyup.native="onOperateClick('keyupArea')"
       ></el-input>
     </el-form-item>
     <query-city
@@ -76,7 +75,6 @@ export default {
   },
   methods: {
     getInfo(val) {
-      console.log(1111111111)
       this.query.cinemaThirdNo = val.cinemaThirdNo
       this.query.provinceId = val.provinceId
       this.query.cityId = val.cityId
