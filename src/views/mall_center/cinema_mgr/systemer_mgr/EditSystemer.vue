@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <el-form label-width="140px" label-position="left" style="width:650px;" :model="params" :rules="rules" ref="form">
+    <el-form label-width="155px" label-position="left" style="width:650px;" :model="params" :rules="rules" ref="form">
       <el-form-item label="系统商名称" prop="name" >
           <el-input v-model.trim="params.name" placeholder="请输入渠道商名称,最多20个字"></el-input>
       </el-form-item>
@@ -111,7 +111,8 @@ export default {
 
         orderRequestOverTime: { required: true, message: '请输入轮询时间', trigger: 'blur' },
         sleepTime: { required: true, message: '请输入轮询间隔', trigger: 'blur' },
-        unLockSeatTime: { required: true, message: '请输入锁座时间', trigger: 'blur' }
+        unLockSeatTime: { required: true, message: '请输入锁座时间', trigger: 'blur' },
+        dockType: { required: true, message: '请输入接入类型', trigger: 'change' }
       },
       isEdit: false
     }

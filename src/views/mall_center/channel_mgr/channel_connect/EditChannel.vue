@@ -86,7 +86,7 @@
             </el-input>
           </tip>
         </el-form-item>
-        <el-form-item label="定价方式" style="width:320px" prop="pricingType" v-if="+params.type===1">
+        <el-form-item label="定价方式" style="width:320px" prop="pricingType">
           <el-radio-group v-model="params.pricingType">
             <el-radio v-for="(item,index) in CHANNEL_AUTO_PRICE_TYPES" :key="index" :label="item.value">{{item.label}}</el-radio>
           </el-radio-group>
@@ -562,6 +562,7 @@ export default {
         refundTime: { required: true, message: '请输入渠道退票时间', trigger: 'blur' },
         renewPlanTime: { required: true, message: '请输入更新排期场次', trigger: 'blur' },
         cashierType: { required: true, message: '请选择收银台类型', trigger: 'blur' },
+        pricingType: { required: true, message: '请选择定价方式', trigger: 'change' },
         technicalServiceFee: [
           { required: true, message: '请输入技术服务费', trigger: 'blur' },
           { validator: STRING_NUMBER, trigger: 'blur' }
@@ -580,7 +581,6 @@ export default {
   },
   methods: {
     deviceChange(val) {
-      this.params.pricingType = +val === 1 ? '1' : null
       deviceChange({ channelType: val }).then(res => {
         this.params.deviceCode = ''
         this.deviceCodeOptions = res
