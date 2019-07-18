@@ -70,7 +70,7 @@ export const couponApplyDetaliType = info => {
     },
     {
       name: '申请人',
-      key: 'operator'
+      key: 'resellerOperator'
     },
     {
       name: '分销商客户',
@@ -91,7 +91,7 @@ export const couponApplyDetaliType = info => {
     {
       name: '申请数量',
       key: 'number',
-      unit: '元'
+      unit: '张'
     },
     {
       name: '备注',

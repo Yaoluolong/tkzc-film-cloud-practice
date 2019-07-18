@@ -12,7 +12,7 @@
         ></remote-select>
         <el-input
           class="vm w250"
-          v-model="query[orderStatus!=='-1'?orderStatus:'']"
+          v-model="query[orderStatus!=='-1'?orderStatus:'empty']"
           placeholder="请输入关键字"
         ></el-input>
       </el-form-item>
@@ -53,7 +53,6 @@
           :clearable="true"
           placeholder="请选择"
           class="w200"
-          @change="getArea"
         ></city-cascader>
       </el-form-item>
       <el-form-item label="票务系统商">
@@ -151,6 +150,11 @@ export default {
       sumData: {} // 统计数据
     }
   },
+  watch: {
+    orderStatus(val, oldVal) {
+      if (oldVal) this.query[oldVal] = ''
+    }
+  },
   computed: {
     columns() {
       return orderColumns(this)
@@ -173,6 +177,8 @@ export default {
   methods: {
     async loadList() {
       this.query.requestType = 'getList'
+      this.getArea(this.area)
+      if (this.query.empty) delete this.query.empty
       const res = await getOrderPageList(this.assignQuery(this.query))
       this.initialTableData(res.data, res.count)
     },

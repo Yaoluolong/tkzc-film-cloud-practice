@@ -141,7 +141,7 @@ export default {
     onOperateClick(type, row) {
       switch (type) {
         case 'query':
-          this.$refs.queryFrom.querySubmit()
+          this.$refs.queryForm.querySubmit()
           this.onSearch()
           break
         case 'addCinema':

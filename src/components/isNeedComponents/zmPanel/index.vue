@@ -95,7 +95,7 @@ export default {
   },
   destroyed() {
     if (this.appendToBody) {
-      // document.body.removeChild(this.$el)
+      document.body.removeChild(this.$el)
     }
   },
   methods: {
