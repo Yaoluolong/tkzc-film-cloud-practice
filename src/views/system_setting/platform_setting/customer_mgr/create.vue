@@ -9,10 +9,10 @@
     @close="closePanel"
   >
   <el-form label-width="80px" :model="params" :rules="rules" ref='form'>
-      <el-form-item label="客户名称">
+      <el-form-item label="客户名称" prop="name">
           <el-input v-model="params.name" placeholder="请输入客户名称" clearable class="w230"></el-input>
       </el-form-item>
-      <el-form-item label="上传图标">
+      <el-form-item label="上传图标" prop="logoImg">
          <pic-upload  v-model="params.logoImg"></pic-upload>
       </el-form-item>
   </el-form>
@@ -52,7 +52,7 @@ export default {
         name: ''
       },
       rules: {
-        name: { required: true, message: '请输入客户名称', trigger: blur }
+        name: { required: true, message: '请输入客户名称', trigger: 'blur' }
       }
     }
   },

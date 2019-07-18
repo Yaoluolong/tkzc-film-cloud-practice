@@ -147,7 +147,7 @@ export default {
   
 }
 </style>
-<style>
+<style scoped lang="scss">
   .el-dialog__body{
     height:50vh !important;
     max-height:50vh;
