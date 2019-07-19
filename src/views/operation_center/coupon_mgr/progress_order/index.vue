@@ -18,10 +18,10 @@
             </el-form-item>
          </el-form>
          <page-table ref="table" index :query="query" :fetch="queryTable">
-            <el-table-column min-width="180"  label="销售订单号" align="center" prop="orderNo" ></el-table-column>
+            <el-table-column min-width="180"  label="销售订单号" align="center" prop="orderNo" show-overflow-tooltip></el-table-column>
             <el-table-column min-width="120"  label="业务人员" align="center" prop="operator" show-overflow-tooltip></el-table-column>
             <el-table-column min-width="100"  label="客户名称" align="center" prop="customerName"></el-table-column>
-            <el-table-column min-width="180"  label="销售时间" align="center" prop="saleTime"></el-table-column>
+            <el-table-column min-width="180"  label="销售时间" align="center" prop="saleTime" show-overflow-tooltip></el-table-column>
             <el-table-column min-width="180"  label="销售总数" align="center" prop="num"></el-table-column>
             <el-table-column min-width="180"  label="销售总额(元)" align="center" prop="amount"></el-table-column>
             <el-table-column min-width="110"  label="初审状态" align="center" prop="checkStatusName">

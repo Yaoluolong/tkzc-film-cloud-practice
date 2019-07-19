@@ -19,16 +19,16 @@
             </el-form-item>
          </el-form>
          <page-table ref="table" index :query="query" :fetch="queryTable">
-            <el-table-column min-width="180"  label="生成单号" align="center" prop="orderNo" ></el-table-column>
+            <el-table-column min-width="180"  label="生成单号" align="center" prop="orderNo" show-overflow-tooltip></el-table-column>
             
-            <el-table-column min-width="180"  label="电影券批次号" align="center" prop="batchNo"></el-table-column>
+            <el-table-column min-width="180"  label="电影券批次号" align="center" prop="batchNo" show-overflow-tooltip></el-table-column>
             <el-table-column min-width="180"  label="电影券种类" align="center" prop="typeName"></el-table-column>
             <el-table-column min-width="110"  label="电影券类型" align="center" prop="styleName"></el-table-column>
-            <el-table-column min-width="180"  label="生成时间" align="center" prop="createTime"></el-table-column>
+            <el-table-column min-width="180"  label="生成时间" align="center" prop="createTime" show-overflow-tooltip></el-table-column>
             <el-table-column min-width="110"  label="生成总数" align="center" prop="num"></el-table-column>
             <el-table-column min-width="110"  label="已销售总数" align="center" prop="saleNum"></el-table-column>
             <el-table-column min-width="120"  label="生成人员" align="center" prop="operator" show-overflow-tooltip></el-table-column>
-            <el-table-column min-width="250"  label="操作" align="center" prop="oper">
+            <el-table-column min-width="250"  label="操作" align="center" prop="oper" fixed="right">
               <template slot-scope="{row}">
                 <el-button type="text" @click="$router.push({path:'/operation_center/coupon_mgr/unsold_coupon_detail',query:{orderNo:row.orderNo}})">查看</el-button>
                 <el-button type="text" @click="openExportEdit(row)">导出券</el-button>

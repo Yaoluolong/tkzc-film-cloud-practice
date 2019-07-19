@@ -26,7 +26,7 @@
             <el-table-column width="80"  label="使用率" align="center" prop="usage"></el-table-column>
             <el-table-column width="80"  label="结算总额" align="center" prop="amount"></el-table-column>
             <el-table-column width="100"  label="电影券种类" align="center" prop="typeName"></el-table-column>
-            <el-table-column width="80"  label="操作" align="center" prop="oper">
+            <el-table-column width="80"  label="操作" align="center" prop="oper" fixed="right">
               <template slot-scope="{row}">
                 <el-button type="text" @click="openDetail(row)">查看明细</el-button>
               </template>

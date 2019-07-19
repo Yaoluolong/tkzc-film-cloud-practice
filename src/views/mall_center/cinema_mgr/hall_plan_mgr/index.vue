@@ -18,7 +18,7 @@
             </el-form-item>
          </el-form>
          <page-table ref="table" :query="query" :fetch="queryTable">
-            <el-table-column min-width="150"  label="影院名称" align="center" prop="cinemaName" ></el-table-column>
+            <el-table-column min-width="150"  label="影院名称" align="center" prop="cinemaName" show-overflow-tooltip></el-table-column>
             <el-table-column min-width="150"  label="影厅总数" align="center" prop="hallNum" ></el-table-column>
             <el-table-column min-width="150"  label="排期总数" align="center" prop="cinemaPlanNum" ></el-table-column>
             <el-table-column min-width="150"  label="平均售价" align="center" prop="average" ></el-table-column>
@@ -46,8 +46,8 @@
             <el-table-column   label="影片挂牌价" align="center" prop="listingPrice"  :formatter="priceFormatter"></el-table-column>
             <el-table-column   label="影院服务费" align="center" prop="serviceAddFee"  :formatter="priceFormatter"></el-table-column> -->
 
-            <el-table-column min-width="150"  label="更新时间" align="center" prop="updateTime"></el-table-column>
-            <el-table-column min-width="150"  label="操作" align="center" prop="eper">
+            <el-table-column min-width="150"  label="更新时间" align="center" prop="updateTime" show-overflow-tooltip></el-table-column>
+            <el-table-column min-width="150"  label="操作" align="center" prop="eper" fixed="right">
             	<template slot-scope="{row}">
             		<el-button type="text" @click="$router.push({path:'/mall_center/cinema_mgr/view_hall',query:{id:row.id, cinemaName:row.cinemaName}})">查看影厅</el-button>
             		<el-button type="text" @click="$router.push({path:'/mall_center/cinema_mgr/view_plan',query:{id:row.id,interfaceId:row.interfaceId, cinemaName:row.cinemaName,remark:row.remark,updateTime:row.updateTime}})">查看排期</el-button>

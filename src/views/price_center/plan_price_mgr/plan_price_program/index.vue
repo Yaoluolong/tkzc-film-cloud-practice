@@ -22,13 +22,13 @@
                 </el-tooltip>
               </template>
             </el-table-column>
-            <el-table-column width="180" align="center" label="添加时间" prop="createTime"></el-table-column>
+            <el-table-column width="180" align="center" label="添加时间" prop="createTime" show-overflow-tooltip></el-table-column>
             <el-table-column width="100" align="center" label="是否启用" prop="status">
               <template slot-scope="{row}">
                 <switch-confirm v-model="row.status" :id="row.id" action="/systemApi/priceModify/setStatus"></switch-confirm>
               </template>
             </el-table-column>
-            <el-table-column min-width="180" align="center" label="操作" prop="oper">
+            <el-table-column min-width="180" align="center" label="操作" prop="oper" fixed="right">
               <template slot-scope="{row}">
                 <el-button type="text" @click="$router.push({path:'/price_center/plan_price_mgr/plan_price_program/look',query:{id:row.id}})">查看</el-button>
                 <el-button type="text" @click="$router.push({path:'/price_center/plan_price_mgr/plan_price_program/edit',query:{id:row.id}})">编辑</el-button>

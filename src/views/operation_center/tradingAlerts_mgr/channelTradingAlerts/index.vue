@@ -23,14 +23,14 @@
           </el-form-item>
         </el-form>
      	<page-table ref="table" index :query="query" :fetch="queryTable" v-show="query.checkStatus ==='0'">
-        <el-table-column min-width="100"  label="商家名称" align="center" prop="name" >
+        <el-table-column min-width="100"  label="商家名称" align="center" prop="name" show-overflow-tooltip>
           <template slot-scope="{row}">
             <el-button type="text" @click="$router.push({path:'/operation_center/paltform_trading_alerts_mgr/view_account_detail',query:{channelId:row.channelId}})">{{row.name}}</el-button>     
           </template>
         </el-table-column>
         <el-table-column min-width="120"  label="消费终端" align="center" prop="consumerDeviceType" show-overflow-tooltip></el-table-column>
         <el-table-column min-width="180"  label="商家类型" align="center" prop="typeName"></el-table-column>
-        <el-table-column min-width="100"  label="接入时间" align="center" prop="createTime"></el-table-column>
+        <el-table-column min-width="100"  label="接入时间" align="center" prop="createTime" show-overflow-tooltip></el-table-column>
         <el-table-column min-width="100"  label="商家可售影院数" align="center" prop="cinemaNum"></el-table-column>
         <el-table-column width="80"  label="启用状态" align="center" prop="isWarning">
           <template slot-scope="{row}">
@@ -44,7 +44,7 @@
       	</el-table-column>
       </page-table>
       <page-table ref="checkAccountTable" index :query="query" :fetch="checkAccountTable" v-show="query.checkStatus ==='1'">
-        <el-table-column min-width="100"  label="商家名称" align="center" prop="name" ></el-table-column>
+        <el-table-column min-width="100"  label="商家名称" align="center" prop="name" show-overflow-tooltip></el-table-column>
         <el-table-column min-width="120"  label="消费终端" align="center" prop="consumerDeviceType" show-overflow-tooltip></el-table-column>
         <el-table-column min-width="180"  label="商家类型" align="center" prop="typeName"></el-table-column>
         <el-table-column min-width="100"  label="售票总数（张）" align="center" prop="sellTicketNum"></el-table-column>
@@ -52,7 +52,7 @@
         <el-table-column min-width="100"  label="预付金（元）" align="center" prop="prePayAmount"></el-table-column>
         <el-table-column min-width="100"  label="预警值%" align="center" prop="warnPercent"></el-table-column>
         <el-table-column min-width="100"  label="预警状态" align="center" prop="warnStatusName"></el-table-column>
-        <el-table-column min-width="250"  label="操作" align="center" prop="oper">
+        <el-table-column min-width="250"  label="操作" align="center" prop="oper" fixed="right">
           <template slot-scope="{row}">
             <el-button 
               type="text" 

@@ -27,11 +27,11 @@
       </el-form-item>
     </el-form>
     <page-table ref="table" index :query="query" :fetch="queryTable">
-      <el-table-column width="100" label="用户名" align="center" prop="userName"></el-table-column>
+      <el-table-column width="100" label="用户名" align="center" prop="userName" show-overflow-tooltip></el-table-column>
       <el-table-column min-width="100" label="姓名" align="center" prop="realName"></el-table-column>
       <el-table-column width="140" label="邮箱地址" align="center" prop="email" show-overflow-tooltip></el-table-column>
       <el-table-column width="120" label="所属角色" align="center" prop="roleName"></el-table-column>
-      <el-table-column width="160" label="添加时间" align="center" prop="createTime"></el-table-column>
+      <el-table-column width="160" label="添加时间" align="center" prop="createTime" show-overflow-tooltip></el-table-column>
       <el-table-column width="160" label="最后登录" align="center" prop="loginTime"></el-table-column>
       <el-table-column width="80" label="是否启用" align="center" prop="status">
         <template slot-scope="{row}">

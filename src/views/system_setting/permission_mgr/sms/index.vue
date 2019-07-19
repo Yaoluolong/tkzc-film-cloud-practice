@@ -20,7 +20,7 @@
                 <switch-confirm v-model="row.status" confirm-text="是否进行此操作" :id="row.id" action="/systemApi/sms/setStatus"></switch-confirm>
               </template>
             </el-table-column>
-            <el-table-column min-width="250"  label="操作" align="center" prop="oper">
+            <el-table-column min-width="250"  label="操作" align="center" prop="oper" fixed="right">
               <template slot-scope="{row}">
               	<el-button type="text" @click="editSms(row.id)">编辑</el-button>
               	<el-button type="text" @click="cancel(row.id)">删除</el-button>
@@ -39,7 +39,7 @@
                 <switch-confirm v-model="row.status" confirm-text="是否进行此操作" :id="row.id" action="/systemApi/smsTemplate/setStatus"></switch-confirm>
               </template>
             </el-table-column>
-            <el-table-column min-width="250"  label="操作" align="center" prop="oper">
+            <el-table-column min-width="250"  label="操作" align="center" prop="oper" fixed="right">
               <template slot-scope="{row}">
               	<el-button type="text" @click="editSmsModules(row.id)">编辑</el-button>
               	<el-button type="text" @click="cancelTemplate(row.id)">删除</el-button>

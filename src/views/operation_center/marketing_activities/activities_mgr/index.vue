@@ -42,23 +42,23 @@
         <el-tab-pane label="草稿箱" name="3"></el-tab-pane>            
       </el-tabs>
      <page-table ref="table" :query="query" :fetch="queryTable">
-        <el-table-column min-width="80" label="活动ID" align="center" prop="id" ></el-table-column>
-        <el-table-column min-width="140" label="活动名称" align="center" prop="name">
+        <el-table-column min-width="80" label="活动ID" align="center" prop="id" show-overflow-tooltip></el-table-column>
+        <el-table-column min-width="140" label="活动名称" align="center" prop="name" show-overflow-tooltip>
           <template slot-scope="{row}">
             <span v-if="row.isTop==='1'">(<span style="color:red">置顶</span>)&nbsp;</span>{{row.name}}
           </template>
         </el-table-column>
-        <el-table-column min-width="180"  label="活动区域" align="center" prop="regionStr"></el-table-column>
-        <el-table-column min-width="180"  label="活动时间" align="center" prop="vaildTime">          
+        <el-table-column min-width="180"  label="活动区域" align="center" prop="regionStr" show-overflow-tooltip></el-table-column>
+        <el-table-column min-width="180"  label="活动时间" align="center" prop="vaildTime" show-overflow-tooltip>          
         </el-table-column>
-        <el-table-column width="180"  label="活动时段" align="center" prop="activityPeriod">
+        <el-table-column width="180"  label="活动时段" align="center" prop="activityPeriod" show-overflow-tooltip>
         </el-table-column>
         <el-table-column min-width="180"  label="投放商家" align="center" prop="channelStr"></el-table-column>
         <el-table-column min-width="120"  label="活动类型" align="center" prop="typeStr"></el-table-column>
         <el-table-column min-width="120"  label="活动状态" align="center" prop="statusStr" v-if="query.approvalStatus!=='3'"></el-table-column>           
         <el-table-column min-width="50"  label="点击量" align="center" prop="hit" v-if="query.approvalStatus!=='3'"></el-table-column>
         <el-table-column min-width="120"  label="审核状态" align="center" prop="auditStatusStr" v-if="query.approvalStatus==='3'"></el-table-column>
-        <el-table-column min-width="160"  label="操作" align="center" prop="prev">
+        <el-table-column min-width="160"  label="操作" align="center" prop="prev" fixed="right">
           <template slot-scope="{row}">
             <!-- 运行中 or 已结束 -->
             <el-button type="text" @click="$router.push({path:'/operation_center/marketing_activities/activities_Detail',query:{id:row.id}})" v-if="query.approvalStatus!=='3' && !row.canReturn">活动明细</el-button>

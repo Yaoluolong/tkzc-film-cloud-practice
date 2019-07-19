@@ -44,7 +44,7 @@
              <el-table-column width="160"  label="广告类型" align="center" prop="typeName"></el-table-column>
              <el-table-column width="160"  label="更新时间" align="center" prop="updateTime"></el-table-column>
              <el-table-column width="120"  label="点击量" align="center" prop="clickNum"></el-table-column>
-            <el-table-column min-width="180"  label="操作" align="center" prop="oper">
+            <el-table-column min-width="180"  label="操作" align="center" prop="oper" fixed="right">
               <template slot-scope="{row}">
                 <el-button type="text" @click="$router.push({path:'/operation_center/advertising/banner_list/edit',query:{id:row.id}})">编辑</el-button>
                 <el-button type="text" @click="deleteSystemer(row)">删除</el-button>

@@ -15,15 +15,15 @@
 
      <page-table ref="table" :query="query" :fetch="queryTable">
         <el-table-column min-width="80"  label="投放商家" align="center" prop="channelStr" ></el-table-column>
-        <el-table-column min-width="120"  label="下单时间" align="center" prop="createTime"></el-table-column>
+        <el-table-column min-width="120"  label="下单时间" align="center" prop="createTime" show-overflow-tooltip></el-table-column>
         <el-table-column min-width="180"  label="参与用户" align="center" prop="bindingMobile"></el-table-column>
-        <el-table-column min-width="180"  label="购票订单号" align="center" prop="orderNo">          
+        <el-table-column min-width="180"  label="购票订单号" align="center" prop="orderNo" show-overflow-tooltip>          
         </el-table-column>
         <el-table-column min-width="180"  label="订单金额(元)" align="center" prop="totalFee"></el-table-column>
         <el-table-column min-width="120"  label="售价(元)" align="center" prop="settlementTotalFee"></el-table-column>
         <el-table-column min-width="120"  label="支付方式" align="center" prop="payTypeStr"></el-table-column>           
         <el-table-column min-width="50"  label="活动订单状态" align="center" prop="StatusStr"></el-table-column>
-        <el-table-column min-width="160"  label="操作" align="center" prop="prev">
+        <el-table-column min-width="160"  label="操作" align="center" prop="prev" fixed="right">
           <template slot-scope="{row}">
             <el-button type="text" @click="dialogShow(row)">查看详情</el-button>          
           </template>

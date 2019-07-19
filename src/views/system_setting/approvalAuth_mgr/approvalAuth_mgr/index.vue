@@ -20,7 +20,7 @@
             </el-table-column>
             <el-table-column width="160"  label="添加人员" align="center" prop="operator"></el-table-column>
             <el-table-column width="160"  label="添加时间" align="center" prop="createTime"></el-table-column>
-            <el-table-column min-width="180"  label="操作" align="center" prop="oper">
+            <el-table-column min-width="180"  label="操作" align="center" prop="oper" fixed="right">
               <template slot-scope="{row}">
               	<el-button type="text" @click="$router.push({path:'/system_setting/approvalAuth_mgr/view_approval_auth',query:{id:row.id}})">查看</el-button>
                 <el-button type="text" @click="editSystemer(row)">编辑</el-button>

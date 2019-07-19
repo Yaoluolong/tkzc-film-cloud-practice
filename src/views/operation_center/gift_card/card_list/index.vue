@@ -88,7 +88,7 @@
         </div>
     </el-form>
     <page-table ref="table" index :query="queryTemp" :fetch="queryTable">
-        <el-table-column  label="电影卡批次号" align="center" prop="batchNo" ></el-table-column>
+        <el-table-column  label="电影卡批次号" align="center" prop="batchNo" show-overflow-tooltip></el-table-column>
         <el-table-column   label="电影卡号码" width="180px" align="center" prop="cardCode" show-overflow-tooltip></el-table-column>
         <el-table-column   label="电影卡种" align="center" prop="typeName"></el-table-column>
         <el-table-column  label="电影卡类型" align="center" prop="styleName"></el-table-column>
@@ -98,7 +98,7 @@
         <el-table-column   label="冻结状态" align="center" prop="isFrozen"></el-table-column>
         <el-table-column   label="作废状态" align="center" prop="isVoid"></el-table-column>
         <el-table-column   label="绑定状态" align="center" prop="bindStatus"></el-table-column>
-        <el-table-column   label="详情" align="center" prop="oper">
+        <el-table-column   label="详情" align="center" prop="oper" fixed="right">
           <template slot-scope="{row}">
         <el-button type="text" @click="$router.push({path:'/operation_center/gift_card/card_detail',query:{id:row.id}})">查看</el-button>
           </template>

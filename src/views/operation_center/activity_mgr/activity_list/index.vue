@@ -45,7 +45,7 @@
             <el-table-column width="160"  label="活动类型" align="center" prop="activity_type"></el-table-column>
             <el-table-column width="160"  label="最后配置时间" align="center" prop="last_modified"></el-table-column>
             <el-table-column width="160"  label="活动状态" align="center" prop="status_str"></el-table-column>
-            <el-table-column min-width="220"  label="操作" align="center" prop="oper">
+            <el-table-column min-width="220"  label="操作" align="center" prop="oper" fixed="right">
               <template slot-scope="{row}">
                 <el-button type="text" @click="$router.push({path:'/operation_center/activity_mgr/view_activity_approval_detail',query:{activity_id:row.activity_id}})" v-if="row.status_code ==='running' || row.status_code ==='finished'|| row.status_code ==='processing'|| row.status_code ==='pending'">查看活动</el-button>
                 <el-button type="text" @click="$router.push({path:'/operation_center/activity_mgr/view_activity_detail',query:{activity_id:row.activity_id}})" v-if="row.status_code ==='running' || row.status_code ==='finished'|| row.status_code ==='off'">活动明细</el-button>

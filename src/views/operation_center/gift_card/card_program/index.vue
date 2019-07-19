@@ -17,7 +17,7 @@
          	<el-table-column min-width="120"  label="充值点数" align="center" prop="point"></el-table-column>
          	<el-table-column min-width="120"  label="原价(元)" align="center" prop="price"></el-table-column>
           <el-table-column min-width="180"  label="适用平台商家" align="center" prop="channelName"></el-table-column>
-          <el-table-column min-width="120"  label="充值点数有效期" align="center" prop="idpdValidityName"></el-table-column>
+          <el-table-column min-width="120"  label="充值点数有效期" align="center" prop="idpdValidityName" show-overflow-tooltip></el-table-column>
           <el-table-column min-width="120"  label="充值活动" align="center" prop="isOpenActive">
             <template slot-scope="{row}">
               <span v-if="row.isOpenActive ==='1'">开启</span>
@@ -45,7 +45,7 @@
                 <el-switch v-model="row.status" @change="clickSwitch(row)" :active-value="activeValue" :inactive-value="inactiveValue"></el-switch>
               </template>
             </el-table-column>
-            <el-table-column min-width="250"  label="操作" align="center" prop="oper">
+            <el-table-column min-width="250"  label="操作" align="center" prop="oper" fixed="right">
               <template slot-scope="{row}">
                 <el-button type="text" @click="$router.push({path:'/operation_center/gift_card/card_recharge_program/edit',query:{id:row.id}})">编辑</el-button>
                 <el-button type="text" @click="deleteObj(row)">删除</el-button>

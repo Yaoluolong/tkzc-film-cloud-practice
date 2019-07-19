@@ -16,8 +16,8 @@
         </el-card>
 		  <el-form>
         <page-table ref="table" index :query="query" :fetch="queryTable">
-          <el-table-column min-width="180"  label="电影卡批次号" align="center" prop="batchNo" ></el-table-column>
-          <el-table-column min-width="120"  label="电影卡号" align="center" prop="cardCode"></el-table-column>
+          <el-table-column min-width="180"  label="电影卡批次号" align="center" prop="batchNo" show-overflow-tooltip></el-table-column>
+          <el-table-column min-width="120"  label="电影卡号" align="center" prop="cardCode" show-overflow-tooltip></el-table-column>
           <el-table-column min-width="100"  label="电影卡种类" align="center" prop="typeName"></el-table-column>
           <el-table-column min-width="100"  label="电影卡类型" align="center" prop="styleName"></el-table-column>
           <el-table-column min-width="110"  label="卡内总点数" align="center" prop="oldPoint"></el-table-column>

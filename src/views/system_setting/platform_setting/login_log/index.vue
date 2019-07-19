@@ -10,7 +10,7 @@
          </el-form>
          <page-table ref="table" index :query="query" :fetch="queryTable">
             <el-table-column min-width="100"  label="用户名" align="center" prop="userName" ></el-table-column>
-            <el-table-column min-width="120"  label="登录日期" align="center" prop="loginTime"></el-table-column>
+            <el-table-column min-width="120"  label="登录日期" align="center" prop="loginTime" show-overflow-tooltip></el-table-column>
             <el-table-column min-width="120"  label="IP地址" align="center" show-overflow-tooltip prop="ip"></el-table-column>
             <el-table-column min-width="120"  label="地区" align="center" prop="area"></el-table-column>
             <el-table-column min-width="120"  label="浏览器" align="center" prop="broswer"></el-table-column>

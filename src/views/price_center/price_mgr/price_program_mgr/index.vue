@@ -37,9 +37,9 @@
               </template>
             </el-table-column>
             <el-table-column width="100" align="center" label="方案类型" prop="typeName"></el-table-column>
-            <el-table-column width="160" align="center" label="添加时间" prop="createTime"></el-table-column>
+            <el-table-column width="160" align="center" label="添加时间" prop="createTime" fixed="right"></el-table-column>
             <el-table-column width="100" align="center" label="创建人" prop="operator"></el-table-column>
-            <el-table-column align="center" label="操作" prop="oper">
+            <el-table-column align="center" label="操作" prop="oper" fixed="right">
               <template slot-scope="{row}">
                 <el-button type="text" v-if="query.status==3" @click="downProgram(row)">下架</el-button>
                 <el-button type="text" v-if="query.status==3" @click="reviewPrice(row)">预览价格</el-button>

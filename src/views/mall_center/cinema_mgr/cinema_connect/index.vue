@@ -34,7 +34,7 @@
 
             <!-- <el-table-column type="selection" :selectable="selectable" align="center" reserve-selection width="40"></el-table-column> -->
 
-            <el-table-column min-width="180"  label="平台内部ID" align="center" prop="id" ></el-table-column>
+            <el-table-column min-width="180"  label="平台内部ID" align="center" prop="id" show-overflow-tooltip></el-table-column>
 
             <el-table-column width="160"  label="影院所在地" align="center" prop="countyName" show-overflow-tooltip>
               <template slot-scope="{row}">
@@ -42,9 +42,9 @@
               </template>
             </el-table-column>
 
-            <el-table-column min-width="180"  label="影院名称" align="center" prop="cinemaName" ></el-table-column>
+            <el-table-column min-width="180"  label="影院名称" align="center" prop="cinemaName" show-overflow-tooltip></el-table-column>
 
-            <el-table-column min-width="120"  label="广电编码" align="center" prop="cinemaId" ></el-table-column>            
+            <el-table-column min-width="120"  label="广电编码" align="center" prop="cinemaId" show-overflow-tooltip></el-table-column>            
             
             <el-table-column width="180"  label="票务系统商" align="center" prop="interfaceName"></el-table-column>
 
@@ -60,14 +60,14 @@
 
             <el-table-column  min-width="80"  label="排期数" align="center" show-overflow-tooltip prop="schCount"></el-table-column>
 
-            <el-table-column width="180" v-show="cinemaType === 'abnormal'" label="添加时间" align="center" key="createTime" prop="createTime"></el-table-column>
+            <el-table-column width="180" v-show="cinemaType === 'abnormal'" label="添加时间" align="center" key="createTime" prop="createTime" show-overflow-tooltip></el-table-column>
 
             <!-- <el-table-column width="100" v-if="cinemaType === 'normal'" label="是否启用" align="center" key="status" prop="status">
               <template slot-scope="{row}">
                 <switch-confirm v-model="row.status" :id="row.id" id-key="id"  action="/systemApi/cinema/setStatus"></switch-confirm>
               </template>
             </el-table-column> -->
-            <el-table-column min-width="180"  label="操作" align="center"  prop="oper">
+            <el-table-column min-width="180"  label="操作" align="center"  prop="oper" fixed="right">
               <template slot-scope="{row}">
                 <el-button type="text" v-if="cinemaType === 'normal'" @click="$router.push({path:'/mall_center/cinema_mgr/view_cinema',query:{id:row.id}})">查看</el-button>
                 <el-button type="text" @click="$router.push({path:'/mall_center/cinema_mgr/cinema_connect/edit',query:{id:row.id}})">编辑</el-button>
@@ -75,7 +75,7 @@
               </template>
             </el-table-column>
 
-            <el-table-column width="180" label="更新时间" align="center" key="updateTime" prop="updateTime"></el-table-column>
+            <el-table-column width="180" label="更新时间" align="center" key="updateTime" prop="updateTime" show-overflow-tooltip></el-table-column>
          </page-table>
     </div>
 </template>

@@ -19,7 +19,7 @@
                 <switch-confirm v-model="row.status" confirm-text="停用角色将同时关闭角色下的用户,是否要执行此操作" :id="row.id" action="/systemApi/systemAccountRole/setStatus"></switch-confirm>
               </template>
             </el-table-column>
-            <el-table-column min-width="180"  label="操作" align="center" prop="oper">
+            <el-table-column min-width="180"  label="操作" align="center" prop="oper" fixed="right">
               <template slot-scope="{row}">
                 <el-button type="text" @click="$router.push({path:'/system_setting/platform_setting/role_mgr/permission_setting',query:{id:row.id}})">权限设置</el-button>
                 <el-button type="text" @click="$router.push({path:'/system_setting/platform_setting/role_mgr/edit',query:{id:row.id}})">编辑</el-button>

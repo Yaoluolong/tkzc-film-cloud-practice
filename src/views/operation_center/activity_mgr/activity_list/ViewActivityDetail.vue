@@ -25,9 +25,9 @@
             <el-table-column min-width="120"  label="购票时间" align="center" prop="create_time"></el-table-column>           
             <el-table-column width="160"  label="座位数" align="center" prop="seats"></el-table-column>
             <el-table-column width="160"  label="订单金额" align="center" prop="total_fee"></el-table-column>
-            <el-table-column width="160"  label="购票订单号" align="center" prop="ticket_order_no"></el-table-column>
+            <el-table-column width="160"  label="购票订单号" align="center" prop="ticket_order_no" show-overflow-tooltip></el-table-column>
             <el-table-column width="160"  label="操作结果" align="center" prop="order_status"></el-table-column>
-            <el-table-column min-width="180"  label="操作" align="center" prop="oper">
+            <el-table-column min-width="180"  label="操作" align="center" prop="oper" fixed="right">
               <template slot-scope="{row}">
                 <el-button type="text" @click="openDetail(row)">查看详情</el-button>
                 <el-button type="text" @click="orderOperateFunc(row)">订单操作</el-button>

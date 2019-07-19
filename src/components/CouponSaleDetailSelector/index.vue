@@ -26,10 +26,10 @@
       </el-radio-group>
       <div class="checkbox-plane" v-show="selectType==='2'">
         <page-table ref="table" index :query="query" :fetch="queryTable">
-          <el-table-column min-width="180"  label="销售订单号" align="center" prop="orderNo" ></el-table-column>
-          <el-table-column width="100"  label="业务员" align="center" prop="operator"></el-table-column>
-          <el-table-column width="180"  label="客户" align="center" prop="customerName"></el-table-column>
-          <el-table-column min-width="180"  label="激活状态" align="center" prop="ActiveName"></el-table-column>
+          <el-table-column min-width="180"  label="销售订单号" align="center" prop="orderNo" show-overflow-tooltip></el-table-column>
+          <el-table-column width="100"  label="业务员" align="center" prop="operator" show-overflow-tooltip></el-table-column>
+          <el-table-column width="180"  label="客户" align="center" prop="customerName" show-overflow-tooltip></el-table-column>
+          <el-table-column min-width="180"  label="激活状态" align="center" prop="ActiveName" show-overflow-tooltip></el-table-column>
           <el-table-column min-width="180"  label="" align="center" prop="isCheck">
             <template slot-scope="{row}">
               <el-checkbox v-model="row.isCheck" @change="rowIsCheckChange(row)"></el-checkbox>

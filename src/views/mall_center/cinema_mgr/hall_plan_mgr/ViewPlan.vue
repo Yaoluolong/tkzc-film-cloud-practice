@@ -45,18 +45,18 @@
               </template>
             </el-table-column> -->
             <el-table-column min-width="150"  label="影片名称" align="center" prop="filmName" show-overflow-tooltip></el-table-column>
-            <el-table-column  min-width="150" label="排期编码" align="center" prop="featureAppNo"></el-table-column>
+            <el-table-column  min-width="150" label="排期编码" align="center" prop="featureAppNo" show-overflow-tooltip></el-table-column>
             <el-table-column  min-width="150" label="放映时间" align="center" prop="startTime"></el-table-column>
             <el-table-column   label="放映影厅" align="center" prop="hallName" show-overflow-tooltip></el-table-column>
             <el-table-column  label="放映制式" align="center" prop="copyType"></el-table-column>
             <el-table-column  label="排期状态" align="center" prop="statusName">
               <template  slot-scope="{row}"><el-tag :type="row.status=='1'? 'success':'danger'">{{row.status=='1'? '正常':'关闭'}}</el-tag></template>
             </el-table-column>
-            <el-table-column   label="影片最低价" align="center" prop="lowestPrice" :formatter="priceFormatter"></el-table-column>
-            <el-table-column   label="影片标准价" align="center" prop="standardPrice" :formatter="priceFormatter"></el-table-column>
+            <el-table-column min-width="120" label="影片最低价" align="center" prop="lowestPrice" :formatter="priceFormatter"></el-table-column>
+            <el-table-column min-width="120" label="影片标准价" align="center" prop="standardPrice" :formatter="priceFormatter"></el-table-column>
             <!-- <el-table-column   label="影片挂牌价" align="center" prop="listingPrice"  :formatter="priceFormatter"></el-table-column> -->
-            <el-table-column   label="影院服务费" align="center" prop="serviceAddFee"  :formatter="priceFormatter"></el-table-column>
-            <el-table-column   label="服务费上限" align="center" prop="thresholds"  :formatter="priceFormatter"></el-table-column>
+            <el-table-column min-width="120" label="影院服务费" align="center" prop="serviceAddFee"  :formatter="priceFormatter"></el-table-column>
+            <el-table-column min-width="120" label="服务费上限" align="center" prop="thresholds"  :formatter="priceFormatter"></el-table-column>
             <!-- <el-table-column   label="系统商结算价" align="center" prop="ticketPrice"  :formatter="priceFormatter"></el-table-column> -->
             <el-table-column min-width="150"  label="更新排期时间" align="center" prop="updateTime"></el-table-column>
          </page-table>

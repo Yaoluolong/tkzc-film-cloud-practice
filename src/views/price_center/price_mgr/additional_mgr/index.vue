@@ -13,11 +13,11 @@
             </el-form-item>
          </el-form>
          <page-table ref="table" index :query="query" :fetch="queryTable">
-            <el-table-column min-width="150"  label="商家名称" align="center" prop="channelName" ></el-table-column>
+            <el-table-column min-width="150"  label="商家名称" align="center" prop="channelName" show-overflow-tooltip></el-table-column>
             <el-table-column width="100"  label="增设类型" align="center" prop="typeName"></el-table-column>
             <el-table-column width="120"  label="关联影院数" align="center" prop="cinemaCount"></el-table-column>
             <el-table-column min-width="120"  label="增设方式" align="center" prop="way"></el-table-column>
-            <el-table-column width="160"  label="规则时间" align="center" prop="updateTime"></el-table-column>
+            <el-table-column width="160"  label="规则时间" align="center" prop="updateTime" show-overflow-tooltip></el-table-column>
             <el-table-column width="80"  label="启用状态" align="center" prop="status">
               <template slot-scope="{row}">
                 <switch-confirm v-model="row.status" confirm-text="是否确认进行此操作" :id="row.id" action="/systemApi/channelSpecialServicePrice/setStatus"></switch-confirm>

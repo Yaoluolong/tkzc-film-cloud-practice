@@ -30,7 +30,7 @@
             <el-table-column min-width="50"  label="活动名称" align="center" prop="activity_subject" ></el-table-column>
             <el-table-column width="180"  label="创建人" align="center" prop="creator"></el-table-column>
             <el-table-column width="120"  label="活动类型" align="center" prop="activity_type"></el-table-column>
-            <el-table-column min-width="120"  label="活动时间" align="center" prop="showtime">
+            <el-table-column min-width="160"  label="活动时间" align="center" prop="showtime" show-overflow-tooltip>
               <template slot-scope="{row}">
                 {{row.activity_start_boundary}}--{{row.activity_end_boundary}}
               </template>

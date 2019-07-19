@@ -25,7 +25,7 @@
             <el-table-column width="160" align="center" label="规则状态" prop="statusName"></el-table-column>
             <el-table-column width="160" align="center" label="操作人" prop="operator"></el-table-column>
             <el-table-column width="160" align="center" label="添加时间" prop="createTime"></el-table-column>
-            <el-table-column min-width="160" align="center" label="操作" prop="oper">
+            <el-table-column min-width="160" align="center" label="操作" prop="oper" fixed="right">
               <template slot-scope="{row}">
                 <el-button type="text" @click="$router.push({path:'/mall_center/cinema_mgr/settlement_price/edit',query:{id:row.id}})">编辑</el-button>
                 <el-button type="text" @click="deleteObj(row)">删除</el-button>

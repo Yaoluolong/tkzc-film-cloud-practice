@@ -115,15 +115,15 @@
             </query-ext-plane>
          </el-form>
          <page-table ref="table" index :query="queryTemp" :fetch="queryTable">
-            <el-table-column min-width="180"  label="电影券批次号" align="center" prop="batchNo" ></el-table-column>
+            <el-table-column min-width="180"  label="电影券批次号" align="center" prop="batchNo" show-overflow-tooltip></el-table-column>
             <el-table-column min-width="120"  label="电影券ID号" align="center" prop="couponId" show-overflow-tooltip></el-table-column>
-            <el-table-column min-width="100"  label="电影券号码" align="center" prop="couponCode"></el-table-column>
+            <el-table-column min-width="100"  label="电影券号码" align="center" prop="couponCode" show-overflow-tooltip></el-table-column>
             <el-table-column min-width="180"  label="电影券类型" align="center" prop="type"></el-table-column>
             <el-table-column min-width="180"  label="消费对象" align="center" prop="consumeTarget"></el-table-column>
             <el-table-column min-width="180"  label="电影券名称" align="center" prop="couponName"></el-table-column>
             <el-table-column min-width="180"  label="绑定状态" align="center" prop="bindStatus"></el-table-column>
             <el-table-column min-width="180"  label="使用状态" align="center" prop="isUse"></el-table-column>
-            <el-table-column min-width="120"  label="操作" align="center" prop="oper">
+            <el-table-column min-width="120"  label="操作" align="center" prop="oper" fixed="right">
               <template slot-scope="{row}">
                 <el-button type="text" @click="$router.push({path:'/operation_center/coupon_mgr/coupon_detail',query:{id:row.id}})">查看</el-button>
               </template>

@@ -27,14 +27,14 @@
          </el-form>
          <page-table ref="table" index :query="query" :fetch="queryTable">
             <el-table-column min-width="150"  label="充值订单号" align="center" prop="orderNo" show-overflow-tooltip></el-table-column>
-            <el-table-column min-width="150"  label="充值电影卡号" align="center" prop="cardCode"></el-table-column>
+            <el-table-column min-width="150"  label="充值电影卡号" align="center" prop="cardCode" show-overflow-tooltip></el-table-column>
             <el-table-column min-width="100"  label="充值点数" align="center" prop="point"></el-table-column>
             <el-table-column min-width="80"  label="充值总额" align="center" prop="price"></el-table-column>
             <el-table-column min-width="110"  label="平台商家" align="center" prop="channelName"></el-table-column>
             <el-table-column min-width="110"  label="消费终端" align="center" prop="deviceType"></el-table-column>
             <el-table-column min-width="130"  label="充值时间" align="center" prop="createTime"></el-table-column>
             <el-table-column min-width="100"  label="订单状态" align="center" prop="orderStatusName"></el-table-column>
-            <el-table-column min-width="250"  label="操作" align="center" prop="oper">
+            <el-table-column min-width="250"  label="操作" align="center" prop="oper" fixed="right">
               <template slot-scope="{row}">
                 <el-button type="text" @click="$router.push({path:'/finace_center/finance_report/card_recharge_order/order_detail', query:{orderId:row.id}})">查看详情</el-button>
                 <el-button type="text" @click="getOrderStatus(row)">同步订单状态</el-button>

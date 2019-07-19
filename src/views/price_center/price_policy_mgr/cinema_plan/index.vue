@@ -32,14 +32,14 @@
             </el-form-item>
          </el-form>
          <page-table ref="table" index :query="query" :fetch="queryTable">
-            <el-table-column min-width="150"  label="影院名称" align="center" prop="cinemaName" ></el-table-column>
+            <el-table-column min-width="150"  label="影院名称" align="center" prop="cinemaName" fixed="right"></el-table-column>
             <el-table-column min-width="150"  label="城市" align="center" prop="cinemaName" >
               <template slot-scope="{row}">
                   {{row.provinceName + row.cityName}}
               </template>
             </el-table-column>
             <el-table-column min-width="150"  label="影片名称" align="center" prop="filmName" show-overflow-tooltip></el-table-column>
-            <el-table-column  min-width="150" label="排期编码" align="center" prop="featureAppNo"></el-table-column>
+            <el-table-column  min-width="150" label="排期编码" align="center" prop="featureAppNo" fixed="right"></el-table-column>
             <el-table-column  min-width="150" label="放映时间" align="center" prop="startTime"></el-table-column>
             <el-table-column   label="放映影厅" align="center" prop="hallName" show-overflow-tooltip></el-table-column>
             <el-table-column  label="放映制式" align="center" prop="copyType"></el-table-column>

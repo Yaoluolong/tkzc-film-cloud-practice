@@ -37,7 +37,7 @@
             <el-table-column min-width="100"  label="作废数" align="center" prop="voidNum"></el-table-column>
             <el-table-column min-width="100"  label="过期数" align="center" prop="overNum"></el-table-column>
             <!-- <el-table-column min-width="100"  label="订单状态" align="center" prop="orderStatusName"></el-table-column> -->
-            <el-table-column min-width="100"  label="操作" align="center" prop="oper">
+            <el-table-column min-width="100"  label="操作" align="center" prop="oper" fixed="right">
               <template slot-scope="{row}">
                 <el-button type="text" @click="openDetail({orderNo:row.orderNo})">查看</el-button>
               </template>
@@ -54,7 +54,7 @@
            <div class="item" v-if="params.type==='3' && diffType==='1'"><span>补差金额：差额补差（影片售价-最大兑付影片面值）</span></div>
            <div class="item" v-if="params.type==='3' && diffType==='2'">
               
-              <div v-for="(item, index) in ruleText">
+              <div v-for="(item, index) in ruleText" :key="index">
                 <span v-if="index===0">补差金额：{{item}}</span>
                 <span v-else>&emsp;&emsp;&emsp;&emsp;&emsp;{{item}}</span>
                 

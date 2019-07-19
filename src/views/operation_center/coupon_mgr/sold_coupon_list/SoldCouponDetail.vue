@@ -69,8 +69,8 @@
       <el-card style="margin-bottom:20px;">
   		  <el-form>
           <page-table ref="table" index :query="query"  :fetch="queryTable">
-            <el-table-column min-width="180"  label="客户名称" align="center" prop="customerName" ></el-table-column>
-            <el-table-column min-width="180"  label="电影券批次号" align="center" prop="batchNo" ></el-table-column>         
+            <el-table-column min-width="180"  label="客户名称" align="center" prop="customerName" show-overflow-tooltip></el-table-column>
+            <el-table-column min-width="180"  label="电影券批次号" align="center" prop="batchNo" show-overflow-tooltip></el-table-column>         
             <el-table-column min-width="100"  label="电影券种类" align="center" prop="typeName"></el-table-column>
             <el-table-column min-width="180"  label="电影券类型" align="center" prop="styleName"></el-table-column>
             <el-table-column min-width="110"  label="券号" align="center" prop="couponCode"></el-table-column>

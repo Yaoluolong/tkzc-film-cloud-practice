@@ -19,7 +19,7 @@
             <el-table-column width="100" align="center" label="影院数" prop="cinemaNum" show-overflow-tooltip></el-table-column>
             <el-table-column min-width="220" align="center" label="影院定价" prop="priceRightConfig" show-overflow-tooltip></el-table-column>
             <el-table-column width="160" align="center" label="添加时间" prop="createTime"></el-table-column>
-            <el-table-column min-width="160" align="center" label="操作" prop="oper">
+            <el-table-column min-width="160" align="center" label="操作" prop="oper" fixed="right">
               <template slot-scope="{row}">
                 <el-button type="text" @click="$router.push({path:'/price_center/price_policy_mgr/price_policy_program/look',query:{id:row.id}})">查看</el-button>
                 <el-button type="text" @click="$router.push({path:'/price_center/price_policy_mgr/price_policy_program/edit',query:{id:row.id}})">编辑</el-button>
