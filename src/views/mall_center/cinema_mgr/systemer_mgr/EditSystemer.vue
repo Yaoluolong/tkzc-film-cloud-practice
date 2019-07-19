@@ -12,7 +12,7 @@
       </el-form-item>
       <el-form-item label="选择系统商接入类型：">
         <el-radio-group v-model="params.dockType" prop="dockType">
-          <el-radio v-for="(item,index) in CHANNEL_TYPES" :key="index" :label="item.value">{{item.label}}</el-radio>
+          <el-radio v-for="(item,index) in DOCK_TYPES" :key="index" :label="item.value">{{item.label}}</el-radio>
         </el-radio-group>
       </el-form-item>
       <el-form-item label="请求系统商地址" prop="apiUrl">
@@ -85,13 +85,13 @@
 <script>
 import { createInterfaceType, updateInterfaceType, getInterfaceTypeInfo, getOpenCinema } from '@/api/mallCenter'
 import ArgEditPlaneTwo from '@/components/ArgEditPlaneTwo'
-import { CHANNEL_TYPES } from '@/model/type'
+import { DOCK_TYPES } from '@/model/type'
 export default {
   name: 'edit_systemer',
   components: { ArgEditPlaneTwo },
   data() {
     return {
-      CHANNEL_TYPES,
+      DOCK_TYPES,
       params: {
         dockType: '1'
       },

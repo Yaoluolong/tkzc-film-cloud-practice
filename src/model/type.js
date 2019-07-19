@@ -50,3 +50,13 @@ export const CHANNEL_TYPES = [
     label: '加盟'
   }
 ]
+export const DOCK_TYPES = [
+  {
+    value: '1',
+    label: '直签'
+  },
+  {
+    value: '2',
+    label: '非直签'
+  }
+]

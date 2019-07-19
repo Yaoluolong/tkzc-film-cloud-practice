@@ -511,6 +511,7 @@ export default {
             cardRecharge: []
           }
         },
+        renewPlanTime: '',
         price: '',
         point: '',
         isFreePayType: '1',
@@ -564,7 +565,6 @@ export default {
         cashierType: { required: true, message: '请选择收银台类型', trigger: 'blur' },
         pricingType: { required: true, message: '请选择定价方式', trigger: 'change' },
         technicalServiceFee: [
-          { required: true, message: '请输入技术服务费', trigger: 'blur' },
           { validator: STRING_NUMBER, trigger: 'blur' }
         ]
 
