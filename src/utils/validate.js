@@ -50,15 +50,10 @@ export function isInteger(s) {
 // 字符串型数字，2位小数
 export const STRING_NUMBER = (rule, value, callback) => {
   const reg = new RegExp('^(([1-9]{1}\\d*)|([0]{1}))(\\.(\\d){0,2})?$')
-  // if (!value) {
-  //   // callback(new Error('请输入正确的金额!'))
-  //   callback()
-  // } else if (reg.test(value) === false) {
-  //   callback(new Error('请输入最多包含2位小数的正数!'))
-  // } else {
-  //   callback()
-  // }
-  if (reg.test(value) !== false) {
+  if (!value) {
+    // callback(new Error('请输入正确的金额!'))
+    callback()
+  } else if (reg.test(value) === false) {
     callback(new Error('请输入最多包含2位小数的正数!'))
   } else {
     callback()
