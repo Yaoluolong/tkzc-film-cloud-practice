@@ -21,21 +21,21 @@
       </el-tabs>
       <page-table ref="table" :query="query" :fetch="queryTable">
         <el-table-column width="90" label="活动ID" align="center" prop="id" ></el-table-column>
-        <el-table-column width="180" label="活动名称" align="center" v-if="query.isSetWarn==='1'" :key="Math.random()">
+        <el-table-column width="180" label="活动名称" align="center" v-if="query.isSetWarn==='1'" :key="Math.random()" show-overflow-tooltip>
           <template slot-scope="{row}">
             <el-button type="text" @click="$router.push({path:'/operation_center/marketing_activities/view_check_account',query:{id:row.id}})">{{row.name}}</el-button>
           </template>
         </el-table-column>
         <el-table-column width="180" label="活动名称" align="center" prop="name" v-if="query.isSetWarn==='0'" :key="Math.random()"></el-table-column>
         <el-table-column width="120"  label="投放商家" align="center" prop="channelStr"></el-table-column>
-        <el-table-column min-width="100"  label="活动类型" align="center" prop="typeStr"></el-table-column>           
+        <el-table-column min-width="120"  label="活动类型" align="center" prop="typeStr" show-overflow-tooltip></el-table-column>           
         <el-table-column width="100"  label="发起人" align="center" prop="operator" v-if="query.isSetWarn==='1'" :key="Math.random()"></el-table-column>
         <el-table-column width="100"  label="发起人" align="center" prop="creatorStr" v-if="query.isSetWarn==='0'" :key="Math.random()"></el-table-column>
         <el-table-column width="120"  label="当前预警值(%)" align="center" prop="warningRatio" v-if="query.isSetWarn==='1'" :key="Math.random()"></el-table-column>
         <el-table-column width="120"  label="活动已用金额" align="center" prop="useActivityFee" v-if="query.isSetWarn==='1'" :key="Math.random()"></el-table-column>
         <el-table-column width="120"  label="预警状态" align="center" prop="warnStatusStr" v-if="query.isSetWarn==='1'" :key="Math.random()"></el-table-column>
         <!-- 预警状态 0、未开始  1、已生效  2、已触警  3、已关停 -->
-        <el-table-column min-width="80"  label="预警操作" align="center" prop="oper">
+        <el-table-column min-width="180"  label="预警操作" align="center" prop="oper" fixed="right">
           <template slot-scope="{row}">
             <el-button type="text"  v-if="query.isSetWarn ==='1' && row.warnStatus==='3'" @click="$router.push({path:'/operation_center/marketing_activities/activities_warn_setting',query:{id:row.id,entrance:'edit'}})">编辑预警</el-button>
             <el-button type="text"  v-if="query.isSetWarn ==='1' && row.warnStatus==='3'" @click="advanceRecovery(row)">恢复预警</el-button>

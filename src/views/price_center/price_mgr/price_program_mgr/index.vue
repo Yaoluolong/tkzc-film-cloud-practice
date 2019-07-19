@@ -28,7 +28,7 @@
             <el-tab-pane label="已下架" name="6"></el-tab-pane>
          </el-tabs>
          <page-table ref="table" index :query="query" :fetch="queryTable" >
-            <el-table-column align="center" label="价格方案名称" prop="name" ></el-table-column>
+            <el-table-column width="150" align="center" label="价格方案名称" prop="name" show-overflow-tooltip></el-table-column>
             <el-table-column width="150" align="center" label="归属影院定价分组" prop="policyGroupName" ></el-table-column>
             <el-table-column width="140" align="center" label="执行平台商家" prop="channelName" show-overflow-tooltip></el-table-column>
             <el-table-column width="180" align="center" label="方案有效时间" prop="priceRightConfig" v-if="query.programType==1">
@@ -37,9 +37,9 @@
               </template>
             </el-table-column>
             <el-table-column width="100" align="center" label="方案类型" prop="typeName"></el-table-column>
-            <el-table-column width="160" align="center" label="添加时间" prop="createTime" fixed="right"></el-table-column>
+            <el-table-column width="160" align="center" label="添加时间" prop="createTime" show-overflow-tooltip></el-table-column>
             <el-table-column width="100" align="center" label="创建人" prop="operator"></el-table-column>
-            <el-table-column align="center" label="操作" prop="oper" fixed="right">
+            <el-table-column width="220" align="center" label="操作" prop="oper" fixed="right">
               <template slot-scope="{row}">
                 <el-button type="text" v-if="query.status==3" @click="downProgram(row)">下架</el-button>
                 <el-button type="text" v-if="query.status==3" @click="reviewPrice(row)">预览价格</el-button>

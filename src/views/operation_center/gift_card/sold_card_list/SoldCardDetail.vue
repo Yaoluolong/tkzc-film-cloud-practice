@@ -238,7 +238,7 @@
       </el-card> -->
 
       <el-dialog title="初审审核详情" :visible.sync="dialogFormVisible" width="40%">
-          <div class="step-row" v-for="item in firstcheckList">
+          <div class="step-row" v-for="(item,index) in firstcheckList" :key="index">
             <table width="100%" border="0" cellspacing="0" cellpadding="0" class="processing_content">
               <tr>
                  <td style="color:#98A6BE">

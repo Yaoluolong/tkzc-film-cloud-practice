@@ -32,7 +32,7 @@
             <el-table-column min-width="80"  label="充值总额" align="center" prop="price"></el-table-column>
             <el-table-column min-width="110"  label="平台商家" align="center" prop="channelName"></el-table-column>
             <el-table-column min-width="110"  label="消费终端" align="center" prop="deviceType"></el-table-column>
-            <el-table-column min-width="130"  label="充值时间" align="center" prop="createTime"></el-table-column>
+            <el-table-column min-width="160"  label="充值时间" align="center" prop="createTime" show-overflow-tooltip></el-table-column>
             <el-table-column min-width="100"  label="订单状态" align="center" prop="orderStatusName"></el-table-column>
             <el-table-column min-width="250"  label="操作" align="center" prop="oper" fixed="right">
               <template slot-scope="{row}">

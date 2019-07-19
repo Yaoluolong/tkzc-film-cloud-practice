@@ -10,16 +10,16 @@
             </el-form-item>
          </el-form>
          <page-table ref="table" index :query="query" :fetch="queryTable">
-            <el-table-column width="120"  label="角色名称" align="center" prop="roleName" ></el-table-column>
+            <el-table-column min-width="120"  label="角色名称" align="center" prop="roleName" ></el-table-column>
             <el-table-column min-width="160" label="职能描述" align="center" prop="roleDesc" show-overflow-tooltip></el-table-column>
-            <el-table-column width="80"  label="用户数量" align="center" prop="num"></el-table-column>
-            <el-table-column width="160"  label="添加时间" align="center" prop="createTime"></el-table-column>
-            <el-table-column width="80"  label="是否启用" align="center" prop="status">
+            <el-table-column min-width="80"  label="用户数量" align="center" prop="num"></el-table-column>
+            <el-table-column min-width="160"  label="添加时间" align="center" prop="createTime" show-overflow-tooltip></el-table-column>
+            <el-table-column min-width="80"  label="是否启用" align="center" prop="status" fixed="right">
               <template slot-scope="{row}">
                 <switch-confirm v-model="row.status" confirm-text="停用角色将同时关闭角色下的用户,是否要执行此操作" :id="row.id" action="/systemApi/systemAccountRole/setStatus"></switch-confirm>
               </template>
             </el-table-column>
-            <el-table-column min-width="180"  label="操作" align="center" prop="oper" fixed="right">
+            <el-table-column min-width="200"  label="操作" align="center" prop="oper" fixed="right">
               <template slot-scope="{row}">
                 <el-button type="text" @click="$router.push({path:'/system_setting/platform_setting/role_mgr/permission_setting',query:{id:row.id}})">权限设置</el-button>
                 <el-button type="text" @click="$router.push({path:'/system_setting/platform_setting/role_mgr/edit',query:{id:row.id}})">编辑</el-button>

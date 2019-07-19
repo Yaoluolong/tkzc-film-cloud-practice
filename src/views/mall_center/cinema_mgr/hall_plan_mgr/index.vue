@@ -22,13 +22,13 @@
             <el-table-column min-width="150"  label="影厅总数" align="center" prop="hallNum" ></el-table-column>
             <el-table-column min-width="150"  label="排期总数" align="center" prop="cinemaPlanNum" ></el-table-column>
             <el-table-column min-width="150"  label="平均售价" align="center" prop="average" ></el-table-column>
-            <el-table-column min-width="150"  label="票务系统商" align="center" prop="remark" ></el-table-column>
+            <el-table-column min-width="150"  label="票务系统商" align="center" prop="remark" show-overflow-tooltip></el-table-column>
             <el-table-column min-width="150"  label="城市" align="center" prop="" >
               <template slot-scope="{row}">
                   {{row.provinceName + row.cityName}}
               </template>
             </el-table-column>
-            <el-table-column width="80"  label="是否启用" align="center" prop="status">
+            <el-table-column width="80"  label="是否启用" align="center" prop="status" fixed="right">
               <template slot-scope="{row}">
                 <switch-confirm v-model="row.status" :id="row.id" action="/systemApi/cinema/setListStatus"></switch-confirm>
               </template>
@@ -47,7 +47,7 @@
             <el-table-column   label="影院服务费" align="center" prop="serviceAddFee"  :formatter="priceFormatter"></el-table-column> -->
 
             <el-table-column min-width="150"  label="更新时间" align="center" prop="updateTime" show-overflow-tooltip></el-table-column>
-            <el-table-column min-width="150"  label="操作" align="center" prop="eper" fixed="right">
+            <el-table-column min-width="200"  label="操作" align="center" prop="eper" fixed="right">
             	<template slot-scope="{row}">
             		<el-button type="text" @click="$router.push({path:'/mall_center/cinema_mgr/view_hall',query:{id:row.id, cinemaName:row.cinemaName}})">查看影厅</el-button>
             		<el-button type="text" @click="$router.push({path:'/mall_center/cinema_mgr/view_plan',query:{id:row.id,interfaceId:row.interfaceId, cinemaName:row.cinemaName,remark:row.remark,updateTime:row.updateTime}})">查看排期</el-button>

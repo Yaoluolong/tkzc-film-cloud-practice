@@ -7,11 +7,11 @@
          </el-form>
          <page-table ref="table" index :query="query" :fetch="queryTable">
             <el-table-column min-width="80"  label="支付类型" align="center" prop="typeName" ></el-table-column>
-            <el-table-column width="200"  label="支付说明" align="center" prop="describe"></el-table-column>
-            <el-table-column min-width="120"  label="支付商户号" align="center" prop="partnerId"></el-table-column>                       
+            <el-table-column width="200"  label="支付说明" align="center" prop="describe" show-overflow-tooltip></el-table-column>
+            <el-table-column min-width="160"  label="支付商户号" align="center" prop="partnerId" show-overflow-tooltip></el-table-column>                       
             <el-table-column width="100"  label="支付排序" align="center" prop="sort"></el-table-column>
             <el-table-column width="160"  label="接入类型" align="center" prop="accessType"></el-table-column>
-            <el-table-column width="80"  label="是否启用" align="center" prop="isUse">
+            <el-table-column width="80"  label="是否启用" align="center" prop="isUse" fixed="right">
               <template slot-scope="{row}">
                 <switch-confirm v-model="row.isUse" confirm-text="是否进行此操作" :id="row.id" :status="row.isUse" action="/systemApi/activityPayConfig/setStatus"></switch-confirm>
               </template>

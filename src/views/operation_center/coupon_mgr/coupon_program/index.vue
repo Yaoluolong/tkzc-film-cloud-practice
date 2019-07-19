@@ -28,7 +28,7 @@
         <el-table-column min-width="120"  label="添加时间" align="center" prop="createTime" v-if="query.isTemplate==='1'" show-overflow-tooltip></el-table-column><el-table-column min-width="180"  label="电影券销售单号" align="center" prop="orderNo" v-if="query.isTemplate==='0'"></el-table-column>
         <el-table-column min-width="120"  label="业务员" align="center" prop="operator" v-if="query.isTemplate==='0'"></el-table-column>
         <el-table-column min-width="100"  label="审核人" align="center" prop="checkPeople" v-if="query.isTemplate==='0'"></el-table-column>
-        <el-table-column min-width="100"  label="启用状态" align="center" prop="status">
+        <el-table-column min-width="100"  label="启用状态" align="center" prop="status" fixed="right">
           <template slot-scope="{row}">
             <switch-confirm v-model="row.status" :id="row.id" action="/systemApi/couponProgram/setStatus"></switch-confirm>
           </template>

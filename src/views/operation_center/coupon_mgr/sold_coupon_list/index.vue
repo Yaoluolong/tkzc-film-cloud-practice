@@ -107,7 +107,7 @@
                     <el-checkbox v-model="selectAll" @change="doSelectAll">全选</el-checkbox>
                   </div>
                   <div class="content" id="content">
-                    <div class="check-item" v-for="(field,index) in agur.fieldList" :key="field.value" style="width:30%;display:inline-block;">
+                    <div class="check-item" v-for="field in agur.fieldList" :key="field.value" style="width:30%;display:inline-block;">
                         <el-checkbox v-model="field.checked" @change="fieldChange">{{field.name}}</el-checkbox>
                     </div>
                     <!-- <el-checkbox-group v-model="selectFieldList">

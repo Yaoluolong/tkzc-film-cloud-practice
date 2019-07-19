@@ -90,7 +90,7 @@
     <page-table ref="table" index :query="queryTemp" :fetch="queryTable">
         <el-table-column  label="电影卡批次号" align="center" prop="batchNo" show-overflow-tooltip></el-table-column>
         <el-table-column   label="电影卡号码" width="180px" align="center" prop="cardCode" show-overflow-tooltip></el-table-column>
-        <el-table-column   label="电影卡种" align="center" prop="typeName"></el-table-column>
+        <el-table-column  min-width="120px" label="电影卡种" align="center" prop="typeName" show-overflow-tooltip></el-table-column>
         <el-table-column  label="电影卡类型" align="center" prop="styleName"></el-table-column>
         <el-table-column  label="卡内原点数" align="center" prop="oldPoint"></el-table-column>
         <el-table-column  label="卡内剩余点数" align="center" prop="point"></el-table-column>

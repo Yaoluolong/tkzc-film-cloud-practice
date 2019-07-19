@@ -17,13 +17,13 @@
             </el-form-item>
          </el-form>
          <page-table ref="table" index :query="query" :fetch="queryTable">
-            <el-table-column min-width="180"  label="影院名称" align="center" prop="cinemaName" fixed="right"></el-table-column>
+            <el-table-column min-width="180"  label="影院名称" align="center" prop="cinemaName" show-overflow-tooltip></el-table-column>
             <el-table-column min-width="180"  label="影院定价分组" align="center" prop="priceRightName" ></el-table-column>
-            <el-table-column min-width="140"  label="商家名称" align="center" prop="channelName" fixed="right"></el-table-column>
+            <el-table-column min-width="140"  label="商家名称" align="center" prop="channelName" show-overflow-tooltip></el-table-column>
             <el-table-column width="80"  label="总排期数" align="center" prop="totoalNum"></el-table-column>
             <el-table-column width="100"  label="可售排期数" align="center" prop="sellNum"></el-table-column>
             <el-table-column min-width="100"  label="不可售排期数" align="center" prop="unSellNum"></el-table-column>
-            <el-table-column width="140"  label="更新排期时间" align="center" prop="updateTime" fixed="right"></el-table-column>
+            <el-table-column width="140"  label="更新排期时间" align="center" prop="updateTime" show-overflow-tooltip></el-table-column>
             <el-table-column min-width="200"  label="操作" align="center" prop="oper" fixed="right">
               <template slot-scope="{row}">
                 <el-button type="text" @click="goToManage(row)">管理排期</el-button>

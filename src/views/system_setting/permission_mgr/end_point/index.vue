@@ -16,8 +16,8 @@
             <el-table-column min-width="100"  label="终端名称" align="center" prop="name" ></el-table-column>
             <el-table-column min-width="100"  label="适用商家" align="center" prop="channelTypeStr" ></el-table-column>
             <el-table-column min-width="120"  label="终端编码" align="center" prop="code"></el-table-column>
-            <el-table-column min-width="120"  label="登录类型" align="center" prop="loginTypeStr"></el-table-column>
-            <el-table-column min-width="120"  label="终端类型" align="center" prop="typeName">               
+            <el-table-column min-width="120"  label="登录类型" align="center" prop="loginTypeStr" show-overflow-tooltip></el-table-column>
+            <el-table-column min-width="120"  label="终端类型" align="center" prop="typeName" show-overflow-tooltip>               
             </el-table-column>            
             <el-table-column min-width="120"  label="操作" align="center" prop="broswer" fixed="right">
                 <template slot-scope="{row}">

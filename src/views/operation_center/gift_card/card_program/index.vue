@@ -40,12 +40,12 @@
          	<el-table-column min-width="120"  label="活动结束恢复原价" align="center" prop="recoveryName"></el-table-column>
          	
          	            
-            <el-table-column min-width="100"  label="上下架" align="center" prop="status">
+            <el-table-column min-width="100"  label="上下架" align="center" prop="status" fixed="right">
               <template slot-scope="{row}">
                 <el-switch v-model="row.status" @change="clickSwitch(row)" :active-value="activeValue" :inactive-value="inactiveValue"></el-switch>
               </template>
             </el-table-column>
-            <el-table-column min-width="250"  label="操作" align="center" prop="oper" fixed="right">
+            <el-table-column min-width="200"  label="操作" align="center" prop="oper" fixed="right">
               <template slot-scope="{row}">
                 <el-button type="text" @click="$router.push({path:'/operation_center/gift_card/card_recharge_program/edit',query:{id:row.id}})">编辑</el-button>
                 <el-button type="text" @click="deleteObj(row)">删除</el-button>

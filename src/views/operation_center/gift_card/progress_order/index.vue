@@ -23,22 +23,22 @@
             <el-table-column min-width="100"  label="客户名称" align="center" prop="customerName"></el-table-column>
             <el-table-column min-width="180"  label="销售时间" align="center" prop="saleTime" show-overflow-tooltip></el-table-column>
             <el-table-column min-width="180"  label="销售总额(元)" align="center" prop="amount"></el-table-column>
-            <el-table-column min-width="110"  label="初审状态" align="center" prop="checkStatusName">
+            <el-table-column min-width="110"  label="初审状态" align="center" prop="checkStatusName" fixed="right">
               <template slot-scope="{row}">
                 <el-button type="text" @click="isPass('1',row.orderNo,{orderNo: row.orderNo, checkStatus: row.checkStatus},'progress_order_submit')">{{row.checkStatusName}}</el-button>
               </template>
             </el-table-column>
-            <el-table-column min-width="110"  label="到款状态" align="center" prop="isReceiveMoneyName">
+            <el-table-column min-width="110"  label="到款状态" align="center" prop="isReceiveMoneyName" fixed="right">
               <template slot-scope="{row}">
                 <el-button type="text"  @click="isPass('2',row.orderNo,{orderNo:row.orderNo,isReceiveMoney:row.isReceiveMoney},'progress_sell_register')">{{row.isReceiveMoneyName}}</el-button>
               </template>
             </el-table-column>
-            <el-table-column min-width="110"  label="开票状态" align="center" prop="isDrawInvoice">
+            <el-table-column min-width="110"  label="开票状态" align="center" prop="isDrawInvoice" fixed="right">
               <template slot-scope="{row}">
                 <el-button type="text" @click="isPass('3',row.orderNo,{orderNo:row.orderNo,invoiceType:row.invoiceType},'progress_sell_register')" :disabled="row.isDrawInvoice==='无需发票'">{{row.isDrawInvoice}}</el-button>
               </template>
             </el-table-column>
-            <el-table-column min-width="110"  label="激活状态" align="center" prop="isActive">
+            <el-table-column min-width="110"  label="激活状态" align="center" prop="isActive" fixed="right">
               <template slot-scope="{row}">
                 <el-button type="text" @click="isPass('4',row.orderNo,{orderNo:row.orderNo,isActive:row.isActive},'progress_sell_register')">{{row.isActive}}</el-button>
               </template>

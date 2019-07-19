@@ -56,7 +56,7 @@
             <el-table-column min-width="180"  label="销售时间" align="center" prop="saleTime" show-overflow-tooltip></el-table-column>
             <el-table-column min-width="110"  label="销售数量" align="center" prop="num"></el-table-column>
             <el-table-column min-width="180"  label="销售总额(元)" align="center" prop="amount"></el-table-column>
-            <el-table-column min-width="110"  label="是否开票" align="center" prop="invoiceTypeName"></el-table-column>
+            <el-table-column min-width="110"  label="是否开票" align="center" prop="invoiceTypeName" show-overflow-tooltip></el-table-column>
             <el-table-column min-width="110" v-if="query.checkStatus === '1'"  label="审核状态" align="center" prop="checkStatusName"></el-table-column>
             <el-table-column min-width="250" fixed="right"  label="操作" align="center" prop="oper" v-if="query.checkStatus==='0'" :key="Math.random()">
               <template slot-scope="{row}">
