@@ -104,7 +104,6 @@ export default {
         const el = document.querySelectorAll(
           '.el-table__body-wrapper > table > tbody'
         )[0]
-        console.log(el)
         const that = this
         this.sortable = Sortable.create(el, {
           draggable: '.el-table__row',
@@ -118,7 +117,6 @@ export default {
           onEnd: async evt => {
             const nIndex = evt.newIndex
             const oIndex = evt.oldIndex
-            console.log(oIndex, nIndex)
             if (nIndex === oIndex) return
             const $li = el.children[nIndex]
             const $oldLi = el.children[oIndex]
