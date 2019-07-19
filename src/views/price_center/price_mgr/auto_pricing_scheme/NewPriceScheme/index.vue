@@ -14,7 +14,7 @@
           size="small"
           maxlength="20"
           clearable
-          class="w320"
+          class="w400"
           placeholder="智能定价方案名称，不超过20个字"
         ></el-input>
       </el-form-item>
@@ -27,7 +27,7 @@
           range-separator="至"
           start-placeholder="开始日期"
           end-placeholder="结束日期"
-          class="w320"
+          class="w400 rest-range"
           value-format="yyyy-MM-dd"
           @change="handleChangeDateRange"
         ></el-date-picker>
@@ -37,6 +37,7 @@
           v-model="info.interfaceId"
           :select-type="'interfaceType'"
           :default-selection="defaultInterfaceType"
+          class="w400"
         ></common-select>
       </el-form-item>
       <template v-if="+info.programType===2">
@@ -96,8 +97,13 @@ import RulesList from './components/RulesList'
 import CommonSelect from '@/components/CommonSelect'
 import { getSelectValue } from '@/utils'
 import { createRuleItem } from '@/views/price_center/price_mgr/auto_pricing_scheme/constant'
-import { getAutoPriceInfo, createAutoPrice, updateAutoPrice } from '@/api/priceCenter'
+import {
+  getAutoPriceInfo,
+  createAutoPrice,
+  updateAutoPrice
+} from '@/api/priceCenter'
 export default {
+  name: 'new_auto_pricing_scheme',
   components: {
     RulesList,
     CommonSelect
@@ -269,8 +275,19 @@ export default {
           message: '新建成功!'
         })
       }
-      this.$router.push({ path: '/price_center/price_mgr/auto_pricing_scheme' })
+      this.$router.push({
+        path: '/price_center/price_mgr/auto_pricing_scheme'
+      })
     }
   }
 }
 </script>
+<style lang="scss">
+.rest-range {
+  &.el-date-editor {
+    .el-range-separator {
+      width: auto !important;
+    }
+  }
+}
+</style>
