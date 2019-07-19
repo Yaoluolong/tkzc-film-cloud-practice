@@ -9,32 +9,42 @@
     </div>
     <p class="fs14 fb">申请处理</p>
     <div>
-      <el-form label-width="120px" :model="params" :rules="rules" ref="form">
-        <el-form-item label="处理方式：" prop="manageType">
-          <el-radio-group v-model="params.manageType" v-if="+detailParams.status===0">
+      <el-form label-width="100px" :model="params" :rules="rules" ref="form">
+        <el-form-item label="处理方式：" prop="manageType" v-if="+detailParams.status===0">
+          <el-radio-group v-model="params.manageType">
             <el-radio :label="'1'">接收</el-radio>
             <el-radio :label="'0'">拒绝</el-radio>
           </el-radio-group>
-          <span v-else>{{info.statusName}}</span>
         </el-form-item>
-        <el-form-item label="处理时间：" prop="status" v-if="+detailParams.status!==0">
-          <span>{{info.handleTime}}</span>
-        </el-form-item>
-        <div v-if="+detailParams.status===0||+detailParams.status===2">
-          <el-form-item label="备注：" prop="approvalContent" v-if="+params.manageType===0">
-            <el-input
-              :disabled="+detailParams.status===2"
-              v-model="params.approvalContent"
-              type="textarea"
-              :rows="5"
-              class="w600"
-              placeholder="请输入拒绝理由，不超过300个字"
-            ></el-input>
-          </el-form-item>
+        <div class="w400 fs14 mb20" v-else>
+          <span>处理方式：</span>
+          <span>{{info.statusName}}</span>
         </div>
-        <el-form-item label="销售订单号" prop="status" v-else>
-          <el-button type="text" @click="goSale(info)">{{info.orderNo}}</el-button>
+        <div class="w400 fs14 mb20" v-if="+detailParams.status!==0">
+          <span>处理时间：</span>
+          <span>{{info.handleTime}}</span>
+        </div>
+        <el-form-item
+          label="备注："
+          prop="approvalContent"
+          v-if="+detailParams.status===0&&+params.manageType===0"
+        >
+          <el-input
+            v-model="params.approvalContent"
+            type="textarea"
+            :rows="5"
+            class="w600"
+            placeholder="请输入拒绝理由，不超过300个字"
+          ></el-input>
         </el-form-item>
+        <div class="w400 fs14 mb20" v-if="+detailParams.status===2">
+          <span>备注：</span>
+          <span>{{info.approvalContent}}</span>
+        </div>
+        <div class="w400 fs14 mb20" v-if="+detailParams.status===1||+detailParams.status===3">
+          <span>销售订单号：</span>
+          <el-button type="text" @click="goSale(info)">{{info.orderNo}}</el-button>
+        </div>
       </el-form>
     </div>
   </div>
@@ -92,9 +102,14 @@ export default {
         ? await setApprovalStatus(this.params)
         : this.$router.push({
           path: '/operation_center/coupon_mgr/sold_coupon_list/create',
-          query: { applyId: this.params.id, applyName: this.params.customerName }
+          query: {
+            applyId: this.params.id,
+            applyName: this.params.customerName
+          }
         })
-      this.params.manageType + '' === '0' ? this.$message.success('申请处理成功') : console.log('接收')
+      this.params.manageType + '' === '0'
+        ? this.$message.success('申请处理成功')
+        : console.log('接收')
       this.$emit('save-after')
     }
   }

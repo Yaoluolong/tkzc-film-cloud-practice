@@ -9,8 +9,8 @@
           :isAddNew="false"
         ></customer-selector>
       </el-form-item>
-      <el-form-item label="申请流程名称">
-        <el-input v-model="query.name" clearable placeholder="请输入申请流程名称" class="w230"></el-input>
+      <el-form-item label="券申请名称">
+        <el-input v-model="query.name" clearable placeholder="请输入券申请名称" class="w230"></el-input>
       </el-form-item>
       <el-form-item label="券类型">
         <remote-select
