@@ -54,6 +54,7 @@
         <common-select
           class="vm"
           v-model="ruleData.interfaceId"
+          :attr-options="{multiple:true}"
           :select-type="'interfaceType'"
           :action-query="{dockType:2,placeholder:'第三方平台'}"
           :default-selection="defaultInterfaceInfo"
@@ -146,10 +147,18 @@ export default {
   },
   computed: {
     defaultInterfaceInfo() {
-      return this.ruleData && this.ruleData.interfaceName ? {
-        id: this.ruleData.interfaceId,
-        name: this.ruleData.interfaceName
-      } : null
+      if (this.ruleData && this.ruleData.interfaceName) {
+        const defaultNames = this.ruleData.interfaceName.split(',')
+        const interfaceIds = this.ruleData.interfaceId.split(',')
+        return interfaceIds.map((v, i) => {
+          return {
+            id: interfaceIds[i],
+            name: defaultNames[i]
+          }
+        })
+      } else {
+        return null
+      }
     }
   },
   watch: {
