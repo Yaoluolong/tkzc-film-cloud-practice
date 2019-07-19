@@ -116,6 +116,8 @@ export default {
         filmType: 0,
         filmNo: null,
         copyType: [],
+        startDate: '',
+        endDate: '',
         rule: []
       },
       infoRules: {
