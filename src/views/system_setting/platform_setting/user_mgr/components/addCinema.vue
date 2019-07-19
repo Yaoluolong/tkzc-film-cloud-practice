@@ -2,11 +2,11 @@
   <div >
     <el-form inline label-width="80px" :model="chooseParams"  ref="form">
       <div class="choose-box">
-        <div v-if="chooseParams.id">
+        <div v-if="chooseParams.cinemaId">
           <query-form ref="queryForm" @change="queryChange" :areaStr="area" :queryParmas="query"></query-form>
         </div>
         <el-form-item prop="cinemaList">
-          <div v-if="chooseParams.id" class="vm mr20">
+          <div v-if="chooseParams.cinemaId" class="vm mr20">
             <el-button type="primary" icon="el-icon-search" @click="onOperateClick('query')">查询</el-button>
           </div>
           <el-button
@@ -84,7 +84,7 @@ export default {
       area: '', // 选择所有时展示添加影院时选择的地区
       chooseParams: {
         // 影院选择参数
-        id: '',
+        cinemaId: '',
         cinemaList: [],
         code: '',
         searchParam: {}, // 内部选择的查询项
