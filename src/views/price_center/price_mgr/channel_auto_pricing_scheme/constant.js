@@ -1,5 +1,5 @@
 const isDisable = row => {
-  return row.statusName.indexOf('失效') === -1 ? '' : 'info'
+  return +row.status === 1 ? '' : 'info'
 }
 export const autoSchemeColumns = context => {
   return [
