@@ -48,7 +48,7 @@
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" @click="refreshTable">查询</el-button>
         <el-button type="warning" icon="el-icon-refresh" @click="updatePlan">更新影院排期</el-button>
-        <el-button type="warning" icon="el-icon-refresh" @click="exportData">导出排期</el-button>
+        <el-button type="warning"  @click="exportData">导出排期</el-button>
       </el-form-item>
     </el-form>
     <page-table ref="table" index :query="query" :fetch="queryTable">
@@ -195,7 +195,9 @@ export default {
       this.$refs.table.refresh()
     },
     exportData() {
-      exportData(getCinemaPlanPageList, realDeepClone(this.query))
+      const query = realDeepClone(this.query)
+      query.requestType = 'export'
+      exportData(getCinemaPlanPageList, query)
     },
     priceFormatter(row, column, cellValue, index) {
       return cellValue ? cellValue + '元' : '--'
