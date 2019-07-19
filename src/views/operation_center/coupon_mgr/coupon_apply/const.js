@@ -7,7 +7,7 @@ export const couponApplyColumns = context => {
     },
     {
       prop: 'name',
-      label: '申请流程名称',
+      label: '券申请名称',
       minWidth: 120
     },
     {
@@ -24,6 +24,11 @@ export const couponApplyColumns = context => {
       prop: 'number',
       label: '申请数量（张）',
       minWidth: 120
+    },
+    {
+      prop: 'creatTime',
+      label: '申请时间',
+      minWidth: 160
     },
     {
       prop: 'statusStr',
@@ -57,7 +62,7 @@ export const couponApplyDetaliType = info => {
   })
   return [
     {
-      name: '申请流程名称',
+      name: '券申请名称',
       key: 'name'
     },
     {
