@@ -48,6 +48,12 @@
 		        <el-form-item label="更新排期场次" style="width:320px" prop="responseOverTime">
 		          	{{params.responseOverTime}}分钟
 		        </el-form-item>
+		        <el-form-item label="定价方式" style="width:320px" prop="pricingType">
+		          	{{getPricingType(params.pricingType)}}
+		        </el-form-item>
+		        <el-form-item label="技术服务费" style="width:320px" prop="technicalServiceFee">
+		          	{{params.technicalServiceFee||'0.00'}}元
+		        </el-form-item>
 		    </div>
 
 		    <div v-if="params.type === '1'">
@@ -253,7 +259,8 @@
 </template>
 
 <script>
-	import { getChannelInfo, getInterfaceActionList, getIntegralPlatformEditionList, getBottomMenuList, getPayTypeList } from '@/api/mallCenter'
+import { CHANNEL_AUTO_PRICE_TYPES } from '@/model/type'
+import { getChannelInfo, getInterfaceActionList, getIntegralPlatformEditionList, getBottomMenuList, getPayTypeList } from '@/api/mallCenter'
 export default {
   name: 'view_channel',
   data() {
@@ -354,6 +361,14 @@ export default {
         e.disabled = true
       }
     })
+  },
+  methods: {
+    getPricingType(type) {
+      const res = CHANNEL_AUTO_PRICE_TYPES.find(v => {
+        return v.value === type
+      })
+      return res && res.label ? res.label : ''
+    }
   }
 }
 </script>
