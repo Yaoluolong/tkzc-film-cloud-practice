@@ -23,7 +23,7 @@
                 <switch-confirm v-model="row.status" :id="row.id" action="/systemApi/couponType/setStatus"></switch-confirm>
               </template>
             </el-table-column>
-            <el-table-column min-width="250"  label="操作" align="center" prop="oper">
+            <el-table-column min-width="250"  label="操作" align="center" prop="oper" fixed="right">
               <template slot-scope="{row}">
                 <el-button type="text" @click="$router.push({path:'/operation_center/coupon_mgr/coupon_category/look',query:{id:row.id}})">查看</el-button>
                 <el-button type="text" @click="$router.push({path:'/operation_center/coupon_mgr/coupon_category/edit',query:{id:row.id}})">编辑</el-button>

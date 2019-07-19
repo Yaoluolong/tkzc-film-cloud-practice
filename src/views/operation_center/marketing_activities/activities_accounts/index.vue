@@ -15,15 +15,15 @@
             </el-form-item>
          </el-form>
          <page-table ref="table" :query="query" :fetch="queryTable">
-            <el-table-column width="100"  label="活动ID" align="center" prop="id" ></el-table-column>
-            <el-table-column width="180"  label="活动名称" align="center" prop="name"></el-table-column>
+            <el-table-column width="100"  label="活动ID" align="center" prop="id" show-overflow-tooltip></el-table-column>
+            <el-table-column width="180"  label="活动名称" align="center" prop="name" show-overflow-tooltip></el-table-column>
             <el-table-column width="120"  label="投放商家" align="center" prop="channelStr"></el-table-column>
             <el-table-column min-width="120"  label="活动类型" align="center" prop="typeStr"></el-table-column>           
             <el-table-column width="100"  label="发起人" align="center" prop="creatorStr"></el-table-column>
             <el-table-column width="140"  label="触发时预警值(%)" align="center" prop="warnPercent"></el-table-column>
-            <el-table-column width="140"  label="触警时间" align="center" prop="createTime"></el-table-column>
+            <el-table-column width="140"  label="触警时间" align="center" prop="createTime" show-overflow-tooltip></el-table-column>
             <el-table-column width="180"  label="活动已使用金额(元)" align="center" prop="useFee"></el-table-column>
-            <el-table-column min-width="80"  label="对账状态" align="center" prop="oper">
+            <el-table-column min-width="180"  label="对账状态" align="center" prop="oper" fixed="right">
               <template slot-scope="{row}">
                 <el-button type="text" v-if="row.type!=='2'" @click="$router.push({path:'/operation_center/marketing_activities/check_accounts',query:{id:row.warnAccountId}})">请对账</el-button>
                 <el-button type="text" v-if="row.type!=='2'" @click="exportData(row)">导出明细</el-button>

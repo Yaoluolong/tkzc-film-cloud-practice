@@ -19,7 +19,7 @@
             </el-form-item>
          </el-form>
          <page-table ref="table" index :query="query" :fetch="queryTable">
-            <el-table-column min-width="180"  label="销售订单号" align="center" prop="orderNo" ></el-table-column>
+            <el-table-column min-width="180"  label="销售订单号" align="center" prop="orderNo" show-overflow-tooltip></el-table-column>
             <el-table-column min-width="120"  label="业务人员" align="center" prop="operator" show-overflow-tooltip></el-table-column>
             <el-table-column min-width="100"  label="营销客户" align="center" prop="customer"></el-table-column>
             <el-table-column min-width="180"  label="销售时间" align="center" prop="saleTime"></el-table-column>
@@ -28,7 +28,7 @@
             <el-table-column min-width="110"  label="到款状态" align="center" prop="isReceiveMoneyName"></el-table-column>
             <el-table-column min-width="110"  label="开票状态" align="center" prop="isDrawInvoiceName"></el-table-column>
             <el-table-column min-width="110"  label="激活状态" align="center" prop="isActiveName"></el-table-column>
-            <el-table-column min-width="250"  label="操作" align="center" prop="oper">
+            <el-table-column min-width="250"  label="操作" align="center" prop="oper" fixed="right">
               <template slot-scope="{row}">
                 <el-button type="text" v-if="row.saleStatus !== 2" @click="$router.push({path:'/operation_center/coupon_mgr/sell_register',query:{orderNo:row.orderNo}})">销售登记</el-button>
                 <el-button type="text" @click="$router.push({path:'/operation_center/coupon_mgr/sell_detail',query:{orderNo:row.orderNo}})">销售明细</el-button>

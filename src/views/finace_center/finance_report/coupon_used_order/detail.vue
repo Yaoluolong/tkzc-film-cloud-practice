@@ -71,9 +71,9 @@
             </query-ext-plane>
           </el-form>
          <page-table ref="table" :query="query" :fetch="queryTable">
-            <el-table-column min-width="180"  label="购票电影券" align="center" prop="couponCode" v-if="query.isUse==='1'"></el-table-column>
+            <el-table-column min-width="180" show-overflow-tooltip label="购票电影券" align="center" prop="couponCode" v-if="query.isUse==='1'"></el-table-column>
             <el-table-column min-width="120"  label="电影券分发渠道" align="center" prop="tag" v-if="query.isUse==='1'" :key="Math.random()"></el-table-column>
-            <el-table-column min-width="120"  label="购票时间" align="center" prop="orderTime" v-if="query.isUse==='1'" :key="Math.random()"></el-table-column>
+            <el-table-column min-width="160" show-overflow-tooltip label="购票时间" align="center" prop="orderTime" v-if="query.isUse==='1'" :key="Math.random()"></el-table-column>
             <el-table-column min-width="120"  label="购票影院" align="center" prop="cinemaName" v-if="query.isUse==='1'" :key="Math.random()"></el-table-column>
             <el-table-column width="120"  label="省份" align="center" prop="provinceName" v-if="query.isUse==='1'" :key="Math.random()"></el-table-column>
             <el-table-column width="120"  label="城市" align="center" prop="cityName" v-if="query.isUse==='1'" :key="Math.random()"></el-table-column>
@@ -84,7 +84,7 @@
             <el-table-column width="120"  label="购票座位" align="center" prop="seatDescribe" v-if="query.isUse==='1'" :key="Math.random()"></el-table-column>
             <el-table-column width="120"  label="售价（元）" align="center" prop="channelTiceketSum" v-if="query.isUse==='1'" :key="Math.random()"></el-table-column>
 
-            <el-table-column min-width="180"  label="电影券编码" align="center" prop="couponCode" v-if="query.isUse==='0'"></el-table-column>
+            <el-table-column min-width="180" show-overflow-tooltip label="电影券编码" align="center" prop="couponCode" v-if="query.isUse==='0'"></el-table-column>
             <el-table-column min-width="180"  label="电影券种类" align="center" prop="typeName" v-if="query.isUse==='0'"></el-table-column>
             <el-table-column min-width="220"  label="有效期" align="center" prop="validTime" v-if="query.isUse==='0'"></el-table-column>
             <el-table-column min-width="100"  label="绑定状态" align="center" prop="bindStatus" v-if="query.isUse==='0'"></el-table-column>

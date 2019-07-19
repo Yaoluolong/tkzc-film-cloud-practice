@@ -28,7 +28,7 @@
       </el-table-column>
       <el-table-column width="180" label="添加时间" align="center" prop="createTime"></el-table-column>
       <el-table-column min-width="120" label="操作员" align="center" prop="operator"></el-table-column>
-      <el-table-column min-width="180" label="操作" align="center" prop="oper">
+      <el-table-column min-width="180" label="操作" align="center" prop="oper" fixed="right">
         <template slot-scope="{row}">
           <el-button
             type="text"

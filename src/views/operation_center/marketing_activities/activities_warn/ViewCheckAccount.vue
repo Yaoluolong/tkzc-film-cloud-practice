@@ -6,7 +6,7 @@
 			<!-- settleType: 1预警对账 2补充活动款对账 3提前对账 -->
 			<!-- <div v-if="params"></div> -->
 			<div v-if="noData" style="margin-bottom:20px;">暂无对账记录</div>
-			<div v-for="(item,index) in params">
+			<div v-for="(item,index) in params" :key="index">
 				<div v-if="index !==0" style="margin-bottom:20px;">--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</div>
 				<el-form-item label="本次活动补贴金额：" v-if="item.type!=='2'">
 					{{item.totalFee||'--'}}&emsp;元

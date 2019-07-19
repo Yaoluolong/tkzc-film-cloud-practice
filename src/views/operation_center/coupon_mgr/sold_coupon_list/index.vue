@@ -53,16 +53,16 @@
                 </div>                            
               </template>
             </el-table-column>
-            <el-table-column min-width="180"  label="销售订单号" align="center" prop="orderNo" ></el-table-column>
+            <el-table-column min-width="180"  label="销售订单号" align="center" prop="orderNo" show-overflow-tooltip></el-table-column>
             <el-table-column min-width="120"  label="业务人员" align="center" prop="operator" show-overflow-tooltip></el-table-column>
-            <el-table-column min-width="100"  label="客户名称" align="center" prop="customerName"></el-table-column>
-            <el-table-column min-width="180"  label="销售时间" align="center" prop="saleTime"></el-table-column>
+            <el-table-column min-width="100"  label="客户名称" align="center" prop="customerName" show-overflow-tooltip></el-table-column>
+            <el-table-column min-width="180"  label="销售时间" align="center" prop="saleTime" show-overflow-tooltip></el-table-column>
             <el-table-column min-width="110"  label="销售数量" align="center" prop="num"></el-table-column>
             <el-table-column min-width="180"  label="销售总额(元)" align="center" prop="amount"></el-table-column>
             <!-- <el-table-column min-width="110"  label="是否开票" align="center" prop="invoiceTypeName"></el-table-column> -->
             <el-table-column min-width="110"  label="业务类型" align="center" prop="invoiceTypeName"></el-table-column>
             <el-table-column min-width="110" v-if="query.checkStatus === '1'" label="审核状态" align="center" prop="checkStatusName" :key="Math.random()"></el-table-column>
-            <el-table-column min-width="250" fixed="right"  label="操作" align="center" prop="oper" v-if="query.checkStatus === '0'" :key="Math.random()">
+            <el-table-column min-width="250"  label="操作" align="center" prop="oper" v-if="query.checkStatus === '0'" :key="Math.random()" fixed="right">
               <template slot-scope="{row}">
                 <div v-if="row.status !== '2'">
                   <el-button type="text" @click="$router.push({path:'/operation_center/coupon_mgr/sold_coupon_list/edit',query:{orderNo:row.orderNo}})" v-if="query.checkStatus === '0'">编辑/提交审核</el-button>
@@ -107,7 +107,7 @@
                     <el-checkbox v-model="selectAll" @change="doSelectAll">全选</el-checkbox>
                   </div>
                   <div class="content" id="content">
-                    <div class="check-item" v-for="(field,index) in agur.fieldList" :key="field.value" style="width:30%;display:inline-block;">
+                    <div class="check-item" v-for="field in agur.fieldList" :key="field.value" style="width:30%;display:inline-block;">
                         <el-checkbox v-model="field.checked" @change="fieldChange">{{field.name}}</el-checkbox>
                     </div>
                     <!-- <el-checkbox-group v-model="selectFieldList">

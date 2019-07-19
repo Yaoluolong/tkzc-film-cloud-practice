@@ -19,13 +19,13 @@
             <el-table-column width="100"  label="关联影院数" align="center" prop="cinemaCount"></el-table-column>
             <el-table-column min-width="120"  label="增设方式" align="center" prop="way"></el-table-column>
             <el-table-column width="180"  label="规则时间" align="center" prop="volidTime"></el-table-column>            
-            <el-table-column width="80"  label="启用状态" align="center" prop="status">
+            <el-table-column width="80"  label="启用状态" align="center" prop="status" fixed="right">
               <template slot-scope="{row}">
                 <switch-confirm v-model="row.status" confirm-text="是否确认进行此操作" :id="row.id" action="/systemApi/channelSpecialServicePrice/setStatus"></switch-confirm>
               </template>
             </el-table-column>
             <el-table-column width="160"  label="提交人" align="center" prop="operator"></el-table-column>
-            <el-table-column min-width="180"  label="操作" align="center" prop="oper">
+            <el-table-column min-width="180"  label="操作" align="center" prop="oper" fixed="right">
               <template slot-scope="{row}">
                 <el-button type="text" @click="$router.push({path:'/price_center/price_mgr/special_service_mgr/edit',query:{id:row.id}})">编辑</el-button>
                 <el-button type="text" @click="deleteSystemer(row)">删除</el-button>

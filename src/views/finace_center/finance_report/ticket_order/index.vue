@@ -181,6 +181,7 @@ export default {
       if (this.query.empty) delete this.query.empty
       const res = await getOrderPageList(this.assignQuery(this.query))
       this.initialTableData(res.data, res.count)
+      if (this.opened) this.getSumData()
     },
     getTime(msg) {
       this.query.orderTimeStart = msg.joinTime[0]
@@ -191,8 +192,11 @@ export default {
       this.query.cityId = this.area[1]
       this.query.countyId = this.area[2]
     },
-    async showSum() {
+    showSum() {
       this.opened = !this.opened
+      this.getSumData()
+    },
+    async getSumData() {
       const query = realDeepClone(this.query)
       query.requestType = 'sum'
       this.sumData = await getOrderPageList(query)

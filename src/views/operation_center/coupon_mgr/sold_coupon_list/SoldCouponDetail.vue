@@ -69,8 +69,8 @@
       <el-card style="margin-bottom:20px;">
   		  <el-form>
           <page-table ref="table" index :query="query"  :fetch="queryTable">
-            <el-table-column min-width="180"  label="客户名称" align="center" prop="customerName" ></el-table-column>
-            <el-table-column min-width="180"  label="电影券批次号" align="center" prop="batchNo" ></el-table-column>         
+            <el-table-column min-width="180"  label="客户名称" align="center" prop="customerName" show-overflow-tooltip></el-table-column>
+            <el-table-column min-width="180"  label="电影券批次号" align="center" prop="batchNo" show-overflow-tooltip></el-table-column>         
             <el-table-column min-width="100"  label="电影券种类" align="center" prop="typeName"></el-table-column>
             <el-table-column min-width="180"  label="电影券类型" align="center" prop="styleName"></el-table-column>
             <el-table-column min-width="110"  label="券号" align="center" prop="couponCode"></el-table-column>
@@ -105,7 +105,7 @@
                 <span>{{programInfo.stime}} -- {{programInfo.etime}}</span>
               </el-form-item>
               <el-form-item label="可用商家:">
-                <div v-for="channel in programInfo.channelList">
+                <div v-for="(channel,index) in programInfo.channelList" :key="index">
                   <!-- <el-checkbox disabled checked v-model="channel.checked">{{channel.name}}</el-checkbox> -->
                   <div>{{channel.name}}</div>
                 </div>
@@ -117,7 +117,7 @@
                 <el-form-item label="兑换方式："  :prop="'ruleList.'+index+'.settlementType'">
                    <span v-if="rule.settlementType==='1'">根据影厅</span>
                    <span v-else-if="rule.settlementType==='2'">根据制式</span>
-                   <span v-else="rule.settlementType==='3'">根据影片</span>
+                   <span v-else-if="rule.settlementType==='3'">根据影片</span>
                 </el-form-item>
                 <el-form-item label="选择影厅："  :prop="'ruleList.'+index+'.hallType'" v-if="programInfo.cinemaGroupId && rule.settlementType === '1'" style="width:300px;">
                     <span>{{rule.hallTypeName}}</span>
@@ -130,7 +130,7 @@
                   <el-radio v-model="rule.filmType" label="-1" disabled>全部影片</el-radio>
                   <el-radio v-model="rule.filmType" label="1" disabled>指定影片</el-radio>
                   <div style="border:1px solid #ebeef5;width:800px;padding: 10px 20px;" v-if="rule.filmType === '1'">
-                    <div v-for="v in rule.filmList">
+                    <div v-for="(v,index) in rule.filmList" :key="index">
                       影片名称：<span>{{v.name}}</span>
                     </div>
                   </div>                
@@ -283,7 +283,7 @@
       </el-card> -->
 
       <el-dialog title="初审审核详情" :visible.sync="dialogFormVisible" width="40%">
-            <div class="step-row" v-for="item in firstcheckList">
+            <div class="step-row" v-for="(item,index) in firstcheckList" :key="index">
               <table width="100%" border="0" cellspacing="0" cellpadding="0" class="processing_content">
                 <tr>
                    <td style="color:#98A6BE">
@@ -490,9 +490,9 @@ export default {
       margin-right:0px;
       margin-top:10px;
   }
-  .processing_content{
-    /*background-color: #D9E5F9;*/
-  }
+  /* .processing_content{ 
+      background-color: #D9E5F9;
+   } */
   .processing_content_detail{
      margin-left: 10px;
      margin-top: 3.5px;

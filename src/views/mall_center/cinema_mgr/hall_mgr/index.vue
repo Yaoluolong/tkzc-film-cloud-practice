@@ -13,7 +13,7 @@
          <page-table ref="table" index :query="query" :fetch="queryTable">
             <el-table-column min-width="120" label="影院名称" align="center" prop="cinemaName" show-overflow-tooltip></el-table-column>
             <el-table-column min-width="160"  label="影厅名称" align="center" prop="hallName" show-overflow-tooltip></el-table-column>
-            <el-table-column width="80"  label="影厅编码" align="center" prop="hallNo"></el-table-column>
+            <el-table-column width="80"  label="影厅编码" align="center" prop="hallNo" show-overflow-tooltip></el-table-column>
             <el-table-column width="70"  label="座位数" align="center" prop="seatCount"></el-table-column>
             <el-table-column width="120"  label="影厅分类" align="center" prop="type" show-overflow-tooltip>
                 <template slot-scope="{row}">
@@ -35,7 +35,7 @@
               </template>
             </el-table-column>
             <el-table-column width="160"  label="更新影厅时间" align="center" prop="updateTime" ></el-table-column>
-            <el-table-column min-width="200"  label="操作" align="center" prop="oper">
+            <el-table-column min-width="200"  label="操作" align="center" prop="oper" fixed="right">
               <template slot-scope="{row}">
                 <el-button type="text" @click="$router.push({path:'/mall_center/cinema_mgr/hall_mgr/seat_pic',query:{id:row.id,cinemaId:row.cinemaId,hallNo:row.hallNo,cinemaName:row.cinemaName,hallName:row.hallName}})">查看座位图</el-button>
                 <el-button type="text" @click="doSyncHallSeat(row)">更新座位图</el-button>

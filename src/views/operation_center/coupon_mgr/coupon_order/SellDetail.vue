@@ -26,9 +26,9 @@
         </el-card>
         <el-card>
             <page-table ref="table2" index :query="query" :fetch="getSaleDetailData">         
-                <el-table-column label="电影券批次号" align="center" prop="batchNo"></el-table-column>
-                <el-table-column label="电影券ID号" align="center" prop="couponId"></el-table-column>
-                <el-table-column label="电影券号码" align="center" prop="couponCode"></el-table-column>
+                <el-table-column label="电影券批次号" align="center" prop="batchNo" show-overflow-tooltip></el-table-column>
+                <el-table-column label="电影券ID号" align="center" prop="couponId" show-overflow-tooltip></el-table-column>
+                <el-table-column label="电影券号码" align="center" prop="couponCode" show-overflow-tooltip></el-table-column>
                 <el-table-column label="电影券类型" align="center" prop="type"></el-table-column>
                 <el-table-column label="消费对象" align="center" prop="consumeTarget"></el-table-column>
                 <el-table-column label="电影券名称" align="center" prop="couponName"></el-table-column>                

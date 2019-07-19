@@ -20,7 +20,7 @@
                 <switch-confirm v-model="row.status" confirm-text="是否进行此操作" :id="row.id" action="/systemApi/sms/setStatus"></switch-confirm>
               </template>
             </el-table-column>
-            <el-table-column min-width="250"  label="操作" align="center" prop="oper">
+            <el-table-column min-width="250"  label="操作" align="center" prop="oper" fixed="right">
               <template slot-scope="{row}">
               	<el-button type="text" @click="editSms(row.id)">编辑</el-button>
               	<el-button type="text" @click="cancel(row.id)">删除</el-button>
@@ -39,7 +39,7 @@
                 <switch-confirm v-model="row.status" confirm-text="是否进行此操作" :id="row.id" action="/systemApi/smsTemplate/setStatus"></switch-confirm>
               </template>
             </el-table-column>
-            <el-table-column min-width="250"  label="操作" align="center" prop="oper">
+            <el-table-column min-width="250"  label="操作" align="center" prop="oper" fixed="right">
               <template slot-scope="{row}">
               	<el-button type="text" @click="editSmsModules(row.id)">编辑</el-button>
               	<el-button type="text" @click="cancelTemplate(row.id)">删除</el-button>
@@ -53,7 +53,7 @@
                 <remote-select v-model="params.type" clearable placeholder="请选择短信平台" action="/systemApi/dict/getList" :query="{type:'smsType'}"></remote-select>
               </el-form-item>
               <el-form-item label="平台账号" prop="accountName">
-                <el-input v-model="params.accountName"label="描述文字" style="width:200px"></el-input>
+                <el-input v-model="params.accountName" label="描述文字" style="width:200px"></el-input>
               </el-form-item>
               <el-form-item label="平台密码" prop="password">
                 <el-input v-model="params.password" label="描述文字" style="width:200px"></el-input>
@@ -90,7 +90,7 @@
               	<el-input v-model.trim="module.templateCode" style="width:200px;" placeholder="阿里短信模板code"></el-input>
               </el-form-item>
               <el-form-item  label="选择变量" style="margin-top:1%" v-if="module.parentType && module.typeStr">
-                <el-button v-for="(shortcut,key) in module.shortcuts" @click="insertVariable(module , shortcut , 'content_'+ module.typeStr)" :key="shortcut" type="primary" style="margin-right:20px;margin-bottom:10px;margin-left:0px;">
+                <el-button v-for="shortcut in module.shortcuts" @click="insertVariable(module , shortcut , 'content_'+ module.typeStr)" :key="shortcut" type="primary" style="margin-right:20px;margin-bottom:10px;margin-left:0px;">
                   {{shortcut}}
                 </el-button>
               </el-form-item>

@@ -1,5 +1,5 @@
 <template>
-  <el-dialog title="导出订单" :visible="value" width="60%" @close="closeDialog">
+  <el-dialog title="导出订单" :visible="value" width="60%" @close="closeDialog" :close-on-click-modal="false">
     <div class="waring-message" v-if="showWaring">
       自定义报表已生成，请前往
       <el-button type="text" @click="goTaskMgr">下载中心</el-button>，
@@ -24,7 +24,9 @@
     </div>
     <div slot="footer" class="dialog-footer tr">
       <el-button @click="goTaskMgr">查看已生成报表</el-button>
-      <el-button type="primary" @click="exportBtn">导出报表</el-button>
+      <el-button type="primary" @click="exportBtn" :disabled="loading">导出报表
+        <i class="el-icon-loading" v-if="loading"></i>
+      </el-button>
     </div>
   </el-dialog>
 </template>
@@ -51,6 +53,7 @@ export default {
   data() {
     return {
       showWaring: false,
+      loading: false,
       chooseList: [
         {
           name: '订单信息',
@@ -119,8 +122,19 @@ export default {
         orderFilmInfoExport: exportObj.orderFilmInfoExport.ids.join(',')
         // 缺选中的表头id参数
       })
-      await getOrderPageList(query)
-      this.showWaring = true
+      // if (query.orderFilmExport || query.orderFilmInfoExport) {
+      this.loading = true
+      try {
+        await getOrderPageList(query)
+        this.$message.success('导出成功，请前往下载中心查看')
+        this.loading = false
+        this.showWaring = true
+      } catch (error) {
+        this.loading = false
+      }
+      // } else {
+      //   this.$message.error('请选择一个导出条件')
+      // }
     },
     closeDialog() {
       this.showWaring = false

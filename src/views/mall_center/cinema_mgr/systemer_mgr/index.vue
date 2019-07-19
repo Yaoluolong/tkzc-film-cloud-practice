@@ -27,7 +27,7 @@
                 <switch-confirm v-model="row.status" confirm-text="停用系统商同时会关闭影院启用，确定要执行此操作" :id="row.id" action="/systemApi/interfaceType/setStatus"></switch-confirm>
               </template>
             </el-table-column>
-            <el-table-column min-width="180"  label="操作" align="center" prop="oper">
+            <el-table-column min-width="200"  label="操作" align="center" prop="oper" fixed="right">
               <template slot-scope="{row}">
                 <el-button type="text" @click="$router.push({path:'/mall_center/cinema_mgr/systemer_mgr/edit',query:{id:row.id}})">编辑</el-button>
                 <el-button type="text" @click="deleteSystemer(row)">删除</el-button>

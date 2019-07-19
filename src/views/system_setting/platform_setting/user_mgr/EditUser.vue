@@ -71,7 +71,7 @@
         <el-form-item label="关联影院" prop="uesrIds" class="wp100">
           <el-button type="primary" @click="onOperateClick('addCinema')" v-if="showAddbtn">添加影院</el-button>
         </el-form-item>
-        <add-cinema v-show="!showAddbtn" :chooseInfo="chooseInfo" ref="addCineam" @change="getChoosedId"></add-cinema>
+        <add-cinema class="mb20" v-show="!showAddbtn" :chooseInfo="chooseInfo" ref="addCineam" @change="getChoosedId"></add-cinema>
       </div>
       <el-form-item label="登录密码" class="w600">
         <el-input v-model="params.passWord" type="password" placeholder="请输入登录密码"></el-input>
@@ -164,8 +164,9 @@ export default {
       this.$refs.addCineam.onOperateClick(type)
     },
     getChoosedId(msg) {
+      console.log(111111, msg)
       this.params.cinemaId = msg.cinemaId
-      this.showAddbtn = Boolean(msg.cinemaId)
+      this.showAddbtn = !msg.cinemaId
     },
     async save() {
       const valid = await this.$refs.form.validate()
@@ -202,7 +203,7 @@ export default {
         if (data) {
           this.params = data
           this.chooseInfo = Object.assign({}, this.chooseInfo, data)
-          this.showAddbtn = Boolean(data.cinemaId)
+          this.showAddbtn = !data.cinemaId
         }
       })
     }

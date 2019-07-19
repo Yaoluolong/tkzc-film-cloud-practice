@@ -18,8 +18,8 @@
       </el-card>
 		  <el-form>
         <page-table ref="table" index :query="query" :fetch="queryTable">
-          <el-table-column min-width="160"  label="电影券批次号" align="center" prop="batchNo" ></el-table-column>
-          <el-table-column min-width="140"  label="电影券号" align="center" prop="couponCode"></el-table-column>
+          <el-table-column min-width="160"  label="电影券批次号" align="center" prop="batchNo" show-overflow-tooltip></el-table-column>
+          <el-table-column min-width="140"  label="电影券号" align="center" prop="couponCode" show-overflow-tooltip></el-table-column>
           <el-table-column min-width="100"  label="电影券种类" align="center" prop="typeName"></el-table-column>
           <el-table-column min-width="100"  label="电影券类型" align="center" prop="styleName"></el-table-column>
           <el-table-column min-width="110"  label="激活状态" align="center" prop="isActive"></el-table-column>
@@ -27,7 +27,7 @@
           <el-table-column min-width="110"  label="作废状态" align="center" prop="isVoid"></el-table-column>
           <el-table-column min-width="110"  label="绑定状态" align="center" prop="bindStatus"></el-table-column>
           <el-table-column min-width="110"  label="使用状态" align="center" prop="isUse"></el-table-column>
-          <el-table-column min-width="110"  label="使用时间" align="center" prop="useTime"></el-table-column>
+          <el-table-column min-width="160"  label="使用时间" align="center" prop="useTime" show-overflow-tooltip></el-table-column>
           <el-table-column min-width="110"  label="实际兑换/优惠面值" align="center" prop="exchangeMoney"></el-table-column>
         </page-table>             
       </el-form>

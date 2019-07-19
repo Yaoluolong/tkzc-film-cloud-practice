@@ -22,17 +22,17 @@
             </el-form-item>
          </el-form>
          <page-table ref="table" index :query="query" :fetch="queryTable">
-            <el-table-column min-width="60"  label="活动ID" align="center" prop="id" ></el-table-column>
-            <el-table-column width="180"  label="活动名称" align="center" prop="name"></el-table-column>
+            <el-table-column min-width="60"  label="活动ID" align="center" prop="id" show-overflow-tooltip></el-table-column>
+            <el-table-column width="180"  label="活动名称" align="center" prop="name" show-overflow-tooltip></el-table-column>
             <el-table-column width="120"  label="投放商家" align="center" prop="channelStr"></el-table-column>
             <el-table-column min-width="120"  label="活动类型" align="center" prop="typeStr"></el-table-column>           
             <el-table-column width="100"  label="发起人" align="center" prop="creatorStr"></el-table-column>
-            <el-table-column min-width="80"  label="一级审批" align="center" prop="oper">
+            <el-table-column min-width="80"  label="一级审批" align="center" prop="oper" fixed="right">
               <template slot-scope="{row}">
                 <el-button type="text" @click="$router.push({path:'/operation_center/marketing_activities/activities_approval_edit',query:{id:row.id,level:'1'}})">{{row.check1||''}}</el-button>
               </template>
             </el-table-column>
-            <el-table-column min-width="80"  label="二级审批" align="center" prop="oper">
+            <el-table-column min-width="80"  label="二级审批" align="center" prop="oper" fixed="right">
               <template slot-scope="{row}">
                 <el-button type="text" @click="check2Method(row)">{{row.check2||''}}</el-button>
               </template>

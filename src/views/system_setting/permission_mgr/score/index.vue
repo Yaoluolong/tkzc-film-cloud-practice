@@ -23,7 +23,7 @@
             </el-table-column>
             <el-table-column min-width="120"  label="影票兑换比例（点）" align="center" prop="ticketExchange"></el-table-column>
             <el-table-column min-width="120"  label="购物兑换比例（元）" align="center" prop="goodsExchange"></el-table-column>
-            <el-table-column min-width="120"  label="操作" align="center" prop="broswer">
+            <el-table-column min-width="120"  label="操作" align="center" prop="broswer" fixed="right">
                 <template slot-scope="{row}">
                     <el-button @click="editRow(row)" type="text">编辑</el-button>
                     <el-button type="text" @click="del(row)">删除</el-button>

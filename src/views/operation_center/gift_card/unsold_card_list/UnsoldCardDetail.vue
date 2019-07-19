@@ -12,13 +12,13 @@
         </el-form-item>
       </el-form>
         <page-table ref="table" index :query="query"  :fetch="queryTable">
-          <el-table-column min-width="180"  label="电影卡批次号" align="center" prop="batchNo" ></el-table-column>
+          <el-table-column min-width="180"  label="电影卡批次号" align="center" prop="batchNo" show-overflow-tooltip></el-table-column>
           <el-table-column min-width="100"  label="电影卡种类" align="center" prop="typeName"></el-table-column>
           <el-table-column min-width="100"  label="电影卡类型" align="center" prop="styleName"></el-table-column>
           <el-table-column min-width="180"  label="卡号" align="center" prop="cardCode"></el-table-column>
           <el-table-column min-width="180"  label="生成时间" align="center" prop="createTime"></el-table-column>
           <el-table-column min-width="120"  label="生成人员" align="center" prop="operator" show-overflow-tooltip></el-table-column>
-          <el-table-column min-width="180"  label="销售时间" align="center" prop="saleTime"></el-table-column>
+          <el-table-column min-width="180"  label="销售时间" align="center" prop="saleTime" show-overflow-tooltip></el-table-column>
           <el-table-column min-width="120"  label="销售人员" align="center" prop="saleName" show-overflow-tooltip></el-table-column>
         </page-table>
       <div slot="footer" class="dialog-footer">

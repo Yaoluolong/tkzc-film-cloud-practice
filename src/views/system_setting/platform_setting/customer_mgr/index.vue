@@ -59,7 +59,10 @@ export default {
           this.newPanelShow = true
           break
         case 'del':
+          await this.$confirm('确定要删除吗？', '温馨提示')
           await deleteCustomer({ id: row.id })
+          this.$message.success('删除成功')
+          this.loadList()
           break
       }
     },

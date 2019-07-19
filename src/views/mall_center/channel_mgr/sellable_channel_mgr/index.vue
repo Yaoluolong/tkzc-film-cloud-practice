@@ -18,8 +18,8 @@
             <el-table-column min-width="120" label="票务系统商" align="center" prop="interfaceName" show-overflow-tooltip></el-table-column>
             <el-table-column width="120"  label="影院数" align="center" prop="cinemaNum"></el-table-column>
             <el-table-column width="120"  label="渠道商数" align="center" prop="channelNum"></el-table-column>
-            <el-table-column width="180"  label="更新时间" align="center" prop="updateTime"></el-table-column>
-            <el-table-column min-width="250"  label="操作" align="center" prop="oper">
+            <el-table-column width="180"  label="更新时间" align="center" prop="updateTime" show-overflow-tooltip></el-table-column>
+            <el-table-column min-width="250"  label="操作" align="center" prop="oper" fixed="right">
               <template slot-scope="{row}">
                 <el-button type="text" @click="$router.push({path:'/mall_center/channel_mgr/sellable_channel_mgr/edit',query:{id:row.id}})">编辑</el-button>
                 <el-button type="text" @click="deleteObj(row)">删除</el-button>

@@ -22,7 +22,7 @@
             </el-form-item>
          </el-form>
          <page-table ref="table" :query="query" :fetch="queryTable">
-            <el-table-column width="70"  label="会员ID" align="center" prop="id" ></el-table-column>
+            <el-table-column width="70"  label="会员ID" align="center" prop="id" show-overflow-tooltip></el-table-column>
             <el-table-column min-width="120"  label="会员手机号" align="center" prop="bindingMobile" show-overflow-tooltip></el-table-column>
             <el-table-column width="150"  label="会员昵称" align="center" prop="userName"></el-table-column>            
             <el-table-column width="80"  label="会员来源" align="center" prop="source"></el-table-column>
@@ -35,7 +35,7 @@
                 <switch-confirm v-model="row.status" :id="row.id" action="/systemApi/member/update"></switch-confirm>
               </template>
             </el-table-column>
-            <el-table-column min-width="120"  label="操作" align="center" prop="oper">
+            <el-table-column min-width="120"  label="操作" align="center" prop="oper" fixed="right">
               <template slot-scope="{row}">
                 <el-button type="text" @click="$router.push({path:'/operation_center/user_mgr/member_list/detail',query:{id:row.id}})">查看</el-button>
                 <el-button type="text" @click="$router.push({path:'/operation_center/user_mgr/member_list/edit',query:{id:row.id}})">编辑</el-button>

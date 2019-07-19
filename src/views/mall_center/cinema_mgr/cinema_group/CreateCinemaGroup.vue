@@ -147,7 +147,7 @@ export default {
         // _this.chooseParams.cinemaId = _this.params.cinemaId
         // _this.chooseParams.cinemaList = _this.params.cinemaList
         _this.chooseParams.searchParam = id
-          ? typeof _this.params.searchParam === 'string'
+          ? _this.params.searchParam && typeof _this.params.searchParam === 'string'
             ? JSON.parse(_this.params.searchParam)
             : _this.params.searchParam
           : {}
@@ -166,6 +166,11 @@ export default {
       this.query.code = this.chooseParams.code
       this.query.type = '1'
       this.query.cinemaType = this.chooseParams.cinemaType
+      // 所有的情况使用searchParam来指定可添加列表的影院范围
+      this.query.searchParam =
+        +this.chooseParams.cinemaType === 1
+          ? JSON.stringify(this.chooseParams.searchParam)
+          : ''
       // 判断编辑时直接读取接口，新建时判断是否添加过，添加过则读取接口
       const res = this.$route.query.id
         ? await getCinemaGroupList(this.assignQuery(this.query))
@@ -173,7 +178,7 @@ export default {
           ? await getCinemaGroupList(this.assignQuery(this.query))
           : { data: [], count: 0 }
       // 添加影院时选择所有影院的情况下，判断下接口是否有返回影院，表单验证用
-      if (+this.query.cinemaType === 1 && this.chooseParams.isChoosed) {
+      if (this.$route.query.id && +this.chooseParams.cinemaType === 1) {
         this.chooseParams.cinemaId = res.data.join(',')
         // this.$refs.form.validateField('cinemaList')
       }
@@ -254,7 +259,7 @@ export default {
       this.chooseParams = Object.assign({}, this.chooseParams, chooseInfo)
       // 所有影院的情况下把组件内部的查询条件赋给外部
       if (+chooseInfo.cinemaType === 1) {
-        this.query = Object.assign({}, this.query, chooseInfo.searchParam)
+        this.query.searchParam = chooseInfo.searchParam
       }
       this.onSearch()
     },

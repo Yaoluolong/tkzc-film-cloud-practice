@@ -39,7 +39,7 @@
    <title-plane title="订单记录" style="margin-top:20px">
       <page-table ref="table" :query="query" :fetch="queryTable">
         <el-table-column min-width="180" align="center" label="订单编号" prop="orderNo" show-overflow-tooltip></el-table-column>
-        <el-table-column min-width="180" align="center" label="提交时间" prop="orderTime" ></el-table-column>
+        <el-table-column min-width="180" align="center" label="提交时间" prop="orderTime" show-overflow-tooltip></el-table-column>
         <el-table-column min-width="180" align="center" label="购票手机号" prop="mobile"></el-table-column>
         <el-table-column min-width="150" align="center" label="订单金额" prop="channelTiceketSum"></el-table-column>
         <el-table-column min-width="150" align="center" label="支付方式" prop="payType"></el-table-column>

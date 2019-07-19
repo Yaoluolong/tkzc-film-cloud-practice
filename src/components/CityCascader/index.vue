@@ -4,7 +4,7 @@
       @active-item-change="handleItemChange"
       v-model="selectedOptions"
       :props="{label:'name',value:'value',children:'children'}"
-      expand-trigger="hover"
+      expand-trigger="click"
       filterable
       change-on-select
       >

@@ -24,13 +24,13 @@
 		  <h3>提示:由于导出文件过大，为了给您提供安全、高效的下载体验，您的文件于导出请求生效后会暂存在阿里云oss上，三天后会自动删除。</h3>
 			<page-table ref="table" index :query="query" :fetch="queryTable">
       	<el-table-column min-width="120"  label="导出人" align="center" prop="operator" ></el-table-column>
-      	<el-table-column min-width="120"  label="导出时间" align="center" prop="createTime" ></el-table-column>
+      	<el-table-column min-width="120"  label="导出时间" align="center" prop="createTime" show-overflow-tooltip></el-table-column>
       	<el-table-column min-width="120"  label="导出类型" align="center" prop="type" ></el-table-column>
         <el-table-column min-width="120"  label="销售订单" align="center" prop="saleOrderNo" ></el-table-column>
       	<el-table-column min-width="120"  label="批次号" align="center" prop="batchNo" ></el-table-column>
       	<el-table-column min-width="250"  label="导出备注" align="center" prop="remark" ></el-table-column>
       	<el-table-column min-width="120"  label="状态" align="center" prop="statusName" ></el-table-column>
-      	<el-table-column min-width="80"  label="文件" align="center">
+      	<el-table-column min-width="80"  label="文件" align="center" fixed="right">
       		<template slot-scope="{row}">
       			<el-button type="text" @click="exportData(row)">下载</el-button>
       		</template>

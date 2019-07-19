@@ -59,7 +59,8 @@ service.interceptors.response.use(
             router.push('/login')
           })
         })*/
-      } else if (res.status === 1) {
+      } else {
+        // if (res.status === 1)
         Message({
           message: res.content,
           type: 'error',

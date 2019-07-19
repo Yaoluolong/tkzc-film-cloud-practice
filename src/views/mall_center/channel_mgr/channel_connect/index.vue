@@ -18,17 +18,17 @@
             </el-form-item>
          </el-form>
          <page-table ref="table" index :query="query" :fetch="queryTable">
-            <el-table-column   label="商家名称" align="center" prop="name" ></el-table-column>
+            <el-table-column   label="商家名称" align="center" prop="name" show-overflow-tooltip></el-table-column>
             <el-table-column   label="消费终端" align="center" prop="deviceCodeName" ></el-table-column>
             <el-table-column   label="商家类型" align="center" prop="typeName"></el-table-column>
-            <el-table-column   label="请求平台接口" align="center" prop="requestUrl"></el-table-column>
-            <el-table-column   label="添加时间" align="center" prop="createTime"></el-table-column>            
+            <el-table-column min-width="120"  label="请求平台接口" align="center" prop="requestUrl" show-overflow-tooltip></el-table-column>
+            <el-table-column min-width="160"  label="添加时间" align="center" prop="createTime" show-overflow-tooltip></el-table-column>            
             <el-table-column   label="是否启用" align="center" prop="status">
               <template slot-scope="{row}">
                 <switch-confirm v-model="row.status" activeValue="1"  confirmText="停用商家将导致涉及影院的常规价格方案自动下架以及线上购票链接或接口无法正常访问，但相关交易数据仍将保留。是否要执行此操作？" :id="row.id" action="/systemApi/channel/setStatus"></switch-confirm>
               </template>
             </el-table-column>
-            <el-table-column min-width="160"  label="操作" align="center" prop="oper">
+            <el-table-column min-width="250"  label="操作" align="center" prop="oper" fixed="right">
               <template slot-scope="{row}">
                 <el-button type="text" @click="$router.push({path:'/mall_center/channel_mgr/view_channel',query:{id:row.id}})">查看</el-button>
                 <el-button type="text" @click="editChannel(row)">编辑</el-button>

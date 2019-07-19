@@ -22,7 +22,7 @@
          </el-form>
          <page-table ref="table" :query="query" :fetch="queryTable">
             <el-table-column min-width="120"  label="业务人员" align="center" prop="operator" show-overflow-tooltip></el-table-column>
-            <el-table-column min-width="100"  label="客户名称" align="center" prop="customerName"></el-table-column>            
+            <el-table-column min-width="120"  label="客户名称" align="center" prop="customerName"></el-table-column>            
             <el-table-column min-width="110"  label="销售总额" align="center" prop="amount"></el-table-column>
             <el-table-column min-width="110"  label="卡内总点数" align="center" prop="point"></el-table-column>
             <el-table-column min-width="110"  label="消费总点数" align="center" prop="useTotalPoint"></el-table-column>
@@ -40,7 +40,7 @@
             
             <!-- <el-table-column min-width="100"  label="销售总数" align="center" prop="num"></el-table-column>
             <el-table-column min-width="100"  label="订单状态" align="center" prop="orderStatusName"></el-table-column> -->
-            <el-table-column min-width="100"  label="操作" align="center" prop="oper">
+            <el-table-column min-width="100"  label="操作" align="center" prop="oper" fixed="right">
               <template slot-scope="{row}">
                 <el-button type="text" @click="openDetail({orderNo:row.orderNo})">查看</el-button>
               </template>
@@ -139,7 +139,7 @@ export default {
   
 }
 </style>
-<style>
+<style scoped lang="scss">
   .el-dialog__body{
     height:50vh !important;
     max-height:50vh;

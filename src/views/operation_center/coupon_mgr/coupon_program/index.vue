@@ -25,16 +25,16 @@
         <el-table-column min-width="180"  label="规则时间" align="center" prop="volidTime" show-overflow-tooltip></el-table-column>
         <el-table-column min-width="120"  label="影院分组名称" align="center" prop="cinemaGroupName"></el-table-column>
         <el-table-column min-width="120"  label="添加人" align="center" prop="operator" v-if="query.isTemplate==='1'"></el-table-column>
-        <el-table-column min-width="120"  label="添加时间" align="center" prop="createTime" v-if="query.isTemplate==='1'"></el-table-column><el-table-column min-width="180"  label="电影券销售单号" align="center" prop="orderNo" v-if="query.isTemplate==='0'"></el-table-column>
+        <el-table-column min-width="120"  label="添加时间" align="center" prop="createTime" v-if="query.isTemplate==='1'" show-overflow-tooltip></el-table-column><el-table-column min-width="180"  label="电影券销售单号" align="center" prop="orderNo" v-if="query.isTemplate==='0'"></el-table-column>
         <el-table-column min-width="120"  label="业务员" align="center" prop="operator" v-if="query.isTemplate==='0'"></el-table-column>
         <el-table-column min-width="100"  label="审核人" align="center" prop="checkPeople" v-if="query.isTemplate==='0'"></el-table-column>
-        <el-table-column min-width="100"  label="启用状态" align="center" prop="status">
+        <el-table-column min-width="100"  label="启用状态" align="center" prop="status" fixed="right">
           <template slot-scope="{row}">
             <switch-confirm v-model="row.status" :id="row.id" action="/systemApi/couponProgram/setStatus"></switch-confirm>
           </template>
         </el-table-column>
         
-        <el-table-column min-width="250"  label="操作" align="center" prop="oper">
+        <el-table-column min-width="250"  label="操作" align="center" prop="oper" fixed="right">
           <template slot-scope="{row}">
             <el-button type="text" @click="$router.push({path:'/operation_center/coupon_mgr/view_program',query:{orderNo:row.orderNo}})" v-if="query.isTemplate==='0'">查看</el-button>
             <el-button type="text" @click="$router.push({path:'/operation_center/coupon_mgr/coupon_program/edit',query:{id:row.id}})" v-if="query.isTemplate==='1'">编辑</el-button>
