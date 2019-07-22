@@ -89,14 +89,20 @@ export default {
     },
     goSale(info) {
       this.$emit('cancel')
+      // 销售单创建流程未走完，跳转到编辑页，否则跳到明细页
+      // info.checkStatus 审核状态 0、未提交 1、提交审核 2、初审完成 3、审核完成 4、被退回
       this.$router.push({
-        name: 'get_sale_coupon_list',
+        path:
+          info.checkStatus && +info.checkStatus !== 0
+            ? '/operation_center/coupon_mgr/get_sale_coupon_list'
+            : '/operation_center/coupon_mgr/sold_coupon_list/edit',
         query: { orderNo: info.orderNo }
       })
     },
     async submit() {
       const valid = await this.$refs.form.validate()
       if (!valid) return
+      // 提交时拒绝走接口改成状态，确定则跳转到创建销售单开始创建流程
       this.params.id = this.id
       this.params.manageType + '' === '0'
         ? await setApprovalStatus(this.params)
