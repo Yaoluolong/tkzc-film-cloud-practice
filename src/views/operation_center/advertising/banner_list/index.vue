@@ -36,12 +36,13 @@
                 {{row.startTime}}:{{row.endTime}}
               </template>
             </el-table-column>           
-           <el-table-column width="80"  label="上线/下线" align="center" prop="status">
+           <el-table-column width="120"  label="上线/下线" align="center" prop="status">
               <template slot-scope="{row}">
                 <switch-confirm v-model="row.status" confirm-text="是否进行此操作" :id="row.id" action="/systemApi/channelBanner/setStatus"></switch-confirm>
               </template>
             </el-table-column>
              <el-table-column width="160"  label="广告类型" align="center" prop="typeName"></el-table-column>
+             <el-table-column width="120"  label="投放终端" align="center" prop="deviceType"></el-table-column>
              <el-table-column width="160"  label="更新时间" align="center" prop="updateTime"></el-table-column>
              <el-table-column width="120"  label="点击量" align="center" prop="clickNum"></el-table-column>
             <el-table-column min-width="180"  label="操作" align="center" prop="oper" fixed="right">
