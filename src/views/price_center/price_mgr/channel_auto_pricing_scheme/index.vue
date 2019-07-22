@@ -42,7 +42,8 @@ export default {
     return {
       CHANNEL_TYPES,
       params: {
-        type: '1'
+        type: '1',
+        pricingType: '1'
       },
       channelList: [],
       channelId: null

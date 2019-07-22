@@ -41,7 +41,7 @@
         </div>
       </el-form-item>
       <el-form-item label="定价方式:">参考第三方价格{{getPricingType(item.priceType)}}</el-form-item>
-      <el-form-item label="配置价格:">参考第三方价格，统一{{+item.type===1?'减少':'增加'}}{{item.price}}元</el-form-item>
+      <el-form-item label="配置价格:">参考第三方价格，统一{{+item.type===1?'增加':'减少'}}{{item.price}}元</el-form-item>
     </el-form>
   </zm-panel>
 </template>
