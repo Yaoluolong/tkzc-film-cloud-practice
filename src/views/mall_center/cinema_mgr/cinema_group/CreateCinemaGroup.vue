@@ -168,7 +168,7 @@ export default {
       this.query.cinemaType = this.chooseParams.cinemaType
       // 所有的情况使用searchParam来指定可添加列表的影院范围
       this.query.searchParam =
-        +this.chooseParams.cinemaType === 1
+        +this.chooseParams.cinemaType === 1 && JSON.stringify(this.chooseParams.searchParam) !== '{}'
           ? JSON.stringify(this.chooseParams.searchParam)
           : ''
       // 判断编辑时直接读取接口，新建时判断是否添加过，添加过则读取接口
@@ -178,7 +178,7 @@ export default {
           ? await getCinemaGroupList(this.assignQuery(this.query))
           : { data: [], count: 0 }
       // 添加影院时选择所有影院的情况下，判断下接口是否有返回影院，表单验证用
-      if (this.$route.query.id && +this.chooseParams.cinemaType === 1) {
+      if (+this.chooseParams.cinemaType === 1) {
         this.chooseParams.cinemaId = res.data.join(',')
         // this.$refs.form.validateField('cinemaList')
       }
