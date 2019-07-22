@@ -109,7 +109,7 @@ export default {
       switch (type) {
         case 'detail':
           this.editId = row.id
-          this.detailParams = row
+          this.detailParams.status = row.status
           this.detailPanelShow = true
           break
         case 'subApply':
