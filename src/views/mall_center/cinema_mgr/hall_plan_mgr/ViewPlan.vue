@@ -159,7 +159,7 @@ import {
   syncCinemaPlan,
   getSyncCinemaPlanPercent
 } from '@/api/mallCenter'
-import { realDeepClone, exportData } from '@/utils'
+import { realDeepClone } from '@/utils'
 export default {
   name: 'cinema_plan',
   components: { CityCascader },
@@ -194,10 +194,12 @@ export default {
     refreshTable() {
       this.$refs.table.refresh()
     },
-    exportData() {
+    async exportData() {
       const query = realDeepClone(this.query)
       query.requestType = 'export'
-      exportData(getCinemaPlanPageList, query)
+      query.id = this.$route.query.id
+      await getCinemaPlanPageList(query)
+      this.$message.success('导出成功，请到下载中心进行下载')
     },
     priceFormatter(row, column, cellValue, index) {
       return cellValue ? cellValue + '元' : '--'

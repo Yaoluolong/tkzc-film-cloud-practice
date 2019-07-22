@@ -17,7 +17,7 @@
       <!-- v-if="couponInfoLoaded || !$route.query.orderNo" -->
       <div slot="header">
         <span>销售电影券基础信息，销售员：{{couponInfo.operator||name}}</span>
-        <span v-if="couponInfo.resellerOperator">申请人：{{couponInfo.resellerOperator}}</span>
+        <span v-if="couponInfo.resellerOperator">,申请人：{{couponInfo.resellerOperator}}</span>
       </div>
       <el-form
         label-width="140px"
@@ -1235,8 +1235,8 @@ export default {
         resellerCouponApplicationId: this.$route.query.applyId || '', // 申请单id
         customer: res.customerId,
         resellerOperator: res.resellerOperator,
-        style: res.couponStyle,
-        type: res.couponType,
+        style: res.style,
+        type: res.type,
         remark: res.content,
         businessType: '1', // 目前只有团体票业务先写死
         num: res.number,

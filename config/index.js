@@ -22,7 +22,8 @@ module.exports = {
         // target:"http://192.168.10.15:81/",
         // target: "http://192.168.10.206:8080/",
         // target: "http://192.168.10.186:8181/",
-        target: "https://tkzc-test-mapi.zmaxfilm.com/",
+        target: "https://tkzc-develop-mapi.zmaxfilm.com/",
+        // target: "https://tkzc-test-mapi.zmaxfilm.com/",
         // target: "https://tkzc-pre-mapi.zmaxfilm.com/",
         changeOrigin: true, //set the option changeOrigin to true for name-based virtual hosted sit
         pathRewrite: { "^/api": "" },
