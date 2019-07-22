@@ -89,9 +89,9 @@
       ></el-table-column>
       <el-table-column
         min-width="120"
-        label="影片标准价"
+        label="影片票价"
         align="center"
-        prop="standardPrice"
+        prop="ticketPrice"
         :formatter="priceFormatter"
       ></el-table-column>
       <!-- <el-table-column   label="影片挂牌价" align="center" prop="listingPrice"  :formatter="priceFormatter"></el-table-column> -->
