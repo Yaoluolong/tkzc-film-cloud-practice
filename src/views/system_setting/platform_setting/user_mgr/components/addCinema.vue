@@ -126,7 +126,7 @@ export default {
           ? await getCinemaGroupList(this.assignQuery(this.query))
           : { data: [], count: 0 }
       // 添加影院时选择所有影院的情况下，判断下接口是否有返回影院，表单验证用
-      if (+this.query.cinemaType === 1 && this.chooseParams.isChoosed) {
+      if (+this.query.cinemaType === 1) {
         this.chooseParams.cinemaId = res.data.join(',')
         // this.$refs.form.validateField('cinemaList')
       }
