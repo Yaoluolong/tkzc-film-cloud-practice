@@ -14,7 +14,7 @@ export default {
   props: {
     value: Object,
     outDataId: String,
-    outDataList: Array,
+    outDataList: [Object, Array],
     outPriceRule: Object,
     getFilm: {
       type: Boolean,

@@ -84,7 +84,7 @@
 import { drawCardInvoice, drawCouponInvoice } from '@/api/operationCenter'
 export default {
   props: {
-    outData: Object, // 初始化数据
+    outData: [Object, Array], // 初始化数据
     type: String, // 开票类型  coupon  card
     drawInvoiceName: String
   },

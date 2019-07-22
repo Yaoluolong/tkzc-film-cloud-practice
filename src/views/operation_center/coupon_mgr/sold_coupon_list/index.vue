@@ -26,7 +26,7 @@
             <el-tab-pane label="已提交审核" name="1"></el-tab-pane>
          </el-tabs>
          <page-table ref="table" index :query="query" :fetch="queryTable">
-            <el-table-column min-width="250"   align="center" prop="oper" v-if="query.checkStatus !== '0'" :key="Math.random()">
+            <el-table-column min-width="250"  align="center" prop="oper" v-if="query.checkStatus !== '0'" :key="Math.random()">
               <template slot-scope="{row}">
                 <div v-if="row.status !== '2'">
                   <el-button type="text" @click="$router.push({path:'/operation_center/coupon_mgr/sold_coupon_list/edit',query:{orderNo:row.orderNo}})" v-if="query.checkStatus === '0'">编辑/提交审核</el-button>
