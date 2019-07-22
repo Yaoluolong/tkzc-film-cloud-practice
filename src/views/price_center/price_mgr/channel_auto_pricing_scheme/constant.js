@@ -5,24 +5,33 @@ export const autoSchemeColumns = context => {
   return [
     {
       label: '权重',
-      prop: 'sort'
+      // prop: 'sort',
+      render: (h, row) => {
+        return <span class={isDisable(row)}>{row.sort}</span>
+      }
     },
     {
       align: 'left',
-      prop: 'name',
-      label: '方案名称'
+      // prop: 'name',
+      label: '方案名称',
+      render: (h, row) => {
+        return <span class={isDisable(row)}>{row.name}</span>
+      }
     },
     {
       label: '有效日期',
       render: (h, row) => {
-        return <span>
+        return <span class={isDisable(row)}>
           {row.startDate}&nbsp;&nbsp;-&nbsp;&nbsp;{row.endDate}
         </span>
       }
     },
     {
       label: '状态',
-      prop: 'statusName'
+      // prop: 'statusName'
+      render: (h, row) => {
+        return <span class={isDisable(row)}>{row.statusName}</span>
+      }
     },
     {
       label: '操作',
@@ -32,6 +41,7 @@ export const autoSchemeColumns = context => {
           <el-button
             size='small'
             type='text'
+            class={isDisable(row)}
             onClick={() => context.confirmDelete(row)}
           >
             删除
@@ -41,6 +51,7 @@ export const autoSchemeColumns = context => {
           <el-button
             size='small'
             type='text'
+            class={isDisable(row)}
             onClick={() => context.openDetail(row)}
           >
             详情
@@ -58,7 +69,7 @@ export const autoSchemeColumns = context => {
       label: '拖动排序',
       width: 160,
       render: (h, row) => {
-        return <i class='el-icon-rank'></i>
+        return <i class={'el-icon-rank ' + isDisable(row)}></i>
       }
     }
   ]
@@ -83,8 +94,15 @@ export const chooseAutoSchemeColumns = context => {
       }
     },
     {
-      prop: 'createTime',
-      label: '创建时间'
+      // prop: 'createTime',
+      label: '创建时间',
+      render: (h, row) => {
+        return (
+          <span class={isDisable(row)}>
+            {row.createTime}
+          </span>
+        )
+      }
     },
     {
       label: '状态',
