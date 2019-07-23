@@ -99,7 +99,11 @@
         </el-form-item>
         <template v-if="params.type === '4'">
           <el-form-item label-width="120px" label="选择活动入口:" class="mb20" prop="activityJumpType">
-            <el-select v-model="params.activityJumpType" clearable @change="changeParams('activityJumpType',$event)">
+            <el-select
+              v-model="params.activityJumpType"
+              clearable
+              @change="changeParams('activityJumpType',$event)"
+            >
               <el-option
                 v-for="(item,index) in DEVICE_JUMP_TYPES"
                 :key="index"
@@ -275,8 +279,16 @@ export default {
         },
         area: { required: true, message: '请填写投放城市', trigger: 'change' },
         time: { required: true, validator: checkTime, trigger: 'change' },
-        timeType: { required: true, validator: checkTimeType, trigger: 'change' },
-        weekTime: { required: true, validator: checkWeekTime, trigger: 'change' },
+        timeType: {
+          required: true,
+          validator: checkTimeType,
+          trigger: 'change'
+        },
+        weekTime: {
+          required: true,
+          validator: checkWeekTime,
+          trigger: 'change'
+        },
         limitTime: {
           required: true,
           validator: checkLimitTime,
@@ -314,7 +326,7 @@ export default {
       this.$refs.form.validateField('image')
     },
     'params.channelList': function(val) {
-      this.$refs.form.validateField('channelList')
+      if (!this.ok) this.$refs.form.validateField('channelList')
     }
   },
   mounted() {
@@ -328,8 +340,8 @@ export default {
         case 'type':
           this.params.typeValue = ''
           break
-        case 'activityJump':
-          this.params.typeValue = +val === 1 ? '-1' : this.params.typeValue
+        case 'activityJumpType':
+          this.params.typeValue = +val === 1 ? '-1' : ''
       }
     },
     timeTypeChange(val) {
@@ -340,65 +352,79 @@ export default {
         this.$set(this.params, 'limitTime', ['08:00:00', '22:00:00'])
       }
     },
-    save() {
-      this.$refs.form.validate(valid => {
-        if (valid) {
-          if (this.channelId === '') {
-            this.$message.warning('请选择投放商家')
-            return
-          }
-          if (this.time.length < 2) {
-            this.$message.warning('请选择投放时间')
-            return
-          }
-          const result = {}
-          result.name = this.params.name
-          result.channelId = this.channelId
-          result.startTime = this.time[0]
-          result.endTime = this.time[1]
-          result.sTime = this.params.limitTime[0]
-          result.eTime = this.params.limitTime[1]
-          result.timeType = this.params.timeType
-          result.week = this.params.weekTime.join(',')
-          result.type = this.params.type
-          result.isRecordMember = this.params.isRecordMember
-          result.provinceId = this.params.area[0]
-          result.cityId = this.params.area[1]
-          result.deviceType = this.params.deviceType // 投放终端类型 1微信 2app
-          result.activityJumpType = result.type === '4' ? this.params.activityJumpType : '' // 活动入口类型 1列表页 2详情页
-          result.typeValue = result.type === '1' ? this.httpType + this.params.typeValue : this.params.typeValue
+    async save() {
+      const valid = await this.$refs.form.validate()
+      if (!valid) return
+      if (this.channelId === '') {
+        this.$message.warning('请选择投放商家')
+        return
+      }
+      if (this.time.length < 2) {
+        this.$message.warning('请选择投放时间')
+        return
+      }
+      const result = {}
+      result.name = this.params.name
+      result.channelId = this.channelId
+      result.startTime = this.time[0]
+      result.endTime = this.time[1]
+      result.sTime = this.params.limitTime[0]
+      result.eTime = this.params.limitTime[1]
+      result.timeType = this.params.timeType
+      result.week = this.params.weekTime.join(',')
+      result.type = this.params.type
+      result.isRecordMember = this.params.isRecordMember
+      result.provinceId = this.params.area[0]
+      result.cityId = this.params.area[1]
+      result.deviceType = this.params.deviceType // 投放终端类型 1微信 2app
+      result.activityJumpType =
+        result.type === '4' ? this.params.activityJumpType : '' // 活动入口类型 1列表页 2详情页
+      result.typeValue =
+        result.type === '1'
+          ? this.httpType + this.params.typeValue
+          : this.params.typeValue
 
-          result.image = this.params.image
-          result.sort = this.params.sort
-          if (this.$route.query.id) {
-            result.id = this.$route.query.id
-            updateBanner(result).then(e => {
-              this.$message.success('保存成功')
-              this.closeTab(true)
-              this.$router.push({
-                path: '/operation_center/advertising/banner_list'
-              })
-            })
-          } else {
-            createBanner(result).then(e => {
-              this.$message.success('保存成功')
-              this.closeTab(true)
-              this.$router.push({
-                path: '/operation_center/advertising/banner_list'
-              })
-            })
-          }
-        }
+      result.image = this.params.image
+      result.sort = this.params.sort
+      result.id = this.$route.query.id || ''
+      const submitApi = this.$route.query.id
+        ? updateBanner(result)
+        : createBanner(result)
+      await submitApi
+      this.$message.success('保存成功')
+      this.closeTab(true)
+      this.$router.push({
+        path: '/operation_center/advertising/banner_list'
       })
+
+      // if (this.$route.query.id) {
+      //   result.id = this.$route.query.id
+      //   updateBanner(result).then(e => {
+      // this.$message.success('保存成功')
+      // this.closeTab(true)
+      // this.$router.push({
+      //   path: '/operation_center/advertising/banner_list'
+      // })
+      //   })
+      // } else {
+      //   createBanner(result).then(e => {
+      //     this.$message.success('保存成功')
+      //     this.closeTab(true)
+      //     this.$router.push({
+      //       path: '/operation_center/advertising/banner_list'
+      //     })
+      //   })
+      // }
     }
   },
   async created() {
     this.allTypeList = await getBannerType()
     if (this.$route.query.id) {
       await getBannerInfo(this.$route.query.id).then(result => {
-        this.params.name = result.name
+        this.params = Object.assign(this.params, result)
+        // this.params.name = result.name
 
-        this.params.isRecordMember = result.isRecordMember
+        // this.params.isRecordMember = result.isRecordMember
 
         const https = 'Https://'
         const http = 'Http://'
@@ -410,26 +436,27 @@ export default {
           this.httpType = http
           this.params.typeValue = result.typeValue.replace(http, '')
         }
-        this.params.image = result.image
-        this.params.sort = result.sort
+        // this.params.image = result.image
+        // this.params.sort = result.sort
         this.$nextTick(() => {
           this.params.type = result.type
         })
-
+        const channelList = []
         result.channelList.forEach(e => {
-          this.params.channelList.push({
+          channelList.push({
             name: e.name,
             value: e.value,
             checked: true
           })
         })
+        this.$set(this.params, 'channelList', channelList)
 
         this.time = []
         // this.$set(this, 'time', [])
         this.$set(this.time, 0, result.startTime)
         this.$set(this.time, 1, result.endTime)
 
-        this.$set(this.params, 'timeType', result.timeType)
+        // this.$set(this.params, 'timeType', result.timeType)
 
         this.$set(this.params, 'limitTime', ['08:00:00', '22:00:00'])
         this.$set(

@@ -78,9 +78,8 @@
                 {{agur.num||'--'}}张
               </el-form-item>
               <el-form-item label="销售订单号" prop="saleOrderNo">
-                <el-input v-model="agur.saleOrderNo" label="输入销售订单号" style="width:200px"></el-input>
-                </br>
-                <span style="margin-left: 8px;color:#8e8e8e;" size="medium">销售订单号未输入则导出整个批次！</span>
+                <el-input v-model="agur.saleOrderNo" label="输入销售订单号" class="w200"></el-input>
+                <span class="db" style="margin-left: 8px;color:#8e8e8e;" size="medium">销售订单号未输入则导出整个批次！</span>
               </el-form-item>
               <el-form-item label="导出字段" prop="fieldList">
                 <div class="checkbox-plane">

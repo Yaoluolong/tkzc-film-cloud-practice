@@ -96,7 +96,7 @@
         prop="operator"
         show-overflow-tooltip
       ></el-table-column>
-      <el-table-column min-width="100" label="客户名称" align="center" prop="customerName"></el-table-column>
+      <el-table-column min-width="100" label="客户名称" align="center" prop="customerName" show-overflow-tooltip></el-table-column>
       <el-table-column
         min-width="180"
         label="销售时间"

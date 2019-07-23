@@ -50,10 +50,21 @@ export default {
       chooseInfo: {
         isAll: false,
         indeterminate: false
+      },
+      isBackfill: false
+    }
+  },
+  watch: {
+    value(val) {
+      // 只回填一次
+      if (val && val.length && !this.isBackfill) {
+        this.getVlaue(val)
+        this.isBackfill = true
       }
     }
   },
   mounted() {
+    // 多次销毁再打开时，重复回填使用
     this.getVlaue(this.value)
   },
   methods: {
