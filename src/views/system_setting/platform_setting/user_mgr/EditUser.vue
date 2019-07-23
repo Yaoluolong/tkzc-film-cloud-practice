@@ -68,7 +68,7 @@
         </el-form-item>
       </div>
       <div v-if="+params.type===4">
-        <el-form-item label="关联影院" prop="uesrIds" class="wp100">
+        <el-form-item label="关联影院" prop="cinemaId" class="wp100">
           <el-button type="primary" @click="onOperateClick('addCinema')" v-if="showAddbtn">添加影院</el-button>
         </el-form-item>
         <add-cinema class="mb20" v-show="!showAddbtn" :chooseInfo="chooseInfo" ref="addCineam" @change="getChoosedId"></add-cinema>
@@ -98,6 +98,13 @@ export default {
   name: 'edit_user',
   components: { zmSelect, addCinema },
   data() {
+    const cinemaIdValid = (rule, value, callback) => {
+      if (!this.params.cinemaId) {
+        callback(new Error('请选择影院'))
+      } else {
+        callback()
+      }
+    }
     return {
       chooseInfo: {
         code: ''
@@ -138,6 +145,7 @@ export default {
           message: '请选择关联业务员',
           trigger: 'change'
         },
+        cinemaId: { required: true, validator: cinemaIdValid, message: '请选择所属影院' },
         type: { required: true, message: '请选择用户类型', trigger: 'change' },
         passWord: [
           { required: true, message: '请输入登录密码', trigger: 'blur' },
@@ -167,6 +175,7 @@ export default {
       console.log(111111, msg)
       this.params.cinemaId = msg.cinemaId
       this.showAddbtn = !msg.cinemaId
+      this.$refs.form.validateField('cinemaId')
     },
     async save() {
       const valid = await this.$refs.form.validate()
