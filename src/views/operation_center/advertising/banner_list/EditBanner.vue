@@ -86,7 +86,11 @@
           <!-- :disabled="$route.query.id ? type.value !== params.type : false"              -->
         </el-radio-group>
         <el-form-item label-width="120px" label="投放终端：" prop="deviceType" class="mt10 mb20">
-          <zm-checkbox v-model="params.deviceType" :list="deviceTypes">
+          <zm-checkbox
+            v-model="params.deviceType"
+            :list="deviceTypes"
+            :option="{groupClass:'dib ml30'}"
+          >
             <template slot-scope="msg">
               <div>
                 <span v-if="!msg.item.content">{{msg.item.label}}</span>
@@ -396,25 +400,6 @@ export default {
       this.$router.push({
         path: '/operation_center/advertising/banner_list'
       })
-
-      // if (this.$route.query.id) {
-      //   result.id = this.$route.query.id
-      //   updateBanner(result).then(e => {
-      // this.$message.success('保存成功')
-      // this.closeTab(true)
-      // this.$router.push({
-      //   path: '/operation_center/advertising/banner_list'
-      // })
-      //   })
-      // } else {
-      //   createBanner(result).then(e => {
-      //     this.$message.success('保存成功')
-      //     this.closeTab(true)
-      //     this.$router.push({
-      //       path: '/operation_center/advertising/banner_list'
-      //     })
-      //   })
-      // }
     }
   },
   async created() {

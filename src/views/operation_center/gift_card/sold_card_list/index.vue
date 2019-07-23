@@ -58,7 +58,11 @@
               @click="cancelSoldCardOrder(row.orderNo)"
               v-if="row.checkStatus == '1'"
             >撤销销售</el-button>
-
+            <el-button
+              type="text"
+              @click="exportData(row)"
+              v-if="row.checkStatus === '2' && row.status === '0'"
+            >导出</el-button>
             <el-dropdown v-if="row.checkStatus == '4'">
               <span class="el-dropdown-link ml20 primary">
                 更多
@@ -176,6 +180,7 @@
         </template>
       </el-table-column>
     </page-table>
+   <export-dialog v-model="exportVisible" v-if="exportVisible" :export-params="exportParams"></export-dialog>
   </div>
 </template>
 
@@ -183,16 +188,19 @@
 import { realDeepClone } from '@/utils'
 import CustomerSelector from '@/components/CustomerSelector'
 import OperatorIdSelector from '@/components/OperatorIdSelector'
+import exportDialog from './exportDialog'
 import {
   getCardOrderPageList,
   cancelSoldCardOrder
 } from '@/api/operationCenter'
 export default {
-  components: { CustomerSelector, OperatorIdSelector },
+  components: { CustomerSelector, OperatorIdSelector, exportDialog },
   name: 'gift_card_sold_card_list',
   data() {
     return {
       cardLimit: 'cardLimit',
+      exportVisible: false,
+      exportParams: {},
       query: {
         time: [],
         checkStatus: ''
@@ -215,6 +223,10 @@ export default {
     },
     refreshTable() {
       this.$refs.table.refresh()
+    },
+    exportData(row) {
+      this.exportVisible = true
+      this.exportParams = row
     },
     cancelSoldCardOrder(orderNo) {
       this.$confirm(
