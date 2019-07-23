@@ -27,7 +27,7 @@
           :fetch="loadList"
           :table-params="tableParams"
           @select="chooseSelect"
-          :options="{mutilpleSelect:true,loading:loading,showPagination:false}"
+          :options="{mutilpleSelect:true,loading:loading}"
         ></zm-table>
       </div>
       <choose-cinema
