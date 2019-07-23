@@ -46,7 +46,7 @@
           prop="cinemaGroupId"
           :rules="+info.areaType===1?otherRules.cinemaGroupId:[]"
         >
-          <el-radio-group v-model="info.areaType" clearable>
+          <el-radio-group v-model="info.areaType" clearable @change="changeAreaType">
             <el-radio :label="'0'">全部</el-radio>
             <el-radio :label="'1'">指定分组</el-radio>
           </el-radio-group>
@@ -55,10 +55,11 @@
             v-model="info.cinemaGroupId"
             :select-type="'cinemaGroup'"
             :default-selection="defaultAreaType"
+            class="w400"
           ></common-select>
         </el-form-item>
         <el-form-item label="影片" prop="filmNo" :rules="+info.filmType===1?otherRules.filmNo:[]">
-          <el-radio-group v-model="info.filmType" clearable>
+          <el-radio-group v-model="info.filmType" clearable @change="changeFilmType">
             <el-radio :label="'0'">全部</el-radio>
             <el-radio :label="'1'">指定影片</el-radio>
           </el-radio-group>
@@ -70,6 +71,7 @@
               :select-type="'filmList'"
               :action-query="{type:1}"
               :default-selection="defaultFilms"
+              class="w400"
             ></common-select>
           </div>
         </el-form-item>
@@ -174,13 +176,13 @@ export default {
       }
     }
   },
-  watch: {
-    'info.filmType'(val, oldVal) {
-      if (+oldVal === 1 && +val === 0) {
-        this.info.filmNo = ''
-      }
-    }
-  },
+  // watch: {
+  //   'info.filmType'(val, oldVal) {
+  //     if (+oldVal === 1 && +val === 0) {
+  //       this.info.filmNo = ''
+  //     }
+  //   }
+  // },
   mounted() {
     if (this.$route.query && this.$route.query.id) {
       this.id = this.$route.query.id
@@ -192,6 +194,16 @@ export default {
   },
   methods: {
     getSelectValue,
+    changeAreaType(val) {
+      if (+val === 0) {
+        this.info.cinemaGroupId = null
+      }
+    },
+    changeFilmType(val) {
+      if (+val === 0) {
+        this.info.filmNo = null
+      }
+    },
     async getDetial() {
       const info = await getAutoPriceInfo({
         id: this.id
@@ -204,9 +216,11 @@ export default {
         id: info.interfaceId,
         name: info.interfaceName
       }
-      this.defaultAreaType = {
-        id: info.cinemaGroupId,
-        name: info.cinemaGroupName
+      if (+info.cinemaGroupId) {
+        this.defaultAreaType = {
+          id: info.cinemaGroupId,
+          name: info.cinemaGroupName
+        }
       }
       if (info.filmNo) {
         const filmNoArr = info.filmNo.split(',')
@@ -275,9 +289,7 @@ export default {
           message: '新建成功!'
         })
       }
-      this.$router.push({
-        path: '/price_center/price_mgr/auto_pricing_scheme'
-      })
+      this.closeTab(true)
     }
   }
 }
