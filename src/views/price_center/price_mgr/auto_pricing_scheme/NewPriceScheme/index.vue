@@ -176,13 +176,6 @@ export default {
       }
     }
   },
-  // watch: {
-  //   'info.filmType'(val, oldVal) {
-  //     if (+oldVal === 1 && +val === 0) {
-  //       this.info.filmNo = ''
-  //     }
-  //   }
-  // },
   mounted() {
     if (this.$route.query && this.$route.query.id) {
       this.id = this.$route.query.id
@@ -197,11 +190,15 @@ export default {
     changeAreaType(val) {
       if (+val === 0) {
         this.info.cinemaGroupId = null
+        this.info.cinemaGroupName = null
+        this.defaultAreaType = null
       }
     },
     changeFilmType(val) {
       if (+val === 0) {
         this.info.filmNo = null
+        this.info.filmName = null
+        this.defaultFilms = []
       }
     },
     async getDetial() {
