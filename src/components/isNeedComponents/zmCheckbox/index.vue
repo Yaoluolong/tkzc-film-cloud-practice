@@ -7,6 +7,7 @@
     >全部</el-checkbox>
     <el-checkbox-group v-model="checkValue" :class="option.groupClass">
       <el-checkbox
+        :class="option.checkboxClass"
         v-for="(item,index) in list"
         :key="index"
         :label="item[labelKey]"
@@ -33,7 +34,8 @@ export default {
       type: Object,
       default() {
         return {
-          groupClass: 'dib ml30'
+          groupClass: '',
+          checkboxClass: ''
         }
       }
     },
@@ -98,3 +100,13 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.el-checkbox{
+  margin-left: 0;
+  &:not(:last-child){
+    margin-right: 30px
+  }
+}
+</style>
+
