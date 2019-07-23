@@ -81,7 +81,7 @@
         </el-form-item>
       </div>
       <el-form-item label="广告类型:" prop="type" class="mb0">
-        <el-radio-group v-model="params.type" size="medium">
+        <el-radio-group v-model="params.type" size="medium" @change="changeParams('type')">
           <el-radio v-for="type in allTypeList" :key="type.value" :label="type.value">{{type.name}}</el-radio>
           <!-- :disabled="$route.query.id ? type.value !== params.type : false"              -->
         </el-radio-group>
@@ -99,7 +99,7 @@
         </el-form-item>
         <template v-if="params.type === '4'">
           <el-form-item label-width="120px" label="选择活动入口:" class="mb20" prop="activityJumpType">
-            <el-select v-model="params.activityJumpType" clearable @change="changeActivityJump">
+            <el-select v-model="params.activityJumpType" clearable @change="changeParams('activityJumpType',$event)">
               <el-option
                 v-for="(item,index) in DEVICE_JUMP_TYPES"
                 :key="index"
@@ -146,7 +146,7 @@
           </div>
         </div>
         <div v-if="params.type === '2'">
-          <film-selector getFilmId v-model.trim="params.typeValue"></film-selector>
+          <film-selector getFilmId v-model.trim="params.typeValue" class="mb20"></film-selector>
         </div>
       </el-form-item>
 
@@ -273,10 +273,10 @@ export default {
           validator: checkChannelList,
           trigger: 'change'
         },
-        area: { required: true, message: '请填写投放城市', trigger: 'blur' },
-        time: { required: true, validator: checkTime, trigger: 'blur' },
-        timeType: { required: true, validator: checkTimeType, trigger: 'blur' },
-        weekTime: { required: true, validator: checkWeekTime, trigger: 'blur' },
+        area: { required: true, message: '请填写投放城市', trigger: 'change' },
+        time: { required: true, validator: checkTime, trigger: 'change' },
+        timeType: { required: true, validator: checkTimeType, trigger: 'change' },
+        weekTime: { required: true, validator: checkWeekTime, trigger: 'change' },
         limitTime: {
           required: true,
           validator: checkLimitTime,
@@ -311,10 +311,10 @@ export default {
       deep: true
     },
     'params.image': function(val) {
-      this.$refs.form.validate()
+      this.$refs.form.validateField('image')
     },
     'params.channelList': function(val) {
-      this.$refs.form.validate()
+      this.$refs.form.validateField('channelList')
     }
   },
   mounted() {
@@ -323,8 +323,14 @@ export default {
     })
   },
   methods: {
-    changeActivityJump(val) {
-      this.typeValue = +val === 1 ? '-1' : this.typeValue
+    changeParams(type, val) {
+      switch (type) {
+        case 'type':
+          this.params.typeValue = ''
+          break
+        case 'activityJump':
+          this.params.typeValue = +val === 1 ? '-1' : this.params.typeValue
+      }
     },
     timeTypeChange(val) {
       if (val === 'daily') {
@@ -358,8 +364,8 @@ export default {
           result.isRecordMember = this.params.isRecordMember
           result.provinceId = this.params.area[0]
           result.cityId = this.params.area[1]
-          result.deviceType = this.params.deviceType
-          result.activityJumpType = this.params.activityJumpType
+          result.deviceType = this.params.deviceType // 投放终端类型 1微信 2app
+          result.activityJumpType = result.type === '4' ? this.params.activityJumpType : '' // 活动入口类型 1列表页 2详情页
           result.typeValue = result.type === '1' ? this.httpType + this.params.typeValue : this.params.typeValue
 
           result.image = this.params.image

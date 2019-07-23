@@ -18,12 +18,12 @@ export const DEVICE_TYPES = info => {
 
 export const DEVICE_JUMP_TYPES = [
   {
-    label: '活动详情页',
-    value: '2'
-  },
-  {
     label: '活动列表页',
     value: '1'
+  },
+  {
+    label: '活动详情页',
+    value: '2'
   }
 ]
 
