@@ -1,53 +1,96 @@
 <template>
   <div class="app-container cinema-base-info-box">
-    <el-form label-width="120px" label-position="left" style="width:1000px;" :model="params" :rules="rules" ref="form">
-      <el-form-item label="影院编码" prop="cinemaId" >
-          <el-input v-model.trim="params.cinemaId" :disabled="cinemaIdInput" placeholder="请输入广电下发影院编码" style="width:320px;"></el-input>
+    <el-form
+      label-width="120px"
+      label-position="left"
+      style="width:1000px;"
+      :model="params"
+      :rules="rules"
+      ref="form"
+    >
+      <el-form-item label="影院编码" prop="cinemaId">
+        <el-input
+          v-model.trim="params.cinemaId"
+          :disabled="cinemaIdInput"
+          placeholder="请输入广电下发影院编码"
+          style="width:320px;"
+        ></el-input>
       </el-form-item>
       <el-form-item label="影院名称" prop="cinemaName">
-        <el-input v-model.trim="params.cinemaName"  placeholder="请输入影院名称,最多20个字" style="width:320px;"></el-input>
+        <el-input
+          v-model.trim="params.cinemaName"
+          placeholder="请输入影院名称,最多20个字"
+          style="width:320px;"
+        ></el-input>
       </el-form-item>
       <div class="form-item-row">
         <el-form-item label="影院所在地区" prop="area">
-          <city-cascader ref="city" v-model="params.area" :rang="2" placeholder="请选择" style="width:320px;"></city-cascader>
+          <city-cascader
+            ref="city"
+            v-model="params.area"
+            :rang="2"
+            placeholder="请选择"
+            style="width:320px;"
+          ></city-cascader>
         </el-form-item>
-        <el-form-item label="影院详细地址" prop="address" >
-          <el-input v-model.trim="params.address"  placeholder="如道路,门牌号,楼栋号等" ></el-input>
+        <el-form-item label="影院详细地址" prop="address">
+          <el-input v-model.trim="params.address" placeholder="如道路,门牌号,楼栋号等"></el-input>
         </el-form-item>
       </div>
-      <el-form-item label="地址经纬度" prop="longitudeAndlatitude" >
-        <el-input v-model="params.longitudeAndlatitude"  placeholder="维度前经度后,若南纬西经值前加'-',如:-23.03" style="width:320px;"></el-input>
+      <el-form-item label="地址经纬度" prop="longitudeAndlatitude">
+        <el-input
+          v-model="params.longitudeAndlatitude"
+          placeholder="维度前经度后,若南纬西经值前加'-',如:-23.03"
+          style="width:320px;"
+        ></el-input>
         <el-button type="primary" @click="openMap()">标注</el-button>
       </el-form-item>
       <!-- <el-form-item label="影院官网" prop="website" >
         <el-input v-model.trim="params.website"   placeholder="请输入影院官网" style="width:320px;"></el-input>
-      </el-form-item> -->
+      </el-form-item>-->
       <el-form-item label="影院简介/公告" prop="summary">
-        <el-input v-model.trim="params.summary"  type="textarea"  :rows="4"  placeholder="输入影院简介/公告" ></el-input>
+        <el-input v-model.trim="params.summary" type="textarea" :rows="4" placeholder="输入影院简介/公告"></el-input>
       </el-form-item>
-      <el-form-item label="接入有效期" prop="time" >
-         <el-date-picker v-model="params.time" type="daterange"  value-format="yyyy-MM-dd"  start-placeholder="开始日期" end-placeholder="结束日期"  style="width:320px;"></el-date-picker>
+      <el-form-item label="接入有效期" prop="time">
+        <el-date-picker
+          unlink-panels
+          v-model="params.time"
+          type="daterange"
+          value-format="yyyy-MM-dd"
+          start-placeholder="开始日期"
+          end-placeholder="结束日期"
+          style="width:320px;"
+        ></el-date-picker>
       </el-form-item>
       <div class="form-item-row">
-        <el-form-item label="同步影院排期" prop="requestPlanDays" >
+        <el-form-item label="同步影院排期" prop="requestPlanDays">
           <tip content="可从影院对接的系统商处同步回最大的影片排期天数">
-            <el-input v-model.trim="params.requestPlanDays"   placeholder="请输入"><template slot="prepend">系统当前时间往后</template></el-input>
+            <el-input v-model.trim="params.requestPlanDays" placeholder="请输入">
+              <template slot="prepend">系统当前时间往后</template>
+            </el-input>
           </tip>
         </el-form-item>
-        <el-form-item label="同步排期间隔" prop="requestPlanTimes" >
+        <el-form-item label="同步排期间隔" prop="requestPlanTimes">
           <tip content="每次从影院对接的系统商处同步排期的时间间隔。">
-            <el-input v-model.trim="params.requestPlanTimes"   placeholder="请输入" ><template slot="append">分钟</template></el-input>
+            <el-input v-model.trim="params.requestPlanTimes" placeholder="请输入">
+              <template slot="append">分钟</template>
+            </el-input>
           </tip>
         </el-form-item>
       </div>
       <div class="form-item-row">
-        <el-form-item label="保留排期数据" prop="remainPlanDays" >
+        <el-form-item label="保留排期数据" prop="remainPlanDays">
           <tip content="对放映过后的影片排期在数据库内保存的时间周期。">
-            <el-input v-model.trim="params.remainPlanDays"   placeholder="请输入" ><template slot="append">天</template></el-input>
+            <el-input v-model.trim="params.remainPlanDays" placeholder="请输入">
+              <template slot="append">天</template>
+            </el-input>
           </tip>
         </el-form-item>
-        <el-form-item label="排期停售时间" prop="stopTime" >
-          <el-input v-model.trim="params.stopTime"   placeholder="请输入" ><template slot="prepend">开映前</template><template slot="append">分钟停止售卖</template></el-input>
+        <el-form-item label="排期停售时间" prop="stopTime">
+          <el-input v-model.trim="params.stopTime" placeholder="请输入">
+            <template slot="prepend">开映前</template>
+            <template slot="append">分钟停止售卖</template>
+          </el-input>
         </el-form-item>
       </div>
       <!-- <div class="form-item-row">
@@ -65,30 +108,34 @@
         <el-form-item label="影院负责人电话" prop="leadingTel" >
           <el-input v-model.trim="params.leadingTel"   placeholder="请输入影院负责人联系方式,如手机,固话,QQ" ></el-input>
         </el-form-item>
-      </div> -->
-      <el-form-item label="影院客服电话" prop="serviceTelType" >
-        <title-plane >
+      </div>-->
+      <el-form-item label="影院客服电话" prop="serviceTelType">
+        <title-plane>
           <template slot="header">
             <el-radio v-model="params.serviceTelType" label="1">统一方式</el-radio>
             <el-radio v-model="params.serviceTelType" label="2">分终端方式</el-radio>
           </template>
           <template v-if="params.serviceTelType==2">
-            <el-form-item label="微信H5" prop="wap1"  class="inner-item" >
-                  <el-input v-model.trim="params.wap1"   placeholder="请输入客服电话1" ></el-input>
-                  <el-input v-model.trim="params.wap2"   placeholder="请输入客服电话2" style="margin-left:20px"></el-input>
+            <el-form-item label="微信H5" prop="wap1" class="inner-item">
+              <el-input v-model.trim="params.wap1" placeholder="请输入客服电话1"></el-input>
+              <el-input v-model.trim="params.wap2" placeholder="请输入客服电话2" style="margin-left:20px"></el-input>
             </el-form-item>
-             <el-form-item label="移动APP" prop="app1"  class="inner-item" >
-                  <el-input v-model="params.app1"   placeholder="请输入客服电话1" ></el-input>
-                  <el-input v-model="params.app2"   placeholder="请输入客服电话2" style="margin-left:20px"></el-input>
+            <el-form-item label="移动APP" prop="app1" class="inner-item">
+              <el-input v-model="params.app1" placeholder="请输入客服电话1"></el-input>
+              <el-input v-model="params.app2" placeholder="请输入客服电话2" style="margin-left:20px"></el-input>
             </el-form-item>
-            <el-form-item label="小程序" prop="web1"  class="inner-item" >
-                  <el-input v-model="params.web1"   placeholder="请输入客服电话1" ></el-input>
-                  <el-input v-model="params.web2"   placeholder="请输入客服电话2" style="margin-left:20px"></el-input>
+            <el-form-item label="小程序" prop="web1" class="inner-item">
+              <el-input v-model="params.web1" placeholder="请输入客服电话1"></el-input>
+              <el-input v-model="params.web2" placeholder="请输入客服电话2" style="margin-left:20px"></el-input>
             </el-form-item>
           </template>
-          <el-form-item  v-else prop="serviceTel1" class="inner-item">
-            <el-input v-model.trim="params.serviceTel1"   placeholder="请输入客服电话1" ></el-input>
-            <el-input v-model.trim="params.serviceTel2"   placeholder="请输入客服电话2" style="margin-left:20px;"></el-input>
+          <el-form-item v-else prop="serviceTel1" class="inner-item">
+            <el-input v-model.trim="params.serviceTel1" placeholder="请输入客服电话1"></el-input>
+            <el-input
+              v-model.trim="params.serviceTel2"
+              placeholder="请输入客服电话2"
+              style="margin-left:20px;"
+            ></el-input>
           </el-form-item>
         </title-plane>
       </el-form-item>
@@ -99,7 +146,7 @@
         <el-form-item label="影院公众号" prop="publicNumber" >
           <pic-upload content="建议尺寸200*200" v-model="params.publicNumber" :delShow="true"></pic-upload>
         </el-form-item>
-      </div> -->
+      </div>-->
     </el-form>
     <el-dialog title="标注" :visible.sync="dialogVisible">
       <div style="margin-bottom:20px;">
@@ -122,7 +169,10 @@ export default {
   data() {
     const serviceTelValidator = (type, serviceTelType = '2') => {
       return (rule, value, cb) => {
-        if (this.params.serviceTelType === serviceTelType && (!this.params[type + '1'] && !this.params[type + '2'])) {
+        if (
+          this.params.serviceTelType === serviceTelType &&
+          (!this.params[type + '1'] && !this.params[type + '2'])
+        ) {
           cb(new Error('至少填写一个客服电话'))
         }
         cb()
@@ -148,7 +198,7 @@ export default {
       cb()
     }
     return {
-      id:'',
+      id: '',
       cinemaIdInput: false,
       mapAddress: '',
       dialogVisible: false,
@@ -181,23 +231,60 @@ export default {
         // latitude: '23.03',
         // longitude: '113.75'
       },
-      serviceTelParams: {
-
-      },
-      serviceTelRules: {
-
-      },
+      serviceTelParams: {},
+      serviceTelRules: {},
       rules: {
-        cinemaId: { required:true, validator: cinemaIdValidator, trigger: ['change', 'blur']},
-        cinemaName: { required: true, max: 20, message: '请输入影院名称,最多20个字', trigger: 'blur' },
-        area: { required: true, message: '请选择所在地区', trigger: ['blur', 'change'] },
-        address: { required: true, message: '请输入影院详细地址', trigger: 'blur' },
-        longitudeAndlatitude: { required: true, validator: longitudeAndlatitudeValidator, trigger: 'blur' },
-        time: { required: true, message: '请选择接入有效期', trigger: ['change', 'blur'] },
-        requestPlanDays: { required: true, message: '请输入同步影院排期', trigger: 'blur' },
-        requestPlanTimes: { required: true, message: '请输入同步排期间隔', trigger: 'blur' },
-        remainPlanDays: { required: true, message: '请输入保留排期数据', trigger: 'blur' },
-        stopTime: { required: true, message: '请输入排期停售时间', trigger: 'blur' },
+        cinemaId: {
+          required: true,
+          validator: cinemaIdValidator,
+          trigger: ['change', 'blur']
+        },
+        cinemaName: {
+          required: true,
+          max: 20,
+          message: '请输入影院名称,最多20个字',
+          trigger: 'blur'
+        },
+        area: {
+          required: true,
+          message: '请选择所在地区',
+          trigger: ['blur', 'change']
+        },
+        address: {
+          required: true,
+          message: '请输入影院详细地址',
+          trigger: 'blur'
+        },
+        longitudeAndlatitude: {
+          required: true,
+          validator: longitudeAndlatitudeValidator,
+          trigger: 'blur'
+        },
+        time: {
+          required: true,
+          message: '请选择接入有效期',
+          trigger: ['change', 'blur']
+        },
+        requestPlanDays: {
+          required: true,
+          message: '请输入同步影院排期',
+          trigger: 'blur'
+        },
+        requestPlanTimes: {
+          required: true,
+          message: '请输入同步排期间隔',
+          trigger: 'blur'
+        },
+        remainPlanDays: {
+          required: true,
+          message: '请输入保留排期数据',
+          trigger: 'blur'
+        },
+        stopTime: {
+          required: true,
+          message: '请输入排期停售时间',
+          trigger: 'blur'
+        }
         // summary: { required: true, min:0, max: 100, message: '请输入影院公告,最多100个字', trigger: 'blur' },
         // businessName: { required: true, message: '请输入商务对接人', trigger: 'blur' },
         // businessTel: { required: true, message: '请输入商务对接人电话', trigger: 'blur' },
@@ -223,7 +310,10 @@ export default {
     },
     setTelStr(params, type) {
       if (params.serviceTel) {
-        const arr = type === 'serviceTel' ? params.serviceTel.split(',') : params.serviceTel[type].split(',')
+        const arr =
+          type === 'serviceTel'
+            ? params.serviceTel.split(',')
+            : params.serviceTel[type].split(',')
         if (arr[0]) {
           params[type + '1'] = arr[0]
         }
@@ -234,7 +324,7 @@ export default {
     },
     getResult() {
       return new Promise((resolve, reject) => {
-        this.$refs.form.validate(async(valid) => {
+        this.$refs.form.validate(async valid => {
           if (valid) {
             let params = Object.assign({}, this.params)
             if (params.serviceTelType === '2') {
@@ -266,7 +356,9 @@ export default {
     setResult(params) {
       params.time = [params.startTime, params.endTime]
       params.longitudeAndlatitude = params.longitude + ',' + params.latitude
-      params.area = [params.provinceId, params.cityId, params.countyId].filter(item=>item)
+      params.area = [params.provinceId, params.cityId, params.countyId].filter(
+        item => item
+      )
 
       if (params.serviceTelType === '2') {
         this.setTelStr(params, 'wap')
@@ -280,9 +372,9 @@ export default {
       } else {
         params.copyTypeRadio = '1'
       }
-      if (params.copyTypeConfig && (params.copyTypeConfig instanceof Array)) {
+      if (params.copyTypeConfig && params.copyTypeConfig instanceof Array) {
         // params.copyTypeConfig.forEach(e => { e.standard = e.standard.split(',') })
-      } else{
+      } else {
         params.copyTypeConfig = []
       }
 
@@ -303,8 +395,10 @@ export default {
     baiduMap() {
       const _this = this
       const map = new window.BMap.Map('Bmap')
-      const point = _this.params.longitude ?  new window.BMap.Point(_this.params.longitude, _this.params.latitude) : new window.BMap.Point(119.300526, 26.067815)
-           
+      const point = _this.params.longitude
+        ? new window.BMap.Point(_this.params.longitude, _this.params.latitude)
+        : new window.BMap.Point(119.300526, 26.067815)
+
       const marker = new window.BMap.Marker(point) // 创建标注
 
       map.setDefaultCursor('crosshair') // 设置地图默认的鼠标指针样式
@@ -315,13 +409,15 @@ export default {
 
       map.addOverlay(marker) // 将标注添加到地图中
 
-      map.addEventListener("click", function(e) {
-        map.clearOverlays(); //添加标注前清空以前的所有标注
-        var marker = new window.BMap.Marker(new window.BMap.Point(e.point.lng, e.point.lat)); // 创建标注
-        map.addOverlay(marker);
+      map.addEventListener('click', function(e) {
+        map.clearOverlays() //添加标注前清空以前的所有标注
+        var marker = new window.BMap.Marker(
+          new window.BMap.Point(e.point.lng, e.point.lat)
+        ) // 创建标注
+        map.addOverlay(marker)
         marker.setAnimation(BMAP_ANIMATION_BOUNCE)
         _this.longitudeAndlatitude = e.point.lng + ',' + e.point.lat
-      });
+      })
     },
     searchMap() {
       const _this = this
@@ -332,7 +428,7 @@ export default {
       localSearch.setSearchCompleteCallback(function(searchResult) {
         var poi = searchResult.getPoi(0)
 
-        if (typeof (poi) === 'undefined') {
+        if (typeof poi === 'undefined') {
           _this.$message.warning('没有找到，请重新填写或者手动选择')
           const point = new window.BMap.Point(119.300526, 26.067815)
           const marker = new window.BMap.Marker(point)
@@ -344,7 +440,9 @@ export default {
         }
 
         map.enableScrollWheelZoom() // 启用滚轮放大缩小，默认禁用。
-        var marker = new window.BMap.Marker(new window.BMap.Point(poi.point.lng, poi.point.lat))
+        var marker = new window.BMap.Marker(
+          new window.BMap.Point(poi.point.lng, poi.point.lat)
+        )
         map.addOverlay(marker)
         marker.setAnimation(BMAP_ANIMATION_BOUNCE)
         map.centerAndZoom(poi.point, 15)
@@ -352,21 +450,22 @@ export default {
       })
       localSearch.search(keyword)
       localSearch.enableAutoViewport()
-      map.addEventListener("click", function(e) {
-        map.clearOverlays(); //添加标注前清空以前的所有标注
+      map.addEventListener('click', function(e) {
+        map.clearOverlays() //添加标注前清空以前的所有标注
         map.enableScrollWheelZoom() // 启用滚轮放大缩小，默认禁用。
-        var marker = new window.BMap.Marker(new window.BMap.Point(e.point.lng, e.point.lat)); // 创建标注
+        var marker = new window.BMap.Marker(
+          new window.BMap.Point(e.point.lng, e.point.lat)
+        ) // 创建标注
 
-        map.addOverlay(marker);
+        map.addOverlay(marker)
         marker.setAnimation(BMAP_ANIMATION_BOUNCE)
         _this.longitudeAndlatitude = e.point.lng + ',' + e.point.lat
-      });
+      })
     },
-    mapLabel () {
+    mapLabel() {
       this.dialogVisible = false
       this.params.longitudeAndlatitude = this.longitudeAndlatitude
     }
-
   },
   async created() {
     if (this.$route.query.id) {
@@ -377,13 +476,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 </style>
 <style lang="scss">
-.cinema-base-info-box{
-  .inner-item{
+.cinema-base-info-box {
+  .inner-item {
     margin-bottom: 20px !important;
-    .el-form-item__content{
+    .el-form-item__content {
       display: flex;
     }
   }

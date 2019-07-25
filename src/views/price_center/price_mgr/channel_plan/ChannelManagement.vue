@@ -10,7 +10,7 @@
                 <el-input v-model="query.filmName" clearable placeholder="请输入影片名称" style="width:200px;"></el-input>
               </el-form-item>
               <el-form-item label="放映时间">
-                <el-date-picker v-model="query.time" type="daterange"  value-format="yyyy-MM-dd"   start-placeholder="放映开始日期" end-placeholder="放映结束日期"></el-date-picker>
+                <el-date-picker unlink-panels v-model="query.time" type="daterange"  value-format="yyyy-MM-dd"   start-placeholder="放映开始日期" end-placeholder="放映结束日期"></el-date-picker>
               </el-form-item>
               <el-form-item label="影厅">
                 <remote-select v-model="query.hallId" clearable placeholder="请选择影厅" :action="'/systemApi/cinemaHall/getList'" :query="{ cinemaId: manage.cinemaId }"></remote-select>

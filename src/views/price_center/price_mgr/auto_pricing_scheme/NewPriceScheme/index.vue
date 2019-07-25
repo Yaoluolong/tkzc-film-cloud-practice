@@ -20,6 +20,7 @@
       </el-form-item>
       <el-form-item label="有效期" prop="startDate">
         <el-date-picker
+          unlink-panels
           v-model="baseDateRange"
           type="daterange"
           size="small"

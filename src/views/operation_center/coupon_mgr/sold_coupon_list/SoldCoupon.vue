@@ -38,7 +38,7 @@
             v-model="couponInfo.customer"
             v-if="couponInfo.customer || !$route.query.orderNo"
             :isAddNew="false"
-          ></customer-selector> -->
+          ></customer-selector>-->
         </el-form-item>
         <el-form-item label="业务员所属公司:" prop="companyId">
           <zm-select
@@ -109,6 +109,7 @@
           </el-form-item>
           <el-form-item label="电影券有效期:" prop="time">
             <el-date-picker
+              unlink-panels
               v-model="couponInfo.time"
               type="daterange"
               value-format="yyyy-MM-dd"
@@ -212,6 +213,7 @@
         </el-form-item>
         <el-form-item label="不可用时段区间" prop="time" v-if="programInfo.dateLimitType==='2'">
           <el-date-picker
+            unlink-panels
             v-model="programInfo.time"
             type="daterange"
             value-format="yyyy-MM-dd"
@@ -873,7 +875,9 @@ export default {
       }
     },
     'programInfo.templateId'(val) {
-      if (val === undefined || val === null) { this.$set(this.programInfo, 'templateId', ' ') }
+      if (val === undefined || val === null) {
+        this.$set(this.programInfo, 'templateId', ' ')
+      }
     }
   },
   mounted() {
@@ -1229,7 +1233,9 @@ export default {
     },
     // 外部申请时请求info数据
     async getApplyInfo() {
-      const res = this.$route.query.applyId ? await getCouponApplyInfo({ id: this.$route.query.applyId }) : {}
+      const res = this.$route.query.applyId
+        ? await getCouponApplyInfo({ id: this.$route.query.applyId })
+        : {}
       // 只给对应字段防止出错
       this.couponInfo = {
         resellerCouponApplicationId: this.$route.query.applyId || '', // 申请单id

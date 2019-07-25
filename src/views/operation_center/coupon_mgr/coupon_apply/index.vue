@@ -35,7 +35,7 @@
         ></remote-select>
       </el-form-item>
       <el-form-item label="申请状态">
-          <remote-select
+        <remote-select
           clearable
           v-model="query.status"
           showAllOption
@@ -47,6 +47,7 @@
       </el-form-item>
       <el-form-item label="申请时间">
         <el-date-picker
+          unlink-panels
           v-model="orderTimeRange"
           type="daterange"
           value-format="yyyy-MM-dd"
@@ -62,10 +63,20 @@
     </el-form>
     <zm-table ref="multipleTable" :columns="columns" :fetch="loadList" :table-params="tableParams"></zm-table>
     <zm-panel title="查看申请详情" :visible.sync="detailPanelShow" @change="closeDetaliPanel">
-      <detail ref="applyDetail" :id="editId" :detail-params="detailParams" @save-after="saveAfter" @cancel="closeDetaliPanel"></detail>
+      <detail
+        ref="applyDetail"
+        :id="editId"
+        :detail-params="detailParams"
+        @save-after="saveAfter"
+        @cancel="closeDetaliPanel"
+      ></detail>
       <div slot="footer" class="footer-button">
         <el-button @click="closeDetaliPanel">{{+detailParams.status!==0?'关闭':'取消'}}</el-button>
-        <el-button type="primary" @click="onOperateClick('subApply')" v-if="+detailParams.status===0">确定</el-button>
+        <el-button
+          type="primary"
+          @click="onOperateClick('subApply')"
+          v-if="+detailParams.status===0"
+        >确定</el-button>
       </div>
     </zm-panel>
   </div>

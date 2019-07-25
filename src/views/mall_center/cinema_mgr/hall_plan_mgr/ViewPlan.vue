@@ -27,6 +27,7 @@
       </el-form-item>
       <el-form-item label="放映日期">
         <el-date-picker
+          unlink-panels
           v-model="query.time"
           type="datetimerange"
           value-format="yyyy-MM-dd HH:mm"
@@ -48,7 +49,7 @@
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" @click="refreshTable">查询</el-button>
         <el-button type="warning" icon="el-icon-refresh" @click="updatePlan">更新影院排期</el-button>
-        <el-button type="warning"  @click="exportData">导出排期</el-button>
+        <el-button type="warning" @click="exportData">导出排期</el-button>
       </el-form-item>
     </el-form>
     <page-table ref="table" index :query="query" :fetch="queryTable">
