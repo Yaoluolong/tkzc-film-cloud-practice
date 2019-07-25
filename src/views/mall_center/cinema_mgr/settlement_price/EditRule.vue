@@ -1,53 +1,90 @@
 <template>
   <div>
-    <el-card shadow='never'>
+    <el-card shadow="never">
       <el-form inline ref="form" :model="params" :rules="rules">
-            <el-form-item label="规则名称" prop="name">
-                <el-input v-model.trim="params.name" style="width:200px" placeholder="输入影院结算价方案名称"></el-input>
-            </el-form-item> <br>
-            <el-form-item label="规则时间" prop="time" required>
-                <el-date-picker v-model="params.time" type="daterange"  value-format="yyyy-MM-dd"
-                  start-placeholder="开始日期" end-placeholder="结束日期"  style="width:320px;"></el-date-picker>
-            </el-form-item> <br>
-            <el-form-item label="结算规则" prop="type">
-                  <el-select @change="checkCinemaList" v-model="params.type">
-                      <el-option :label="'按影厅'" :value="'1'"></el-option>
-                      <el-option :label="'按制式'" :value="'2'"></el-option>
-                  </el-select>
-            </el-form-item>
-          <rule-hall ref="ruleHall" :hallParam="hallParam" v-if="params.type === '1'" :cinemaList="cinemaList"></rule-hall>
-          <rule-standard ref="ruleStandard" :standardParam="standardParam" v-if="params.type === '2'" :cinemaList="cinemaList"></rule-standard> <br>
-          <el-form-item label="特殊结算价" required>
-            <tip content="特殊结算价是说再特殊时期在原有结算价基础上加价结算！">
-              <el-radio-group v-model="params.isSpecialPrice">
-                <el-radio :label="'1'">是</el-radio>
-                <el-radio :label="'0'">否</el-radio>
-              </el-radio-group>
-              </tip>
-          </el-form-item>  <br>
-          <el-form-item v-if="params.isSpecialPrice === '1'" label="特殊规则时间" required prop="specialTime">
-            <el-date-picker v-model="params.specialTime" type="daterange"  value-format="yyyy-MM-dd"
-                      start-placeholder="开始日期" end-placeholder="结束日期"  style="width:320px;"></el-date-picker>
-          </el-form-item>  <br>
-          
-          <el-form-item v-if="params.isSpecialPrice === '1'" label="规则结算规则" prop="specialType_specialMoney">
-            <span style="display:flex">
-                  结算价: &nbsp;
-                  <!-- <el-from-item prop="specialType"> -->
-                    <el-select v-model="params.specialType" style="width:100px">
-                      <el-option :value="'1'" label="增加"></el-option>
-                      <el-option :value="'2'" label="减少"></el-option>
-                    </el-select> &nbsp;&nbsp;&nbsp;
-                  <!-- </el-from-item> -->
-                  <!-- <el-from-item prop="specialMoney"> -->
-                    <el-input v-model.trim="params.specialMoney" style="width:100px" placeholder="0.00"></el-input> &nbsp;&nbsp;&nbsp;            
-                  <!-- </el-from-item> -->
-              </span> 
-          </el-form-item> 
-        </el-form>
-        <slot></slot>
+        <el-form-item label="规则名称" prop="name">
+          <el-input v-model.trim="params.name" style="width:200px" placeholder="输入影院结算价方案名称"></el-input>
+        </el-form-item>
+        <br />
+        <el-form-item label="规则时间" prop="time" required>
+          <el-date-picker
+            unlink-panels
+            v-model="params.time"
+            type="daterange"
+            value-format="yyyy-MM-dd"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期"
+            style="width:320px;"
+          ></el-date-picker>
+        </el-form-item>
+        <br />
+        <el-form-item label="结算规则" prop="type">
+          <el-select @change="checkCinemaList" v-model="params.type">
+            <el-option :label="'按影厅'" :value="'1'"></el-option>
+            <el-option :label="'按制式'" :value="'2'"></el-option>
+          </el-select>
+        </el-form-item>
+        <rule-hall
+          ref="ruleHall"
+          :hallParam="hallParam"
+          v-if="params.type === '1'"
+          :cinemaList="cinemaList"
+        ></rule-hall>
+        <rule-standard
+          ref="ruleStandard"
+          :standardParam="standardParam"
+          v-if="params.type === '2'"
+          :cinemaList="cinemaList"
+        ></rule-standard>
+        <br />
+        <el-form-item label="特殊结算价" required>
+          <tip content="特殊结算价是说再特殊时期在原有结算价基础上加价结算！">
+            <el-radio-group v-model="params.isSpecialPrice">
+              <el-radio :label="'1'">是</el-radio>
+              <el-radio :label="'0'">否</el-radio>
+            </el-radio-group>
+          </tip>
+        </el-form-item>
+        <br />
+        <el-form-item
+          v-if="params.isSpecialPrice === '1'"
+          label="特殊规则时间"
+          required
+          prop="specialTime"
+        >
+          <el-date-picker
+            unlink-panels
+            v-model="params.specialTime"
+            type="daterange"
+            value-format="yyyy-MM-dd"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期"
+            style="width:320px;"
+          ></el-date-picker>
+        </el-form-item>
+        <br />
+
+        <el-form-item
+          v-if="params.isSpecialPrice === '1'"
+          label="规则结算规则"
+          prop="specialType_specialMoney"
+        >
+          <span style="display:flex">
+            结算价: &nbsp;
+            <!-- <el-from-item prop="specialType"> -->
+            <el-select v-model="params.specialType" style="width:100px">
+              <el-option :value="'1'" label="增加"></el-option>
+              <el-option :value="'2'" label="减少"></el-option>
+            </el-select>&nbsp;&nbsp;&nbsp;
+            <!-- </el-from-item> -->
+            <!-- <el-from-item prop="specialMoney"> -->
+            <el-input v-model.trim="params.specialMoney" style="width:100px" placeholder="0.00"></el-input>&nbsp;&nbsp;&nbsp;
+            <!-- </el-from-item> -->
+          </span>
+        </el-form-item>
+      </el-form>
+      <slot></slot>
     </el-card>
-      
   </div>
 </template>
 
@@ -89,7 +126,11 @@ export default {
         time: { validator: checkTime, trigger: 'blur' },
         type: { required: true, message: '请选择结算规则', trigger: 'blur' },
         specialTime: { validator: checkTime, trigger: 'blur' },
-        specialType_specialMoney: { validator: checkSpecialTypeSpecialMoney, required: true, trigger: 'blur' }
+        specialType_specialMoney: {
+          validator: checkSpecialTypeSpecialMoney,
+          required: true,
+          trigger: 'blur'
+        }
         // specialType: { required: true, message: '请选择结算规则', trigger: 'blur' },
         // specialMoney: { required: true, message: '请输入结算价', trigger: 'blur' }
       },
@@ -106,12 +147,8 @@ export default {
       standardParam: {} // 结算规则为按制式相关参数  用于传入组件中
     }
   },
-  mounted() {
-
-  },
-  computed: {
-
-  },
+  mounted() {},
+  computed: {},
   watch: {
     cinemaList: {
       handler: function(val, oldVal) {
@@ -150,7 +187,7 @@ export default {
             this.params = Object.assign(this.params, hallParam)
             this.params.typeName = '按影厅结算'
           } else if (this.params.type === '2') {
-            const standardParam = await this.$refs.ruleStandard.getReturn()// 结算规则为按制式相关参数
+            const standardParam = await this.$refs.ruleStandard.getReturn() // 结算规则为按制式相关参数
             this.params = Object.assign(this.params, standardParam)
             this.params.typeName = '按制式结算'
           }
@@ -169,8 +206,9 @@ export default {
           }
         })
       })
-    }, initData() {
-    // 根据传进来的rule显示页面
+    },
+    initData() {
+      // 根据传进来的rule显示页面
       if (this.rule) {
         this.params.time = []
         this.params.time[0] = this.rule.startTime

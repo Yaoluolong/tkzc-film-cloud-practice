@@ -3,6 +3,7 @@
   <el-form :model="form" :rules="itemRules" ref="form">
     <el-form-item prop="priceDateRange">
       <el-date-picker
+        unlink-panels
         v-model="form.priceDateRange"
         type="daterange"
         size="small"

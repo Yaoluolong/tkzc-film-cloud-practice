@@ -37,12 +37,13 @@
         ></city-cascader>
       </el-form-item>
       <!-- <el-form-item label="投放时间:" prop="time" >
-            <el-date-picker v-model="time" type="daterange"  value-format="yyyy-MM-dd"
+            <el-date-picker unlink-panels v-model="time" type="daterange"  value-format="yyyy-MM-dd"
                     start-placeholder="开始日期" end-placeholder="结束日期"  style="width:320px;"></el-date-picker>
       </el-form-item>-->
       <div class="timeStyle">
         <el-form-item label="投放时间:" prop="time" style="display:inline-block;width:320px;">
           <el-date-picker
+            unlink-panels
             v-model="time"
             type="daterange"
             value-format="yyyy-MM-dd"

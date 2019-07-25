@@ -44,7 +44,7 @@
                   {{params.cardInfo.unitPrice}} 元，折合卡内点数: {{ params.cardInfo.unitPrice * params.cardInfo.scalePoint /params.cardInfo.scalePrice}}
                 </el-form-item>
                 <el-form-item label="电影卡有效期:" prop="time" >
-                    <!-- <el-date-picker v-model="params.cardInfo.time" type="daterange"  value-format="yyyy-MM-dd"
+                    <!-- <el-date-picker unlink-panels v-model="params.cardInfo.time" type="daterange"  value-format="yyyy-MM-dd"
                             start-placeholder="开始日期" end-placeholder="结束日期"  style="width:320px;"></el-date-picker> -->
                     {{params.cardInfo.time[0]}} 至 {{params.cardInfo.time[1]}}
                 </el-form-item>

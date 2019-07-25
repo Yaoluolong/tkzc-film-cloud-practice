@@ -6,6 +6,7 @@
       </el-form-item>
       <el-form-item label="销售时间">
         <el-date-picker
+          unlink-panels
           v-model="query.time"
           style="width:230px;"
           type="daterange"
@@ -100,7 +101,13 @@
         prop="operator"
         show-overflow-tooltip
       ></el-table-column>
-      <el-table-column min-width="100" label="客户名称" align="center" prop="customerName" show-overflow-tooltip></el-table-column>
+      <el-table-column
+        min-width="100"
+        label="客户名称"
+        align="center"
+        prop="customerName"
+        show-overflow-tooltip
+      ></el-table-column>
       <el-table-column
         min-width="180"
         label="销售时间"
@@ -180,7 +187,7 @@
         </template>
       </el-table-column>
     </page-table>
-   <export-dialog v-model="exportVisible" v-if="exportVisible" :export-params="exportParams"></export-dialog>
+    <export-dialog v-model="exportVisible" v-if="exportVisible" :export-params="exportParams"></export-dialog>
   </div>
 </template>
 
