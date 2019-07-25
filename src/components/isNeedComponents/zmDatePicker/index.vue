@@ -105,7 +105,8 @@ export default {
   methods: {
     changeDateRange(val) {
       // if (!val) {
-      this.queryParams.dateType = ''
+      this.queryParams.dateType = val ? '' : 'all'
+      this.queryParams.joinTime = val || ['', '']
       // }
       this.$emit('on-change', this.queryParams)
     },
