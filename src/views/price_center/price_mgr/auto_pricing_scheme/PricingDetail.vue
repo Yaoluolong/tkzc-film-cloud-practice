@@ -6,7 +6,7 @@
       <el-form-item label="有效期:">{{info.startDate}}&nbsp;&nbsp;-&nbsp;&nbsp;{{info.endDate}}</el-form-item>
       <el-form-item label="系统商:">{{info.interfaceName}}</el-form-item>
       <el-form-item label="区域:" v-if="+info.programType===2">{{info.cinemaGroupName||'全部'}}</el-form-item>
-      <el-form-item label="影片:" v-if="+info.programType===2">{{info.filmName}}</el-form-item>
+      <el-form-item label="影片:" v-if="+info.programType===2">{{+info.filmType===0?'全部':info.filmName}}</el-form-item>
       <el-form-item label="制式:" v-if="+info.programType===2">{{info.copyType.join('、')}}</el-form-item>
     </el-form>
     <el-form label-width="90px" v-for="(item,index) in info.rule" :key="index">
