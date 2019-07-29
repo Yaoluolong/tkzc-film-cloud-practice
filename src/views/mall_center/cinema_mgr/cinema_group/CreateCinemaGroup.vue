@@ -299,7 +299,12 @@ export default {
       // params.cinemaId = params.cinemaList.map(e => e.value).join(",");
       // params.interfaceTypeId = this.query.interfaceId;
       const chooseParams = { ...this.chooseParams.searchParam }
-      chooseParams.area = this.chooseParams.area
+      chooseParams.area = this.chooseParams.area || ''
+      let sum = 0
+      for (const key in chooseParams) {
+        sum = chooseParams[key] && chooseParams[key].length ? sum + 1 : sum
+      }
+      const searchParam = sum ? chooseParams : {}
       const params = {
         name: this.params.name,
         code: this.chooseParams.code,
@@ -307,8 +312,8 @@ export default {
         cinemaType: this.chooseParams.cinemaType,
         searchParam:
           +this.chooseParams.cinemaType === 1 &&
-          JSON.stringify(chooseParams) !== '{}'
-            ? JSON.stringify(chooseParams)
+          JSON.stringify(searchParam) !== '{}'
+            ? JSON.stringify(searchParam)
             : '',
         interfaceTypeId: this.chooseParams.searchParam.interfaceId || '-1',
         cinemaNum: this.cinemaNum,
