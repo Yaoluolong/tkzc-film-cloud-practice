@@ -8,7 +8,7 @@
       <el-form-item label="用户名">
         <el-input v-model="query.userName" clearable placeholder="请输入用户名" style="width:200px;"></el-input>
       </el-form-item>
-      <el-form-item label="角色类型">
+      <el-form-item label="角色类型" v-if="+activeTab===1">
         <remote-select
           v-model="query.roleId"
           clearable
@@ -16,6 +16,13 @@
           action="/systemApi/systemAccountRole/getList"
           style="width:200px;"
         ></remote-select>
+      </el-form-item>
+       <el-form-item label="用户类型" v-if="+activeTab===2">
+         <el-select v-model="query.roleId" clearable placeholder="请选择用户类型" class="w200">
+           <el-option label="卡券分销商" value="1"></el-option>
+           <el-option label="渠道商户" value="2"></el-option>
+           <el-option label="影院" value="3"></el-option>
+         </el-select>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" @click="refreshTable">查询</el-button>
@@ -30,7 +37,7 @@
       <el-table-column min-width="100" label="用户名" align="center" prop="userName" show-overflow-tooltip></el-table-column>
       <el-table-column min-width="100" label="姓名" align="center" prop="realName"></el-table-column>
       <el-table-column min-width="140" label="邮箱地址" align="center" prop="email" show-overflow-tooltip></el-table-column>
-      <el-table-column min-width="120" label="所属角色" align="center" prop="roleName"></el-table-column>
+      <el-table-column min-width="120" :label="+activeTab===1?'所属角色':'用户类型'" align="center" prop="roleName"></el-table-column>
       <el-table-column min-width="160" label="添加时间" align="center" prop="createTime" show-overflow-tooltip></el-table-column>
       <el-table-column min-width="160" label="最后登录" align="center" prop="loginTime"></el-table-column>
       <el-table-column width="80" label="是否启用" align="center" prop="status" fixed="right">

@@ -72,7 +72,7 @@
         </el-form-item>
         <el-form-item label="销售总额:" prop="amount">
           <el-input v-model.trim="cardInfo.amount" placeholder="0.00" style="width:100px;"></el-input>元
-          <span style="margin-left:20px;color:gray">只能是数值，且必须大于0</span>
+          <span style="margin-left:20px;color:gray">只能是数值，且必须大于等于0，限制两位小数</span>
         </el-form-item>
         <div>
           <el-form-item label="销售比例:" prop="scalePoint" style="display:inline-block">
@@ -327,19 +327,19 @@ export default {
       })
       cb()
     }
-    const betweenInt = (type, min, max) => (rule, v, cb) => {
-      let isBetween = false
-      let isInt = false
-      if (type === 1) {
-        isBetween = v > min
-        isInt = /^[0-9]+$/.test(v)
-      } else if (type === 2) {
-        isBetween = v >= min && v <= max
-        isInt = true
-      }
-      if (isBetween && isInt) return cb()
-      return cb(new Error())
-    }
+    // const betweenInt = (type, min, max) => (rule, v, cb) => {
+    //   let isBetween = false
+    //   let isInt = false
+    //   if (type === 1) {
+    //     isBetween = v > min
+    //     isInt = /^[0-9]+$/.test(v)
+    //   } else if (type === 2) {
+    //     isBetween = v >= min && v <= max
+    //     isInt = true
+    //   }
+    //   if (isBetween && isInt) return cb()
+    //   return cb(new Error())
+    // }
     return {
       step: 1,
       stepOfEdit: 0,
@@ -391,8 +391,9 @@ export default {
         amount: [
           { required: true, message: '请输入销售总额', trigger: 'blur' },
           {
-            validator: betweenInt(2, 0, 100000000),
-            message: '销售总额须大于0',
+            pattern: /^[0-9]+(.[0-9]{1,2})?$/,
+            // validator: betweenInt(2, 0, 100000000),
+            message: '销售总额只能是小数点后保留2位的正数',
             trigger: 'blur'
           }
         ],

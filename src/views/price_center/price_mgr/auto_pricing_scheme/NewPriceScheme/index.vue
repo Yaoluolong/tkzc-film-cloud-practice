@@ -38,6 +38,7 @@
           v-model="info.interfaceId"
           :select-type="'interfaceType'"
           :default-selection="defaultInterfaceType"
+          :action-query="{dockType:1}"
           class="w400"
         ></common-select>
       </el-form-item>
