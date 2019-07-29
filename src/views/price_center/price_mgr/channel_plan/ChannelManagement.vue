@@ -30,24 +30,26 @@
             <el-table-column type="selection" :selectable="selectable" align="center" reserve-selection width="40"></el-table-column>
             <el-table-column min-width="120"  label="还可调价范围" align="center" prop="modifyRange" show-overflow-tooltip></el-table-column>
             <el-table-column min-width="180"  label="影片名称" align="center" prop="filmName" show-overflow-tooltip></el-table-column>
-            <el-table-column width="80"  label="排期编码" align="center" prop="featureAppNo"></el-table-column>
-            <el-table-column width="140"  label="放映时间" align="center" prop="startTime"></el-table-column>
+            <el-table-column min-width="80"  label="排期编码" align="center" prop="featureAppNo"></el-table-column>
+            <el-table-column min-width="140"  label="放映时间" align="center" prop="startTime"></el-table-column>
             <el-table-column min-width="120"  label="放映影厅" align="center" prop="hallName" show-overflow-tooltip></el-table-column>
-            <el-table-column width="80"  label="放映制式" align="center" prop="copyType"></el-table-column>
-            <el-table-column width="120"  label="影片最低价" align="center" prop="lowestPrice" :formatter="priceFormatter"></el-table-column>
-            <el-table-column width="120"  label="影院结算票价" align="center" prop="cinemaSettleTicketPrice"  :formatter="priceFormatter"></el-table-column>
-            <el-table-column width="120"  label="影院结算服务费" align="center" prop="cinemaSettleServicePrice"  :formatter="priceFormatter"></el-table-column>
+            <el-table-column min-width="80"  label="放映制式" align="center" prop="copyType"></el-table-column>
+            <el-table-column min-width="120"  label="影片最低价" align="center" prop="lowestPrice" :formatter="priceFormatter"></el-table-column>
+            <el-table-column min-width="120"  label="影院结算票价" align="center" prop="cinemaSettleTicketPrice"  :formatter="priceFormatter"></el-table-column>
+            <el-table-column min-width="120"  label="影院结算服务费" align="center" prop="cinemaSettleServicePrice"  :formatter="priceFormatter"></el-table-column>
             <!-- <el-table-column width="120"  label="营收票价" align="center" prop="revenueTicketPrice"  :formatter="priceFormatter"></el-table-column>
             <el-table-column width="120"  label="营收服务费" align="center" prop="revenueServiceFee"  :formatter="priceFormatter"></el-table-column>
             <el-table-column min-width="100"  label="调整价格" align="center" prop="modifyStr" show-overflow-tooltip></el-table-column>
             <el-table-column width="120"  label="当前影院票价" align="center" prop="settlementPrice" :formatter="priceFormatter"></el-table-column>
             <el-table-column width="120"  label="当前影院服务费" align="center" prop="servicePrice"  :formatter="priceFormatter"></el-table-column> -->
-            <el-table-column width="120"  label="价格方案内票价" align="center" prop="settlementTicketPrice"  :formatter="priceFormatter"></el-table-column>
-            <el-table-column width="120"  label="价格方案内影院服务费" align="center" prop="revenueServiceFee"  :formatter="priceFormatter"></el-table-column>
-            <el-table-column width="120"  label="票价调整额" align="center" prop="modifyTicketPrice"  :formatter="priceFormatter"></el-table-column>
-            <el-table-column width="120"  label="服务费调整额" align="center" prop="mobifyServicePrice"  :formatter="priceFormatter"></el-table-column>
+            <el-table-column min-width="120"  label="价格方案内票价" align="center" prop="settlementTicketPrice"  :formatter="priceFormatter"></el-table-column>
+            <el-table-column min-width="120"  label="价格方案内影院服务费" align="center" prop="revenueServiceFee"  :formatter="priceFormatter"></el-table-column>
+            <el-table-column min-width="120"  label="智能定价调整价格" align="center" prop="autoServicePrice"  :formatter="priceFormatter"></el-table-column>
+            <el-table-column min-width="120"  label="技术服务费" align="center" prop="technicalServicePrice"  :formatter="priceFormatter"></el-table-column>
+            <el-table-column min-width="120"  label="票价调整额" align="center" prop="modifyTicketPrice"  :formatter="priceFormatter"></el-table-column>
+            <el-table-column min-width="120"  label="服务费调整额" align="center" prop="mobifyServicePrice"  :formatter="priceFormatter"></el-table-column>
             
-            <el-table-column width="100"  label="销售状态" align="center" prop="statusName">
+            <el-table-column min-width="100"  label="销售状态" align="center" prop="statusName">
               <template  slot-scope="{row}"><el-tag :type="row.status=='1'? 'success':'danger'">{{row.status=='1'? '已上架':'已下架'}}</el-tag></template>
             </el-table-column>
             
