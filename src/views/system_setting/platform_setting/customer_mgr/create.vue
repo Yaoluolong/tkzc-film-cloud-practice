@@ -2,7 +2,7 @@
    <el-dialog
     width="500px"
     append-to-body
-    :title="title+'公司'"
+    :title="title+'客户'"
     :close-on-click-modal="false"
     :visible="value"
     class="dialogContainer"
