@@ -12,7 +12,7 @@
         ></remote-select>
         <el-input
           class="vm w250"
-          v-model="query[orderStatus!=='-1'?orderStatus:'empty']"
+          v-model="query[orderStatus&&orderStatus!=='-1'?orderStatus:'empty']"
           placeholder="请输入关键字"
         ></el-input>
       </el-form-item>
