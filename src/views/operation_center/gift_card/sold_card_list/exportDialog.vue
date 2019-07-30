@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { exportCardDetail, getUnsoldExportCardField } from '@/api/operationCenter'
+import { exportCardOrderDetail, getUnsoldExportCardField } from '@/api/operationCenter'
 import zmCheckbox from '@/components/isNeedComponents/zmCheckbox'
 export default {
   components: { zmCheckbox },
@@ -104,7 +104,7 @@ export default {
         mobile: this.agur.mobile,
         remark: this.agur.remark
       }
-      await exportCardDetail(agur)
+      await exportCardOrderDetail(agur)
       this.$router.push({ path: '/system_setting/task_mgr/task_mgr', query: { id: agur.orderNo }})
       this.closeDialog()
     }

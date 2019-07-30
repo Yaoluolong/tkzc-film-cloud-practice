@@ -43,13 +43,16 @@
         show-overflow-tooltip
       ></el-table-column>
       <el-table-column min-width="120" label="导出类型" align="center" prop="type"></el-table-column>
-      <el-table-column min-width="120" label="销售订单" align="center" prop="saleOrderNo"></el-table-column>
-      <el-table-column min-width="120" label="批次号" align="center" prop="batchNo"></el-table-column>
+      <el-table-column min-width="120" label="销售订单" align="center" prop="saleOrderNo" show-overflow-tooltip></el-table-column>
+      <el-table-column min-width="120" label="批次号" align="center" prop="batchNo" show-overflow-tooltip></el-table-column>
       <!-- <el-table-column min-width="250" label="导出备注" align="center" prop="remark"></el-table-column> -->
       <!-- <el-table-column min-width="120" label="状态" align="center" prop="statusName"></el-table-column> -->
-      <el-table-column min-width="80" label="文件" align="center" fixed="right">
+      <el-table-column min-width="120" label="文件" align="center" fixed="right">
         <template slot-scope="{row}">
-          <el-button type="text" @click="exportData(row)" v-if="+row.status===1">下载</el-button>
+          <div v-if="+row.status===1">
+            <el-button type="text" @click="exportData(row)">下载</el-button>
+            <el-button type="text" @click="delExport(row)">删除</el-button>
+          </div>
           <span v-else>{{row.statusName}}</span>
         </template>
       </el-table-column>
@@ -58,7 +61,7 @@
 </template>
 <script>
 import { realDeepClone } from '@/utils'
-import { getTaskMgrList, exportTaskMgr } from '@/api/systemSetting'
+import { getTaskMgrList, exportTaskMgr, deleteExportTask } from '@/api/systemSetting'
 export default {
   name: 'task_mgr',
   data() {
@@ -108,6 +111,11 @@ export default {
         .catch(e => {
           this.$message.warning(e)
         })
+    },
+    async delExport(row) {
+      await deleteExportTask({ id: row.id })
+      this.$message.success('删除成功')
+      this.refreshTable()
     }
   }
 }

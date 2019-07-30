@@ -242,6 +242,10 @@ export function cancelSoldCardOrder(query) {
 export function checkCardAuthority(params) {
   return request.post('/systemApi/cardOrder/checkAuthority', params)
 }
+// 导出销售电影卡
+export function exportCardOrderDetail(params) {
+  return request.post('/systemApi/cardOrder/exportCardDetail', params)
+}
 
 /* 销售电影券 by lgl end */
 

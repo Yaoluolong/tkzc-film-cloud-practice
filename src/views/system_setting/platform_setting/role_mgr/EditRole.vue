@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <el-form label-width="120px"  style="width:1000px;" :model="params" :rules="rules" ref="form">
+    <el-form label-width="120px"   :model="params" :rules="rules" ref="form">
       <el-form-item label="角色名称" prop="roleName" v-if="!isPermissionSetting&&!isUserPermission">
         <el-input v-model="params.roleName" placeholder="请输入角色名称,最多10个字"  style="width:320px"></el-input>
       </el-form-item>
@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import MenuCheckboxPlane from './MenuCheckboxPlane'
 import { getMenuListByParentIds, getMenuListByParentId, getRoleInfo, createRole, updateRole, getPermissionsInfo, updateUserPermission } from '@/api/systemSetting'
 export default {
@@ -42,6 +43,9 @@ export default {
       isPermissionSetting: false,
       isUserPermission: false
     }
+  },
+  computed: {
+    ...mapGetters(['type'])
   },
   methods: {
     save() {
@@ -146,7 +150,7 @@ export default {
       this.isUserPermission = true
     }
     // 获取第一级菜单
-    this.topMenus = await getMenuListByParentId({ parentId: '0', type: this.$route.query.type })
+    this.topMenus = await getMenuListByParentId({ parentId: '0', type: this.$route.query.type || this.type })
     // 编辑
     if (this.isUserPermission) {
       const params = await getPermissionsInfo(this.$route.query.id)

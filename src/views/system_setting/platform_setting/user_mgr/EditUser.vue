@@ -172,7 +172,6 @@ export default {
       this.$refs.addCineam.onOperateClick(type)
     },
     getChoosedId(msg) {
-      console.log(111111, msg)
       this.params.cinemaId = msg.cinemaId
       this.showAddbtn = !msg.cinemaId
       this.$refs.form.validateField('cinemaId')

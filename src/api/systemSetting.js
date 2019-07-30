@@ -342,7 +342,9 @@ export function getTaskMgrList(params) {
 export function exportTaskMgr(params) {
   return request.post('/systemApi/exportTask/download', params)
 }
-
+export function deleteExportTask(params) {
+  return request.post('/systemApi/exportTask/delete', params)
+}
 // ============== 审批权限管理 ================
 export function getApprovalPageList(params) {
   return request.post('/systemApi/approval/getPageList', params)
