@@ -19,7 +19,7 @@
       <el-form-item label="影院名称" prop="cinemaName">
         <el-input
           v-model.trim="params.cinemaName"
-          placeholder="请输入影院名称,最多20个字"
+          placeholder="请输入影院名称,最多50个字"
           style="width:320px;"
         ></el-input>
       </el-form-item>
@@ -241,8 +241,8 @@ export default {
         },
         cinemaName: {
           required: true,
-          max: 20,
-          message: '请输入影院名称,最多20个字',
+          max: 50,
+          message: '请输入影院名称,最多50个字',
           trigger: 'blur'
         },
         area: {
