@@ -43,8 +43,8 @@
         show-overflow-tooltip
       ></el-table-column>
       <el-table-column min-width="120" label="导出类型" align="center" prop="type"></el-table-column>
-      <el-table-column min-width="120" label="销售订单" align="center" prop="saleOrderNo"></el-table-column>
-      <el-table-column min-width="120" label="批次号" align="center" prop="batchNo"></el-table-column>
+      <el-table-column min-width="120" label="销售订单" align="center" prop="saleOrderNo" show-overflow-tooltip></el-table-column>
+      <el-table-column min-width="120" label="批次号" align="center" prop="batchNo" show-overflow-tooltip></el-table-column>
       <!-- <el-table-column min-width="250" label="导出备注" align="center" prop="remark"></el-table-column> -->
       <!-- <el-table-column min-width="120" label="状态" align="center" prop="statusName"></el-table-column> -->
       <el-table-column min-width="120" label="文件" align="center" fixed="right">

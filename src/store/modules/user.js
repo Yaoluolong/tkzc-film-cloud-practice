@@ -10,12 +10,16 @@ const user = {
     name: '',
     avatar: '',
     roles: [],
-    menus: []
+    menus: [],
+    type: ''
   },
 
   mutations: {
     SET_TOKEN: (state, token) => {
       state.token = token
+    },
+    SET_TYPE: (state, type) => {
+      state.type = type
     },
     SET_NAME: (state, name) => {
       state.name = name
@@ -73,6 +77,7 @@ const user = {
         commit('SET_NAME', data.realName)
         commit('SET_USER_ID', data.id)
         commit('SET_AVATAR', data.headImg)
+        commit('SET_TYPE', data.type)
         return response
       })
     },
