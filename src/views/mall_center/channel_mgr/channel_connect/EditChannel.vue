@@ -27,7 +27,7 @@
                 v-for="item in deviceCodeOptions"
                 :key="item.value"
                 :label="item.name"
-                :value="item.name">
+                :value="item.value">
               </el-option>
             </el-select>
           </el-form-item>  
