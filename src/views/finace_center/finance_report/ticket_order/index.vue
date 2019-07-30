@@ -86,7 +86,7 @@
     <query-ext-plane :opened="opened">
       <div class="row pl20 pr20">
         <div class="block-box mr20 mb20" v-for="(item,key,index) in sumData" :key="index">
-          <p>{{key|showSumFliter(key)||'暂无标题'}}</p>
+          <p>{{(key|showSumFliter(key)) ||'暂无标题'}}</p>
           <p>{{item}}</p>
         </div>
       </div>
