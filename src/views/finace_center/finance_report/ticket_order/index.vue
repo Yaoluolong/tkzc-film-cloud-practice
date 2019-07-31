@@ -86,7 +86,7 @@
     <query-ext-plane :opened="opened">
       <div class="row pl20 pr20">
         <div class="block-box mr20 mb20" v-for="(item,key,index) in sumData" :key="index">
-          <p>{{(key|showSumFliter(key)) ||'暂无标题'}}</p>
+          <p>{{key|showSumFliter}}</p>
           <p>{{item}}</p>
         </div>
       </div>
@@ -163,14 +163,8 @@ export default {
   filters: {
     // 统计类型
     showSumFliter(value) {
-      if (!value) {
-        return '暂无标题'
-      }
-      let label
-      showSumType.forEach(e => {
-        if (e.key === value) label = e.label
-      })
-      return label
+      const _item = showSumType.find(item => item.key === value)
+      return (_item && _item.label) || '暂无标题'
     }
   },
   created() {},

@@ -18,6 +18,13 @@ export const showSumType = [
   }, {
     key: 'userPayNum',
     label: '支付用户数'
+  }, {
+    key: 'cinemaSettlementPrice',
+    label: '影院结算价'
+  },
+  {
+    key: 'revenueServiceFeeSum',
+    label: '平台营收总额'
   }
 ]
 // 订单查询类型
