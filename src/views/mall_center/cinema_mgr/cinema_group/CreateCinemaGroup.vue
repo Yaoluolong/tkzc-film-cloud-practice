@@ -5,9 +5,9 @@
         <el-input v-model.trim="params.name" placeholder="请输入影院分组名称,最多10个字" class="w420"></el-input>
       </el-form-item>
       <div class="choose-box">
-        <!-- <div v-if="chooseParams.id">
+        <div v-if="chooseParams.id">
           <query-form ref="queryForm" @change="queryChange" :area-str="area" :query-params="query"></query-form>
-        </div> -->
+        </div>
         <el-form-item prop="cinemaList">
           <div v-if="chooseParams.id" class="vm mr20">
             <el-button type="primary" icon="el-icon-search" @click="onOperateClick('query')">查询</el-button>
@@ -59,7 +59,7 @@ import uuid from 'uuid'
 import zmTable from '@/components/isNeedComponents/zmTable'
 import tableMixin from '@/mixins/zmTableMixin'
 import chooseCinema from '@/components/isNeedComponents/chooseCinema'
-// import queryForm from '@/components/isNeedComponents/addCinemaQuery'
+import queryForm from '@/components/isNeedComponents/addCinemaQuery'
 import { cinemaGroupDetailColumns } from './const'
 import {
   createCinemaGroup,
@@ -71,7 +71,7 @@ import {
 } from '@/api/mallCenter'
 export default {
   name: 'create_cinema_group',
-  components: { zmTable, chooseCinema },
+  components: { zmTable, chooseCinema, queryForm },
   mixins: [tableMixin],
   computed: {
     columns() {
@@ -242,7 +242,7 @@ export default {
       this.chooseParams.cinemaId = realCinemaIds.join(',')
       // 操作后清除已选，刷新列表
       this.clearSelection()
-      this.disDelBtn = false
+      this.disDelBtn = true
       this.loadList()
     },
     // 筛选id

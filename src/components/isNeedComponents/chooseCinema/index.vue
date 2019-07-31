@@ -3,7 +3,12 @@
     <div class="hp100">
       <el-form inline label-width="80px" label-position="right" class="mt20 mb20">
         <query-form ref="queryForm" @change="queryChange" :area-str="area" :query-params="query"></query-form>
-        <el-radio-group v-model="cinemaType" class="mb20 ml20" v-if="chooseOption.isShowCinemaType">
+        <el-radio-group
+          v-model="cinemaType"
+          class="mb20 ml20"
+          v-if="chooseOption.isShowCinemaType"
+          :disabled="Boolean(chooseParams.id)"
+        >
           <el-radio label="1">所有影院</el-radio>
           <el-radio label="2">指定影院</el-radio>
         </el-radio-group>
@@ -112,7 +117,11 @@ export default {
       this.$emit('cancel')
     },
     async onSubmitClick() {
-      const cinemaIds = this.chooseParams.cinemaId ? this.chooseParams.cinemaId.split(',') : [].concat(this.getSelectionIds())
+      const getSelectionIds = this.getSelectionIds()
+      const prveCinemaIds = this.chooseParams.cinemaId
+        ? this.chooseParams.cinemaId.split(',')
+        : []
+      const cinemaIds = prveCinemaIds.concat(getSelectionIds)
       const chooseInfo = {
         cinemaId: +this.cinemaType === 2 ? cinemaIds.join(',') : '',
         cinemaList: +this.cinemaType === 2 ? this.getTableSelection() : [],
@@ -125,13 +134,13 @@ export default {
       // 如果用户选择指定影院，则调用接口，将对应的参数传入
       // 添加影院
       if (+this.cinemaType === 2) {
-        if (chooseInfo.cinemaId) {
+        if (getSelectionIds && getSelectionIds.length) {
           await this.apiObj.operaApi({
             code: this.chooseParams.code,
             isAdd: 1,
             cinemaType: this.cinemaType,
             // searchParam: JSON.stDringify(chooseInfo.searchParam) !== '{}' ? JSON.stringify(chooseInfo.searchParam) : '',
-            cinemaIds: this.getSelectionIds().join(','),
+            cinemaIds: getSelectionIds.join(','),
             type: this.cinemaType // 1 覆盖操作 2添加操作
           })
           this.$emit('saveChoose', chooseInfo)
