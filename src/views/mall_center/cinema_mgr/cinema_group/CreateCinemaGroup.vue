@@ -242,7 +242,7 @@ export default {
       this.chooseParams.cinemaId = realCinemaIds.join(',')
       // 操作后清除已选，刷新列表
       this.clearSelection()
-      this.disDelBtn = false
+      this.disDelBtn = true
       this.loadList()
     },
     // 筛选id
