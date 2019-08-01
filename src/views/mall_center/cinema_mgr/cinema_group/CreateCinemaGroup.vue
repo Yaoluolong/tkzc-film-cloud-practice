@@ -84,7 +84,11 @@ export default {
       if (this.chooseParams.cinemaId && this.chooseParams.cinemaId.length) {
         callback()
       } else {
-        callback(new Error('请添加影院'))
+        this.$message({
+          message: '以下为默认所有影院，请点击添加按钮进行添加!',
+          type: 'warning'
+        })
+        callback(new Error('以下为默认所有影院，请手动添加影院!'))
       }
     }
     return {
