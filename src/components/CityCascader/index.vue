@@ -95,7 +95,7 @@ export default {
       deepfind(0, this.options)
     },
     async fetchCityRegion(parentId, appendChild = true) {
-      const optionsTemp = [{ name: '全国', value: '-1' }]
+      const optionsTemp = [{ name: parentId === 0 ? '全国' : '全部', value: '-1' }]
       const options = this.showAllOptions ? mergeArray(optionsTemp, await getCityRegion({ parentId })) : await getCityRegion({ parentId })
       options.forEach(e => {
         if (e.value === '-1') {
