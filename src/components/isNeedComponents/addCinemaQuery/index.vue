@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-form-item label="影院编码">
+    <el-form-item label="影院编码" :rules="formRule">
       <el-input v-model.trim="query.cinemaThirdNo" clearable placeholder="请输入编码、影院名称" class="w200"></el-input>
     </el-form-item>
     <el-form-item label="系统商">
@@ -11,6 +11,7 @@
         placeholder="选择系统商"
         action="/systemApi/interfaceType/getList"
         class="w200"
+        clearable
         @change="interfaceTypeChange"
       ></remote-select-multiple>
     </el-form-item>
@@ -19,6 +20,7 @@
         v-model="area"
         placeholder="选择地区模糊查询"
         class="w200"
+        clearable
         @focus="onOperateClick('area')"
       ></el-input>
     </el-form-item>
