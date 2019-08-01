@@ -83,9 +83,27 @@
             prop="batchNo"
             show-overflow-tooltip
           ></el-table-column>
-          <el-table-column min-width="100" label="电影券种类" align="center" prop="typeName" show-overflow-tooltip></el-table-column>
-          <el-table-column min-width="100" label="电影券类型" align="center" prop="styleName" show-overflow-tooltip></el-table-column>
-          <el-table-column min-width="140" label="券号" align="center" prop="couponCode" show-overflow-tooltip></el-table-column>
+          <el-table-column
+            min-width="100"
+            label="电影券种类"
+            align="center"
+            prop="typeName"
+            show-overflow-tooltip
+          ></el-table-column>
+          <el-table-column
+            min-width="100"
+            label="电影券类型"
+            align="center"
+            prop="styleName"
+            show-overflow-tooltip
+          ></el-table-column>
+          <el-table-column
+            min-width="140"
+            label="券号"
+            align="center"
+            prop="couponCode"
+            show-overflow-tooltip
+          ></el-table-column>
           <el-table-column min-width="190" label="有效日期" align="center" show-overflow-tooltip>
             <template slot-scope="{row}">
               <span prop="row.startTime">{{row.startTime.substr(0,10)}}</span>至
@@ -113,12 +131,7 @@
         >{{programInfo.statusName}}</span>
       </div>
       <el-card shadow="never" class="mt20 mb15">
-        <el-form
-          label-width="140px"
-          label-position="right"
-          class="wp100"
-          :model="programInfo"
-        >
+        <el-form label-width="140px" label-position="right" class="wp100" :model="programInfo">
           <el-form-item label="规则名称:">
             <span>{{programInfo.name}}</span>
           </el-form-item>
@@ -217,52 +230,62 @@
       </el-card>
     </el-card>
 
-    <el-card class="mb20" >
+    <el-card class="mb20">
       <el-card shadow="never" class="w800 mt20 mb15">
-        <el-form label-width="140px" label-position="right" class="wp100" v-if="couponInfo.checkInfo">
+        <el-form
+          label-width="140px"
+          label-position="right"
+          class="wp100"
+          v-if="couponInfo.checkInfo"
+        >
           <el-form-item label="审核意见：">{{suggestion?suggestion:'无审核意见'}}</el-form-item>
           <el-form-item label="审核状态：">{{firstCheckInfo.isAgree==='1'?'通过':'退回'}}</el-form-item>
           <el-form-item label="审核人：">{{firstCheckInfo.checkName}}</el-form-item>
           <el-form-item label="审核时间：">{{firstCheckInfo.createTime?firstCheckInfo.createTime:'无'}}</el-form-item>
         </el-form>
         <el-form label-width="140px" label-position="right" class="wp100" v-else>
-          <el-form-item label="审核状态：">未审核</el-form-item>
-          <el-form-item label="审核人：">测试数据1、测试数据2</el-form-item>
+          <el-form-item label="审核状态：">未初审</el-form-item>
+          <el-form-item label="审核人：">{{firstCheckInfo.checkName}}</el-form-item>
         </el-form>
       </el-card>
     </el-card>
-    <el-card
-      class="mb20"
-      v-if="$route.query.isReceiveMoney || couponInfo.isReceiveMoney==='1'"
-    >
-      <receipt-detail type="coupon" :outData="payInfo" :isCollectName="params.collectName"></receipt-detail>
+    <el-card class="mb20">
+      <receipt-detail
+        type="coupon"
+        :outData="payInfo"
+        :isCollectName="params.collectName"
+        v-if="$route.query.isReceiveMoney || couponInfo.isReceiveMoney==='1'"
+      ></receipt-detail>
+      <el-form label-width="140px" label-position="right" class="wp100" v-else>
+        <el-form-item label="收款状态：">未收款</el-form-item>
+        <el-form-item label="审核人：">{{payInfo.checkName}}</el-form-item>
+      </el-form>
     </el-card>
-    <el-card
-      class="mb20"
-    >
+    <el-card class="mb20" v-if="couponInfo.invoiceType==='1' && couponInfo.isDrawInvoice==='0'">
       <el-card shadow="never" class="w800 mt20 mb15">
-        <el-form label-width="140px" label-position="right" class="wp100" v-if="couponInfo.invoiceType==='1' && couponInfo.isDrawInvoice==='0'">
+        <el-form label-width="140px" label-position="right" class="wp100">
           <el-form-item label="是否提供发票：">无需开票</el-form-item>
         </el-form>
-        <el-form label-width="140px" label-position="right" class="wp100" v-else>
-          <el-form-item label="开票状态：">未开票</el-form-item>
-          <el-form-item label="审核人：">测试数据1、测试数据2</el-form-item>
-        </el-form>
       </el-card>
     </el-card>
-    <el-card
-      class="mb20"
-      v-if="couponInfo.invoiceType!=='1' && couponInfo.isDrawInvoice!=='0'"
-    >
-      <invoice-detail :outData="invoiceInfo" :drawInvoiceName="params.drawInvoiceName"></invoice-detail>
+    <el-card class="mb20" v-if="+couponInfo.invoiceType==2">
+      <invoice-detail
+        :outData="invoiceInfo"
+        :drawInvoiceName="params.drawInvoiceName"
+        v-if="+isDrawInvoice===1"
+      ></invoice-detail>
+      <el-form label-width="140px" label-position="right" class="wp100" v-else>
+        <el-form-item label="开票状态：">未开票</el-form-item>
+        <el-form-item label="审核人：">{{invoiceInfo.checkName}}</el-form-item>
+      </el-form>
     </el-card>
-    <el-card v-if="$route.query.isActive || couponInfo.isActive==='1'">
+    <el-card>
       <el-card shadow="never" class="w800 mt20 mb15">
         <el-form
           label-width="140px"
           label-position="right"
           class="wp100"
-          v-if="couponInfo.isActive === '1'"
+          v-if="$route.query.isActive ||couponInfo.isActive === '1'"
         >
           <el-form-item label="激活说明：">
             <span v-if="couponInfo.isActive==='1'">{{couponInfo.setActiveExplain}}</span>
@@ -287,7 +310,10 @@
           >{{couponInfo.setActiveTime||'--'}}</el-form-item>
           <!-- <el-button size="small" v-if="$route.query.isActive && couponInfo.isActive === '0'" @click="setActive(couponInfo)" type="primary">激活销售单</el-button> -->
         </el-form>
-
+        <el-form label-width="140px" label-position="right" class="wp100" v-else>
+          <el-form-item label="激活状态：">未激活</el-form-item>
+          <el-form-item label="审核人：">{{couponInfo.activeCheckName}}</el-form-item>
+        </el-form>
         <el-button
           size="small"
           v-if="$route.query.isActive && couponInfo.isActive === '0'"

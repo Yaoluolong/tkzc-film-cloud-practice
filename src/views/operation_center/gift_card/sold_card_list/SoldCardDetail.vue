@@ -1,7 +1,9 @@
 <template>
-    <div class="app-container">
+  <div class="app-container">
     <el-card>
-      <div style="font-size:18px;font-weight:bold;">销售订单号：{{$route.query.orderNo}}&emsp;&emsp;&emsp;客户名称：{{cardInfo.customerName}}</div>
+      <div
+        style="font-size:18px;font-weight:bold;"
+      >销售订单号：{{$route.query.orderNo}}&emsp;&emsp;&emsp;客户名称：{{cardInfo.customerName}}</div>
     </el-card>
     <!-- <el-card style="margin-bottom:20px;">
         <el-steps :active="parseInt(params.checkStatus)" style="margin: 0px 100px 40px 100px">
@@ -60,119 +62,144 @@
           </el-step>
           <el-step title="完成" :status="status" description=""></el-step>
         </el-steps>
-      </el-card> -->
-      <el-card style="margin-bottom:20px;">
-  		  <el-form>
-          <page-table ref="table" index :query="query"  :fetch="queryTable">
-            <!-- <el-table-column min-width="180"  label="客户名称" align="center" prop="customerName" ></el-table-column> -->
-            <el-table-column min-width="180"  label="电影卡批次号" align="center" prop="batchNo" show-overflow-tooltip></el-table-column>
-            <el-table-column min-width="100"  label="电影卡种类" align="center" prop="typeName"></el-table-column>
-            <el-table-column min-width="180"  label="电影卡类型" align="center" prop="styleName"></el-table-column>            
-            <el-table-column min-width="110"  label="卡号" align="center" prop="cardCode"></el-table-column>
-            <el-table-column min-width="180"  label="有效日期" align="center" prop="" show-overflow-tooltip>
-        			<template slot-scope="{row}">
-        				<span prop="row.startTime">{{row.startTime.substr(0,10)}}</span>至<span prop="row.startTime">{{row.endTime.substr(0,10)}}</span>
-        			</template>
-            </el-table-column>
-            <el-table-column min-width="110"  label="卡内点数" align="center" prop="point"></el-table-column>
-          </page-table>
+    </el-card>-->
+    <el-card style="margin-bottom:20px;">
+      <el-form>
+        <page-table ref="table" index :query="query" :fetch="queryTable">
+          <!-- <el-table-column min-width="180"  label="客户名称" align="center" prop="customerName" ></el-table-column> -->
+          <el-table-column
+            min-width="180"
+            label="电影卡批次号"
+            align="center"
+            prop="batchNo"
+            show-overflow-tooltip
+          ></el-table-column>
+          <el-table-column min-width="100" label="电影卡种类" align="center" prop="typeName"></el-table-column>
+          <el-table-column min-width="180" label="电影卡类型" align="center" prop="styleName"></el-table-column>
+          <el-table-column min-width="110" label="卡号" align="center" prop="cardCode"></el-table-column>
+          <el-table-column min-width="180" label="有效日期" align="center" prop show-overflow-tooltip>
+            <template slot-scope="{row}">
+              <span prop="row.startTime">{{row.startTime.substr(0,10)}}</span>至
+              <span prop="row.startTime">{{row.endTime.substr(0,10)}}</span>
+            </template>
+          </el-table-column>
+          <el-table-column min-width="110" label="卡内点数" align="center" prop="point"></el-table-column>
+        </page-table>
+      </el-form>
+    </el-card>
+    <el-card style="margin-bottom:20px">
+      <el-card shadow="never" style="margin-top:20px;margin-bottom:15px;">
+        <el-form label-width="140px" label-position="right" style="width:1000px;">
+          <el-form-item label="客户名称：">{{cardInfo.customerName}}</el-form-item>
+          <el-form-item label="电影卡种类：">{{cardInfo.typeName}}</el-form-item>
+          <el-form-item label="电影卡类型：">{{cardInfo.styleName}}</el-form-item>
+          <el-form-item label="电影卡号：" v-if="cardInfo.codeIdDetail">{{cardInfo.codeIdDetail}}</el-form-item>
+          <el-form-item label="销售数量：">{{cardInfo.num}} 张</el-form-item>
+          <el-form-item label="销售总额：">{{cardInfo.amount}} 元</el-form-item>
+          <el-form-item label="销售比例：">{{cardInfo.scalePrice}}:{{cardInfo.scalePoint}}</el-form-item>
+          <el-form-item label="卡内金额：">{{cardInfo.amount}}元，折合卡内点数{{cardInfo.point}}点</el-form-item>
+          <el-form-item label="电影卡有效期：">{{cardInfo.startTime}} -- {{cardInfo.endTime}}</el-form-item>
+          <el-form-item label="销售备注：">{{cardInfo.remark}}</el-form-item>
+          <el-form-item label="使用说明：">{{cardInfo.useExplain}}</el-form-item>
         </el-form>
       </el-card>
-      <el-card style="margin-bottom:20px">
-        <el-card shadow="never" style="margin-top:20px;margin-bottom:15px;">
-          <el-form label-width="140px" label-position="right" style="width:1000px;">
-            <el-form-item label="客户名称：">
-              {{cardInfo.customerName}}
-            </el-form-item>
-            <el-form-item label="电影卡种类：">
-              {{cardInfo.typeName}}
-            </el-form-item>
-            <el-form-item label="电影卡类型：">
-              {{cardInfo.styleName}}
-            </el-form-item>
-            <el-form-item label="电影卡号：" v-if="cardInfo.codeIdDetail">
-              {{cardInfo.codeIdDetail}}
-            </el-form-item>
-            <el-form-item label="销售数量：">
-              {{cardInfo.num}} 张
-            </el-form-item>
-            <el-form-item label="销售总额：">
-              {{cardInfo.amount}} 元
-            </el-form-item>
-            <el-form-item label="销售比例：">
-              {{cardInfo.scalePrice}}:{{cardInfo.scalePoint}}
-            </el-form-item>
-            <el-form-item label="卡内金额：">
-              {{cardInfo.amount}}元，折合卡内点数{{cardInfo.point}}点
-            </el-form-item>
-            <el-form-item label="电影卡有效期：">
-              {{cardInfo.startTime}} -- {{cardInfo.endTime}}
-            </el-form-item>
-            <el-form-item label="销售备注：">
-              {{cardInfo.remark}}
-            </el-form-item>
-            <el-form-item label="使用说明：">
-              {{cardInfo.useExplain}}
-            </el-form-item>
-          </el-form>
-        </el-card>
+    </el-card>
+    <el-card style="margin-bottom:20px">
+      <el-card shadow="never" style="width:800px;margin-top:20px;margin-bottom:15px;">
+        <el-form
+          label-width="140px"
+          label-position="right"
+          style="width:1000px;"
+          v-if="cardInfo.checkInfo"
+        >
+          <el-form-item label="审核意见1：">{{suggestion?suggestion:'无审核意见'}}</el-form-item>
+          <el-form-item label="审核状态：">{{firstCheckInfo.isAgree==='1'?'通过':'退回'}}</el-form-item>
+          <el-form-item label="审核人：">{{firstCheckInfo.checkName}}</el-form-item>
+          <el-form-item label="审核时间：">{{firstCheckInfo.createTime?firstCheckInfo.createTime:'无'}}</el-form-item>
+        </el-form>
+        <el-form label-width="140px" label-position="right" class="wp100" v-else>
+          <el-form-item label="审核状态：">未初审</el-form-item>
+          <el-form-item label="审核人：">{{firstCheckInfo.checkName}}</el-form-item>
+        </el-form>
       </el-card>
-      <el-card style="margin-bottom:20px" v-if="cardInfo.checkInfo">
-        <el-card shadow="never" style="width:800px;margin-top:20px;margin-bottom:15px;">
-          <el-form label-width="140px" label-position="right" style="width:1000px;">
-            <el-form-item label="审核意见：">
-              {{suggestion?suggestion:'无审核意见'}}
-            </el-form-item>
-            <el-form-item label="审核状态：">
-              {{firstCheckInfo.isAgree==='1'?'通过':'退回'}}
-            </el-form-item>
-            <el-form-item label="审核人：">
-              {{firstCheckInfo.checkName}}
-            </el-form-item>
-            <el-form-item label="审核时间：">
-              {{firstCheckInfo.createTime?firstCheckInfo.createTime:'无'}}
-            </el-form-item>
-          </el-form>
-        </el-card>
+    </el-card>
+    <el-card style="margin-bottom:20px">
+      <receipt-detail
+        type="coupon"
+        :outData="payInfo"
+        :isCollectName="firstcheckList.collectName"
+        v-if="$route.query.isReceiveMoney || cardInfo.isReceiveMoney==='1'"
+      ></receipt-detail>
+      <el-form label-width="140px" label-position="right" class="wp100" v-else>
+        <el-form-item label="收款状态：">未收款</el-form-item>
+        <el-form-item label="审核人：">{{payInfo.checkName}}</el-form-item>
+      </el-form>
+    </el-card>
+    <el-card
+      style="margin-bottom:20px"
+      v-if="cardInfo.invoiceType==='1' && cardInfo.isDrawInvoice==='0'"
+    >
+      <el-card shadow="never" style="width:800px;margin-top:20px;margin-bottom:15px;">
+        <el-form label-width="140px" label-position="right" style="width:1000px;">
+          <el-form-item label="是否提供发票：">无需开票</el-form-item>
+        </el-form>
       </el-card>
-      <el-card style="margin-bottom:20px" v-if="$route.query.isReceiveMoney || cardInfo.isReceiveMoney==='1'">
-        <receipt-detail type="coupon" :outData="payInfo" :isCollectName="firstcheckList.collectName"></receipt-detail>
+    </el-card>
+    <el-card style="margin-bottom:20px" v-if="+cardInfo.invoiceType===2 ">
+      <invoice-detail
+        :outData="invoiceInfo"
+        :drawInvoiceName="firstcheckList.drawInvoiceName"
+        v-if="+isDrawInvoice===1"
+      ></invoice-detail>
+      <el-form label-width="140px" label-position="right" class="wp100" v-else>
+        <el-form-item label="开票状态：">未开票</el-form-item>
+        <el-form-item label="审核人：">{{invoiceInfo.checkName}}</el-form-item>
+      </el-form>
+    </el-card>
+    <el-card>
+      <el-card shadow="never" style="width:800px;margin-top:20px;margin-bottom:15px;">
+        <el-form
+          label-width="140px"
+          label-position="right"
+          style="width:1000px;"
+          v-if="$route.query.isActive ||cardInfo.isActive === '1'"
+        >
+          <el-form-item label="激活说明：">
+            <span v-if="cardInfo.isActive==='1'">{{cardInfo.setActiveExplain}}</span>
+            <el-input
+              v-else
+              v-model.trim="cardInfo.setActiveExplain"
+              type="textarea"
+              :rows="5"
+              :disabled="cardInfo.isActive !== '0'"
+              placeholder="请输入您对此销售单的审核意见"
+              style="display:inline-block;width:600px;"
+            ></el-input>
+          </el-form-item>
+          <el-form-item label="激活状态：" v-if="cardInfo.isActive === '1'">{{params.activeName}}</el-form-item>
+          <el-form-item
+            label="激活人："
+            v-if="cardInfo.isActive === '1'"
+          >{{cardInfo.setActivePeople||'--'}}</el-form-item>
+          <el-form-item
+            label="激活时间："
+            v-if="cardInfo.isActive === '1'"
+          >{{cardInfo.setActiveTime||'--'}}</el-form-item>
+          <!-- <el-button size="small" v-if="$route.query.isActive && cardInfo.isActive === '0'" @click="setActive(cardInfo)" type="primary">激活销售单</el-button> -->
+        </el-form>
+        <el-form label-width="140px" label-position="right" class="wp100" v-else>
+          <el-form-item label="激活状态：">未激活</el-form-item>
+          <el-form-item label="审核人：">{{cardInfo.activeCheckName}}</el-form-item>
+        </el-form>
+        <el-button
+          size="small"
+          v-if="$route.query.isActive && cardInfo.isActive === '0'"
+          @click="setActive(cardInfo)"
+          type="primary"
+        >激活销售单</el-button>
       </el-card>
-      <el-card style="margin-bottom:20px" v-if="cardInfo.invoiceType==='1' && cardInfo.isDrawInvoice==='0'">
-        <el-card shadow="never" style="width:800px;margin-top:20px;margin-bottom:15px;">
-          <el-form label-width="140px" label-position="right" style="width:1000px;">
-            <el-form-item label="是否提供发票：">
-              无需开票
-            </el-form-item>
-          </el-form>
-        </el-card>
-      </el-card>
-      <el-card style="margin-bottom:20px" v-if="cardInfo.invoiceType!=='1' && cardInfo.isDrawInvoice!=='0'">
-        <invoice-detail :outData="invoiceInfo" :drawInvoiceName="firstcheckList.drawInvoiceName"></invoice-detail>
-      </el-card>
-      <el-card v-if="$route.query.isActive || cardInfo.isActive==='1'">
-        <el-card shadow="never" style="width:800px;margin-top:20px;margin-bottom:15px;">
-          <el-form label-width="140px" label-position="right" style="width:1000px;" v-if="cardInfo.isActive === '1'">
-            <el-form-item label="激活说明：">
-              <span v-if="cardInfo.isActive==='1'">{{cardInfo.setActiveExplain}}</span>
-              <el-input v-else v-model.trim="cardInfo.setActiveExplain" type="textarea" :rows="5" :disabled="cardInfo.isActive !== '0'" placeholder="请输入您对此销售单的审核意见" style="display:inline-block;width:600px;"></el-input>
-            </el-form-item>
-            <el-form-item label="激活状态：" v-if="cardInfo.isActive === '1'">
-              {{params.activeName}}
-            </el-form-item>
-            <el-form-item label="激活人：" v-if="cardInfo.isActive === '1'">
-              {{cardInfo.setActivePeople||'--'}}
-            </el-form-item>
-            <el-form-item label="激活时间：" v-if="cardInfo.isActive === '1'">
-              {{cardInfo.setActiveTime||'--'}}
-            </el-form-item>
-            <!-- <el-button size="small" v-if="$route.query.isActive && cardInfo.isActive === '0'" @click="setActive(cardInfo)" type="primary">激活销售单</el-button> -->
-          </el-form>
-
-          <el-button size="small" v-if="$route.query.isActive && cardInfo.isActive === '0'" @click="setActive(cardInfo)" type="primary">激活销售单</el-button>
-        </el-card>
-      </el-card>
-      <!-- <el-card style="margin-bottom:20px">
+    </el-card>
+    <!-- <el-card style="margin-bottom:20px">
             <div slot="header">
                 <span>销售发票信息</span>
             </div>
@@ -235,40 +262,52 @@
               <el-input v-else v-model.trim="payInfo.transferPeople" placeholder="请输入转账人姓名" style="width:200px;" disabled></el-input> 
             </el-form-item>
           </el-form>
-      </el-card> -->
+    </el-card>-->
 
-      <el-dialog title="初审审核详情" :visible.sync="dialogFormVisible" width="40%">
-          <div class="step-row" v-for="(item,index) in firstcheckList" :key="index">
-            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="processing_content">
-              <tr>
-                 <td style="color:#98A6BE">
-                   <div class="processing_content_detail" style="float:left;width:70%">
-                     <span style="color:#219AFF">{{item.checkName}}</span>&nbsp;&nbsp;
-                     <span>{{item.isAgree==='1'?'通过':'退回'}}</span>
-                   </div> 
-                   <div class="processing_content_detail" style="float:left;">
-                     <span ><i class="el-icon-time" v-if="item.createTime"></i>&nbsp;&nbsp;{{item.createTime}}</span> 
-                   </div>
-                 </td>
-               </tr>
-               <tr>
-                 <td>
-                   <div class="processing_content_detail" style="float:left;width:70%;margin-bottom:20px;" v-if="item.suggestion">
-                     <span style="color:#919FB8">审核意见：{{item.suggestion}}</span>
-                   </div> 
-                 </td>
-               </tr>
-             </table>
-           </div>
-          <div slot="footer" class="dialog-footer">
-            <el-button @click="dialogFormVisible = false">关 闭</el-button>
-          </div>
-      </el-dialog>
-    </div>
+    <el-dialog title="初审审核详情" :visible.sync="dialogFormVisible" width="40%">
+      <div class="step-row" v-for="(item,index) in firstcheckList" :key="index">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="processing_content">
+          <tr>
+            <td style="color:#98A6BE">
+              <div class="processing_content_detail" style="float:left;width:70%">
+                <span style="color:#219AFF">{{item.checkName}}</span>&nbsp;&nbsp;
+                <span>{{item.isAgree==='1'?'通过':'退回'}}</span>
+              </div>
+              <div class="processing_content_detail" style="float:left;">
+                <span>
+                  <i class="el-icon-time" v-if="item.createTime"></i>
+                  &nbsp;&nbsp;{{item.createTime}}
+                </span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div
+                class="processing_content_detail"
+                style="float:left;width:70%;margin-bottom:20px;"
+                v-if="item.suggestion"
+              >
+                <span style="color:#919FB8">审核意见：{{item.suggestion}}</span>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">关 闭</el-button>
+      </div>
+    </el-dialog>
+  </div>
 </template>
 <script>
 import ElStep from '@/views/operation_center/coupon_mgr/sold_coupon_list/elsteps'
-import { GetSaleCardDetail, GetSoldCardCheckInfo, getCardOrderInfo, getCardFirstCheckList } from '@/api/operationCenter'
+import {
+  GetSaleCardDetail,
+  GetSoldCardCheckInfo,
+  getCardOrderInfo,
+  getCardFirstCheckList
+} from '@/api/operationCenter'
 import InvoiceDetail from '../../InvoiceDetail'
 import ReceiptDetail from '../../ReceiptDetail'
 export default {
@@ -300,15 +339,9 @@ export default {
       query: {
         orderNo: this.$route.query.orderNo
       },
-      cardInfo: {
-
-      },
-      invoiceInfo: {
-
-      },
-      payInfo: {
-
-      },
+      cardInfo: {},
+      invoiceInfo: {},
+      payInfo: {},
       dialogFormVisible: false,
       firstcheckList: []
     }
@@ -321,10 +354,12 @@ export default {
   methods: {
     async buttonFirst() {
       const _this = this
-      await getCardFirstCheckList({ orderNo: this.$route.query.orderNo }).then(res => {
-        _this.firstcheckList = res
-        this.dialogFormVisible = true
-      })
+      await getCardFirstCheckList({ orderNo: this.$route.query.orderNo }).then(
+        res => {
+          _this.firstcheckList = res
+          this.dialogFormVisible = true
+        }
+      )
     },
     queryTable(query) {
       if (this.$route.query.orderNo) {
@@ -337,7 +372,7 @@ export default {
   },
   async created() {
     const _this = this
-    GetSoldCardCheckInfo({ orderNo: this.$route.query.orderNo }).then((res) => {
+    GetSoldCardCheckInfo({ orderNo: this.$route.query.orderNo }).then(res => {
       _this.params = res
       _this.firstCheckInfo = res.firstCheckInfo
       _this.description = res.operator
@@ -354,7 +389,10 @@ export default {
     this.invoiceInfo = this.detail.invoiceInfo
     this.payInfo = this.detail.payInfo
 
-    if (this.cardInfo.checkInfo && this.cardInfo.checkInfo.suggestion !== 'null') {
+    if (
+      this.cardInfo.checkInfo &&
+      this.cardInfo.checkInfo.suggestion !== 'null'
+    ) {
       _this.suggestion = this.cardInfo.checkInfo.suggestion
     } else {
       _this.suggestion = ''
@@ -364,5 +402,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>
