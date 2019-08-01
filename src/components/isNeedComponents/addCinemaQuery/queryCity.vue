@@ -84,7 +84,7 @@
   </div>
 </template>
 <script>
-import { getRegionList, getCityRegion } from '@/api/mallCenter'
+import { getAllRegion, getCityRegion } from '@/api/mallCenter'
 import { getCanChooseIds } from '@/utils'
 export default {
   props: {
@@ -150,7 +150,7 @@ export default {
     async getRegion() {
       const data = this.areaInfo.children
       // 不重置组件时，进入时候判断value是否true,省份数组是否已存在，没有则调用接口,并赋初始值
-      const res = await getRegionList()
+      const res = await getAllRegion()
       this.areaInfo.children = res.data || res || data
       this.getInfo(this.areaInfo, this.cityParams.provinceId)
       this.areaInfo.children.forEach(e => {

@@ -59,6 +59,10 @@ export function getInterfaceOtherInfo(id) {
 export function getCityRegion(query) {
   return request.get('/systemApi/cinema/getCityRegionList', { params: query })
 }
+// 获取全国列表查询用
+export function getAllRegion(query) {
+  return request.get('/systemApi/cinema/getAllRegion', { params: query })
+}
 // 获取全国列表
 export function getRegionList(query) {
   return request.get('/systemApi/cinema/getRegionList', { params: query })
