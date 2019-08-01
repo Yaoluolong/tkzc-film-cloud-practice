@@ -132,7 +132,7 @@
       ></receipt-detail>
       <el-form label-width="140px" label-position="right" class="wp100" v-else>
         <el-form-item label="收款状态：">未收款</el-form-item>
-        <el-form-item label="审核人：">测试数据1、测试数据2</el-form-item>
+        <el-form-item label="审核人：">{{payInfo.checkName}}</el-form-item>
       </el-form>
     </el-card>
     <el-card
@@ -153,7 +153,7 @@
       ></invoice-detail>
       <el-form label-width="140px" label-position="right" class="wp100" v-else>
         <el-form-item label="开票状态：">未开票</el-form-item>
-        <el-form-item label="审核人：">测试数据1、测试数据2</el-form-item>
+        <el-form-item label="审核人：">{{invoiceInfo.checkName}}</el-form-item>
       </el-form>
     </el-card>
     <el-card>
@@ -189,7 +189,7 @@
         </el-form>
         <el-form label-width="140px" label-position="right" class="wp100" v-else>
           <el-form-item label="激活状态：">未激活</el-form-item>
-          <el-form-item label="审核人：">测试数据1、测试数据2</el-form-item>
+          <el-form-item label="审核人：">{{cardInfo.activeCheckName}}</el-form-item>
         </el-form>
         <el-button
           size="small"
