@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <el-tabs v-model="activeTab" @tab-click="refreshTable">
+    <el-tabs v-model="activeTab" @tab-click="chooseAcitve">
       <el-tab-pane label="平台用户管理" name="1"></el-tab-pane>
       <el-tab-pane label="加盟商用户管理" name="2"></el-tab-pane>
     </el-tabs>
@@ -18,10 +18,10 @@
         ></remote-select>
       </el-form-item>
        <el-form-item label="用户类型" v-if="+activeTab===2">
-         <el-select v-model="query.roleId" clearable placeholder="请选择用户类型" class="w200">
-           <el-option label="卡券分销商" value="1"></el-option>
-           <el-option label="渠道商户" value="2"></el-option>
-           <el-option label="影院" value="3"></el-option>
+         <el-select v-model="query.userType" clearable placeholder="请选择用户类型" class="w200">
+           <el-option label="卡券分销商" value="2"></el-option>
+           <el-option label="渠道商户" value="3"></el-option>
+           <el-option label="影院" value="4"></el-option>
          </el-select>
       </el-form-item>
       <el-form-item>
@@ -37,7 +37,7 @@
       <el-table-column min-width="100" label="用户名" align="center" prop="userName" show-overflow-tooltip></el-table-column>
       <el-table-column min-width="100" label="姓名" align="center" prop="realName"></el-table-column>
       <el-table-column min-width="140" label="邮箱地址" align="center" prop="email" show-overflow-tooltip></el-table-column>
-      <el-table-column min-width="120" :label="+activeTab===1?'所属角色':'用户类型'" align="center" prop="roleName"></el-table-column>
+      <el-table-column min-width="120" :label="+activeTab===1?'所属角色':'用户类型'" align="center" :prop="+activeTab===1?'roleName':'typeName'"></el-table-column>
       <el-table-column min-width="160" label="添加时间" align="center" prop="createTime" show-overflow-tooltip></el-table-column>
       <el-table-column min-width="160" label="最后登录" align="center" prop="loginTime"></el-table-column>
       <el-table-column width="80" label="是否启用" align="center" prop="status" fixed="right">
@@ -78,7 +78,10 @@ export default {
   data() {
     return {
       activeTab: '1',
-      query: {}
+      query: {
+        userType: '',
+        roleId: ''
+      }
     }
   },
   methods: {
@@ -88,6 +91,11 @@ export default {
     },
     refreshTable() {
       this.$refs.table.refresh()
+    },
+    chooseAcitve() {
+      this.query.roleId = +this.activeTab === 1 ? this.query.roleId : ''
+      this.query.userType = +this.activeTab === 2 ? this.query.userType : ''
+      this.refreshTable()
     },
     deleteUser(row) {
       this.$confirm(
