@@ -107,7 +107,12 @@
       :table-params="tableParams"
       :options="{mutilpleSelect:true}"
     ></zm-table>
-    <choose-export v-model="exportVisible" @cancel="closeExport" :export-params="exportParams"></choose-export>
+    <choose-export
+      @after-save="exoprtAfterSave"
+      v-model="exportVisible"
+      @cancel="closeExport"
+      :export-params="exportParams"
+    ></choose-export>
   </div>
 </template>
 
@@ -206,6 +211,9 @@ export default {
         ','
       )
       // exportData(getOrderPageList, query)
+    },
+    exoprtAfterSave() {
+      this.clearSelection()
     },
     closeExport() {
       this.exportVisible = false

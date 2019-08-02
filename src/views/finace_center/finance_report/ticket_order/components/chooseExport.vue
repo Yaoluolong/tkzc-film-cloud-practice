@@ -129,6 +129,7 @@ export default {
         this.$message.success('导出成功，请前往下载中心查看')
         this.loading = false
         this.showWaring = true
+        this.$emit('after-save', true)
       } catch (error) {
         this.loading = false
       }
