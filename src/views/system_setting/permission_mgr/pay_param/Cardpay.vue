@@ -1,10 +1,10 @@
 <template>
   <el-form ref="form" :rules="rules" :model="params" inline style="margin-top:40px;margin-left:5%;">
     <el-form-item label="消费比例" prop="money">
-      <el-input v-model="money" placeholder="票价金额单位元"></el-input>
+      <el-input clearable  v-model="money" placeholder="票价金额单位元"></el-input>
     </el-form-item>
     <el-form-item prop="point">
-      <el-input v-model="point" placeholder="卡内金额单位点" style="margin-left:10px;"></el-input>
+      <el-input clearable  v-model="point" placeholder="卡内金额单位点" style="margin-left:10px;"></el-input>
     </el-form-item>
     
       <p style="color:#c0c4cc;width:100%;">每次使用卡内金额点数的时候可以抵扣多少票价金额</p>

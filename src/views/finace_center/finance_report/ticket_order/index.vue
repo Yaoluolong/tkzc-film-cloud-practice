@@ -11,13 +11,14 @@
           :query="{ type: 'orderFilmSearchType' }"
         ></remote-select>
         <el-input
+          clearable
           class="vm w250"
           v-model="query[orderStatus&&orderStatus!=='-1'?orderStatus:'empty']"
           placeholder="请输入关键字"
         ></el-input>
       </el-form-item>
       <el-form-item label="时间查询" class="wp100">
-        <el-select v-model="query.timeType" class="w150 vm">
+        <el-select clearable v-model="query.timeType" class="w150 vm">
           <el-option value="0" label="订单日期"></el-option>
           <el-option value="1" label="退票时间"></el-option>
         </el-select>
@@ -35,7 +36,7 @@
         ></remote-select>
       </el-form-item>
       <el-form-item label="订单状态">
-        <el-select v-model="query.orderStatus">
+        <el-select clearable v-model="query.orderStatus">
           <el-option
             v-for="(item,index) in orderStatusType"
             :key="index"

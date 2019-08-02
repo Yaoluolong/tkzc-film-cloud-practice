@@ -2,7 +2,7 @@
   <div class="app-container">
     <el-form label-width="120px" label-position="left" style="width:1000px;" :model="params" :rules="rules" ref="form">
       <el-form-item label="影院分组名称" prop="name" >
-          <el-input v-model.trim="params.name" placeholder="请输入影院分组名称,最多10个字" style="width:420px;"></el-input>
+          <el-input clearable v-model.trim="params.name" placeholder="请输入影院分组名称,最多10个字" style="width:420px;"></el-input>
       </el-form-item>
       <el-form-item label="票务系统商">
         <remote-select-multiple  v-model="params.interfaceTypeIdArray" showAllOption placeholder="选择票务系统商" action="/systemApi/interfaceType/getList" style="width:300px" @change="interfaceTypeChange">

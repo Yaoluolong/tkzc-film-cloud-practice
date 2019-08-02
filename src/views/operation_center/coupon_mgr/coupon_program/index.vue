@@ -6,11 +6,11 @@
       </el-tabs>
       <el-form inline label-width="120px">            
         <el-form-item label="影院名称">
-          <el-input v-model="query.cinemaName" style="width:200px;" placeholder="请输入影院名称或编码模糊查询"></el-input>
+          <el-input clearable v-model="query.cinemaName" style="width:200px;" placeholder="请输入影院名称或编码模糊查询"></el-input>
           <!-- <cinema-id-selector v-model="query.cinemaId" style="width:200px;"></cinema-id-selector> -->
         </el-form-item>
         <el-form-item label="销售单号" v-if="query.isTemplate==='0'">
-          <el-input v-model="query.orderNo" style="width:200px;" placeholder="输入电影券订单号查询"></el-input>
+          <el-input clearable v-model="query.orderNo" style="width:200px;" placeholder="输入电影券订单号查询"></el-input>
         </el-form-item>
         <el-form-item label="平台商家">
           <channel-id-selector v-model="query.channelId" type="1"></channel-id-selector>

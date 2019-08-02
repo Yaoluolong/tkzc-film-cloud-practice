@@ -12,7 +12,7 @@
         </el-radio-group> 
         <el-form inline :model="query"  ref="form" v-show="selectType === '2'">
           <el-form-item prop="name">
-              <el-input  v-model="query.name" placeholder="请输入职员名称"></el-input>
+              <el-input  v-model="query.name" placeholder="请输入职员名称" clearable></el-input>
           </el-form-item>
           <el-form-item>
               <el-button type="primary" @click="fetchData(query.name)" >查询</el-button>

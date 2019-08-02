@@ -4,7 +4,7 @@
       <span style="display:inline-block;width:250px;">{{item.name}}</span>
       <span style="display:inline-block;" v-if="outPriceRule">影票价格范围{{priceRuleName}}{{priceRuleValue}}元可使用券，需补差价</span>
       <span v-else>需补差价&emsp;</span>
-      <el-input v-model="item.complementPrice" style="width:100px;" :disabled="disabled"></el-input>  元
+      <el-input clearable  v-model="item.complementPrice" style="width:100px;" :disabled="disabled"></el-input>  元
     </div>
   </div>
 </template>

@@ -9,7 +9,7 @@
       ref="form"
     >
       <el-form-item label="价格方案名称" prop="name">
-        <el-input v-model.trim="params.name" placeholder="请输入价格方案名称，最多10个字" style="width:320px"></el-input>
+        <el-input clearable v-model.trim="params.name" placeholder="请输入价格方案名称，最多10个字" style="width:320px"></el-input>
       </el-form-item>
       <el-form-item label="价格有效期" prop="time" v-if="params.programType==1">
         <el-date-picker
@@ -30,7 +30,7 @@
       </el-form-item>-->
       <el-form-item v-if="params.programType==2" label="价格优先级别序号" prop="sort">
         <tip content="同个公司/影院发起的活动价格，优先级别数值越大说明优先级越高。" style="width:320px;">
-          <el-input v-model.trim="params.sort" placeholder="输入价格优先序号"></el-input>
+          <el-input clearable v-model.trim="params.sort" placeholder="输入价格优先序号"></el-input>
         </tip>
       </el-form-item>
       <date-time-limit-selector
@@ -40,7 +40,7 @@
         v-model="dateTimeListParams"
       ></date-time-limit-selector>
       <!-- <el-form-item label="活动时间" prop="dateType" v-if="params.programType==2">
-         <el-select v-model="params.dateType" style="width:320px">
+         <el-select clearable v-model="params.dateType" style="width:320px">
            <el-option label="指定日期" value="1"></el-option>
            <el-option label="每月" value="2"></el-option>
          </el-select>
@@ -48,7 +48,7 @@
          <date-selector clearable v-if="params.dateType==2" v-model="params.dateDetail2" style="width:320px"></date-selector>
       </el-form-item>
       <el-form-item label="时间限制" :prop="propType" v-if="params.programType==2&&params.dateType">
-         <el-select v-model="params.timeType" style="width:320px;margin-bottom:20px" v-if="params.dateType==1">
+         <el-select clearable  v-model="params.timeType" style="width:320px;margin-bottom:20px" v-if="params.dateType==1">
            <el-option label="不限制" value="-1"></el-option>
            <el-option label="每天" value="day"></el-option>
            <el-option label="每周" value="week"></el-option>
@@ -80,7 +80,7 @@
       </el-form-item>
 
       <el-form-item label="方案类型" prop="type" v-if="params.cinemaList.length>0">
-        <el-select v-model="params.type" style="width:320px" placeholder="请选择">
+        <el-select clearable  v-model="params.type" style="width:320px" placeholder="请选择">
           <el-option value="1" label="根据影片" v-if="params.programType==2"></el-option>
           <el-option value="2" label="根据影厅"></el-option>
           <el-option value="3" label="根据制式"></el-option>
@@ -192,12 +192,12 @@
             </el-form-item>
             <el-form-item label="影院服务费" :prop="'cinemaService'+index" class="modifyPriceNo">
               调价下限&emsp;
-              <el-input style="width:140px" v-model.trim="rule.cinemaService" placeholder="0.00">
+              <el-input clearable style="width:140px" v-model.trim="rule.cinemaService" placeholder="0.00">
                 <!--  v-if="canCinemaService" -->
                 <!-- <template slot="append">元</template> -->
               </el-input>&emsp;元
               调价上限&emsp;
-              <el-input style="width:140px" v-model.trim="rule.thresholds" placeholder="0.00">
+              <el-input clearable style="width:140px" v-model.trim="rule.thresholds" placeholder="0.00">
                 <!-- v-if="canCinemaService" -->
                 <!-- <template slot="append">元</template> -->
               </el-input>&emsp;元

@@ -2,7 +2,7 @@
     <div class="app-container">
          <el-form inline label-width="120px">
             <el-form-item label="影院名称">
-              <el-input v-model="query.name" clearable placeholder="请输入影院名称或影院编码" style="width:200px;"></el-input>
+              <el-input clearable  v-model="query.name" placeholder="请输入影院名称或影院编码" style="width:200px;"></el-input>
             </el-form-item>
             <el-form-item>
               <el-button type="primary" icon="el-icon-search"  @click="refreshTable">查询</el-button>

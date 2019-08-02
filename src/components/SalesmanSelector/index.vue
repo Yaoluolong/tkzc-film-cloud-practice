@@ -1,194 +1,198 @@
 <template>
-    <div class="salemanContent">
-      <div class="salemanTitle">选择职员</div>
-      <div class="salemanContentainer">
-        <el-radio-group v-model="selectType" style="margin-top:-5%">
-          <el-radio :label="'1'">
-            所有职员
-          </el-radio>  
-          <el-radio :label="'2'">
-            指定职员
-          </el-radio>
-        </el-radio-group> 
-        <el-form inline :model="query"  ref="form" v-show="selectType === '2'">
-          <el-form-item prop="name">
-              <el-input  v-model="query.name" placeholder="请输入职员名称"></el-input>
-          </el-form-item>
-          <el-form-item>
-              <el-button type="primary" @click="fetchData(query.name)" >查询</el-button>
-          </el-form-item>
-        </el-form>
-        <div class="checkbox-plane" v-show="selectType === '2'">
-          <div class="header">
-            <el-checkbox @change="doSelectAll" v-model="selectAll">全选</el-checkbox>
-          </div>          
-          <div class="content">
-            <div class="check-item" v-for="(user,index) in UserList.list" :key="index">
-              <el-checkbox @change="doChangeFun" v-model="user.checked" >{{user.name}}</el-checkbox>
-            </div>
+  <div class="salemanContent">
+    <div class="salemanTitle">选择职员</div>
+    <div class="salemanContentainer">
+      <el-radio-group v-model="selectType" style="margin-top:-5%">
+        <el-radio :label="'1'">所有职员</el-radio>
+        <el-radio :label="'2'">指定职员</el-radio>
+      </el-radio-group>
+      <el-form inline :model="query" ref="form" v-show="selectType === '2'">
+        <el-form-item prop="name">
+          <el-input clearable v-model="query.name" placeholder="请输入职员名称"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="fetchData(query.name)">查询</el-button>
+        </el-form-item>
+      </el-form>
+      <div class="checkbox-plane" v-show="selectType === '2'">
+        <div class="header">
+          <el-checkbox @change="doSelectAll" v-model="selectAll">全选</el-checkbox>
+        </div>
+        <div class="content">
+          <div class="check-item" v-for="(user,index) in UserList.list" :key="index">
+            <el-checkbox @change="doChangeFun" v-model="user.checked">{{user.name}}</el-checkbox>
           </div>
         </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-  import { getUserListForPage } from '@/api/systemSetting'
-  import { mergeArray } from '@/utils'
-  export default {
-    props: {
-      value: [String, Array],
-      showAllChoice: Boolean
+import { getUserListForPage } from '@/api/systemSetting'
+import { mergeArray } from '@/utils'
+export default {
+  props: {
+    value: [String, Array],
+    showAllChoice: Boolean
+  },
+  data() {
+    return {
+      selectTypebak: '2',
+      selectType: '2', // 1 选择全部职员  2 指定职员
+      query: {},
+      UserList: [],
+      selectedUserList: [],
+      selectAll: false,
+      delSelect: {},
+      changeUserList: []
+    }
+  },
+  watch: {
+    selectedUserList(val) {
+      this.$emit('input', val)
     },
-    data() {
-      return {
-        selectTypebak: '2',
-        selectType: '2', // 1 选择全部职员  2 指定职员
-        query: {},
-        UserList: [],
-        selectedUserList: [],
-        selectAll: false,
-        delSelect: {},
-        changeUserList: []
-      }
-    },
-    watch: {
-      selectedUserList(val) {
-        this.$emit('input', val)
-      },
-      selectType(val) {
-        if (val === '1') {
-          this.selectedUserList = [{
+    selectType(val) {
+      if (val === '1') {
+        this.selectedUserList = [
+          {
             name: '-1',
             value: '-1'
-          }]
-        } else {
-          this.fetchData()
-        }
-      },
-      value(val) {
-        if (this.selectedUserList !== val) {
-          this.selectedUserList = val
-        }
-      },
-      delSelect(val) {
-        this.changeUserList.forEach(e => {
-          if (e.value === val.value) {
-            e.checked = false
           }
-        })
-      }
-    },
-    methods: {
-      doChangeFun(val) {
-        this.save()
-      },
-      save() {
-        this.selectTypebak = this.selectType
-        if (this.selectTypebak === '1') {
-          this.selectedUserList = mergeArray(this.selectedUserList, this.UserList.list)
-        } else {
-          this.selectedUserList = mergeArray(this.selectedUserList.filter(e => e.value !== '-1'), this.UserList.list.filter(e => e.checked))
-          // const selectFalse = mergeArray(this.selectedUserList, this.UserList.list.filter(e => JSON.stringify(e.checked) === 'false'))
-          // if (selectFalse) {
-          //   selectFalse.forEach((e, i, self) => {
-          //     if (!e.checked) {
-          //       self.splice(i, self.length)
-          //     }
-          //   })
-          // }
-          // this.changeUserList = this.UserList.list
-          // this.selectedUserList = selectFalse
-          this.$forceUpdate()
-        }
-      },
-      doSelectAll(val) {
-        this.UserList.list.forEach(e => {
-          this.$set(e, 'checked', val)
-        })
-        if (val) {
-          this.selectedUserList = this.UserList.list
-        } else {
-          this.selectedUserList = []
-        }
-      },
-      async fetchData(val) {
-        this.UserList = await getUserListForPage({ realName: val })
-  
-        this.UserList.list.forEach(e => {
-          const temp = this.selectedUserList.find((value, index, arr) => {
-            return value.value === e.value
-          })
-          if (temp) {
-            e.checked = true
-          }
-        })
-      }
-    },
-    created() {
-      if (this.showAllChoice) {
-        this.$set(this, 'selectType', '1')
-        this.selectedUserList.push({
-          name: '-1',
-          value: '-1'
-        })
+        ]
       } else {
         this.fetchData()
-        this.selectedUserList = this.value.filter(e => {
-          return e.value
-        })
       }
+    },
+    value(val) {
+      if (this.selectedUserList !== val) {
+        this.selectedUserList = val
+      }
+    },
+    delSelect(val) {
+      this.changeUserList.forEach(e => {
+        if (e.value === val.value) {
+          e.checked = false
+        }
+      })
+    }
+  },
+  methods: {
+    doChangeFun(val) {
+      this.save()
+    },
+    save() {
+      this.selectTypebak = this.selectType
+      if (this.selectTypebak === '1') {
+        this.selectedUserList = mergeArray(
+          this.selectedUserList,
+          this.UserList.list
+        )
+      } else {
+        this.selectedUserList = mergeArray(
+          this.selectedUserList.filter(e => e.value !== '-1'),
+          this.UserList.list.filter(e => e.checked)
+        )
+        // const selectFalse = mergeArray(this.selectedUserList, this.UserList.list.filter(e => JSON.stringify(e.checked) === 'false'))
+        // if (selectFalse) {
+        //   selectFalse.forEach((e, i, self) => {
+        //     if (!e.checked) {
+        //       self.splice(i, self.length)
+        //     }
+        //   })
+        // }
+        // this.changeUserList = this.UserList.list
+        // this.selectedUserList = selectFalse
+        this.$forceUpdate()
+      }
+    },
+    doSelectAll(val) {
+      this.UserList.list.forEach(e => {
+        this.$set(e, 'checked', val)
+      })
+      if (val) {
+        this.selectedUserList = this.UserList.list
+      } else {
+        this.selectedUserList = []
+      }
+    },
+    async fetchData(val) {
+      this.UserList = await getUserListForPage({ realName: val })
+
+      this.UserList.list.forEach(e => {
+        const temp = this.selectedUserList.find((value, index, arr) => {
+          return value.value === e.value
+        })
+        if (temp) {
+          e.checked = true
+        }
+      })
+    }
+  },
+  created() {
+    if (this.showAllChoice) {
+      this.$set(this, 'selectType', '1')
+      this.selectedUserList.push({
+        name: '-1',
+        value: '-1'
+      })
+    } else {
+      this.fetchData()
+      this.selectedUserList = this.value.filter(e => {
+        return e.value
+      })
     }
   }
+}
 </script>
 
 <style scoped lang="scss">
 .salemanContent {
-  border: 1px solid #DCDFE6;
-  .salemanTitle{
-    padding-left:20px;
-    border-bottom: 1px solid #DCDFE6;
-    background-color: #F2F6FC;
+  border: 1px solid #dcdfe6;
+  .salemanTitle {
+    padding-left: 20px;
+    border-bottom: 1px solid #dcdfe6;
+    background-color: #f2f6fc;
   }
-  .salemanContentainer{
-    padding:20px;
-    .salemanCont{
-      padding-top:20px;
+  .salemanContentainer {
+    padding: 20px;
+    .salemanCont {
+      padding-top: 20px;
     }
   }
-  .checkbox-plane{
-    border: 1px solid #DCDFE6;
+  .checkbox-plane {
+    border: 1px solid #dcdfe6;
     border-radius: 4px;
     overflow: hidden;
   }
-  .header{
+  .header {
     height: 40px;
     display: flex;
     align-items: center;
-    background-color: #F2F6FC;
+    background-color: #f2f6fc;
     padding: 0 20px;
-    border-bottom:  1px solid #DCDFE6;
+    border-bottom: 1px solid #dcdfe6;
   }
-  .content{
+  .content {
     padding: 0px 20px 20px 20px;
     margin: -10px 0px;
     margin-top: 0;
     max-height: 300px;
     overflow: auto;
-    .check-item{
+    .check-item {
       margin: 10px 0px;
     }
   }
-  .tag-plane{
-   border: 1px solid #DCDFE6;
-   border-radius: 4px;
-   margin-top: 20px;
-   display: flex;
-   flex-wrap: wrap;
-   padding: 10px;
-   .selected-item{
-     margin: 10px;
-   }
+  .tag-plane {
+    border: 1px solid #dcdfe6;
+    border-radius: 4px;
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    .selected-item {
+      margin: 10px;
+    }
   }
 }
 </style>

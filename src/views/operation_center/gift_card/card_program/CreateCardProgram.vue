@@ -7,11 +7,11 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item label="充值点数:" prop="point">
-        <el-input v-model="params.point" style="width:100px;"></el-input>点
+        <el-input clearable v-model="params.point" style="width:100px;"></el-input>点
         <span style="margin-left:20px;color:gray">只允许输入数值，必须大于等于0！</span>
       </el-form-item>
       <el-form-item label="充值原价:" prop="price">
-        <el-input v-model="params.price" style="width:100px;"></el-input>元
+        <el-input clearable v-model="params.price" style="width:100px;"></el-input>元
         <span style="margin-left:20px;color:gray">只允许输入数值，必须大于等于0！</span>
       </el-form-item>
       <el-form-item label="适用平台商家" prop="channelList" v-if="ok">
@@ -38,7 +38,7 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item label="充值活动价:" prop="activePrice" v-if="params.isOpenActive==='1'">
-        <el-input v-model="params.activePrice" style="width:100px;" placeholder="0.00"></el-input>元
+        <el-input clearable v-model="params.activePrice" style="width:100px;" placeholder="0.00"></el-input>元
         <span style="margin-left:20px;color:gray">只允许输入数值，必须大于等于0！</span>
       </el-form-item>
       <el-form-item label="充值活动时间:" prop="time" v-if="params.isOpenActive==='1'">
@@ -58,7 +58,7 @@
         label-width="250px"
         v-if="params.isOpenActive==='1'"
       >
-        <el-input v-model="params.activeNum" style="width:100px;"></el-input>次
+        <el-input clearable v-model="params.activeNum" style="width:100px;"></el-input>次
         <span style="margin-left:20px;color:gray">只允许输入数值，必须大于等于0！</span>
       </el-form-item>
       <el-form-item
@@ -78,7 +78,7 @@
 
       <!-- <el-form-item label="充值点数有效时间:" prop="dayNum" v-if="params.validity === '2'"  label-width="140px">
         <tip content="有效期的开始时间是充值成功的那个时间！" style="width:130px;">
-          <el-input v-model="params.dayNum"  style="width:100px;"></el-input>  天
+          <el-input clearable v-model="params.dayNum"  style="width:100px;"></el-input>  天
         </tip>
       </el-form-item>-->
     </el-form>

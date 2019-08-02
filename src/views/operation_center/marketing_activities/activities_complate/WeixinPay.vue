@@ -14,7 +14,7 @@
   	      	<!-- <el-form-item label="活动优惠标记:" :prop="`rule.activityConfig.${index}.tag`" :rules="rules.tag"> -->
   	      	<el-form-item label="活动优惠标记:" prop="tag">
             	<tip content="微信商户客户端配置的标记(goods_tag)" style="width:130px;">
-  	            <el-input placeholder="输入活动标记" v-model.trim="item.tag" style="width:120px"></el-input>
+  	            <el-input clearable  placeholder="输入活动标记" v-model.trim="item.tag" style="width:120px"></el-input>
   	          </tip>
               <div class="ruleHeader">
                 <div class="oper" style="float:right;">
@@ -31,23 +31,23 @@
             </el-form-item>
 
             <!-- <el-form-item label="减价金额:" prop="money1" style="width:300px;" v-if="rule.discountType==='1'">
-              <el-input v-model.trim="item.money" style="width:100px"></el-input>&emsp;元
+              <el-input clearable  v-model.trim="item.money" style="width:100px"></el-input>&emsp;元
             </el-form-item>
             
             <el-form-item label="随机减价区间:" prop="money1" style="width:500px;" v-if="rule.discountType==='2'">
-              <el-input v-model.trim="item.interval1" style="width:100px"></el-input>&emsp;至&emsp;<el-input v-model.trim="item.interval2" style="width:100px"></el-input>&emsp;元
+              <el-input clearable  v-model.trim="item.interval1" style="width:100px"></el-input>&emsp;至&emsp;<el-input clearable  v-model.trim="item.interval2" style="width:100px"></el-input>&emsp;元
             </el-form-item>
             
             <el-form-item label="折扣比例:" prop="scale" style="width:500px;" v-if="rule.discountType==='3'">
-              <el-input v-model.trim="item.scale" style="width:100px"></el-input>&emsp;(原价为1, 0.88即为八八折)
+              <el-input clearable  v-model.trim="item.scale" style="width:100px"></el-input>&emsp;(原价为1, 0.88即为八八折)
             </el-form-item>
             <el-form-item label="单笔优惠上限:" prop="limit" style="width:300px;" v-if="rule.discountType==='3'">
-              <el-input v-model.trim="item.limit" style="width:100px"></el-input>&emsp;元
+              <el-input clearable  v-model.trim="item.limit" style="width:100px"></el-input>&emsp;元
             </el-form-item> -->
 
             <el-form-item label="活动补贴消耗上限:" prop="ceiling" style="width:300px;">
               <tip content="本条规则发放的总金额数">
-                  <el-input v-model.trim="item.ceiling" style="width:120px"></el-input>&emsp;元
+                  <el-input clearable  v-model.trim="item.ceiling" style="width:120px"></el-input>&emsp;元
                 </tip>
             </el-form-item>
           </div>	                 

@@ -5,21 +5,21 @@
       <div style="margin-bottom:4%">平台用户基础信息</div>
       <el-form-item label="用户名" prop="userName" class="w600">
         <tip content="用于登录平台的账号">
-          <el-input v-model="params.userName" placeholder="请输入用户名,最多10个英文或数字字符"></el-input>
+          <el-input clearable  v-model="params.userName" placeholder="请输入用户名,最多10个英文或数字字符"></el-input>
         </tip>
       </el-form-item>
       <el-form-item label="用户姓名" prop="realName" class="w600">
-        <el-input v-model="params.realName" placeholder="请输入用户姓名,最多10个字"></el-input>
+        <el-input clearable  v-model="params.realName" placeholder="请输入用户姓名,最多10个字"></el-input>
       </el-form-item>
       <el-form-item label="邮箱地址" prop="email" class="w600">
-        <el-input v-model="params.email" placeholder="请输入邮箱地址"></el-input>
+        <el-input clearable  v-model="params.email" placeholder="请输入邮箱地址"></el-input>
       </el-form-item>
       <el-form-item label="手机号码" prop="mobile" class="w600">
-        <el-input v-model="params.mobile" placeholder="请输入手机号码"></el-input>
+        <el-input clearable  v-model="params.mobile" placeholder="请输入手机号码"></el-input>
       </el-form-item>
       <el-form-item label="用户类型" prop="type" placeholder="请选择用户类型" class="w600">
         <tip content="用户账户归属，用于登录时的依据可登录哪个PC后台！">
-          <el-select v-model="params.type" class="wp100" @change="chooseType">
+          <el-select clearable v-model="params.type" class="wp100" @change="chooseType">
             <el-option value="1" label="平台端用户"></el-option>
             <el-option value="2" label="卡券分销商"></el-option>
             <el-option value="3" label="渠道商户"></el-option>
@@ -74,13 +74,13 @@
         <add-cinema class="mb20" v-show="!showAddbtn" :chooseInfo="chooseInfo" ref="addCineam" @change="getChoosedId"></add-cinema>
       </div>
       <el-form-item label="登录密码" class="w600">
-        <el-input v-model="params.passWord" type="password" placeholder="请输入登录密码"></el-input>
+        <el-input clearable  v-model="params.passWord" type="password" placeholder="请输入登录密码"></el-input>
       </el-form-item>
       <el-form-item label="确认密码" class="w600">
-        <el-input v-model="params.rePassWord" type="password" placeholder="请输入确认密码"></el-input>
+        <el-input clearable  v-model="params.rePassWord" type="password" placeholder="请输入确认密码"></el-input>
       </el-form-item>
       <el-form-item label="备注信息" prop="remark" class="w600">
-        <el-input v-model="params.remark" type="textarea" :rows="4" placeholder="请输入内容"></el-input>
+        <el-input clearable  v-model="params.remark" type="textarea" :rows="4" placeholder="请输入内容"></el-input>
       </el-form-item>
       <el-form-item style="text-align:center"></el-form-item>
     </el-form>

@@ -15,10 +15,10 @@
       <div style="margin-top:2%;" v-show="showAdd">
         <el-form :model="addRegionObj" :rules="rules" ref="regionForm" label-width="100px" class="demo-ruleForm">
           <el-form-item label-width="0px" prop="regionName" style="display:inline-block;">
-            <el-input v-model.trim="addRegionObj.regionName" placeholder="请输入地区名称" style="width:239px;"></el-input>
+            <el-input clearable  v-model.trim="addRegionObj.regionName" placeholder="请输入地区名称" style="width:239px;"></el-input>
           </el-form-item>
           <el-form-item label-width="0px" prop="initials" style="display:inline-block;">
-            <el-input v-model.trim="addRegionObj.initials" placeholder="大写首字母" style="width:110px;"></el-input>
+            <el-input clearable  v-model.trim="addRegionObj.initials" placeholder="大写首字母" style="width:110px;"></el-input>
           </el-form-item>
           <el-form-item>
           <el-button type="text" @click="createRegion">保存</el-button>

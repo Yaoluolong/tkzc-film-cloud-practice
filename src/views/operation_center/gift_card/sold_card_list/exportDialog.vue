@@ -17,10 +17,10 @@
         <el-radio v-model="agur.exportType" label="1">直接导出</el-radio>
       </el-form-item>
       <el-form-item label="接收校验码" prop="mobile">
-        <el-input v-model="agur.mobile" placeholder="输入接收校验码" style="width:200px"></el-input>
+        <el-input clearable v-model="agur.mobile" placeholder="输入接收校验码" style="width:200px"></el-input>
       </el-form-item>
       <el-form-item label="导出备注" prop="remark">
-        <el-input type="textarea" :row="5" v-model="agur.remark" placeholder="请输入内容"></el-input>
+        <el-input clearable type="textarea" :row="5" v-model="agur.remark" placeholder="请输入内容"></el-input>
       </el-form-item>
     </el-form>
 

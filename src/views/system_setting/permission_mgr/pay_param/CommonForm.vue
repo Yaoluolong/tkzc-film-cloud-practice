@@ -10,10 +10,10 @@
               <pic-upload v-model="payParam.image" content="建议尺寸40*40"></pic-upload>
        </el-form-item>
        <el-form-item class="get-right" prop="describe" label="支付说明">
-            <el-input v-model.trim="payParam.describe" maxlength="10" oninput="if(value.length > 11)value = value.slice(0, 11)" placeholder="请输入内容最多10个字"></el-input>            
+            <el-input clearable  v-model.trim="payParam.describe" maxlength="10" oninput="if(value.length > 11)value = value.slice(0, 11)" placeholder="请输入内容最多10个字"></el-input>            
         </el-form-item>
         <el-form-item class="get-right2" prop="sort" label="支付排序">
-            <el-input v-model.trim="payParam.sort" placeholder="请输入内容"></el-input>
+            <el-input clearable  v-model.trim="payParam.sort" placeholder="请输入内容"></el-input>
         </el-form-item>
     </el-form>
     <slot></slot>

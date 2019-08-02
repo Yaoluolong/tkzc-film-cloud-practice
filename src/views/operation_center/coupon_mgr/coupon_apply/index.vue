@@ -10,7 +10,7 @@
         ></customer-selector>
       </el-form-item>
       <el-form-item label="券申请名称">
-        <el-input v-model="query.name" clearable placeholder="请输入券申请名称" class="w230"></el-input>
+        <el-input clearable v-model="query.name"  placeholder="请输入券申请名称" class="w230"></el-input>
       </el-form-item>
       <el-form-item label="券类型">
         <remote-select

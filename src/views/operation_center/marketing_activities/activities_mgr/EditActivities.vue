@@ -10,6 +10,7 @@
     >
       <el-form-item label="活动名称:" prop="name">
         <el-input
+          clearable
           placeholder="请输入活动名称标题,最多30个字"
           maxlength="30"
           v-model.trim="activityParams.name"
@@ -29,7 +30,7 @@
           ></el-date-picker>
         </el-form-item>
         <el-form-item label prop="showTimeCycle" v-if="time" style="display:inline-block;">
-          <el-select v-model="activityParams.showTimeCycle" style="width:320px;">
+          <el-select clearable v-model="activityParams.showTimeCycle" style="width:320px;">
             <el-option label="任意时段" value="any"></el-option>
             <el-option label="每天" value="daily"></el-option>
             <el-option label="每周" value="weekly"></el-option>
@@ -79,6 +80,7 @@
       </el-form-item>
       <el-form-item label="活动对象:" prop="objects">
         <el-input
+          clearable
           type="textarea"
           :row="10"
           class="areaTextHeight"
@@ -87,10 +89,11 @@
         ></el-input>
       </el-form-item>
       <!-- <el-form-item label="活动流程:" prop="process">
-            <el-input type="textarea" :row="10" class="areaTextHeight" v-model="activityParams.process" placeholder="请输入活动流程"></el-input>
+            <el-input clearable  type="textarea" :row="10" class="areaTextHeight" v-model="activityParams.process" placeholder="请输入活动流程"></el-input>
       </el-form-item>-->
       <el-form-item label="活动规则:" prop="rule">
         <el-input
+          clearable
           type="textarea"
           :row="10"
           class="areaTextHeight"
@@ -101,6 +104,7 @@
       <el-form-item label="前端活动标签:" style="width:400px">
         <tip content="展示在活动详情前，可填入例如“特惠”等">
           <el-input
+            clearable
             type="text"
             v-model="activityParams.tag"
             maxlength="6"

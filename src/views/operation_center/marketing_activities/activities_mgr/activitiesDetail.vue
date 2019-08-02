@@ -2,10 +2,10 @@
     <div class="app-container">
       <el-form inline index label-width="120px">
         <el-form-item label="参与用户:">
-         <el-input v-model="query.bindingMobile" style="width:200px;" placeholder="输入参与手机号"></el-input>
+         <el-input clearable  v-model="query.bindingMobile" style="width:200px;" placeholder="输入参与手机号"></el-input>
         </el-form-item>
         <el-form-item label="购票订单号:">
-          <el-input v-model="query.orderNo" style="width:200px;" placeholder="输入购票订单号"></el-input>
+          <el-input clearable  v-model="query.orderNo" style="width:200px;" placeholder="输入购票订单号"></el-input>
         </el-form-item>                 
         <el-form-item>
           <el-button type="primary" icon="el-icon-search"  @click="refreshTable">查询</el-button>

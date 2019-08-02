@@ -84,7 +84,7 @@
         title="退票退款备注"
         v-if="orderInfo.orderStatus==='6' ||orderInfo.orderStatus==='7' ||orderInfo.orderStatus==='8' ||orderInfo.orderStatus==='9'"
       >
-        <div v-for="item in orderInfo.changeLog" class="changeLog">
+        <div v-for="(item,index) in orderInfo.changeLog" class="changeLog" :key="index">
           <div class="item" style="margin-bottom:20px;">{{item.backTicketContent}}</div>
           <div class="item" style="margin-bottom:20px;">操作人：{{item.realName}}</div>
           <div class="item" style="margin-bottom:20px;">操作时间：{{item.addTime}}</div>
@@ -112,7 +112,7 @@
     >
       <el-form ref="dialogForm" :rules="formRule" :model="params">
         <el-form-item label="选择退票退款方式：" prop="type">
-          <el-select v-model="params.type">
+          <el-select clearable v-model="params.type">
             <el-option
               v-for="item in typeOptions"
               :key="item.value"
@@ -139,6 +139,7 @@
         </el-form-item>
         <el-form-item label label-width="0px" prop="remark">
           <el-input
+            clearable
             v-model="params.remark"
             type="textarea"
             :row="12"

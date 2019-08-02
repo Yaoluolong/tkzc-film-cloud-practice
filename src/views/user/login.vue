@@ -11,11 +11,11 @@
           </div>
           <el-form v-else inline ref="loginForm" :rules="loginRules" :model="loginForm">
             <el-form-item prop="username">
-              <el-input class="username-input" size="large" prefix-icon="el-icon-yonghu" v-model="loginForm.username" placeholder="请输入用户名称">
+              <el-input clearable  class="username-input" size="large" prefix-icon="el-icon-yonghu" v-model="loginForm.username" placeholder="请输入用户名称">
               </el-input>
             </el-form-item>
             <el-form-item prop="password">
-              <el-input class="password-input" size="large" type="password"  prefix-icon="el-icon-lock"  v-model="loginForm.password" placeholder="请输入登入密码">
+              <el-input clearable  class="password-input" size="large" type="password"  prefix-icon="el-icon-lock"  v-model="loginForm.password" placeholder="请输入登入密码">
               </el-input>
             </el-form-item>
             <el-form-item>
@@ -37,9 +37,9 @@
       </div>
       <template v-else>
         <el-form-item prop="username">
-          <el-input  type="text" prefix-icon="el-icon-user" v-model="loginForm.username" size="large" auto-complete="on" placeholder="账 号" /></el-form-item>
+          <el-input clearable   type="text" prefix-icon="el-icon-user" v-model="loginForm.username" size="large" auto-complete="on" placeholder="账 号" /></el-form-item>
         <el-form-item prop="password">
-          <el-input  type="password" prefix-icon="el-icon-mima"  @keyup.enter.native="handleLogin" size="large" v-model="loginForm.password" auto-complete="on" placeholder="密 码" /></el-form-item>
+          <el-input clearable   type="password" prefix-icon="el-icon-mima"  @keyup.enter.native="handleLogin" size="large" v-model="loginForm.password" auto-complete="on" placeholder="密 码" /></el-form-item>
         <!-- <el-form-item class="forget-plane">
           <el-checkbox style="float:left;color:#606266">记住密码</el-checkbox>
           <el-button style="float:right" type="text">忘记密码?</el-button>

@@ -5,7 +5,7 @@
 		        <remote-select v-model="params.type" placeholder="请选择审批类型" action="/systemApi/dict/getList" :query="{type:'approvalType'}" style="width:230px;" @change="resetData"></remote-select>
 		    </el-form-item>
 	        <el-form-item label="审批流名称：" prop="name">
-	          <el-input placeholder="请输入便于识别的审批流程名称,字数限制30个字" v-model.trim="params.name" style="width:450px"></el-input>
+	          <el-input clearable  placeholder="请输入便于识别的审批流程名称,字数限制30个字" v-model.trim="params.name" style="width:450px"></el-input>
 	        </el-form-item>
 	        <el-form-item label="适用业务员：" prop="salesmanList" label-width="130px" v-if="!$route.query.id || (ok && $route.query.id)">
 	        	<approval-man-selector ref="salesmanListComponent" v-model="params.salesmanList" :salesman="params.salesman" @salesmanChange="salesmanChange"></approval-man-selector>

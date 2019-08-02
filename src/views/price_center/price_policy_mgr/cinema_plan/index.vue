@@ -11,11 +11,16 @@
         ></remote-select>
       </el-form-item>
       <el-form-item label="影院名称">
-        <el-input v-model="query.cinemaName" style="width:200px;" placeholder="请输入影院名称或编码模糊查询"></el-input>
+        <el-input
+          clearable
+          v-model="query.cinemaName"
+          style="width:200px;"
+          placeholder="请输入影院名称或编码模糊查询"
+        ></el-input>
         <!-- <cinema-id-selector v-model="query.cinemaId" style="width:300px;"></cinema-id-selector> -->
       </el-form-item>
       <el-form-item label="影片名称">
-        <el-input v-model="query.filmName" clearable placeholder="请输入影片名称" style="width:200px;"></el-input>
+        <el-input clearable v-model="query.filmName" placeholder="请输入影片名称" style="width:200px;"></el-input>
       </el-form-item>
       <el-form-item label="排期编码">
         <el-input

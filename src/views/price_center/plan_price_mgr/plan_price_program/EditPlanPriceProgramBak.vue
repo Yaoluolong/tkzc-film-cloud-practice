@@ -2,10 +2,10 @@
   <div class="app-container">
     <el-form label-width="130px" label-position="left" style="width:1000px;" :model="params" :rules="rules" ref="form">
       <el-form-item label="调价方案名称" prop="name" >
-          <el-input v-model="params.name" placeholder="请输入调价方案名称" style="width:320px"></el-input>
+          <el-input clearable  v-model="params.name" placeholder="请输入调价方案名称" style="width:320px"></el-input>
       </el-form-item>
       <el-form-item label="归属影院策略组" prop="policyGroupId">
-        <el-select v-model="form.policyGroupId" placeholder="请选择" style="width:320px">
+        <el-select clearable v-model="form.policyGroupId" placeholder="请选择" style="width:320px">
           <el-option v-for="item in groupOptions" :key="item.index" :label="item.name" :value="item.value"></el-option>
         </el-select>
       </el-form-item>
@@ -17,13 +17,13 @@
        </el-form-item>
       <div class="active" v-for="Item in ajustForm" :key="Item.index">
         <el-form-item label="调价场次" prop="type">
-          <el-select v-model="form.type" style="width:320px;margin-right:20px;" :disabled="ajustForm.length > 1 && Item.index > 0 ? true : false">
+          <el-select clearable v-model="form.type" style="width:320px;margin-right:20px;" :disabled="ajustForm.length > 1 && Item.index > 0 ? true : false">
             <el-option value="-1" label="不限场次"></el-option>
             <el-option value="day" label="场次区间每天"></el-option>
             <el-option value="week" label="场次区间每周"></el-option>
           </el-select>
           <span v-if="form.type == 'week'">
-            <el-select v-model="Item.week" multiple placeholder="请选择星期" style="width:150px;margin-right:20px;">
+            <el-select clearable v-model="Item.week" multiple placeholder="请选择星期" style="width:150px;margin-right:20px;">
               <el-option v-for="item in weekOptions" :key="item.value" :label="item.name" :value="item.value"></el-option>
             </el-select>
             <el-time-picker is-range v-model="Item.weekTime" value-format="HH:mm" format="HH:mm" range-separator="-" start-placeholder="开始时间" end-placeholder="结束时间" placeholder="选择时间范围" style="width:320px;"></el-time-picker>
@@ -32,12 +32,12 @@
         </el-form-item>
 
         <el-form-item v-if="form.type" label="调整票价" prop="type">
-          <el-select v-model="Item.floatType" style="width:320px;margin-right:20px;">
+          <el-select clearable v-model="Item.floatType" style="width:320px;margin-right:20px;">
             <el-option value="add" label="增加"></el-option>
             <el-option value="sub" label="减少"></el-option>
           </el-select>
           <label style="font-weight:normal">平台票价</label>
-          <el-input v-model="Item.ticketPrice" placeholder="0.00" style="width:80px;"></el-input>
+          <el-input clearable  v-model="Item.ticketPrice" placeholder="0.00" style="width:80px;"></el-input>
           <span>&nbsp;元</span>
           <span class="add-button">           
             <el-tooltip content="最多添加3条立减规则！" placement="right-start" effect="dark">

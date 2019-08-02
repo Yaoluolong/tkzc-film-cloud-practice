@@ -9,7 +9,7 @@
         <el-checkbox label="2" v-model="params.scopes">活动模块</el-checkbox>
       </el-form-item>
       <el-form-item label="活动链接:" prop="link">
-        <el-input v-model="params.link"></el-input>
+        <el-input clearable  v-model="params.link"></el-input>
       </el-form-item>
     </el-form>
 </template>

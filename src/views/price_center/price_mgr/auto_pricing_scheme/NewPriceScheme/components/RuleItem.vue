@@ -21,7 +21,7 @@
         <div>
           <el-radio v-model="ruleData.timeType" :label="'2'">
             <span>有效期内，指定</span>
-            <el-select v-model="ruleData.dateType" @change="changeDateType">
+            <el-select clearable v-model="ruleData.dateType" @change="changeDateType">
               <el-option label="周期" :value="'1'"></el-option>
               <el-option label="日期" :value="'2'"></el-option>
             </el-select>
@@ -61,7 +61,7 @@
           @change="onInterfaceIdChange"
         ></common-select>
         <span>选择</span>
-        <el-select v-model="ruleData.priceType">
+        <el-select clearable v-model="ruleData.priceType">
           <el-option
             v-for="(item,index) in PRICING_METHODS"
             :key="index"
@@ -82,11 +82,11 @@
       <el-form-item label="配置价格">
         <el-form-item prop="price">
           <span>参考第三方价格，统一</span>
-          <el-select v-model="ruleData.type" class="w100">
+          <el-select clearable v-model="ruleData.type" class="w100">
             <el-option :value="'1'" label="增加"></el-option>
             <el-option :value="'2'" label="减少"></el-option>
           </el-select>
-          <el-input v-model="ruleData.price" placeholder="0.00" class="w160">
+          <el-input clearable v-model="ruleData.price" placeholder="0.00" class="w160">
             <template slot="append">元</template>
           </el-input>
           <el-tooltip placement="top-start" content="配置价格，是参考第三方的定价，在常规价格上进行调价">
@@ -137,7 +137,11 @@ export default {
       priceDateRange: null,
       priceRulesForm: {},
       priceFormRules: {
-        interfaceId: { required: true, trigger: 'change', message: '请选择第三方平台' },
+        interfaceId: {
+          required: true,
+          trigger: 'change',
+          message: '请选择第三方平台'
+        },
         price: [
           { required: true, trigger: 'blur', message: '请输入价格' },
           { validator: STRING_NUMBER, trigger: 'blur' }
@@ -217,9 +221,11 @@ export default {
     },
     validate() {
       const priomiseArry = []
-      const form = this.$refs.priceRulesForm && this.$refs.priceRulesForm.validate()
+      const form =
+        this.$refs.priceRulesForm && this.$refs.priceRulesForm.validate()
       if (form) priomiseArry.push(form)
-      const timeRuleList = this.$refs.timeRuleList && this.$refs.timeRuleList.validateAll()
+      const timeRuleList =
+        this.$refs.timeRuleList && this.$refs.timeRuleList.validateAll()
       if (timeRuleList) priomiseArry.push(timeRuleList)
       return Promise.all(priomiseArry)
     }

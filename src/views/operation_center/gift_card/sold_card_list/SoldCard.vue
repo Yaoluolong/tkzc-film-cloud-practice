@@ -60,6 +60,7 @@
         </el-form-item>
         <el-form-item label="销售数量:" prop="num">
           <el-input
+            clearable
             v-model.trim="cardInfo.num"
             placeholder="0"
             style="width:100px;"
@@ -71,12 +72,18 @@
           >系统已根据您所填写的号码段自动统计出销售数量!</span>
         </el-form-item>
         <el-form-item label="销售总额:" prop="amount">
-          <el-input v-model.trim="cardInfo.amount" placeholder="0.00" style="width:100px;"></el-input>元
+          <el-input
+            clearable
+            v-model.trim="cardInfo.amount"
+            placeholder="0.00"
+            style="width:100px;"
+          ></el-input>元
           <span style="margin-left:20px;color:gray">只能是数值，且必须大于等于0，限制两位小数</span>
         </el-form-item>
         <div>
           <el-form-item label="销售比例:" prop="scalePoint" style="display:inline-block">
             <el-input
+              clearable
               type="text"
               v-model="cardInfo.scalePrice"
               placeholder="票面金额单位元"
@@ -85,6 +92,7 @@
           </el-form-item>:
           <el-form-item prop="scalePoint" label-width="0px" style="display:inline-block">
             <el-input
+              clearable
               type="text"
               v-model="cardInfo.scalePoint"
               placeholder="卡内金额单位点"
@@ -94,8 +102,15 @@
           <p style="margin-left:140px;margin-top:0;color:gray">销售的时候卡面金额与卡内点数的比例，默认1:10建议不修改！</p>
         </div>
         <el-form-item label="卡内金额" prop="unitPrice" style="display:inline-block">
-          <el-input type="text" v-model="cardInfo.unitPrice" placeholder="0" style="width:100px;"></el-input>元，折合卡内点数:
           <el-input
+            clearable
+            type="text"
+            v-model="cardInfo.unitPrice"
+            placeholder="0"
+            style="width:100px;"
+          ></el-input>元，折合卡内点数:
+          <el-input
+            clearable
             type="text"
             disabled
             :value="cardInfo.unitPrice * cardInfo.scalePoint /cardInfo.scalePrice || '0'"
@@ -116,6 +131,7 @@
         </el-form-item>
         <el-form-item label="销售备注:">
           <el-input
+            clearable
             type="textarea"
             :row="5"
             v-model="cardInfo.remark"
@@ -124,6 +140,7 @@
         </el-form-item>
         <el-form-item label="使用说明:">
           <el-input
+            clearable
             type="textarea"
             :row="5"
             v-model="cardInfo.useExplain"
@@ -149,7 +166,7 @@
         ref="invoiceInfoForm"
       >
         <el-form-item label="发票类型:" prop="invoiceType">
-          <el-select v-model="invoiceInfo.invoiceType" style="width:400px;">
+          <el-select clearable  v-model="invoiceInfo.invoiceType" style="width:400px;">
             <el-option
               v-for="invoiceType in allInvoiceTypes"
               :key="invoiceType.value"
@@ -160,7 +177,12 @@
         </el-form-item>
         <template v-if="invoiceInfo.invoiceType && invoiceInfo.invoiceType !== '1'">
           <el-form-item label="发票抬头:" prop="title">
-            <el-input v-model.trim="invoiceInfo.title" placeholder="输入发票抬头的信息" style="width:200px;"></el-input>
+            <el-input
+              clearable
+              v-model.trim="invoiceInfo.title"
+              placeholder="输入发票抬头的信息"
+              style="width:200px;"
+            ></el-input>
           </el-form-item>
           <!-- 企业相关START -->
           <el-form-item
@@ -168,10 +190,16 @@
             prop="taxNo"
             v-if="invoiceInfo.invoiceType === '4' || invoiceInfo.invoiceType === '6' || invoiceInfo.invoiceType === '5'"
           >
-            <el-input v-model.trim="invoiceInfo.taxNo" placeholder="请输入内容" style="width:200px;"></el-input>
+            <el-input
+              clearable
+              v-model.trim="invoiceInfo.taxNo"
+              placeholder="请输入内容"
+              style="width:200px;"
+            ></el-input>
           </el-form-item>
           <el-form-item label="企业地址:" prop="companyAddress" v-if="invoiceInfo.invoiceType === '6'">
             <el-input
+              clearable
               v-model.trim="invoiceInfo.companyAddress"
               placeholder="请输入内容"
               style="width:200px;"
@@ -179,16 +207,27 @@
           </el-form-item>
           <el-form-item label="电话号码:" prop="companyMobile" v-if="invoiceInfo.invoiceType === '6'">
             <el-input
+              clearable
               v-model.trim="invoiceInfo.companyMobile"
               placeholder="请输入内容"
               style="width:200px;"
             ></el-input>
           </el-form-item>
           <el-form-item label="开户银行:" prop="bank" v-if="invoiceInfo.invoiceType === '6'">
-            <el-input v-model.trim="invoiceInfo.bank" placeholder="请输入内容" style="width:200px;"></el-input>
+            <el-input
+              clearable
+              v-model.trim="invoiceInfo.bank"
+              placeholder="请输入内容"
+              style="width:200px;"
+            ></el-input>
           </el-form-item>
           <el-form-item label="银行账号:" prop="bankNo" v-if="invoiceInfo.invoiceType === '6'">
-            <el-input v-model.trim="invoiceInfo.bankNo" placeholder="请输入内容" style="width:200px;"></el-input>
+            <el-input
+              clearable
+              v-model.trim="invoiceInfo.bankNo"
+              placeholder="请输入内容"
+              style="width:200px;"
+            ></el-input>
           </el-form-item>
           <!-- 企业相关END -->
           <!-- 个人相关START -->
@@ -198,6 +237,7 @@
             v-if="invoiceInfo.invoiceType === '2' || invoiceInfo.invoiceType === '3'"
           >
             <el-input
+              clearable
               v-model.trim="invoiceInfo.idNumber"
               placeholder="输入索要发票人身份证号码"
               style="width:200px;"
@@ -210,6 +250,7 @@
             v-if="invoiceInfo.invoiceType === '3' || invoiceInfo.invoiceType === '5'"
           >
             <el-input
+              clearable
               v-model.trim="invoiceInfo.receiveEmail"
               placeholder="输入索要发票人电子邮箱"
               style="width:200px;"
@@ -254,6 +295,7 @@
         </el-form-item>
         <el-form-item label="转账银行:" prop="transferBank" v-if="payInfo.payType === '1'">
           <el-input
+            clearable
             v-model.trim="payInfo.transferBank"
             placeholder="请输入银行名称或账户"
             style="width:300px;"
@@ -264,7 +306,12 @@
           prop="transferMoney"
           v-if="payInfo.payType"
         >
-          <el-input v-model.trim="payInfo.transferMoney" placeholder="0.00" style="width:100px;"></el-input>元
+          <el-input
+            clearable
+            v-model.trim="payInfo.transferMoney"
+            placeholder="0.00"
+            style="width:100px;"
+          ></el-input>元
         </el-form-item>
         <el-form-item
           :label="payInfo.payType==='1'?'转账人:':'付款人:'"
@@ -272,6 +319,7 @@
           v-if="payInfo.payType"
         >
           <el-input
+            clearable
             v-model.trim="payInfo.transferPeople"
             placeholder="请输入转账人姓名"
             style="width:200px;"

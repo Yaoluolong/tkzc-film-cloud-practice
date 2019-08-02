@@ -73,7 +73,7 @@
                   <el-form-item label="优惠方式:">
                     <span>{{query.weixinPay.discountTypeStr}}</span>
                   </el-form-item>
-                  <div v-for="(item,index) in query.weixinPay.activityConfig">
+                  <div v-for="(item,index) in query.weixinPay.activityConfig" :key="index">
                     <el-form-item label="活动优惠标记:">
                       <span>{{item.tag}}</span>
                     </el-form-item>
@@ -175,7 +175,7 @@
                   {{query.filmConfig.interval1}}至{{query.filmConfig.interval2}}&emsp;元
                 </el-form-item>
                 <el-form-item label="活动可用支付方式:">
-                  <div v-for="(item,index) in query.payTypeDetail">
+                  <div v-for="(item,index) in query.payTypeDetail" :key="index">
                     <span>{{index}}:{{item.join(',')}}</span>
                   </div>
                 </el-form-item>
@@ -185,7 +185,7 @@
               <div>=============================================</div> 
               <h3>审核环节:一级审批</h3>
               <el-form-item label="审核意见:" prop="comment">
-                <el-input v-model="params.comment" type="textarea" rows="5" style="width:400px;"></el-input>
+                <el-input clearable  v-model="params.comment" type="textarea" rows="5" style="width:400px;"></el-input>
               </el-form-item>
                 <el-button style="margin-top:20px;" type="primary" @click="save('1','1')">同意</el-button>
               <el-button style="margin-top:20px;" type="primary" @click="save('1','-1')">退回</el-button>
@@ -211,7 +211,7 @@
               <div>=============================================</div> 
               <h3>审核环节:二级审批</h3>
               <el-form-item label="审核意见:" prop="comment">
-                <el-input v-model="params.comment" type="textarea" rows="5" style="width:400px;"></el-input>
+                <el-input clearable  v-model="params.comment" type="textarea" rows="5" style="width:400px;"></el-input>
               </el-form-item>
                 <el-button style="margin-top:20px;" type="primary" @click="save('2','1')">同意</el-button>
               <el-button style="margin-top:20px;" type="primary" @click="save('2','-1')">退回</el-button>

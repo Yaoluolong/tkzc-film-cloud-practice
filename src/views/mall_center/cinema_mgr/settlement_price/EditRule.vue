@@ -3,7 +3,7 @@
     <el-card shadow="never">
       <el-form inline ref="form" :model="params" :rules="rules">
         <el-form-item label="规则名称" prop="name">
-          <el-input v-model.trim="params.name" style="width:200px" placeholder="输入影院结算价方案名称"></el-input>
+          <el-input clearable v-model.trim="params.name" style="width:200px" placeholder="输入影院结算价方案名称"></el-input>
         </el-form-item>
         <br />
         <el-form-item label="规则时间" prop="time" required>
@@ -19,7 +19,7 @@
         </el-form-item>
         <br />
         <el-form-item label="结算规则" prop="type">
-          <el-select @change="checkCinemaList" v-model="params.type">
+          <el-select clearable @change="checkCinemaList" v-model="params.type">
             <el-option :label="'按影厅'" :value="'1'"></el-option>
             <el-option :label="'按制式'" :value="'2'"></el-option>
           </el-select>
@@ -72,13 +72,13 @@
           <span style="display:flex">
             结算价: &nbsp;
             <!-- <el-from-item prop="specialType"> -->
-            <el-select v-model="params.specialType" style="width:100px">
+            <el-select clearable v-model="params.specialType" style="width:100px">
               <el-option :value="'1'" label="增加"></el-option>
               <el-option :value="'2'" label="减少"></el-option>
             </el-select>&nbsp;&nbsp;&nbsp;
             <!-- </el-from-item> -->
             <!-- <el-from-item prop="specialMoney"> -->
-            <el-input v-model.trim="params.specialMoney" style="width:100px" placeholder="0.00"></el-input>&nbsp;&nbsp;&nbsp;
+            <el-input clearable v-model.trim="params.specialMoney" style="width:100px" placeholder="0.00"></el-input>&nbsp;&nbsp;&nbsp;
             <!-- </el-from-item> -->
           </span>
         </el-form-item>

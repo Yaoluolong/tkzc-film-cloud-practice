@@ -6,6 +6,7 @@
       </el-form-item>
       <el-form-item label="销售时间">
         <el-date-picker
+        clearable 
           unlink-panels
           v-model="query.time"
           style="width:230px;"

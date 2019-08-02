@@ -118,7 +118,7 @@
             </div>
             
             <!-- <el-form-item label="审核意见:" v-if="workflow.log.length===0" prop="comment" style="width:400px;">
-              <el-input v-model="params.comment" type="textarea" rows="5"></el-input>
+              <el-input clearable v-model="params.comment" type="textarea" rows="5"></el-input>
             </el-form-item> -->
             <div v-for="(item,index) in workflow.log" :key="index" v-if="activityInfo.audit_code!=='1'">            
               <div v-if="item.work_status!=='待审批'">

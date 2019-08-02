@@ -17,7 +17,7 @@
         <span>{{params.sellTicketAmount}}</span>  元
   		</el-form-item>
   		<el-form-item label="合作方对账人：" prop="partnerCheckPeople">                
-        <el-input v-model="query.partnerCheckPeople" style="width:220px;"></el-input>
+        <el-input clearable  v-model="query.partnerCheckPeople" style="width:220px;"></el-input>
       </el-form-item>
       <el-form-item label="对账时间：" prop="checkTime">
         <el-date-picker
@@ -27,11 +27,11 @@
         </el-date-picker>
       </el-form-item>
       <el-form-item label="本次结算金额：" prop="settlementPrice">                
-        <el-input v-model.number="query.settlementPrice" palceholder="0.00" style="width:220px;"></el-input>  元
+        <el-input clearable  v-model.number="query.settlementPrice" palceholder="0.00" style="width:220px;"></el-input>  元
       </el-form-item>
       <el-form-item label="继续缴纳预存金：" prop="prePayAmount">                
-        <el-input v-model="query.prePayAmount" palceholder="0.00" style="width:220px;"></el-input>  元</br>
-        <span style="color:grey;font-size:14px;">确认对账成功后，下一次预警使用的合作方预付金额度将根据（原合作方预付金额度减去本次结算金额加上继续缴纳预存金额度）</span>
+        <el-input clearable  v-model="query.prePayAmount" palceholder="0.00" class="w220 mr10"></el-input>元
+        <span class="db fs14" style="color:grey;">确认对账成功后，下一次预警使用的合作方预付金额度将根据（原合作方预付金额度减去本次结算金额加上继续缴纳预存金额度）</span>
       </el-form-item>
       <el-form-item label="缴纳时间：" prop="prePayTime">
         <el-date-picker

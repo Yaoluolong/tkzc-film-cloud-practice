@@ -5,19 +5,19 @@
        <pic-upload v-model.trim="params.headImg" class="avatar" title="点击更换头像"></pic-upload>
       </el-form-item>
       <el-form-item label="用户名" prop="userName">
-        <el-input v-model.trim="params.userName" placeholder="请输入用户名" disabled></el-input>
+        <el-input clearable  v-model.trim="params.userName" placeholder="请输入用户名" disabled></el-input>
       </el-form-item>
       <el-form-item label="电子邮箱" prop="email">
-        <el-input v-model.trim="params.email" placeholder="请输入电子邮箱" disabled></el-input>
+        <el-input clearable  v-model.trim="params.email" placeholder="请输入电子邮箱" disabled></el-input>
       </el-form-item>
       <el-form-item label="旧密码" prop="oldPassWord">
-        <el-input type="password" v-model.trim="params.oldPassWord" placeholder="请输入旧密码"></el-input>
+        <el-input clearable  type="password" v-model.trim="params.oldPassWord" placeholder="请输入旧密码"></el-input>
       </el-form-item>
       <el-form-item label="新密码" prop="newPassWord">
-        <el-input type="password" v-model.trim="params.newPassWord" placeholder="请输入新密码"></el-input>
+        <el-input clearable  type="password" v-model.trim="params.newPassWord" placeholder="请输入新密码"></el-input>
       </el-form-item>
       <el-form-item label="确认密码" prop="rePassWord">
-        <el-input type="password" v-model.trim="params.rePassWord" placeholder="请输入确认密码"></el-input>
+        <el-input clearable  type="password" v-model.trim="params.rePassWord" placeholder="请输入确认密码"></el-input>
       </el-form-item>
       <el-form-item style="text-align:center">
         <el-button type="primary" @click="save">保存</el-button>

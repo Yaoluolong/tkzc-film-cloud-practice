@@ -10,6 +10,7 @@
     >
       <el-form-item label="影院编码" prop="cinemaId">
         <el-input
+          clearable
           v-model.trim="params.cinemaId"
           :disabled="cinemaIdInput"
           placeholder="请输入广电下发影院编码"
@@ -18,6 +19,7 @@
       </el-form-item>
       <el-form-item label="影院名称" prop="cinemaName">
         <el-input
+          clearable
           v-model.trim="params.cinemaName"
           placeholder="请输入影院名称,最多50个字"
           style="width:320px;"
@@ -29,16 +31,18 @@
             ref="city"
             v-model="params.area"
             :rang="2"
+            clearable
             placeholder="请选择"
             style="width:320px;"
           ></city-cascader>
         </el-form-item>
         <el-form-item label="影院详细地址" prop="address">
-          <el-input v-model.trim="params.address" placeholder="如道路,门牌号,楼栋号等"></el-input>
+          <el-input clearable v-model.trim="params.address" placeholder="如道路,门牌号,楼栋号等"></el-input>
         </el-form-item>
       </div>
       <el-form-item label="地址经纬度" prop="longitudeAndlatitude">
         <el-input
+          clearable
           v-model="params.longitudeAndlatitude"
           placeholder="维度前经度后,若南纬西经值前加'-',如:-23.03"
           style="width:320px;"
@@ -49,10 +53,17 @@
         <el-input v-model.trim="params.website"   placeholder="请输入影院官网" style="width:320px;"></el-input>
       </el-form-item>-->
       <el-form-item label="影院简介/公告" prop="summary">
-        <el-input v-model.trim="params.summary" type="textarea" :rows="4" placeholder="输入影院简介/公告"></el-input>
+        <el-input
+          clearable
+          v-model.trim="params.summary"
+          type="textarea"
+          :rows="4"
+          placeholder="输入影院简介/公告"
+        ></el-input>
       </el-form-item>
       <el-form-item label="接入有效期" prop="time">
         <el-date-picker
+          clearable
           unlink-panels
           v-model="params.time"
           type="daterange"
@@ -65,14 +76,14 @@
       <div class="form-item-row">
         <el-form-item label="同步影院排期" prop="requestPlanDays">
           <tip content="可从影院对接的系统商处同步回最大的影片排期天数">
-            <el-input v-model.trim="params.requestPlanDays" placeholder="请输入">
+            <el-input clearable v-model.trim="params.requestPlanDays" placeholder="请输入">
               <template slot="prepend">系统当前时间往后</template>
             </el-input>
           </tip>
         </el-form-item>
         <el-form-item label="同步排期间隔" prop="requestPlanTimes">
           <tip content="每次从影院对接的系统商处同步排期的时间间隔。">
-            <el-input v-model.trim="params.requestPlanTimes" placeholder="请输入">
+            <el-input clearable v-model.trim="params.requestPlanTimes" placeholder="请输入">
               <template slot="append">分钟</template>
             </el-input>
           </tip>
@@ -81,13 +92,13 @@
       <div class="form-item-row">
         <el-form-item label="保留排期数据" prop="remainPlanDays">
           <tip content="对放映过后的影片排期在数据库内保存的时间周期。">
-            <el-input v-model.trim="params.remainPlanDays" placeholder="请输入">
+            <el-input clearable v-model.trim="params.remainPlanDays" placeholder="请输入">
               <template slot="append">天</template>
             </el-input>
           </tip>
         </el-form-item>
         <el-form-item label="排期停售时间" prop="stopTime">
-          <el-input v-model.trim="params.stopTime" placeholder="请输入">
+          <el-input clearable v-model.trim="params.stopTime" placeholder="请输入">
             <template slot="prepend">开映前</template>
             <template slot="append">分钟停止售卖</template>
           </el-input>
@@ -117,21 +128,37 @@
           </template>
           <template v-if="params.serviceTelType==2">
             <el-form-item label="微信H5" prop="wap1" class="inner-item">
-              <el-input v-model.trim="params.wap1" placeholder="请输入客服电话1"></el-input>
-              <el-input v-model.trim="params.wap2" placeholder="请输入客服电话2" style="margin-left:20px"></el-input>
+              <el-input clearable v-model.trim="params.wap1" placeholder="请输入客服电话1"></el-input>
+              <el-input
+                clearable
+                v-model.trim="params.wap2"
+                placeholder="请输入客服电话2"
+                style="margin-left:20px"
+              ></el-input>
             </el-form-item>
             <el-form-item label="移动APP" prop="app1" class="inner-item">
-              <el-input v-model="params.app1" placeholder="请输入客服电话1"></el-input>
-              <el-input v-model="params.app2" placeholder="请输入客服电话2" style="margin-left:20px"></el-input>
+              <el-input clearable v-model="params.app1" placeholder="请输入客服电话1"></el-input>
+              <el-input
+                clearable
+                v-model="params.app2"
+                placeholder="请输入客服电话2"
+                style="margin-left:20px"
+              ></el-input>
             </el-form-item>
             <el-form-item label="小程序" prop="web1" class="inner-item">
-              <el-input v-model="params.web1" placeholder="请输入客服电话1"></el-input>
-              <el-input v-model="params.web2" placeholder="请输入客服电话2" style="margin-left:20px"></el-input>
+              <el-input clearable v-model="params.web1" placeholder="请输入客服电话1"></el-input>
+              <el-input
+                clearable
+                v-model="params.web2"
+                placeholder="请输入客服电话2"
+                style="margin-left:20px"
+              ></el-input>
             </el-form-item>
           </template>
           <el-form-item v-else prop="serviceTel1" class="inner-item">
-            <el-input v-model.trim="params.serviceTel1" placeholder="请输入客服电话1"></el-input>
+            <el-input clearable v-model.trim="params.serviceTel1" placeholder="请输入客服电话1"></el-input>
             <el-input
+              clearable
               v-model.trim="params.serviceTel2"
               placeholder="请输入客服电话2"
               style="margin-left:20px;"
@@ -150,7 +177,7 @@
     </el-form>
     <el-dialog title="标注" :visible.sync="dialogVisible">
       <div style="margin-bottom:20px;">
-        <el-input v-model.trim="mapAddress" placeholder="请输入详细地址" style="width:50%;"></el-input>
+        <el-input clearable v-model.trim="mapAddress" placeholder="请输入详细地址" style="width:50%;"></el-input>
         <el-button type="primary" @click="searchMap()">查询</el-button>
         <el-button type="success" @click="mapLabel()" style="float:right">标注</el-button>
       </div>

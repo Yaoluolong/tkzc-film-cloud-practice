@@ -2,28 +2,35 @@
   <div class="cinemaContent">
     <div class="cinemaTitle">选择影院</div>
     <div class="cinemaContentainer">
-      <el-form inline :model="query"  ref="form" class="cinemaCont">     
+      <el-form inline :model="query" ref="form" class="cinemaCont">
         <el-form-item class="cityProp">
-            <span style="font-weight:bold;margin-right:10px;">省/自治区/直辖市</span>
-            <city-cascader v-model.trim="query.area" :rang="1" :clearable="true" placeholder="请选择" style="width:170px;"></city-cascader>
+          <span style="font-weight:bold;margin-right:10px;">省/自治区/直辖市</span>
+          <city-cascader
+            v-model.trim="query.area"
+            :rang="1"
+            :clearable="true"
+            placeholder="请选择"
+            style="width:170px;"
+          ></city-cascader>
         </el-form-item>
         <div style="display:inline-block;">
-          <el-form-item >
-              <el-input style="width:300px" v-model.trim="query.cinemaName" placeholder="请输入影院名称"></el-input>
+          <el-form-item>
+            <el-input
+              clearable
+              style="width:300px"
+              v-model.trim="query.cinemaName"
+              placeholder="请输入影院名称"
+            ></el-input>
           </el-form-item>
           <el-form-item style="margin-left:60px">
-              <el-button type="primary" @click="clearCinemaListAndFetchData(query.cinemaName)" >搜索</el-button>
+            <el-button type="primary" @click="clearCinemaListAndFetchData(query.cinemaName)">搜索</el-button>
           </el-form-item>
-        </div>              
+        </div>
       </el-form>
       <div style="margin-top:20px;">
-        <el-radio-group v-model="cinemaTypeOut" >
-          <el-radio :label="'1'">
-            所有影院
-          </el-radio>  
-          <el-radio :label="'2'">
-            指定影院
-          </el-radio>
+        <el-radio-group v-model="cinemaTypeOut">
+          <el-radio :label="'1'">所有影院</el-radio>
+          <el-radio :label="'2'">指定影院</el-radio>
         </el-radio-group>
       </div>
       <div class="el-transfer" v-if="cinemaTypeOut === '2'">
@@ -36,25 +43,30 @@
           :outInterfaceTypeId="interfaceTypeId"
           :cinemaTypeOut="cinemaType"
           :outArea="query.area"
-          :outCinemaName="query.cinemaName"          
+          :outCinemaName="query.cinemaName"
           :title="titles[0] || t('el.transfer.titles.0')"
           :default-checked="leftDefaultChecked"
-          @checked-change="onSourceCheckedChange">
+          @checked-change="onSourceCheckedChange"
+        >
           <slot name="left-footer"></slot>
         </transfer-panel>
         <div class="el-transfer__buttons">
           <el-button
             type="primary"
             :class="['el-transfer__button', hasButtonTexts ? 'is-with-texts' : '']"
-            @click.native="addToRight">
-            <span>-></span><!--此处本人更改为自己所需按钮，按钮事件名字也从addToLeft改为allToLeft-->
+            @click.native="addToRight"
+          >
+            <span>-></span>
+            <!--此处本人更改为自己所需按钮，按钮事件名字也从addToLeft改为allToLeft-->
           </el-button>
           <el-button
             type="primary"
             :class="['el-transfer__button', hasButtonTexts ? 'is-with-texts' : '']"
             @click.native="addToLeft"
-            style="margin-left:0;">
-            <span><-</span><!--此处本人更改为自己所需按钮，按钮事件名字也从addToRight改为allToRight-->
+            style="margin-left:0;"
+          >
+            <span><-</span>
+            <!--此处本人更改为自己所需按钮，按钮事件名字也从addToRight改为allToRight-->
           </el-button>
         </div>
         <transfer-panel
@@ -67,7 +79,8 @@
           :title="titles[1] || t('el.transfer.titles.1')"
           :default-checked="rightDefaultChecked"
           :placeholder="filterPlaceholder || t('el.transfer.filterPlaceholder')"
-          @checked-change="onTargetCheckedChange">
+          @checked-change="onTargetCheckedChange"
+        >
           <slot name="right-footer"></slot>
         </transfer-panel>
       </div>
@@ -81,7 +94,7 @@ import ElButton from 'element-ui/packages/button'
 import TransferPanel from './transferPanel.vue'
 import { getCinemaList } from '@/api/systemSetting'
 
-export default{
+export default {
   name: 'ElTransfer',
   components: { CityCascader, TransferPanel, ElButton },
   props: {
@@ -178,25 +191,25 @@ export default{
 
     sourceData: {
       get: function() {
-        return this.data.filter(item => this.value.indexOf(item[this.props.key]) === -1)
+        return this.data.filter(
+          item => this.value.indexOf(item[this.props.key]) === -1
+        )
       },
-      set: function() {
-
-      }
+      set: function() {}
     },
 
     targetData: {
       get: function() {
         return this.targetOrder === 'original'
-          ? this.totalCinemaList.filter(item => this.value.indexOf(item[this.props.key]) > -1) // 从所有影城中渲染匹配key
+          ? this.totalCinemaList.filter(
+            item => this.value.indexOf(item[this.props.key]) > -1
+          ) // 从所有影城中渲染匹配key
           : this.value.map(key => this.dataObj[key])
         /* return this.targetOrder === 'original'
           ? this.data.filter(item => this.value.indexOf(item[this.props.key]) > -1)
           : this.value.map(key => this.dataObj[key])*/
       },
-      set: function() {
-
-      }
+      set: function() {}
     },
 
     hasButtonTexts() {
@@ -207,7 +220,8 @@ export default{
     value(val) {
       this.$emit('ElFormItem', 'el.form.change', val)
     },
-    cinemaTypeOut(val, oldval) { //  @cinemaTypeChange="cinemaTypeChange"接收子组件;子组件传cinemaType切换给父组件
+    cinemaTypeOut(val, oldval) {
+      //  @cinemaTypeChange="cinemaTypeChange"接收子组件;子组件传cinemaType切换给父组件
       this.$emit('cinemaTypeChange', val)
     },
     interfaceTypeId(val) {
@@ -269,7 +283,7 @@ export default{
       // this.addToLeft()// 在此处直接把选中项添加到左边框，实现单击操作，而不需通过按钮再次操作
     },
     allToLeft() {
-      this.$refs.leftPanel.handleAllCheckedChange(true)// 直接出发全选事件，父组件调用子组件方法需要通过this.$refs.组件ref值.子组件方法名
+      this.$refs.leftPanel.handleAllCheckedChange(true) // 直接出发全选事件，父组件调用子组件方法需要通过this.$refs.组件ref值.子组件方法名
     },
     addToLeft() {
       const currentValue = this.value.slice()
@@ -283,7 +297,7 @@ export default{
       this.$emit('change', currentValue, 'left', this.rightChecked)
     },
     allToRight() {
-      this.$refs.rightPanel.handleAllCheckedChange(true)// 直接出发全选事件，父组件调用子组件方法需要通过this.$refs.组件ref值.子组件方法名
+      this.$refs.rightPanel.handleAllCheckedChange(true) // 直接出发全选事件，父组件调用子组件方法需要通过this.$refs.组件ref值.子组件方法名
     },
     addToRight() {
       this.$refs.leftPanel.fetchData(this.interfaceTypeId)
@@ -299,12 +313,15 @@ export default{
           itemsToBeMoved.push(itemKey)
         }
       })
-      currentValue = this.targetOrder === 'unshift'
-        ? itemsToBeMoved.concat(currentValue)
-        : currentValue.concat(itemsToBeMoved)
+      currentValue =
+        this.targetOrder === 'unshift'
+          ? itemsToBeMoved.concat(currentValue)
+          : currentValue.concat(itemsToBeMoved)
       this.$emit('input', currentValue)
       this.$emit('change', currentValue, 'right', this.leftChecked)
-      this.$message.success('添加至第' + (parseInt(this.$refs.leftPanel.params.page) - 1) + '页成功')
+      this.$message.success(
+        '添加至第' + (parseInt(this.$refs.leftPanel.params.page) - 1) + '页成功'
+      )
       this.queryBak = this.copyObject(this.query)
     },
 
@@ -330,38 +347,38 @@ export default{
 </script>
 <style scoped lang="scss">
 .cinemaContent {
-  border: 1px solid #DCDFE6;
-  .cinemaTitle{
-    padding-left:20px;
-    border-bottom: 1px solid #DCDFE6;
-    background-color: #F2F6FC;
+  border: 1px solid #dcdfe6;
+  .cinemaTitle {
+    padding-left: 20px;
+    border-bottom: 1px solid #dcdfe6;
+    background-color: #f2f6fc;
   }
-  .cinemaContentainer{
-    padding:0px 20px 20px 20px;
-    .cinemaCont{
-      padding-top:20px;
+  .cinemaContentainer {
+    padding: 0px 20px 20px 20px;
+    .cinemaCont {
+      padding-top: 20px;
       .cityProp {
-        .el-form-item__label:before{
-          content:'';
-          color:#000000;
+        .el-form-item__label:before {
+          content: '';
+          color: #000000;
         }
       }
     }
-  } 
+  }
 
-.checkbox-plane{
-  border: 1px solid #DCDFE6;
-  border-radius: 4px;
-  overflow: hidden;
-  margin-top: 20px;
-}
-.header{
-  height: 40px;
-  display: flex;
-  align-items: center;
-  background-color: #F2F6FC;
-  padding: 0 20px;
-  border-bottom:  1px solid #DCDFE6;
-}
+  .checkbox-plane {
+    border: 1px solid #dcdfe6;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 20px;
+  }
+  .header {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    background-color: #f2f6fc;
+    padding: 0 20px;
+    border-bottom: 1px solid #dcdfe6;
+  }
 }
 </style>

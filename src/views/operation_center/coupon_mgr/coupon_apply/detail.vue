@@ -30,6 +30,7 @@
           v-if="+detailParams.status===0&&+params.manageType===0"
         >
           <el-input
+          clearable 
             v-model="params.approvalContent"
             type="textarea"
             :rows="5"

@@ -88,6 +88,7 @@
         <div v-if="couponInfo.type">
           <el-form-item label="销售数量:" prop="num">
             <el-input
+              clearable
               v-model.trim="couponInfo.num"
               placeholder="0"
               class="w100 mr10"
@@ -100,15 +101,26 @@
             <span style="margin-left:20px;color:gray" v-show="couponInfo.style!=='Z'">只能是数值，且必须大于0</span>
           </el-form-item>
           <el-form-item label="销售总额:" prop="amount">
-            <el-input v-model.trim="couponInfo.amount" placeholder="0.00" class="w100 mr10"></el-input>元
+            <el-input
+              clearable
+              v-model.trim="couponInfo.amount"
+              placeholder="0.00"
+              class="w100 mr10"
+            ></el-input>元
             <span style="margin-left:20px;color:gray">只能是数值，且必须大于等于0，限制两位小数</span>
           </el-form-item>
           <el-form-item label="销售单价:" prop="unitPrice">
-            <el-input v-model.trim="couponInfo.unitPrice" placeholder="0.00" class="w100 mr10"></el-input>元
+            <el-input
+              clearable
+              v-model.trim="couponInfo.unitPrice"
+              placeholder="0.00"
+              class="w100 mr10"
+            ></el-input>元
             <span style="margin-left:20px;color:gray">只能是数值，限2位小数，如果销售单价未填写则最后系统将按照（销售总额除以销售数量）来计算</span>
           </el-form-item>
           <el-form-item label="电影券有效期:" prop="time">
             <el-date-picker
+              clearable
               unlink-panels
               v-model="couponInfo.time"
               type="daterange"
@@ -135,6 +147,7 @@
             v-if="couponInfo.type=='2' && couponInfo.discountType=='1'"
           >
             <el-input
+              clearable
               v-model.trim="couponInfo.canFreePrice"
               placeholder="0.00"
               style="width:100px;"
@@ -144,6 +157,7 @@
         </div>
         <el-form-item label="销售备注:" class="areaStyle">
           <el-input
+            clearable
             type="textarea"
             :row="5"
             v-model="couponInfo.remark"
@@ -153,6 +167,7 @@
         </el-form-item>
         <el-form-item label="使用说明:" class="areaStyle">
           <el-input
+            clearable
             type="textarea"
             :row="5"
             v-model="couponInfo.useExplain"
@@ -194,6 +209,7 @@
         </el-form-item>
         <el-form-item label="模板规则名称" prop="name">
           <el-input
+            clearable
             v-model="programInfo.name"
             placeholder="输入电影券使用规则名称"
             style="width:320px;"
@@ -202,6 +218,7 @@
         </el-form-item>
         <el-form-item label="券不可用时段" class="dateTimeLimit" prop="dateLimitType">
           <el-select
+            clearable
             v-model="programInfo.dateLimitType"
             style="width:320px;"
             :disabled="programInfoIsAllowEdit"
@@ -213,6 +230,7 @@
         </el-form-item>
         <el-form-item label="不可用时段区间" prop="time" v-if="programInfo.dateLimitType==='2'">
           <el-date-picker
+            clearable
             unlink-panels
             v-model="programInfo.time"
             type="daterange"
@@ -223,6 +241,7 @@
             :disabled="programInfoIsAllowEdit"
           ></el-date-picker>
           <el-select
+            clearable
             v-model="programInfo.timeType"
             style="width:320px;margin-bottom:20px;"
             :disabled="programInfoIsAllowEdit"
@@ -239,6 +258,7 @@
             :disabled="programInfoIsAllowEdit"
           ></date-selector>
           <el-time-picker
+            clearable
             v-if="programInfo.timeType=='day'||programInfo.timeType=='week'"
             v-model="programInfo.limitTime"
             is-range
@@ -283,6 +303,7 @@
             :rules="programInfoRules.settlementType"
           >
             <el-select
+              clearable
               v-model="rule.settlementType"
               @change="resetDiffRuleChange"
               :disabled="programInfoIsAllowEdit"
@@ -448,7 +469,7 @@
         ref="invoiceInfoForm"
       >
         <el-form-item label="发票类型:" prop="invoiceType">
-          <el-select v-model="invoiceInfo.invoiceType" style="width:400px;">
+          <el-select clearable v-model="invoiceInfo.invoiceType" style="width:400px;">
             <el-option
               v-for="invoiceType in allInvoiceTypes"
               :key="invoiceType.value"
@@ -459,7 +480,12 @@
         </el-form-item>
         <template v-if="invoiceInfo.invoiceType && invoiceInfo.invoiceType !== '1'">
           <el-form-item label="发票抬头:" prop="title">
-            <el-input v-model.trim="invoiceInfo.title" placeholder="输入发票抬头的信息" style="width:200px;"></el-input>
+            <el-input
+              clearable
+              v-model.trim="invoiceInfo.title"
+              placeholder="输入发票抬头的信息"
+              style="width:200px;"
+            ></el-input>
           </el-form-item>
           <!-- 企业相关START -->
           <el-form-item
@@ -467,10 +493,16 @@
             prop="taxNo"
             v-if="invoiceInfo.invoiceType === '4' || invoiceInfo.invoiceType === '6' || invoiceInfo.invoiceType === '5'"
           >
-            <el-input v-model.trim="invoiceInfo.taxNo" placeholder="请输入内容" style="width:200px;"></el-input>
+            <el-input
+              clearable
+              v-model.trim="invoiceInfo.taxNo"
+              placeholder="请输入内容"
+              style="width:200px;"
+            ></el-input>
           </el-form-item>
           <el-form-item label="企业地址:" prop="companyAddress" v-if="invoiceInfo.invoiceType === '6'">
             <el-input
+              clearable
               v-model.trim="invoiceInfo.companyAddress"
               placeholder="请输入内容"
               style="width:200px;"
@@ -478,16 +510,27 @@
           </el-form-item>
           <el-form-item label="电话号码:" prop="companyMobile" v-if="invoiceInfo.invoiceType === '6'">
             <el-input
+              clearable
               v-model.trim="invoiceInfo.companyMobile"
               placeholder="请输入内容"
               style="width:200px;"
             ></el-input>
           </el-form-item>
           <el-form-item label="开户银行:" prop="bank" v-if="invoiceInfo.invoiceType === '6'">
-            <el-input v-model.trim="invoiceInfo.bank" placeholder="请输入内容" style="width:200px;"></el-input>
+            <el-input
+              clearable
+              v-model.trim="invoiceInfo.bank"
+              placeholder="请输入内容"
+              style="width:200px;"
+            ></el-input>
           </el-form-item>
           <el-form-item label="银行账号:" prop="bankNo" v-if="invoiceInfo.invoiceType === '6'">
-            <el-input v-model.trim="invoiceInfo.bankNo" placeholder="请输入内容" style="width:200px;"></el-input>
+            <el-input
+              clearable
+              v-model.trim="invoiceInfo.bankNo"
+              placeholder="请输入内容"
+              style="width:200px;"
+            ></el-input>
           </el-form-item>
           <!-- 企业相关END -->
           <!-- 个人相关START -->
@@ -497,6 +540,7 @@
             v-if="invoiceInfo.invoiceType === '2' || invoiceInfo.invoiceType === '3'"
           >
             <el-input
+              clearable
               v-model.trim="invoiceInfo.idNumber"
               placeholder="输入索要发票人身份证号码"
               style="width:200px;"
@@ -509,6 +553,7 @@
             v-if="invoiceInfo.invoiceType === '3' || invoiceInfo.invoiceType === '5'"
           >
             <el-input
+              clearable
               v-model.trim="invoiceInfo.receiveEmail"
               placeholder="输入索要发票人电子邮箱"
               style="width:200px;"
@@ -553,6 +598,7 @@
         </el-form-item>
         <el-form-item label="转账银行:" prop="transferBank" v-if="payInfo.payType === '1'">
           <el-input
+            clearable
             v-model.trim="payInfo.transferBank"
             placeholder="请输入银行名称或账户"
             style="width:300px;"
@@ -563,7 +609,12 @@
           prop="transferMoney"
           v-if="payInfo.payType"
         >
-          <el-input v-model.trim="payInfo.transferMoney" placeholder="0.00" style="width:100px;"></el-input>元
+          <el-input
+            clearable
+            v-model.trim="payInfo.transferMoney"
+            placeholder="0.00"
+            style="width:100px;"
+          ></el-input>元
         </el-form-item>
         <el-form-item
           :label="payInfo.payType==='1'?'转账人:':'付款人:'"
@@ -571,6 +622,7 @@
           v-if="payInfo.payType"
         >
           <el-input
+            clearable
             v-model.trim="payInfo.transferPeople"
             placeholder="请输入转账人姓名"
             style="width:200px;"

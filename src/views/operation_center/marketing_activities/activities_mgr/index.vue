@@ -2,13 +2,13 @@
   <div class="app-container">
     <el-form inline label-width="120px">
       <el-form-item label="活动名称">
-        <el-input v-model="query.name" style="width:200px;" placeholder="输入活动名称或ID查询"></el-input>
+        <el-input clearable  v-model="query.name" style="width:200px;" placeholder="输入活动名称或ID查询"></el-input>
       </el-form-item>
       <el-form-item label="投放商家">
         <channel-id-selector v-model="query.channelIds" type="1"></channel-id-selector>
       </el-form-item>
       <el-form-item label="活动状态" v-if="query.approvalStatus==='1'">
-        <el-select v-model="query.status" style="width:200px">
+        <el-select clearable v-model="query.status" style="width:200px">
           <el-option value="-1" label="全部"></el-option>
           <el-option value="1" label="未开始"></el-option>
           <el-option value="2" label="进行中"></el-option>
@@ -16,7 +16,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="活动状态" v-if="query.approvalStatus==='3'">
-        <el-select v-model="query.draftStatus" style="width:200px">
+        <el-select clearable v-model="query.draftStatus" style="width:200px">
           <el-option value="-1" label="全部"></el-option>
           <el-option value="0" label="未提交"></el-option>
           <el-option value="1" label="审核中"></el-option>
@@ -217,7 +217,7 @@
         <el-form-item label="活动补贴总金额：">{{fillUpParams.activityInfo.totalAmount}}</el-form-item>
         <el-form-item label="当前剩余活动补贴金额：">{{fillUpParams.activityInfo.leftFee}}</el-form-item>
         <el-form-item label="补充活动款：" prop="activityInfo.addFee">
-          <el-input
+          <el-input clearable 
             v-model="fillUpParams.activityInfo.addFee"
             placeholder="填写补充活动款金额"
             style="width:300px"
@@ -235,7 +235,7 @@
               :rules="fullUpRules.weixinCeiling"
               style="margin-bottom:20px;"
             >
-              <el-input v-model="item.ceiling" :placeholder="item.ceiling" style="width:300px"></el-input>
+              <el-input clearable  v-model="item.ceiling" :placeholder="item.ceiling" style="width:300px"></el-input>
             </el-form-item>
           </div>
         </div>
@@ -243,7 +243,7 @@
           <h3>银联支付</h3>
           <el-form-item label="活动可用制式：">{{fillUpParams.unionPay.copyType}}</el-form-item>
           <el-form-item label="活动补贴消耗上限：" prop="unionPay.ceiling" style="margin-bottom:20px;">
-            <el-input
+            <el-input clearable 
               v-model="fillUpParams.unionPay.ceiling"
               :placeholder="fillUpParams.unionPay.ceiling"
               style="width:300px"
@@ -251,7 +251,7 @@
           </el-form-item>
         </div>
         <el-form-item label="补充活动款金额说明：" prop="activityInfo.addFeeContent" class="addFeeContent">
-          <el-input
+          <el-input clearable 
             type="textarea"
             v-model="fillUpParams.activityInfo.addFeeContent"
             placeholder="请输入补充活动款金额说明"

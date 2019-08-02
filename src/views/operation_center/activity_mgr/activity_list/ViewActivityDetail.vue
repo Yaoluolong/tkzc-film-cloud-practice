@@ -2,16 +2,16 @@
     <div class="app-container">
          <el-form inline label-width="120px">
            <el-form-item label="购买影城">
-             <el-input v-model="query.cinema_code" style="width:200px;" placeholder="请输入影院名称或编码模糊查询"></el-input>
+             <el-input clearable v-model="query.cinema_code" style="width:200px;" placeholder="请输入影院名称或编码模糊查询"></el-input>
             </el-form-item>
             <!-- <el-form-item label="投放影院">
               <cinema-id-selector v-model="query.cinemaId" clearable style="width:200px"></cinema-id-selector>
             </el-form-item> -->
             <el-form-item label="手机号">
-              <el-input v-model="query.mobile" style="width:200px;" placeholder="请输入影院名称或编码模糊查询"></el-input>              
+              <el-input clearable v-model="query.mobile" style="width:200px;" placeholder="请输入影院名称或编码模糊查询"></el-input>              
             </el-form-item>
             <el-form-item label="支付订单">
-                 <el-input v-model="query.trade_no" style="width:200px;" placeholder="请输入支付订单单号"></el-input>
+                 <el-input clearable v-model="query.trade_no" style="width:200px;" placeholder="请输入支付订单单号"></el-input>
             </el-form-item>              
             <el-form-item>
               <el-button type="primary" icon="el-icon-search"  @click="refreshTable">查询</el-button>
@@ -73,7 +73,7 @@
                 </el-checkbox-group>
               </el-form-item>
               <el-form-item label="操作备注：" prop="comment">
-                 <el-input type="textarea" rows="3" width="160" v-model="resetOrderStatus.comment"></el-input>
+                 <el-input clearable type="textarea" rows="3" width="160" v-model="resetOrderStatus.comment"></el-input>
               </el-form-item>
             </el-form>
             <div>

@@ -2,52 +2,78 @@
   <div>
     <el-button type="primary" @click="show">选择影院</el-button>
     <!-- 选择指定影院并且至少已经选择一个影院后显示 -->
-    <div class="tag-plane" v-if="selectedCinemaList.length>0&&selectType !== '1'" style="max-height:500px;overflow-y: auto;">
-      <el-tag type="danger" @close="handleClose(index,cinema)" class="selected-item" v-for="(cinema,index) in selectedCinemaList" closable :key="index">{{cinema.name}}</el-tag>
+    <div
+      class="tag-plane"
+      v-if="selectedCinemaList.length>0&&selectType !== '1'"
+      style="max-height:500px;overflow-y: auto;"
+    >
+      <el-tag
+        type="danger"
+        @close="handleClose(index,cinema)"
+        class="selected-item"
+        v-for="(cinema,index) in selectedCinemaList"
+        closable
+        :key="index"
+      >{{cinema.name}}</el-tag>
     </div>
     <!-- 选择所有影院时显示 -->
-    <div class="tag-plane" v-if="selectType === '1'">
-      所有影院
-    </div>
-    <el-dialog title="选择影院"  :visible.sync="dialogVisible" width="600px" @close="resetFields('form')">        
-        <el-form style="margin-top:-5%" inline :model="query"  ref="form" v-show="selectType === '2'">     
-          <el-form-item label="省/自治区/直辖市" prop="cinemaName">
-              <city-cascader ref="city" v-model="query.area" :rang="1" :clearable="true" placeholder="请选择" style="width:170px;"></city-cascader>
-          </el-form-item>  
-          <div style="margin-top:10px">
-            <el-form-item  prop="cinemaName">
-                <el-input style="width:300px" v-model="query.cinemaName" placeholder="请输入影院名称"></el-input>
-            </el-form-item>
-            <el-form-item style="margin-left:60px">
-                <el-button type="primary" @click="fetchData" >搜索</el-button>
-            </el-form-item>
-          </div>              
-        </el-form>
-        
-        <el-radio-group v-model="selectType" >
-          <el-radio :label="'1'">
-            所有影院
-          </el-radio>  
-          <el-radio :label="'2'">
-            指定影院
-          </el-radio>
-        </el-radio-group>  
-        <div class="checkbox-plane" v-show="selectType === '2'">
-          <div class="header">
-            <el-checkbox @change="doSelectAll" v-model="allChecked">全选</el-checkbox>
-          </div>
-          <div class="content">
-            <div class="check-item" v-for="(cinema,index) in cinemaList" :key="index">             
-                <el-checkbox v-model="cinema.checked"  @change="dataChange(cinema)" :disabled="cinema.disable">
-                  <span class="cinema-name">{{cinema.name}}----{{cinema.cinemaCode}}</span>
-                </el-checkbox>
-            </div>
+    <div class="tag-plane" v-if="selectType === '1'">所有影院</div>
+    <el-dialog
+      title="选择影院"
+      :visible.sync="dialogVisible"
+      width="600px"
+      @close="resetFields('form')"
+    >
+      <el-form style="margin-top:-5%" inline :model="query" ref="form" v-show="selectType === '2'">
+        <el-form-item label="省/自治区/直辖市" prop="cinemaName">
+          <city-cascader
+            ref="city"
+            v-model="query.area"
+            :rang="1"
+            :clearable="true"
+            placeholder="请选择"
+            style="width:170px;"
+          ></city-cascader>
+        </el-form-item>
+        <div style="margin-top:10px">
+          <el-form-item prop="cinemaName">
+            <el-input
+              clearable
+              style="width:300px"
+              v-model="query.cinemaName"
+              placeholder="请输入影院名称"
+            ></el-input>
+          </el-form-item>
+          <el-form-item style="margin-left:60px">
+            <el-button type="primary" @click="fetchData">搜索</el-button>
+          </el-form-item>
+        </div>
+      </el-form>
+
+      <el-radio-group v-model="selectType">
+        <el-radio :label="'1'">所有影院</el-radio>
+        <el-radio :label="'2'">指定影院</el-radio>
+      </el-radio-group>
+      <div class="checkbox-plane" v-show="selectType === '2'">
+        <div class="header">
+          <el-checkbox @change="doSelectAll" v-model="allChecked">全选</el-checkbox>
+        </div>
+        <div class="content">
+          <div class="check-item" v-for="(cinema,index) in cinemaList" :key="index">
+            <el-checkbox
+              v-model="cinema.checked"
+              @change="dataChange(cinema)"
+              :disabled="cinema.disable"
+            >
+              <span class="cinema-name">{{cinema.name}}----{{cinema.cinemaCode}}</span>
+            </el-checkbox>
           </div>
         </div>
-        <span slot="footer" class="dialog-footer">
-            <el-button type="primary" @click="save" >确 定</el-button>
-            <el-button @click="hide" >取 消</el-button>
-        </span>
+      </div>
+      <span slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="save">确 定</el-button>
+        <el-button @click="hide">取 消</el-button>
+      </span>
     </el-dialog>
   </div>
 </template>
@@ -85,9 +111,7 @@ export default {
       changeCinemaList: []
     }
   },
-  computed: {
-
-  },
+  computed: {},
   watch: {
     text(val, oldVal) {
       if (val.length === 0) {
@@ -104,7 +128,7 @@ export default {
     selectedCinemaList(val) {
       // 只有在指定影院时才做处理
       if (this.selectType === '2') {
-        const result = val.map((e) => {
+        const result = val.map(e => {
           return e.value
         })
         this.$emit('input', result)
@@ -289,8 +313,12 @@ export default {
     },
     async fetchData() {
       // this.query.cinemaId = this.query.cinemaName
-      if (this.query.cinemaName === undefined) { delete this.query['cinemaName'] }
-      this.cinemaList = this.policy ? await getCinemaList(this.query) : await getCinemaById({ id: this.form.policyGroupId })
+      if (this.query.cinemaName === undefined) {
+        delete this.query['cinemaName']
+      }
+      this.cinemaList = this.policy
+        ? await getCinemaList(this.query)
+        : await getCinemaById({ id: this.form.policyGroupId })
 
       // 恢复已经选中的选项
       if (this.value) {
@@ -325,48 +353,48 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.checkbox-plane{
-  border: 1px solid #DCDFE6;
+.checkbox-plane {
+  border: 1px solid #dcdfe6;
   border-radius: 4px;
   overflow: hidden;
   margin-top: 20px;
 }
-.header{
+.header {
   height: 40px;
   display: flex;
   align-items: center;
-  background-color: #F2F6FC;
+  background-color: #f2f6fc;
   padding: 0 20px;
-  border-bottom:  1px solid #DCDFE6;
+  border-bottom: 1px solid #dcdfe6;
 }
-.content{
+.content {
   padding: 0 20px;
   max-height: 300px;
   overflow-y: auto;
-  .check-item{
+  .check-item {
     margin: 10px 0px;
   }
 }
-.tag-plane{
-   border: 1px solid #DCDFE6;
-   border-radius: 4px;
-   margin-top: 20px;
-   display: flex;
-   flex-wrap: wrap;
-   padding: 10px;
-   .selected-item{
-     margin: 10px;
-   }
+.tag-plane {
+  border: 1px solid #dcdfe6;
+  border-radius: 4px;
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+  .selected-item {
+    margin: 10px;
+  }
 }
-.cinema-name{
+.cinema-name {
   display: inline-block;
   width: 250px;
 }
 .cinema-rule {
   display: inline-block;
   width: 250px;
-  overflow:hidden; 
-  text-overflow:ellipsis; 
-  white-space:nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 </style>

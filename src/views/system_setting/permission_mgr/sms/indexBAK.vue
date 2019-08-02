@@ -1,65 +1,103 @@
 <template>
-  <div class="app-container" >
-       <el-form ref="mainform" style="width:100%" :model="submitData" :rules="rules1">
-            <el-form-item label="短信平台参数:"  style="width:100%">
-                <el-card>
-                    <el-form-item label="短信平台:" label-width="100px" style="width:900px">
-                        <el-radio-group style="width:100%" v-model="submitData.type">
-                          <el-radio style="margin-left:5%" v-for="smsType in initData.smsTypes" :key="smsType.type" :label="smsType.type" >
-                            {{smsType.name}}
-                          </el-radio>  
-                        </el-radio-group>                   
-                    </el-form-item>
-                      <el-form :rules="rules2" inline :model="submitData">
-                        <el-form-item label="平台账号:" label-width="100px" prop="accountName">
-                            <el-input v-model.trim="submitData.accountName"></el-input>
-                        </el-form-item>   
-                        <el-form-item label="平台密码:" label-width="100px" prop="password">
-                            <el-input v-model.trim="submitData.password"></el-input>
-                        </el-form-item>
-                      </el-form>                       
-                      <el-form-item label="短信签名:" label-width="100px" style="margin-top:1%;" prop="sign">
-                            <el-input v-model.trim="submitData.sign" style="width:185px"></el-input>
-                      </el-form-item>   
-                </el-card>
-            </el-form-item>     
-            <el-form-item label="短信模板管理:">    
-                <el-card>
-                  <el-collapse accordion>
-                    <el-collapse-item v-for="templateCategory in initData.templateCategorys" v-if="templateCategory.show" :title="templateCategory.name" :key="templateCategory.type" :name="templateCategory.type">
-                      <el-row v-if="template.parentType === templateCategory.type && template.show" v-for="(template , key) in submitData.templateList" :key="key" style="margin-top:2%">
-                          <el-form ref="subForm" :model="template" :rules="rules3" label-position="right" label-width="20%">
-                            <el-form-item :label="template.name">
-                                <el-radio-group style="width:50%;margin-left:5%" v-model="template.status">
-                                  <el-radio :label="'1'">
-                                    开启
-                                  </el-radio>  
-                                  <el-radio :label="'2'">
-                                    关闭
-                                  </el-radio>
-                                </el-radio-group>   
-                            </el-form-item>
-                            <el-form-item prop="templateCode" label="阿里短信CODE:" style="margin-top:1%" >
-                                <el-input v-model.trim="template.templateCode" style="width:20%;margin-left:5%" placeholder="阿里短信模板code"></el-input> <span style="margin-left:3%">短信运营商是阿里短信的必填</span>
-                            </el-form-item>
-                            <el-form-item  label="选择要插入的变量:" style="margin-top:1%">
-                                <el-button v-for="shortcut in template.shortcuts" @click="insertVariable(template , shortcut , 'content_'+ key)" :key="shortcut" type="primary" style="margin-left:5%">
-                                  {{shortcut}}
-                                </el-button>
-                            </el-form-item>
-                            <el-form-item :show-message="false" label="短信模版:" style="margin-top:1%" prop="content">
-                                <el-input v-model.trim="template.content" :id="'content_'+ key" style="width:80%;margin-left:5%" placeholder="请输入内容"></el-input>  <br>
-                                <span style="margin-left:5%;color:gray">{{template.format}}</span>                          
-                            </el-form-item>
-                          </el-form>
-                          <div style="width:100%;height:0px;    border-top: 1px solid #DCDCDC;" />
-                      </el-row>                      
-                    </el-collapse-item>                                                    
-                  </el-collapse>
-                </el-card>  
-            </el-form-item>   
-      </el-form>
-        <el-button style="margin-left:30%" type="success" @click="saveSms">保存</el-button>
+  <div class="app-container">
+    <el-form ref="mainform" style="width:100%" :model="submitData" :rules="rules1">
+      <el-form-item label="短信平台参数:" style="width:100%">
+        <el-card>
+          <el-form-item label="短信平台:" label-width="100px" style="width:900px">
+            <el-radio-group style="width:100%" v-model="submitData.type">
+              <el-radio
+                style="margin-left:5%"
+                v-for="smsType in initData.smsTypes"
+                :key="smsType.type"
+                :label="smsType.type"
+              >{{smsType.name}}</el-radio>
+            </el-radio-group>
+          </el-form-item>
+          <el-form :rules="rules2" inline :model="submitData">
+            <el-form-item label="平台账号:" label-width="100px" prop="accountName">
+              <el-input clearable v-model.trim="submitData.accountName"></el-input>
+            </el-form-item>
+            <el-form-item label="平台密码:" label-width="100px" prop="password">
+              <el-input clearable v-model.trim="submitData.password"></el-input>
+            </el-form-item>
+          </el-form>
+          <el-form-item label="短信签名:" label-width="100px" style="margin-top:1%;" prop="sign">
+            <el-input clearable v-model.trim="submitData.sign" style="width:185px"></el-input>
+          </el-form-item>
+        </el-card>
+      </el-form-item>
+      <el-form-item label="短信模板管理:">
+        <el-card>
+          <el-collapse accordion>
+            <el-collapse-item
+              v-for="templateCategory in initData.templateCategorys"
+              v-if="templateCategory.show"
+              :title="templateCategory.name"
+              :key="templateCategory.type"
+              :name="templateCategory.type"
+            >
+              <el-row
+                v-if="template.parentType === templateCategory.type && template.show"
+                v-for="(template , key) in submitData.templateList"
+                :key="key"
+                style="margin-top:2%"
+              >
+                <el-form
+                  ref="subForm"
+                  :model="template"
+                  :rules="rules3"
+                  label-position="right"
+                  label-width="20%"
+                >
+                  <el-form-item :label="template.name">
+                    <el-radio-group style="width:50%;margin-left:5%" v-model="template.status">
+                      <el-radio :label="'1'">开启</el-radio>
+                      <el-radio :label="'2'">关闭</el-radio>
+                    </el-radio-group>
+                  </el-form-item>
+                  <el-form-item prop="templateCode" label="阿里短信CODE:" style="margin-top:1%">
+                    <el-input
+                      clearable
+                      v-model.trim="template.templateCode"
+                      style="width:20%;margin-left:5%"
+                      placeholder="阿里短信模板code"
+                    ></el-input>
+                    <span style="margin-left:3%">短信运营商是阿里短信的必填</span>
+                  </el-form-item>
+                  <el-form-item label="选择要插入的变量:" style="margin-top:1%">
+                    <el-button
+                      v-for="shortcut in template.shortcuts"
+                      @click="insertVariable(template , shortcut , 'content_'+ key)"
+                      :key="shortcut"
+                      type="primary"
+                      style="margin-left:5%"
+                    >{{shortcut}}</el-button>
+                  </el-form-item>
+                  <el-form-item
+                    :show-message="false"
+                    label="短信模版:"
+                    style="margin-top:1%"
+                    prop="content"
+                  >
+                    <el-input
+                      clearable
+                      v-model.trim="template.content"
+                      :id="'content_'+ key"
+                      style="width:80%;margin-left:5%"
+                      placeholder="请输入内容"
+                    ></el-input>
+                    <br />
+                    <span style="margin-left:5%;color:gray">{{template.format}}</span>
+                  </el-form-item>
+                </el-form>
+                <div style="width:100%;height:0px;    border-top: 1px solid #DCDCDC;" />
+              </el-row>
+            </el-collapse-item>
+          </el-collapse>
+        </el-card>
+      </el-form-item>
+    </el-form>
+    <el-button style="margin-left:30%" type="success" @click="saveSms">保存</el-button>
   </div>
 </template>
 
@@ -124,10 +162,9 @@ export default {
             templateCode: '',
             interfaceVersion: '',
             content: '',
-            format: '样式：您本次的注册验证码是：【验证码】，验证码在10分钟之内有效，超时请重新获取，请不要泄露给他人。',
-            shortcuts: [
-              '验证码'
-            ],
+            format:
+              '样式：您本次的注册验证码是：【验证码】，验证码在10分钟之内有效，超时请重新获取，请不要泄露给他人。',
+            shortcuts: ['验证码'],
             show: true
           },
           registSuccess: {
@@ -138,10 +175,9 @@ export default {
             templateCode: '',
             interfaceVersion: '',
             content: '',
-            format: '样式：欢迎您加入【平台名称】的大家庭并成为其中一员，我们将提供各种的影视娱乐服务来丰富您的生活！',
-            shortcuts: [
-              '平台名称'
-            ],
+            format:
+              '样式：欢迎您加入【平台名称】的大家庭并成为其中一员，我们将提供各种的影视娱乐服务来丰富您的生活！',
+            shortcuts: ['平台名称'],
             show: true
           },
           phoneLoginCode: {
@@ -152,10 +188,9 @@ export default {
             templateCode: '',
             interfaceVersion: '',
             content: '',
-            format: '样式：您本次的登录验证码是：【验证码】，验证码在10分钟之内有效，超时请重新获取，请不要泄露给他人。',
-            shortcuts: [
-              '验证码'
-            ],
+            format:
+              '样式：您本次的登录验证码是：【验证码】，验证码在10分钟之内有效，超时请重新获取，请不要泄露给他人。',
+            shortcuts: ['验证码'],
             show: true
           },
           firstPhoneLoginSuccess: {
@@ -166,10 +201,9 @@ export default {
             templateCode: '',
             interfaceVersion: '',
             content: '',
-            format: '样式：欢迎您注册成为【平台名称】会员，账号是：【手机号码】，初始登入密码为：【登录密码】，为了您账户的安全请及时进入平台进行密码修改，感谢您的支持与配合，谢谢！',
-            shortcuts: [
-              '平台名称', '手机号码', '登录密码'
-            ],
+            format:
+              '样式：欢迎您注册成为【平台名称】会员，账号是：【手机号码】，初始登入密码为：【登录密码】，为了您账户的安全请及时进入平台进行密码修改，感谢您的支持与配合，谢谢！',
+            shortcuts: ['平台名称', '手机号码', '登录密码'],
             show: true
           },
           findPwd: {
@@ -180,10 +214,9 @@ export default {
             templateCode: '',
             interfaceVersion: '',
             content: '',
-            format: '样式：您正在申请找回密码，校验码是：【验证码】验证码【时间】分钟之内有效，超时请重新获取。',
-            shortcuts: [
-              '验证码', '时间'
-            ],
+            format:
+              '样式：您正在申请找回密码，校验码是：【验证码】验证码【时间】分钟之内有效，超时请重新获取。',
+            shortcuts: ['验证码', '时间'],
             show: true
           },
           mantianxing: {
@@ -194,9 +227,16 @@ export default {
             templateCode: '',
             interfaceVersion: '',
             content: '',
-            format: '样式：尊敬的用户：您已成功订购【日期】在【影院名称】的【影片名称】电影票，请凭订单号【订单号】及取票码【取票码】至影院柜台或自助机取票，祝您观影愉快！',
+            format:
+              '样式：尊敬的用户：您已成功订购【日期】在【影院名称】的【影片名称】电影票，请凭订单号【订单号】及取票码【取票码】至影院柜台或自助机取票，祝您观影愉快！',
             shortcuts: [
-              '日期', '影院名称', '影片名称', '订单号', '取票码', '验证码', '取票序列号'
+              '日期',
+              '影院名称',
+              '影片名称',
+              '订单号',
+              '取票码',
+              '验证码',
+              '取票序列号'
             ]
           },
           huofenghuang: {
@@ -207,9 +247,16 @@ export default {
             templateCode: '',
             interfaceVersion: '',
             content: '',
-            format: '样式：尊敬的用户：您已成功订购【日期】在【影院名称】的【影片名称】电影票，请凭取票码【取票码】至影院柜台或自助机取票，祝您观影愉快！',
+            format:
+              '样式：尊敬的用户：您已成功订购【日期】在【影院名称】的【影片名称】电影票，请凭取票码【取票码】至影院柜台或自助机取票，祝您观影愉快！',
             shortcuts: [
-              '日期', '影院名称', '影片名称', '订单号', '取票码', '验证码', '取票序列号'
+              '日期',
+              '影院名称',
+              '影片名称',
+              '订单号',
+              '取票码',
+              '验证码',
+              '取票序列号'
             ]
           },
           chengxing: {
@@ -220,9 +267,16 @@ export default {
             templateCode: '',
             interfaceVersion: '',
             content: '',
-            format: '样式：尊敬的用户：您已成功订购【日期】在【影院名称】的【影片名称】电影票，请凭订单号【订单号】及取票序列号【取票序列号】至影院柜台或自助机取票，祝您观影愉快！',
+            format:
+              '样式：尊敬的用户：您已成功订购【日期】在【影院名称】的【影片名称】电影票，请凭订单号【订单号】及取票序列号【取票序列号】至影院柜台或自助机取票，祝您观影愉快！',
             shortcuts: [
-              '日期', '影院名称', '影片名称', '订单号', '取票码', '验证码', '取票序列号'
+              '日期',
+              '影院名称',
+              '影片名称',
+              '订单号',
+              '取票码',
+              '验证码',
+              '取票序列号'
             ]
           },
           dadi1_0: {
@@ -233,9 +287,14 @@ export default {
             templateCode: '',
             interfaceVersion: '',
             content: '',
-            format: '样式：尊敬的【平台名称】会员：您已成功订购【放映时间】在【影院名称】的【影片名称】电影票，请凭取票码【取票码】至影院柜台或自助机取票，祝您观影愉快！',
+            format:
+              '样式：尊敬的【平台名称】会员：您已成功订购【放映时间】在【影院名称】的【影片名称】电影票，请凭取票码【取票码】至影院柜台或自助机取票，祝您观影愉快！',
             shortcuts: [
-              '平台名称', '放映时间', '影院名称', '影片名称', '取票码'
+              '平台名称',
+              '放映时间',
+              '影院名称',
+              '影片名称',
+              '取票码'
             ],
             show: true
           },
@@ -247,10 +306,9 @@ export default {
             templateCode: '',
             interfaceVersion: '',
             content: '',
-            format: '样式：尊敬的【平台名称】会员：您已成功订购【放映时间】在【影院名称】的【影片名称】电影票，请凭取票信息【变量】至影院柜台或自助机取票，祝您观影愉快！',
-            shortcuts: [
-              '平台名称', '放映时间', '影院名称', '影片名称', '变量'
-            ],
+            format:
+              '样式：尊敬的【平台名称】会员：您已成功订购【放映时间】在【影院名称】的【影片名称】电影票，请凭取票信息【变量】至影院柜台或自助机取票，祝您观影愉快！',
+            shortcuts: ['平台名称', '放映时间', '影院名称', '影片名称', '变量'],
             show: true
           },
           system1905: {
@@ -261,9 +319,16 @@ export default {
             templateCode: '',
             interfaceVersion: '',
             content: '',
-            format: '样式：尊敬的用户：您已成功订购【日期】在【影院名称】的【影片名称】电影票，请凭取票码【取票码】或验证码【验证码】至影院柜台或自助机取票，祝您观影愉快！',
+            format:
+              '样式：尊敬的用户：您已成功订购【日期】在【影院名称】的【影片名称】电影票，请凭取票码【取票码】或验证码【验证码】至影院柜台或自助机取票，祝您观影愉快！',
             shortcuts: [
-              '日期', '影院名称', '影片名称', '订单号', '取票码', '验证码', '取票序列号'
+              '日期',
+              '影院名称',
+              '影片名称',
+              '订单号',
+              '取票码',
+              '验证码',
+              '取票序列号'
             ]
           },
           yunzhi: {
@@ -274,9 +339,16 @@ export default {
             templateCode: '',
             interfaceVersion: '',
             content: '',
-            format: '样式：尊敬的用户：您已成功订购【日期】在【影院名称】的【影片名称】电影票，请凭取票码【取票码】至影院柜台或自助机取票，祝您观影愉快！',
+            format:
+              '样式：尊敬的用户：您已成功订购【日期】在【影院名称】的【影片名称】电影票，请凭取票码【取票码】至影院柜台或自助机取票，祝您观影愉快！',
             shortcuts: [
-              '日期', '影院名称', '影片名称', '订单号', '取票码', '验证码', '取票序列号'
+              '日期',
+              '影院名称',
+              '影片名称',
+              '订单号',
+              '取票码',
+              '验证码',
+              '取票序列号'
             ]
           },
           dingxing: {
@@ -287,9 +359,16 @@ export default {
             templateCode: '',
             interfaceVersion: '',
             content: '',
-            format: '样式：尊敬的用户：您已成功订购【日期】在【影院名称】的【影片名称】电影票，请凭序列号【取票序列号】或验证码【验证码】至影院柜台或自助机取票，祝您观影愉快！',
+            format:
+              '样式：尊敬的用户：您已成功订购【日期】在【影院名称】的【影片名称】电影票，请凭序列号【取票序列号】或验证码【验证码】至影院柜台或自助机取票，祝您观影愉快！',
             shortcuts: [
-              '日期', '影院名称', '影片名称', '订单号', '取票码', '验证码', '取票序列号'
+              '日期',
+              '影院名称',
+              '影片名称',
+              '订单号',
+              '取票码',
+              '验证码',
+              '取票序列号'
             ]
           },
           huolieniao: {
@@ -300,9 +379,16 @@ export default {
             templateCode: '',
             interfaceVersion: '',
             content: '',
-            format: '样式：尊敬的用户：您已成功订购【日期】在【影院名称】的【影片名称】电影票，请凭取票码【取票码】或验证码【验证码】至影院柜台或自助机取票，祝您观影愉快！',
+            format:
+              '样式：尊敬的用户：您已成功订购【日期】在【影院名称】的【影片名称】电影票，请凭取票码【取票码】或验证码【验证码】至影院柜台或自助机取票，祝您观影愉快！',
             shortcuts: [
-              '日期', '影院名称', '影片名称', '订单号', '取票码', '验证码', '取票序列号'
+              '日期',
+              '影院名称',
+              '影片名称',
+              '订单号',
+              '取票码',
+              '验证码',
+              '取票序列号'
             ]
           },
           maoyanOne: {
@@ -313,10 +399,9 @@ export default {
             templateCode: '',
             interfaceVersion: '',
             content: '',
-            format: '样式：尊敬的用户：您已成功订购【日期】在【影院名称】的【影片名称】电影票，请凭【变量】至影院柜台或自助机取票，祝您观影愉快！',
-            shortcuts: [
-              '日期', '影院名称', '影片名称', '变量'
-            ]
+            format:
+              '样式：尊敬的用户：您已成功订购【日期】在【影院名称】的【影片名称】电影票，请凭【变量】至影院柜台或自助机取票，祝您观影愉快！',
+            shortcuts: ['日期', '影院名称', '影片名称', '变量']
           },
           maoyanTwo: {
             parentType: '2',
@@ -326,10 +411,9 @@ export default {
             templateCode: '',
             interfaceVersion: '',
             content: '',
-            format: '样式：尊敬的用户：您已成功订购【日期】在【影院名称】的【影片名称】电影票，请凭【变量1】及【变量2】至影院柜台或自助机取票，祝您观影愉快！',
-            shortcuts: [
-              '日期', '影院名称', '影片名称', '变量1', '变量2'
-            ]
+            format:
+              '样式：尊敬的用户：您已成功订购【日期】在【影院名称】的【影片名称】电影票，请凭【变量1】及【变量2】至影院柜台或自助机取票，祝您观影愉快！',
+            shortcuts: ['日期', '影院名称', '影片名称', '变量1', '变量2']
           },
           ticketCoupon: {
             parentType: '3',
@@ -339,10 +423,9 @@ export default {
             templateCode: '',
             interfaceVersion: '',
             content: '',
-            format: '样式：尊敬的用户：您已成功订购订单号【订单号】，【商品名称+数量】，请关注“影托邦”公众号，点击“微信购票”菜单查看和使用。祝您观影愉快！',
-            shortcuts: [
-              '商品名称+数量', '订单号'
-            ]
+            format:
+              '样式：尊敬的用户：您已成功订购订单号【订单号】，【商品名称+数量】，请关注“影托邦”公众号，点击“微信购票”菜单查看和使用。祝您观影愉快！',
+            shortcuts: ['商品名称+数量', '订单号']
           },
           giftCard: {
             parentType: '3',
@@ -352,10 +435,9 @@ export default {
             templateCode: '',
             interfaceVersion: '',
             content: '',
-            format: '样式：尊敬的用户：您已成功订购订单号【订单号】，【商品名称+数量】，【卡号】，请关注“影托邦”公众号，点击“微信购票”菜单查看和使用。祝您观影愉快！',
-            shortcuts: [
-              '商品名称+数量', '订单号', '卡号'
-            ]
+            format:
+              '样式：尊敬的用户：您已成功订购订单号【订单号】，【商品名称+数量】，【卡号】，请关注“影托邦”公众号，点击“微信购票”菜单查看和使用。祝您观影愉快！',
+            shortcuts: ['商品名称+数量', '订单号', '卡号']
           },
           ticketFailAuto: {
             parentType: '4',
@@ -365,10 +447,9 @@ export default {
             templateCode: '',
             interfaceVersion: '',
             content: '',
-            format: '样式：尊敬的【平台名称】会员：您购买的【影院名称】【放映时间】【影片名称】的影票，订单未能成功系统已自动为您操作退款，支付金额会在1-7个工作日返回支付来源。如想继续观影您可重新下单购买，感谢您的理解与支持，如有疑问请致电客服热线400-8507-010，祝您生活愉快！',
-            shortcuts: [
-              '平台名称', '影院名称', '影片名称', '放映时间'
-            ],
+            format:
+              '样式：尊敬的【平台名称】会员：您购买的【影院名称】【放映时间】【影片名称】的影票，订单未能成功系统已自动为您操作退款，支付金额会在1-7个工作日返回支付来源。如想继续观影您可重新下单购买，感谢您的理解与支持，如有疑问请致电客服热线400-8507-010，祝您生活愉快！',
+            shortcuts: ['平台名称', '影院名称', '影片名称', '放映时间'],
             show: true
           },
           platformManual: {
@@ -379,10 +460,9 @@ export default {
             templateCode: '',
             interfaceVersion: '',
             content: '',
-            format: '样式：尊敬的【平台名称】会员：您购买的【影院名称】【放映时间】【影片名称】的影票，已由人工客服介入为您操作退款退票（影院设备故障或来电申请），支付金额会在1-7个工作日返回支付来源。如想继续观影您可重新下单购买，感谢您的理解与支持，如有疑问请致电客服热线400-8507-010，祝您生活愉快！',
-            shortcuts: [
-              '平台名称', '影院名称', '影片名称', '放映时间'
-            ],
+            format:
+              '样式：尊敬的【平台名称】会员：您购买的【影院名称】【放映时间】【影片名称】的影票，已由人工客服介入为您操作退款退票（影院设备故障或来电申请），支付金额会在1-7个工作日返回支付来源。如想继续观影您可重新下单购买，感谢您的理解与支持，如有疑问请致电客服热线400-8507-010，祝您生活愉快！',
+            shortcuts: ['平台名称', '影院名称', '影片名称', '放映时间'],
             show: true
           }
         }
@@ -391,14 +471,19 @@ export default {
         sign: [{ required: true, message: '请输入短信签名', trigger: 'blur' }]
       },
       rules2: {
-        accountName: [{ required: true, message: '请输入商户名称', trigger: 'blur' }],
-        password: [{ required: true, message: '请输入平台密码', trigger: 'blur' }]
+        accountName: [
+          { required: true, message: '请输入商户名称', trigger: 'blur' }
+        ],
+        password: [
+          { required: true, message: '请输入平台密码', trigger: 'blur' }
+        ]
       },
       rules3: {
         templateCode: [{ validator: checkTemplateCode, trigger: 'blur' }],
-        content: [{ required: true, message: '请输入短信模板', trigger: 'blur' }]
+        content: [
+          { required: true, message: '请输入短信模板', trigger: 'blur' }
+        ]
       }
-
     }
   },
   methods: {
@@ -409,10 +494,16 @@ export default {
       if (myField.selectionStart || myField.selectionStart === 0) {
         var startPos = myField.selectionStart
         var endPos = myField.selectionEnd
-        template.content = myField.value.substring(0, startPos) + shortcut + myField.value.substring(endPos, myField.value.length)
+        template.content =
+          myField.value.substring(0, startPos) +
+          shortcut +
+          myField.value.substring(endPos, myField.value.length)
         await this.$nextTick() // 这句是重点, 圈起来
         myField.focus()
-        myField.setSelectionRange(endPos + shortcut.length, endPos + shortcut.length)
+        myField.setSelectionRange(
+          endPos + shortcut.length,
+          endPos + shortcut.length
+        )
       } else {
         template.content += shortcut
       }
@@ -425,7 +516,7 @@ export default {
         delete submitDataObj.templateList[key].show
         delete submitDataObj.templateList[key].shortcuts
       }
-      this.$refs.mainform.validate((valid) => {
+      this.$refs.mainform.validate(valid => {
         if (valid) {
           saveSms(submitDataObj).then(() => {
             this.$message({
@@ -452,5 +543,4 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
 </style>

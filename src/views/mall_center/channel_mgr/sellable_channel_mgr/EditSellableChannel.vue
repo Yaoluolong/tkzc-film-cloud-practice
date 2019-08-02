@@ -2,7 +2,7 @@
   <div class="app-container">
     <el-form label-width="120px" label-position="left" style="width:1000px;" :model="params" :rules="rules" ref="form">
       <el-form-item label="销售分组名称" prop="name" >
-          <el-input v-model.trim="params.name" placeholder="请输入销售分组名称,最多10个字" style="width:420px;"></el-input>
+          <el-input clearable v-model.trim="params.name" placeholder="请输入销售分组名称,最多10个字" style="width:420px;"></el-input>
       </el-form-item>
       <el-form-item required label="票务系统商">
         <remote-select v-model="params.interfaceTypeId" placeholder="请选择票务系统商" action="/systemApi/interfaceType/getList" style="width:200px;"></remote-select>

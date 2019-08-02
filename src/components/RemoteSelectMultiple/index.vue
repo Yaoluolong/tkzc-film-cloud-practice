@@ -1,5 +1,5 @@
 <template>
-    <el-select remo fitler remo-method multiple v-bind="$attrs" v-on="$listeners" v-model="value1">
+    <el-select clearable remo fitler remo-method multiple v-bind="$attrs" v-on="$listeners" v-model="value1">
       <el-option :label="item[labelKey]" :value="item[valueKey]+''" v-for="item in options" :key="item[valueKey]" :disabled="item.disabled"
       @click.native="changeFun(item.value)">
       </el-option>

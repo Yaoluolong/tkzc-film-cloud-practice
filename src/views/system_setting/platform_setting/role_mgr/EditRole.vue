@@ -2,10 +2,10 @@
   <div class="app-container">
     <el-form label-width="120px"   :model="params" :rules="rules" ref="form">
       <el-form-item label="角色名称" prop="roleName" v-if="!isPermissionSetting&&!isUserPermission">
-        <el-input v-model="params.roleName" placeholder="请输入角色名称,最多10个字"  style="width:320px"></el-input>
+        <el-input clearable  v-model="params.roleName" placeholder="请输入角色名称,最多10个字"  style="width:320px"></el-input>
       </el-form-item>
       <el-form-item label="职能描述" prop="roleDesc" v-if="!isPermissionSetting&&!isUserPermission">
-        <el-input v-model="params.roleDesc"  type="textarea"  :rows="4" maxlength="100"  placeholder="请输入内容" ></el-input>
+        <el-input clearable  v-model="params.roleDesc"  type="textarea"  :rows="4" maxlength="100"  placeholder="请输入内容" ></el-input>
       </el-form-item>
       <el-form-item label="开通模块">
         <menu-checkbox-plane  :menu="{name:'一级菜单',children:topMenus}" @change="fetchSubMenus"  :selected-ids="params.menuIds"></menu-checkbox-plane>

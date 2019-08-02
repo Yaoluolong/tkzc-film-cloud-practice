@@ -12,13 +12,13 @@
         <channel-id-selector v-model="channelId"></channel-id-selector>
       </el-form-item>
       <el-form-item label="增设类型：" prop="type">
-        <el-select v-model="params.type">
+        <el-select clearable v-model="params.type">
           <el-option value="1" label="购影片"></el-option>
           <el-option value="2" disabled label="购商品"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="活动时间" prop="dateType">
-        <el-select v-model="params.dateType" style="width:320px">
+        <el-select clearable v-model="params.dateType" style="width:320px">
           <el-option label="指定日期" value="1"></el-option>
           <el-option label="每月" value="2"></el-option>
         </el-select>
@@ -41,6 +41,7 @@
       </el-form-item>
       <el-form-item label="时间限制" :prop="propType">
         <el-select
+          clearable
           v-model="params.timeType"
           style="width:320px;margin-bottom:20px"
           v-if="params.dateType==1"
@@ -70,7 +71,7 @@
         <cinema-selector outNeedChannelId :outChannelId="channelId" v-model="cinemaList"></cinema-selector>
       </el-form-item>
       <el-form-item label="增设方式：" prop="way" v-if="params.type === '1'">
-        <el-select v-model="params.way" @change="checkCinemaList">
+        <el-select clearable v-model="params.way" @change="checkCinemaList">
           <el-option value="1" label="根据影厅"></el-option>
           <el-option value="2" label="根据制式"></el-option>
           <el-option value="3" label="根据影片"></el-option>
@@ -126,7 +127,12 @@
           </el-checkbox-group>
         </el-form-item>
         <el-form-item label="增设特殊服务费：" prop="servicePrice">
-          <el-input style="width:150px;" v-model.trim="rule.servicePrice" placeholder="0.00">
+          <el-input
+            clearable
+            style="width:150px;"
+            v-model.trim="rule.servicePrice"
+            placeholder="0.00"
+          >
             <template slot="append">元</template>
           </el-input>
           <div class="oper" style="float:right">

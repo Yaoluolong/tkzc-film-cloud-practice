@@ -14,6 +14,7 @@
       </el-form-item>
       <el-form-item label="活动名称:" prop="activity_subject">
         <el-input
+          clearable
           placeholder="请输入活动名称标题,最多15个字"
           v-model.trim="activityParams.activity_subject"
           style="width:320px"
@@ -48,6 +49,7 @@
           style="width:320px;"
         ></el-date-picker>
         <el-select
+          clearable
           v-model="activityParams.showtime_cycle"
           style="width:320px;"
           v-if="activityParams.time"
@@ -93,6 +95,7 @@
       </el-form-item>
       <el-form-item label="活动说明:" prop="description">
         <el-input
+          clearable
           v-model="activityParams.description"
           type="textarea"
           rows="5"
@@ -165,6 +168,7 @@
             style="width:320px;"
           ></el-date-picker>
           <el-select
+            clearable
             v-model="settingParams.activity_cycle"
             style="width:320px;"
             v-if="settingParams.time"
@@ -202,6 +206,7 @@
         </el-form-item>
         <el-form-item label="前端标签:" prop="activity_tag">
           <el-input
+            clearable
             placeholder="输入前端标签"
             v-model.trim="settingParams.activity_tag"
             style="width:120px"
@@ -215,7 +220,7 @@
       </div>
       <div v-if="settingParams.activity_type==='coupon'" prop="external_link">
         <el-form-item label="活动网址:" prop="external_link">
-          <el-input v-model.trim="settingParams.external_link" style="width:521px"></el-input>
+          <el-input clearable v-model.trim="settingParams.external_link" style="width:521px"></el-input>
         </el-form-item>
       </div>
       <el-form-item style="text-align:center;margin-top:20px">

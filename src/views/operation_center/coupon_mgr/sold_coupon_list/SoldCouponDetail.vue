@@ -268,11 +268,11 @@
         </el-form>
       </el-card>
     </el-card>
-    <el-card class="mb20" v-if="+couponInfo.invoiceType==2">
+    <el-card class="mb20" v-if="+couponInfo.invoiceType!==1">
       <invoice-detail
         :outData="invoiceInfo"
         :drawInvoiceName="params.drawInvoiceName"
-        v-if="+isDrawInvoice===1"
+        v-if="+couponInfo.isDrawInvoice===1"
       ></invoice-detail>
       <el-form label-width="140px" label-position="right" class="wp100" v-else>
         <el-form-item label="开票状态：">未开票</el-form-item>
@@ -290,6 +290,7 @@
           <el-form-item label="激活说明：">
             <span v-if="couponInfo.isActive==='1'">{{couponInfo.setActiveExplain}}</span>
             <el-input
+              clearable
               v-else
               v-model.trim="couponInfo.setActiveExplain"
               type="textarea"

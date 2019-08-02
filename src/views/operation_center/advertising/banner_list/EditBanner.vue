@@ -12,6 +12,7 @@
         <span v-if="ok">{{params.name}}</span>
         <el-input
           v-else
+          clearable 
           placeholder="请输入广告名称标题,最多15个字"
           v-model.trim="params.name"
           style="width:320px"
@@ -53,7 +54,7 @@
           ></el-date-picker>
         </el-form-item>
         <el-form-item label prop="timeType" v-if="time" style="display:inline-block;">
-          <el-select v-model="params.timeType" style="width:320px;" @change="timeTypeChange">
+          <el-select clearable v-model="params.timeType" style="width:320px;" @change="timeTypeChange">
             <el-option label="每天" value="daily"></el-option>
             <el-option label="每周" value="weekly"></el-option>
           </el-select>
@@ -133,9 +134,9 @@
           </el-form-item>
         </template>
         <div v-if="params.type === '1'">
-          <el-input v-model.trim="params.typeValue" class="w520">
+          <el-input clearable v-model.trim="params.typeValue" class="w520">
             <template slot="prepend">
-              <el-select class="w100" v-model="httpType">
+              <el-select clearable class="w100" v-model="httpType">
                 <el-option label="Http://" value="Http://"></el-option>
                 <el-option label="Https://" value="Https://"></el-option>
               </el-select>
@@ -168,7 +169,7 @@
         ></pic-upload>
       </el-form-item>
       <el-form-item label="广告排序:" prop="sort">
-        <el-input placeholder="输入投放顺序" v-model.trim="params.sort" style="width:120px"></el-input>
+        <el-input clearable placeholder="输入投放顺序" v-model.trim="params.sort" style="width:120px"></el-input>
       </el-form-item>
       <el-form-item style="text-align:center;margin-top:20px">
         <el-button type="primary" @click="save" v-if="!look">保存</el-button>

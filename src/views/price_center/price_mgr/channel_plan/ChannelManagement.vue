@@ -61,13 +61,13 @@
                 <span class="tip"><span>{{selectNum == 'all' ? '当前影院下的所有排期，' : '已选择的影院排期 '+selectNum+' 条，'}}</span>进行调整平台票价：</span>
                 <div class="form-item-row">
                   <el-form-item prop="ticketFloatType">
-                    <el-select v-model="form.ticketFloatType" placeholder="请选择调整方式" style="width:200px;margin-right:10px;">
+                    <el-select clearable v-model="form.ticketFloatType" placeholder="请选择调整方式" style="width:200px;margin-right:10px;">
                       <el-option value="add" label="增加"></el-option>
                       <el-option value="sub" label="减少"></el-option>
                     </el-select>
                   </el-form-item>
                   <el-form-item prop="ticketPrice">
-                    <el-input v-model="form.ticketPrice"  placeholder="0.00" style="width:200px;">
+                    <el-input clearable  v-model="form.ticketPrice"  placeholder="0.00" style="width:200px;">
                       <template slot="append">元</template>
                     </el-input>
                   </el-form-item>
@@ -77,13 +77,13 @@
                 <span class="tip"><span v-if="priceRight != '1' && priceRight != '2'">{{selectNum == 'all' ? '当前影院下的所有排期，' : '已选择的影院排期 '+selectNum+' 条，'}}</span>进行调整影院服务费：</span>
                 <div class="form-item-row">
                   <el-form-item prop="serviceFloatType">
-                    <el-select v-model="form.serviceFloatType" placeholder="请选择调整方式" style="width:200px;margin-right:10px;">
+                    <el-select clearable v-model="form.serviceFloatType" placeholder="请选择调整方式" style="width:200px;margin-right:10px;">
                       <el-option value="add" label="增加"></el-option>
                       <el-option value="sub" label="减少"></el-option>
                     </el-select>
                   </el-form-item>
                   <el-form-item prop="servicePrice">
-                    <el-input v-model="form.servicePrice"  placeholder="0.00" style="width:200px;">
+                    <el-input clearable  v-model="form.servicePrice"  placeholder="0.00" style="width:200px;">
                       <template slot="append">元</template>
                     </el-input>
                   </el-form-item>
