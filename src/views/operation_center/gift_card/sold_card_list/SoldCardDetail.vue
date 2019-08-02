@@ -145,11 +145,11 @@
         </el-form>
       </el-card>
     </el-card>
-    <el-card style="margin-bottom:20px" v-if="+cardInfo.invoiceType===2 ">
+    <el-card style="margin-bottom:20px" v-if="+cardInfo.invoiceType!==1 ">
       <invoice-detail
         :outData="invoiceInfo"
         :drawInvoiceName="firstcheckList.drawInvoiceName"
-        v-if="+isDrawInvoice===1"
+        v-if="+cardInfo.isDrawInvoice===1"
       ></invoice-detail>
       <el-form label-width="140px" label-position="right" class="wp100" v-else>
         <el-form-item label="开票状态：">未开票</el-form-item>
