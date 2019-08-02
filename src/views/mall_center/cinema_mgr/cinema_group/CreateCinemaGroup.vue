@@ -2,7 +2,7 @@
   <div class="app-container">
     <el-form inline label-width="80px" :model="params" :rules="rules" ref="form">
       <el-form-item label-width="120px" label="影院分组名称" prop="name">
-        <el-input v-model.trim="params.name" placeholder="请输入影院分组名称,最多10个字" class="w420"></el-input>
+        <el-input v-model.trim="params.name" placeholder="请输入影院分组名称,最多20个字" maxlength="20" class="w420"></el-input>
       </el-form-item>
       <div class="choose-box">
         <div v-if="chooseParams.id">
@@ -36,6 +36,7 @@
           :fetch="loadList"
           :table-params="tableParams"
           @select="chooseSelect"
+          @select-all="chooseSelect"
           :options="{mutilpleSelect:+chooseParams.cinemaType===2,loading:loading}"
         ></zm-table>
       </div>
@@ -83,7 +84,11 @@ export default {
       if (this.chooseParams.cinemaId && this.chooseParams.cinemaId.length) {
         callback()
       } else {
-        callback(new Error('请添加影院'))
+        this.$message({
+          message: '以下为默认所有影院，请点击添加按钮进行添加!',
+          type: 'warning'
+        })
+        callback(new Error('以下为默认所有影院，请手动添加影院!'))
       }
     }
     return {
@@ -120,8 +125,8 @@ export default {
       rules: {
         name: {
           required: true,
-          max: 10,
-          message: '请输入影院分组名称,最多10个字',
+          max: 20,
+          message: '请输入影院分组名称,最多20个字',
           trigger: 'blur'
         },
         cinemaList: { validator: cinemaListValid, trigger: 'change' }
