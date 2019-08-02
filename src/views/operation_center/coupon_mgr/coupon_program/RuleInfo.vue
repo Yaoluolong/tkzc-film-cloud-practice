@@ -2,10 +2,10 @@
   <div class="app-container">
     <el-form label-width="120px"  style="width:1200px;" :model="params" :rules="rules" ref="form">
       <el-form-item label="规则名称" prop="ruleName" >
-          <el-input v-model="params.ruleName" placeholder="请输入规则名称" style="width:320px;"></el-input>
+          <el-input clearable v-model="params.ruleName" placeholder="请输入规则名称" style="width:320px;"></el-input>
       </el-form-item>
       <el-form-item label="结算规则" prop="settlementType">
-         <el-select v-model="params.settlementType" placeholder="请选择结算规则" style="width:320px;">
+         <el-select clearable v-model="params.settlementType" placeholder="请选择结算规则" style="width:320px;">
            <el-option label="影厅" value="1"></el-option>
            <el-option label="制式" value="2"></el-option>
          </el-select>
@@ -27,7 +27,7 @@
         <time-rule  v-model="params.timeRule" ></time-rule>
       </el-form-item>
       <el-form-item label="规则优先级" prop="sort">
-        <el-input style="width:150px" v-model.trim="params.sort"></el-input> &nbsp;级
+        <el-input clearable style="width:150px" v-model.trim="params.sort"></el-input> &nbsp;级
       </el-form-item>
       <div  style="margin-left:40px;">
         <el-button type="primary" @click="save">保存</el-button>

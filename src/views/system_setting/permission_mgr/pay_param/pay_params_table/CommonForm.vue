@@ -12,20 +12,20 @@
        <div>
          <el-form-item class="get-right" prop="name" label="支付名称" label-width="1px;">
               <!-- <tip content="显示支付图标后面,例如:建行龙支付特惠购票." style="width:550px;"> -->
-                <el-input v-model.trim="payParam.name" maxlength="8" oninput="if(value.length > 9)value = value.slice(0, 8)" placeholder="请输入内容最多8个字"></el-input>
+                <el-input clearable  v-model.trim="payParam.name" maxlength="8" oninput="if(value.length > 9)value = value.slice(0, 8)" placeholder="请输入内容最多8个字"></el-input>
               <!-- </tip>             -->
           </el-form-item>
         </div>
        <div>
          <el-form-item class="get-right" prop="describe" label="支付说明" label-width="1px;">
               <tip content="显示支付图标后面,例如:建行龙支付特惠购票." style="width:750px;">
-                <el-input v-model.trim="payParam.describe" maxlength="50" oninput="if(value.length > 51)value = value.slice(0, 50)" placeholder="请输入内容最多50个字"></el-input>
+                <el-input clearable  v-model.trim="payParam.describe" maxlength="50" oninput="if(value.length > 51)value = value.slice(0, 50)" placeholder="请输入内容最多50个字"></el-input>
               </tip>            
           </el-form-item>
         </div>
         <el-form-item class="get-right2" prop="sort" label="支付排序" label-width="1px;">
           <tip content="用户选择支付方式时的展示优先级排序,数字越大优先级越高." style="width:100px;">
-            <el-input v-model.trim="payParam.sort" placeholder="请输入内容"></el-input>
+            <el-input clearable  v-model.trim="payParam.sort" placeholder="请输入内容"></el-input>
           </tip>
         </el-form-item>
     </el-form>

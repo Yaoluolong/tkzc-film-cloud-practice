@@ -2,7 +2,7 @@
   <div class="app-container">
        <el-form inline label-width="120px">
             <!-- <el-form-item label="商家名称">
-                <el-input v-model="query.name"></el-input>
+                <el-input clearable  v-model="query.name"></el-input>
             </el-form-item>
             <el-form-item >
               <el-button type="primary" icon="el-icon-search"  @click="refreshTable">查询</el-button>
@@ -31,7 +31,7 @@
           <span>
               <el-form inline :model="submitData" :rules="rules" ref="form">
                 <el-form-item label="终端名称:" prop="name">
-                    <el-input v-model.trim="submitData.name" style="width: 280px;" :maxlength="8" placeholder="请输入终端名称,最多8个字"></el-input>
+                    <el-input clearable  v-model.trim="submitData.name" style="width: 280px;" :maxlength="8" placeholder="请输入终端名称,最多8个字"></el-input>
                 </el-form-item>
                 <el-form-item label="适用商家:" prop="channelType">
                   <el-radio-group v-model="submitData.channelType" size="medium">
@@ -40,10 +40,10 @@
                   </el-radio-group>
                 </el-form-item>
                 <el-form-item label="终端代码:" prop="code" v-if="submitData.channelType==='1'">
-                    <el-input v-model.trim="submitData.code" style="width: 280px;" placeholder="请输入消费终端代码"></el-input>
+                    <el-input clearable  v-model.trim="submitData.code" style="width: 280px;" placeholder="请输入消费终端代码"></el-input>
                 </el-form-item>
                 <el-form-item label="终端类型:" prop="type">
-                    <!-- <el-select v-model="submitData.type" placeholder="请选择">
+                    <!-- <el-select clearable v-model="submitData.type" placeholder="请选择">
                         <el-option label="IOS" value="1"></el-option>
                         <el-option label="安卓" value="2"></el-option>
                         <el-option label="微信H5" value="3"></el-option>

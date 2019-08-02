@@ -8,7 +8,7 @@
               <cinema-id-selector v-model="query.cinemaId" clearable style="width:200px"></cinema-id-selector>
             </el-form-item> -->
             <el-form-item label="广告状态">
-              <el-select v-model="query.status" style="width:200px">
+              <el-select clearable v-model="query.status" style="width:200px">
                     <el-option value="-1" label="全部"></el-option>
                     <el-option value="1" label="已上线"></el-option>
                     <el-option value="2" label="已下线"></el-option>

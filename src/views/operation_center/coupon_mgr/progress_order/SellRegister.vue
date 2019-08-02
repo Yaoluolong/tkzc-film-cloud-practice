@@ -46,7 +46,7 @@
                   </el-form-item>
                 </div>
                 <el-form-item label="电影券号" v-if="couponInfo.style==='Z'">
-                  <div v-for="item in couponInfo.codeIdDetail">
+                  <div v-for="(item,index) in couponInfo.codeIdDetail" :key="index">
                     <span>{{item.left}}</span>
                     <span> －－ </span>
                     <span>{{item.right}}</span>
@@ -82,11 +82,11 @@
                 <span>{{couponInfo.canFreePrice}}</span>元
                 </el-form-item>
                 <el-form-item label="销售备注:">
-                  <!-- <el-input type="textarea" :row="5" v-model="couponInfo.remark" disabled></el-input> -->
+                  <!-- <el-input clearable type="textarea" :row="5" v-model="couponInfo.remark" disabled></el-input> -->
                   <span>{{couponInfo.remark}}</span>
                 </el-form-item>
                 <el-form-item label="使用说明:">
-                  <!-- <el-input type="textarea" :row="5" v-model="couponInfo.useExplain" disabled></el-input> -->
+                  <!-- <el-input clearable type="textarea" :row="5" v-model="couponInfo.useExplain" disabled></el-input> -->
                   <span>{{couponInfo.useExplain}}</span>
                 </el-form-item>                
             </el-form>
@@ -111,7 +111,7 @@
               <span>{{programInfo.stime}} -- {{programInfo.etime}}</span>
             </el-form-item>
             <el-form-item label="可用商家:">
-              <div v-for="channel in programInfo.channelList">
+              <div v-for="(channel,index) in programInfo.channelList" :key="index">
                 <div>{{channel.name}}</div>
               </div>
             </el-form-item>
@@ -122,7 +122,7 @@
               <el-form-item label="兑换方式："  :prop="'ruleList.'+index+'.settlementType'">
                  <span v-if="rule.settlementType==='1'">根据影厅</span>
                  <span v-else-if="rule.settlementType==='2'">根据制式</span>
-                 <span v-else="rule.settlementType==='3'">根据影片</span>
+                 <span v-else-if="rule.settlementType==='3'">根据影片</span>
               </el-form-item>
               <el-form-item label="选择影厅："  :prop="'ruleList.'+index+'.hallType'" v-if="programInfo.cinemaGroupId && rule.settlementType === '1'" style="width:300px;">
                  <span>{{rule.hallTypeName}}</span>
@@ -134,7 +134,7 @@
                 <el-radio v-model="rule.filmType" label="-1" disabled>全部影片</el-radio>
                 <el-radio v-model="rule.filmType" label="1" disabled>指定影片</el-radio>
                 <div style="border:1px solid #ebeef5;width:800px;padding: 10px 20px;" v-if="rule.filmType === '1'">
-                  <div v-for="v in rule.filmList">
+                  <div v-for="(v,i) in rule.filmList" :key="i">
                     影片名称：<span>{{v.name}}</span>
                   </div>
                 </div>
@@ -199,7 +199,7 @@
           <!-- <div style="margin:20px 0;">
             <span style="font-size:14px;line-height:1;vertical-align:top;">激活说明：</span>
             <span v-if="couponInfo.isActive==='1'">{{couponInfo.setActiveExplain}}</span>
-            <el-input v-else v-model.trim="couponInfo.setActiveExplain" type="textarea" :rows="5" :disabled="couponInfo.isActive !== '0'" placeholder="请输入您对此销售单的审核意见" style="display:inline-block;width:600px;"></el-input>
+            <el-input clearable v-else v-model.trim="couponInfo.setActiveExplain" type="textarea" :rows="5" :disabled="couponInfo.isActive !== '0'" placeholder="请输入您对此销售单的审核意见" style="display:inline-block;width:600px;"></el-input>
           </div>
           <div style="margin:20px 0;" v-if="couponInfo.isActive === '1'">
             <span style="font-size:14px;vertical-align:top;">激活人：{{couponInfo.setActivePeople}}</span>
@@ -208,7 +208,7 @@
             <el-form label-width="140px" label-position="right" style="width:1000px;">
               <el-form-item label="激活说明：">
                 <span v-if="couponInfo.isActive==='1'">{{couponInfo.setActiveExplain}}</span>
-                <el-input v-else v-model.trim="couponInfo.setActiveExplain" type="textarea" :rows="5" :disabled="couponInfo.isActive !== '0'" placeholder="请输入您对此销售单的审核意见" style="display:inline-block;width:600px;"></el-input>
+                <el-input clearable  v-else v-model.trim="couponInfo.setActiveExplain" type="textarea" :rows="5" :disabled="couponInfo.isActive !== '0'" placeholder="请输入您对此销售单的审核意见" style="display:inline-block;width:600px;"></el-input>
               </el-form-item>
               <el-form-item label="激活状态：" v-if="couponInfo.isActive === '1'">
                 {{couponInfo.activeName}}

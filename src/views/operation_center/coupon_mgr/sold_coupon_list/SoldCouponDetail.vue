@@ -290,6 +290,7 @@
           <el-form-item label="激活说明：">
             <span v-if="couponInfo.isActive==='1'">{{couponInfo.setActiveExplain}}</span>
             <el-input
+              clearable
               v-else
               v-model.trim="couponInfo.setActiveExplain"
               type="textarea"

@@ -2,7 +2,7 @@
     <div class="app-container">
          <el-form inline label-width="120px">
            <el-form-item label="适用职员">
-             <el-input v-model="query.salesman"  style="width:300px;" placeholder="输入职员名称或账号模糊查询"></el-input>
+             <el-input clearable  v-model="query.salesman"  style="width:300px;" placeholder="输入职员名称或账号模糊查询"></el-input>
             </el-form-item>             
             <el-form-item>
               <el-button type="primary" icon="el-icon-search"  @click="refreshTable">查询</el-button>

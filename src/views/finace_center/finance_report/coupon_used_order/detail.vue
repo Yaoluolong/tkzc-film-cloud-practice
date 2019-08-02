@@ -6,14 +6,14 @@
     </el-tabs>
     <el-form inline label-width="120px">
       <el-form-item label="电影券号码" v-if="query.isUse==='0'">
-        <el-input v-model="query.couponCodeLeft" style="width:200px;" placeholder="输入优惠券号码查询"></el-input>&nbsp;--&nbsp;
-        <el-input v-model="query.couponCodeRight" style="width:200px;" placeholder="输入优惠券号码查询"></el-input>
+        <el-input clearable v-model="query.couponCodeLeft" style="width:200px;" placeholder="输入优惠券号码查询"></el-input>&nbsp;--&nbsp;
+        <el-input clearable v-model="query.couponCodeRight" style="width:200px;" placeholder="输入优惠券号码查询"></el-input>
       </el-form-item>
       <el-form-item label="分发渠道">
-        <el-input v-model="query.tag" style="width:200px;" placeholder="输入分发渠道"></el-input>
+        <el-input clearable v-model="query.tag" style="width:200px;" placeholder="输入分发渠道"></el-input>
       </el-form-item>
       <el-form-item label="购票影院" v-if="query.isUse==='1'">
-        <el-input v-model="query.cinemaName" style="width:200px;" placeholder="输入影院名称模糊查询"></el-input>
+        <el-input clearable v-model="query.cinemaName" style="width:200px;" placeholder="输入影院名称模糊查询"></el-input>
       </el-form-item>
       <el-form-item label="影院城市" prop="area" v-if="query.isUse==='1'">
         <city-cascader

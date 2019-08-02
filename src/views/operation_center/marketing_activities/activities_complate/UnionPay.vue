@@ -42,31 +42,31 @@
           </el-form-item>
           
           <el-form-item label="单个座位固定售价:" prop="money" style="width:300px;" v-if="rule.discountType==='1' && rule.activityConfig.ruleType==='1'">
-            <el-input v-model.trim="rule.activityConfig.money" style="width:100px"></el-input>&emsp;元
+            <el-input clearable  v-model.trim="rule.activityConfig.money" style="width:100px"></el-input>&emsp;元
           </el-form-item>
           <el-form-item label="单个座位固定立减:" prop="money" style="width:300px;" v-if="rule.discountType==='1' && rule.activityConfig.useType==='1' && rule.activityConfig.ruleType==='2'">
-            <el-input v-model.trim="rule.activityConfig.money" style="width:100px"></el-input>&emsp;元
+            <el-input clearable  v-model.trim="rule.activityConfig.money" style="width:100px"></el-input>&emsp;元
           </el-form-item>
           <el-form-item label="总售价固定立减:" prop="money" style="width:300px;" v-if="rule.discountType==='1' && rule.activityConfig.useType==='2' && rule.activityConfig.ruleType==='2'">
-            <el-input v-model.trim="rule.activityConfig.money" style="width:100px"></el-input>&emsp;元
+            <el-input clearable  v-model.trim="rule.activityConfig.money" style="width:100px"></el-input>&emsp;元
           </el-form-item>
 
           <el-form-item label="随机减价区间:" prop="money" style="width:500px;" v-if="rule.discountType==='2'">
-            <el-input v-model.trim="rule.activityConfig.interval1" style="width:100px"></el-input>&emsp;至&emsp;<el-input v-model.trim="rule.activityConfig.interval2" style="width:100px"></el-input>&emsp;元
+            <el-input clearable  v-model.trim="rule.activityConfig.interval1" style="width:100px"></el-input>&emsp;至&emsp;<el-input clearable  v-model.trim="rule.activityConfig.interval2" style="width:100px"></el-input>&emsp;元
           </el-form-item>
           
           <el-form-item label="折扣比例:" prop="scale" style="width:500px;" v-if="rule.discountType==='3'">
-            <el-input v-model.trim="rule.activityConfig.scale" style="width:100px"></el-input>&emsp;(原价为1, 0.88即为八八折)
+            <el-input clearable  v-model.trim="rule.activityConfig.scale" style="width:100px"></el-input>&emsp;(原价为1, 0.88即为八八折)
           </el-form-item>
           <el-form-item label="单个座位优惠上限:" prop="limit" style="width:300px;" v-if="rule.discountType==='3' && rule.activityConfig.useType==='1'">
-            <el-input v-model.trim="rule.activityConfig.limit" style="width:100px"></el-input>&emsp;元
+            <el-input clearable  v-model.trim="rule.activityConfig.limit" style="width:100px"></el-input>&emsp;元
           </el-form-item>
           <el-form-item label="单笔优惠上限:" prop="limit" style="width:300px;" v-if="rule.discountType==='3' && rule.activityConfig.useType==='2'">
-            <el-input v-model.trim="rule.activityConfig.limit" style="width:100px"></el-input>&emsp;元
+            <el-input clearable  v-model.trim="rule.activityConfig.limit" style="width:100px"></el-input>&emsp;元
           </el-form-item>
           <el-form-item label="活动补贴消耗上限:" prop="ceiling" style="width:300px;">
             <tip content="本条规则发放的总金额数">
-                <el-input v-model.trim="rule.ceiling" style="width:120px"></el-input>&emsp;元
+                <el-input clearable  v-model.trim="rule.ceiling" style="width:120px"></el-input>&emsp;元
               </tip>
           </el-form-item>
       	</el-form>     

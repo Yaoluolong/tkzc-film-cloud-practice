@@ -136,7 +136,7 @@
             </div>
             <div v-if="$route.query.status==='1'">
               <el-form-item label="审核意见:" prop="comment">
-                <el-input v-model="params.comment" type="textarea" rows="5" style="width:400px;"></el-input>
+                <el-input clearable v-model="params.comment" type="textarea" rows="5" style="width:400px;"></el-input>
               </el-form-item>
             </div>         
           </el-form>

@@ -14,7 +14,7 @@
       </el-form-item>
       <el-form-item label="活动结算方式：" v-else>{{params.typeStr}}</el-form-item>
       <el-form-item label="固定结算金额：" v-if="params.type==='3'" style="width:300px;" prop="money">
-        <el-input v-model="params.money" placeholder="0"></el-input>
+        <el-input clearable  v-model="params.money" placeholder="0"></el-input>
       </el-form-item>
       <div class="triggerWarningConditions">
         <div v-for="(item, index) in params.warnConfig" class="siggleConditions" :key="index">
@@ -25,7 +25,7 @@
             :rules="rules.warnPercent"
           >
             优惠总金额达到合作方总金额&emsp;
-            <el-input v-model="item.warnPercent" placeholder="0" style="width:100px"></el-input>&emsp;%
+            <el-input clearable  v-model="item.warnPercent" placeholder="0" style="width:100px"></el-input>&emsp;%
             <div class="ruleHeader">
               <div class="oper" style="float:right;">
                 <i
@@ -56,7 +56,7 @@
           </el-form-item>
           <el-form-item label=" " :prop="'warnConfig.'+index+'.days'" :rules="rules.days">
             并在&emsp;
-            <el-input v-model="item.days" placeholder="0" style="width:100px;"></el-input>&emsp;个工作日内完成对账。
+            <el-input clearable  v-model="item.days" placeholder="0" style="width:100px;"></el-input>&emsp;个工作日内完成对账。
           </el-form-item>
         </div>
       </div>
@@ -110,7 +110,7 @@
         </el-table>
       </el-form-item>
       <el-form-item label="预警通知接收人：" prop="notifyPeople">
-        <el-input
+        <el-input clearable 
           v-model.trim="params.notifyPeople"
           type="textarea"
           placeholder="接收号码间用英文','隔开"

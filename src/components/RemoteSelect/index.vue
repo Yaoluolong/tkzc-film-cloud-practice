@@ -1,5 +1,5 @@
 <template>
-    <el-select v-bind="$attrs" v-on="$listeners" v-model="value1" >
+    <el-select clearable v-bind="$attrs" v-on="$listeners" v-model="value1" >
         <el-option v-if="showAllOption" value="-1" label="全部"></el-option>
         <el-option :label="item[labelKey]" v-if="!type || type===item['type']" :value="item[valueKey]+''" v-for="item in options" :key="item[valueKey]"></el-option>
     </el-select>

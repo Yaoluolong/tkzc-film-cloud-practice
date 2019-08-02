@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-form-item label="影院编码">
-      <el-input v-model.trim="query.cinemaThirdNo" clearable placeholder="请输入编码、影院名称" class="w200"></el-input>
+      <el-input clearable v-model.trim="query.cinemaThirdNo" placeholder="请输入编码、影院名称" class="w200"></el-input>
     </el-form-item>
     <el-form-item label="系统商">
       <remote-select-multiple
@@ -17,10 +17,11 @@
     </el-form-item>
     <el-form-item label="地区">
       <el-input
+        clearable
         v-model="area"
         placeholder="选择地区模糊查询"
         class="w200"
-        clearable
+        @change="changeArea"
         @focus="onOperateClick('area')"
       ></el-input>
     </el-form-item>
@@ -72,16 +73,26 @@ export default {
     }
   },
   mounted() {
-    if (JSON.parse(JSON.stringify(this.queryParams) !== '{}')) this.getInfo(this.queryParams)
+    if (JSON.parse(JSON.stringify(this.queryParams) !== '{}')) {
+      this.getInfo(this.queryParams)
+    }
     this.interfaceTypeChange()
   },
   methods: {
+    changeArea(val) {
+      if (!val) {
+        this.query.provinceId = ''
+        this.query.cityId = ''
+      }
+    },
     getInfo(val) {
       this.query.cinemaThirdNo = val.cinemaThirdNo
       this.query.provinceId = val.provinceId
       this.query.cityId = val.cityId
       this.area = this.areaStr
-      this.interfaceTypeIdArray = val.interfaceId ? val.interfaceId.split(',') : ['-1']
+      this.interfaceTypeIdArray = val.interfaceId
+        ? val.interfaceId.split(',')
+        : ['-1']
     },
     // 接口商点击全部时清除其他选项
     interfaceTypeChange() {
@@ -109,9 +120,9 @@ export default {
       this.query.provinceId = areaInfo.provinceId
       this.query.cityId = areaInfo.cityId
       this.area =
-        areaInfo.provinceName + (areaInfo.provinceName && areaInfo.cityName
-          ? ','
-          : '') + areaInfo.cityName
+        areaInfo.provinceName +
+        (areaInfo.provinceName && areaInfo.cityName ? ',' : '') +
+        areaInfo.cityName
     },
     querySubmit() {
       this.query.interfaceId = this.interfaceTypeIdArray

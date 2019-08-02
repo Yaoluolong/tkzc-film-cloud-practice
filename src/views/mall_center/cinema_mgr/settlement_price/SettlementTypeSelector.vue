@@ -4,9 +4,9 @@
             结算价 &nbsp;&nbsp;= &nbsp;&nbsp;<span v-if="params.settlementType"> 影院结算票价 &nbsp;</span><span v-if="params.settlementType === '4'"> +影院结算服务费 &nbsp;</span>
             <remote-select v-model="params.settlementType"  placeholder="请选择结算价类型" action="/systemApi/settlementPrice/getSettlementType" style="width:250px"></remote-select> &nbsp;&nbsp;&nbsp;
             <span v-if="params.settlementType !== '4' && params.settlementType">
-              <el-input v-model="params.money" style="width:100px" placeholder="0.00"></el-input> &nbsp;&nbsp;&nbsp;
+              <el-input clearable v-model="params.money" style="width:100px" placeholder="0.00"></el-input> &nbsp;&nbsp;&nbsp;
                 元 + 影院结算服务费 &nbsp;&nbsp;&nbsp;
-              <el-input v-model="params.servicePrice" placeholder="0.00" style="width:100px"></el-input>&nbsp;&nbsp;元
+              <el-input clearable v-model="params.servicePrice" placeholder="0.00" style="width:100px"></el-input>&nbsp;&nbsp;元
             </span>            
           </span>          
         </div>

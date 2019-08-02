@@ -5,19 +5,19 @@
             <p style="font-size:14px;font-weight:700">支付参数 :</p>
             <el-card class="box-card">
                 <el-form-item label="商户号" prop="account" style="width:100%;">
-                  <el-input v-model.trim="abcPayParam.configDetail.account" placeholder="请输入内容" style="width:400px;"></el-input>            
+                  <el-input clearable v-model.trim="abcPayParam.configDetail.account" placeholder="请输入内容" style="width:400px;"></el-input>            
                 </el-form-item>
                 <el-form-item label="支付证书" prop="payCertPath" style="width:100%;">
-                  <el-input v-model.trim="abcPayParam.configDetail.payCertPath" placeholder="请输入内容" style="width:400px;"></el-input>            
+                  <el-input clearable v-model.trim="abcPayParam.configDetail.payCertPath" placeholder="请输入内容" style="width:400px;"></el-input>            
                 </el-form-item>
                 <el-form-item label="商户证书" prop="accountCertPath" style="width:100%;">
-                  <el-input v-model.trim="abcPayParam.configDetail.accountCertPath" placeholder="请输入内容" style="width:400px;"></el-input>            
+                  <el-input clearable v-model.trim="abcPayParam.configDetail.accountCertPath" placeholder="请输入内容" style="width:400px;"></el-input>            
                 </el-form-item>
                 <el-form-item label="秘钥密码" prop="secretPassword" style="width:100%;">
-                  <el-input v-model.trim="abcPayParam.configDetail.secretPassword" placeholder="请输入内容" style="width:400px;"></el-input>            
+                  <el-input clearable v-model.trim="abcPayParam.configDetail.secretPassword" placeholder="请输入内容" style="width:400px;"></el-input>            
                 </el-form-item>
                 <el-form-item label="合作商APPID" prop="appId" style="width:100%;">
-                  <el-input v-model.trim="abcPayParam.configDetail.appId" placeholder="请输入内容" style="width:400px;"></el-input>            
+                  <el-input clearable v-model.trim="abcPayParam.configDetail.appId" placeholder="请输入内容" style="width:400px;"></el-input>            
                 </el-form-item>             
             </el-card> 
           </el-form>        

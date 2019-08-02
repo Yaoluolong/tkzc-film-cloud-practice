@@ -1,8 +1,8 @@
 <template>
   <div class="app-container">
-    <el-form label-width="120px" style="width:600px;" :model="params" :rules="rules" ref="form">
-      <el-form-item label="手机号码" prop="userName">
-        <el-input clearable v-model="params.mobile" placeholder="请输入手机号码" disabled></el-input>
+    <el-form label-width="120px"  style="width:600px;" :model="params" :rules="rules" ref="form">
+      <el-form-item label="手机号码" prop="userName" >
+          <el-input clearable  v-model="params.mobile" placeholder="请输入手机号码" disabled></el-input>
       </el-form-item>
       <el-form-item label="性别" prop="realName">
         <!-- <el-radio v-model="params.sex" label="" >保密</el-radio> -->

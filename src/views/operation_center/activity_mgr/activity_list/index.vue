@@ -5,7 +5,7 @@
              <channel-id-selector v-model="query.merchant"  style="width:200px;" type="1"></channel-id-selector>
             </el-form-item>
             <el-form-item label="活动状态">
-              <el-select v-model="query.activity_status" style="width:200px">
+              <el-select clearable v-model="query.activity_status" style="width:200px">
                     <el-option value="all" label="全部"></el-option>
                     <el-option value="draft" label="未提交"></el-option>
                     <el-option value="pending" label="未开始"></el-option>
@@ -17,14 +17,14 @@
               </el-select>              
             </el-form-item>
             <el-form-item label="活动类型">
-              <el-select v-model="query.activity_type" style="width:200px">
+              <el-select clearable v-model="query.activity_type" style="width:200px">
                 <el-option value="all" label="全部"></el-option>
                 <el-option value="cash" label="现金支付"></el-option>
                 <el-option value="coupon" label="抢券活动"></el-option>
               </el-select>
             </el-form-item>
             <el-form-item label="活动名称">
-             <el-input v-model="query.activity_subject" style="width:200px;" placeholder="请输入活动名称"></el-input>
+             <el-input clearable v-model="query.activity_subject" style="width:200px;" placeholder="请输入活动名称"></el-input>
             </el-form-item>              
             <el-form-item>
               <el-button type="primary" icon="el-icon-search"  @click="refreshTable">查询</el-button>

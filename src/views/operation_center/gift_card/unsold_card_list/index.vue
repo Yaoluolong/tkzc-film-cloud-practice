@@ -48,7 +48,7 @@
                 <remote-select v-model="params.style" clearable placeholder="请选择电影卡类型" action="/systemApi/dict/getList" :query="{type:'cardStyle'}"></remote-select>
               </el-form-item> -->
               <el-form-item label="生成数量" prop="num">
-                <el-input v-model="params.num" text="number" value="0" :min="1" label="输入数字" style="width:200px;"></el-input>&nbsp;&nbsp;张<span style="margin-left: 8px;color:#8e8e8e;" size="medium">只能是数值，且必须大于0</span>
+                <el-input clearable  v-model="params.num" text="number" value="0" :min="1" label="输入数字" style="width:200px;"></el-input>&nbsp;&nbsp;张<span style="margin-left: 8px;color:#8e8e8e;" size="medium">只能是数值，且必须大于0</span>
               </el-form-item>
             </el-form>
 
@@ -78,7 +78,7 @@
                 {{agur.num||'--'}}张
               </el-form-item>
               <el-form-item label="销售订单号" prop="saleOrderNo">
-                <el-input v-model="agur.saleOrderNo" label="输入销售订单号" class="w200"></el-input>
+                <el-input clearable  v-model="agur.saleOrderNo" label="输入销售订单号" class="w200"></el-input>
                 <span class="db" style="margin-left: 8px;color:#8e8e8e;" size="medium">销售订单号未输入则导出整个批次！</span>
               </el-form-item>
               <el-form-item label="导出字段" prop="fieldList">
@@ -105,10 +105,10 @@
                 <el-radio v-model="agur.exportType" label="1">直接导出</el-radio>
               </el-form-item>
               <el-form-item label="接收校验码" prop="mobile">
-                <el-input v-model="agur.mobile" placeholder="输入接收校验码" style="width:200px"></el-input>
+                <el-input clearable  v-model="agur.mobile" placeholder="输入接收校验码" style="width:200px"></el-input>
               </el-form-item>
               <el-form-item label="导出备注" prop="remark">
-                <el-input type="textarea" :row="5" v-model="agur.remark" placeholder="请输入内容"></el-input>
+                <el-input clearable  type="textarea" :row="5" v-model="agur.remark" placeholder="请输入内容"></el-input>
               </el-form-item>           
             </el-form>
 

@@ -38,7 +38,7 @@
         </el-radio-group>  
         <el-form inline  ref="form" v-show="selectType === '2'">           
           <el-form-item prop="cinemaName">
-              <el-input  v-model="filterCondition" placeholder="请输入影院名称"></el-input>
+              <el-input clearable  v-model="filterCondition" placeholder="请输入影院名称"></el-input>
           </el-form-item>
           <el-form-item>
               <el-button type="primary" @click="forShowCInemaHallDataFilter">查询</el-button>

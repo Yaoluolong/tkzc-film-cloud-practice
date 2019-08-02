@@ -8,7 +8,7 @@
       ref="baseInfo"
     >
       <el-form-item label="规则模板名称" prop="name">
-        <el-input v-model="params.name" placeholder="请输入电影券名称,最多20个字" style="width:320px;"></el-input>
+        <el-input clearable v-model="params.name" placeholder="请输入电影券名称,最多20个字" style="width:320px;"></el-input>
       </el-form-item>
       <el-form-item label="销售时规则是否允许修改" prop="isAllowUpdate" label-width="200">
         <!-- <el-radio-group v-model="params.isAllowUpdate">
@@ -22,11 +22,11 @@
         >业务员在销售电影券时选择该电影券规则模版后是否允许让其进行修改，在创建模版的时候默认是“不允许”！</span>
       </el-form-item>
       <!-- <el-form-item label="电影券销售单号" prop="orderNo" >
-          <el-input v-model="params.orderNo" placeholder="请输入电影券销售单号" style="width:320px;"></el-input>
+          <el-input clearable v-model="params.orderNo" placeholder="请输入电影券销售单号" style="width:320px;"></el-input>
           <span style="font-size:14px;color:rgb(142, 142, 142);margin-left:8px;">这里的规则时间指的是影片的放映场次时间</span>
       </el-form-item>-->
       <el-form-item label="券不可用时段" class="dateTimeLimit" prop="dateLimitType">
-        <el-select v-model="params.dateLimitType" style="width:320px;margin-bottom:20px;">
+        <el-select clearable v-model="params.dateLimitType" style="width:320px;margin-bottom:20px;">
           <el-option label="不限制" value="1"></el-option>
           <el-option label="指定时间" value="2"></el-option>
         </el-select>
@@ -42,7 +42,7 @@
           end-placeholder="结束日期"
           style="width:320px;"
         ></el-date-picker>
-        <el-select v-model="params.timeType" style="width:320px;margin-bottom:20px;">
+        <el-select clearable v-model="params.timeType" style="width:320px;margin-bottom:20px;">
           <el-option label="每天" value="day"></el-option>
           <el-option label="每周" value="week"></el-option>
         </el-select>
@@ -102,7 +102,7 @@
           :prop="'ruleList.'+index+'.settlementType'"
           :rules="programInfoRules.settlementType"
         >
-          <el-select v-model="rule.settlementType" @change="resetDiffRuleChange">
+          <el-select clearable v-model="rule.settlementType" @change="resetDiffRuleChange">
             <el-option value="1" label="根据影厅"></el-option>
             <el-option value="2" label="根据制式"></el-option>
             <el-option value="3" label="根据影片"></el-option>

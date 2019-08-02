@@ -1,7 +1,7 @@
 <template>
   <el-form label-width="140px" label-position="left" :model="params" :rules="rules" ref="form">
     <el-form-item :label="title" prop="dateType">
-      <el-select v-model="params.dateType" style="width:320px">
+      <el-select clearable v-model="params.dateType" style="width:320px">
         <el-option label="指定日期" value="1"></el-option>
         <el-option v-if="showSpecificDate" label="每月" value="2"></el-option>
       </el-select>
@@ -24,6 +24,7 @@
     </el-form-item>
     <el-form-item label="时间限制" :prop="propType" v-if="params.dateType">
       <el-select
+        clearable
         v-model="params.timeType"
         style="width:320px;margin-bottom:20px"
         v-if="params.dateType==1"

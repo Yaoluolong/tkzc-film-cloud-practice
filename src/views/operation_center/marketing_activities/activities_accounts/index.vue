@@ -2,7 +2,7 @@
     <div class="app-container">
          <el-form inline label-width="120px">
             <el-form-item label="活动名称">
-             <el-input v-model="query.name" style="width:200px;" placeholder="输入活动名称或ID查询"></el-input>
+             <el-input clearable  v-model="query.name" style="width:200px;" placeholder="输入活动名称或ID查询"></el-input>
             </el-form-item>
             <el-form-item label="投放商家">
           		<channel-id-selector v-model="query.channelIds" type="1"></channel-id-selector>

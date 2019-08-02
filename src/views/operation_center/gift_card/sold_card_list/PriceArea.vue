@@ -4,12 +4,12 @@
         <el-option label="大于" value="gt"></el-option>
         <el-option label="大于等于" value="egt"></el-option>
     </el-select>&nbsp;
-    <el-input v-model.trim="params.price1" :precision="2" style="width:160px;"></el-input>&nbsp;元,&nbsp;&nbsp;
+    <el-input clearable  v-model.trim="params.price1" :precision="2" style="width:160px;"></el-input>&nbsp;元,&nbsp;&nbsp;
     <el-select v-model.trim="params.mark2" placeholder="请选择" style="width:120px;">
         <el-option label="小于" value="lt"></el-option>
         <el-option label="小于等于" value="elt"></el-option>
     </el-select>&nbsp;
-    <el-input v-model.trim="params.price2" :precision="2" style="width:160px;"></el-input>&nbsp;元
+    <el-input clearable  v-model.trim="params.price2" :precision="2" style="width:160px;"></el-input>&nbsp;元
   </div>
 </template>
 
@@ -69,7 +69,7 @@
 </script>
 
 <style scoped>
-.price-rule{
-    /*padding: 20px;*/
-}
+/* .price-rule{
+    padding: 20px;
+} */
 </style>

@@ -260,6 +260,7 @@
           <div v-if="agur.isMult==='1'">
             每&emsp;
             <el-input
+              clearable
               v-model="agur.couponNum"
               style="width:100px;"
               :disabled="agur.hasExport==='1'"
@@ -274,10 +275,15 @@
           <el-radio v-model="agur.exportType" label="1">直接导出</el-radio>
         </el-form-item>
         <el-form-item label="接收校验码" prop="mobile">
-          <el-input v-model="agur.mobile" placeholder="输入用于接收文件校验码的手机号" style="width:350px"></el-input>
+          <el-input
+            clearable
+            v-model="agur.mobile"
+            placeholder="输入用于接收文件校验码的手机号"
+            style="width:350px"
+          ></el-input>
         </el-form-item>
         <el-form-item label="导出备注" prop="remark">
-          <el-input type="textarea" :row="5" v-model="agur.remark" placeholder="请输入内容"></el-input>
+          <el-input clearable type="textarea" :row="5" v-model="agur.remark" placeholder="请输入内容"></el-input>
         </el-form-item>
       </el-form>
 

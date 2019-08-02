@@ -2,13 +2,13 @@
      <el-dialog :title="title" :visible.sync="dialogVisible" width="600px" @close="resetFields('form')">
         <el-form label-width="120px"  :model="params" :rules="rules" ref="form">
             <el-form-item label="菜单名称" prop="menuName">
-              <el-input  v-model="params.menuName" placeholder="请输入菜单名称,最多9个字"></el-input>
+              <el-input clearable   v-model="params.menuName" placeholder="请输入菜单名称,最多9个字"></el-input>
           </el-form-item>
           <el-form-item  label="菜单地址" prop="menuUrl">
-              <el-input  v-model="params.menuUrl" placeholder="请输入菜单访问地址"></el-input>
+              <el-input clearable   v-model="params.menuUrl" placeholder="请输入菜单访问地址"></el-input>
           </el-form-item>
           <el-form-item  label="菜单同级序号" prop="sort">
-              <el-input-number  v-model="params.sort" ></el-input-number>
+              <el-input-number clearable v-model="params.sort" ></el-input-number>
           </el-form-item>
           <el-form-item  label="菜单状态" prop="status">
             <el-radio v-model="params.status" label="1">启用</el-radio>

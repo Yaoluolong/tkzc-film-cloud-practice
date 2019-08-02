@@ -13,7 +13,7 @@
         ></el-date-picker>
       </el-form-item>
       <el-form-item label="销售单号">
-        <el-input v-model="query.orderNo" clearable placeholder="请输入销售订单号" style="width:230px;"></el-input>
+        <el-input clearable v-model="query.orderNo" placeholder="请输入销售订单号" style="width:230px;"></el-input>
       </el-form-item>
 
       <el-form-item label="业务人员">

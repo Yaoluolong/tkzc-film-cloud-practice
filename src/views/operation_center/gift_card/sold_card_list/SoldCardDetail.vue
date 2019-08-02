@@ -167,6 +167,7 @@
           <el-form-item label="激活说明：">
             <span v-if="cardInfo.isActive==='1'">{{cardInfo.setActiveExplain}}</span>
             <el-input
+              clearable
               v-else
               v-model.trim="cardInfo.setActiveExplain"
               type="textarea"
@@ -251,15 +252,15 @@
             </el-form-item>
             <el-form-item label="转账银行:" prop="transferBank" v-if="payInfo.payType === '1'">
               <span v-if="payInfo.transferPeople">{{payInfo.transferBank}}</span>
-              <el-input v-else v-model.trim="payInfo.transferBank" placeholder="请输入银行名称或账户" style="width:300px;" disabled></el-input> 
+              <el-input clearable  v-else v-model.trim="payInfo.transferBank" placeholder="请输入银行名称或账户" style="width:300px;" disabled></el-input> 
             </el-form-item>
             <el-form-item :label="payInfo.payType==='1'?'转账金额:':'付款金额:'" prop="transferMoney">
               <span v-if="payInfo.transferPeople">{{payInfo.transferMoney}}</span>
-                <el-input v-else v-model.trim="payInfo.transferMoney" placeholder="0.00" style="width:100px;" disabled></el-input> 元
+                <el-input clearable  v-else v-model.trim="payInfo.transferMoney" placeholder="0.00" style="width:100px;" disabled></el-input> 元
             </el-form-item>
             <el-form-item  :label="payInfo.payType==='1'?'转账人:':'付款人:'" prop="transferPeople">
               <span v-if="payInfo.transferPeople">{{payInfo.transferPeople}}</span>
-              <el-input v-else v-model.trim="payInfo.transferPeople" placeholder="请输入转账人姓名" style="width:200px;" disabled></el-input> 
+              <el-input clearable  v-else v-model.trim="payInfo.transferPeople" placeholder="请输入转账人姓名" style="width:200px;" disabled></el-input> 
             </el-form-item>
           </el-form>
     </el-card>-->

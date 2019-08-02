@@ -7,39 +7,39 @@
             </el-form-item>
             <div v-if="detail.payType === '1'">
                 <el-form-item label="转账银行:" prop="transferBank">
-                    <el-input style="width:400px" v-model="submitData.transferBank" placeholder="输入银行名称"></el-input>
+                    <el-input clearable  style="width:400px" v-model="submitData.transferBank" placeholder="输入银行名称"></el-input>
                 </el-form-item>
                 <el-form-item label="转账金额:" prop="transferMoney">
-                    <el-input style="width:200px" v-model="submitData.transferMoney" placeholder="0.00"></el-input>
+                    <el-input clearable  style="width:200px" v-model="submitData.transferMoney" placeholder="0.00"></el-input>
                 </el-form-item>
                 <el-form-item label="转账人:" prop="transportName">
-                    <el-input style="width:250px" v-model="submitData.transportName" placeholder="输入转账人姓名"></el-input>
+                    <el-input clearable  style="width:250px" v-model="submitData.transportName" placeholder="输入转账人姓名"></el-input>
                 </el-form-item>
                 <el-form-item label="转账时间:" prop="transferTime">
                     <el-date-picker  type="date" v-model="submitData.transferTime" value-format="yyyy-MM-dd"  placeholder="选择日期"></el-date-picker>
                 </el-form-item>                
                 <el-form-item label="收款人:" prop="collectPeople">
-                    <el-input style="width:250px" v-model="submitData.collectPeople" placeholder="输入收款人姓名"></el-input>
+                    <el-input clearable  style="width:250px" v-model="submitData.collectPeople" placeholder="输入收款人姓名"></el-input>
                 </el-form-item>
                 <el-form-item label="收款账户:" prop="collectAccount">
-                    <el-input  style="width:400px" v-model="submitData.collectAccount" placeholder="输入收款银行名称或账号"></el-input>
+                    <el-input clearable   style="width:400px" v-model="submitData.collectAccount" placeholder="输入收款银行名称或账号"></el-input>
                 </el-form-item>
             </div>
             <div v-if="detail.payType === '2'">
                 <el-form-item label="付款人:" prop="transportName">
-                    <el-input style="width:250px" v-model="submitData.transportName" placeholder="输入付款人姓名"></el-input>
+                    <el-input clearable  style="width:250px" v-model="submitData.transportName" placeholder="输入付款人姓名"></el-input>
                 </el-form-item>
                 <el-form-item label="付款金额:" prop="transferMoney">
-                    <el-input style="width:200px" v-model="submitData.transferMoney" placeholder="0.00"></el-input>
+                    <el-input clearable  style="width:200px" v-model="submitData.transferMoney" placeholder="0.00"></el-input>
                 </el-form-item>                
                 <el-form-item label="付款时间:" prop="transferTime">
                     <el-date-picker type="date" v-model="submitData.transferTime" value-format="yyyy-MM-dd"  placeholder="选择日期"></el-date-picker>
                 </el-form-item>
                 <el-form-item label="收款人:" prop="collectPeople">
-                    <el-input style="width:250px" v-model="submitData.collectPeople" placeholder="输入收款人姓名"></el-input>
+                    <el-input clearable  style="width:250px" v-model="submitData.collectPeople" placeholder="输入收款人姓名"></el-input>
                 </el-form-item>
                 <el-form-item label="收款账户:" prop="collectAccount">
-                    <el-input style="width:400px" v-model="submitData.collectAccount" placeholder="输入收款银行名称或账号"></el-input>
+                    <el-input clearable  style="width:400px" v-model="submitData.collectAccount" placeholder="输入收款银行名称或账号"></el-input>
                 </el-form-item>
             </div> -->
             <el-form-item label="付款方式:" prop="payType">
@@ -50,15 +50,15 @@
             </el-form-item>
             <el-form-item label="转账银行:" prop="transferBank" v-if="detail.payType === '1'">
               <span v-if="detail.collectPeople">{{detail.transferBank}}</span>
-              <el-input v-else v-model.trim="detail.transferBank" placeholder="请输入银行名称或账户" style="width:300px;" ></el-input> 
+              <el-input clearable  v-else v-model.trim="detail.transferBank" placeholder="请输入银行名称或账户" style="width:300px;" ></el-input> 
             </el-form-item>
             <el-form-item :label="detail.payType==='1'?'转账金额:':'付款金额:'" prop="transferMoney">
                 <span v-if="detail.collectPeople">{{detail.transferMoney}}</span>
-                <el-input v-else v-model.trim="detail.transferMoney" placeholder="0.00" style="width:100px;" ></el-input> 元
+                <el-input clearable  v-else v-model.trim="detail.transferMoney" placeholder="0.00" style="width:100px;" ></el-input> 元
             </el-form-item>
             <el-form-item  :label="detail.payType==='1'?'转账人:':'付款人:'" prop="transferPeople">
               <span v-if="detail.collectPeople">{{detail.transferPeople}}</span>
-              <el-input v-else v-model.trim="detail.transferPeople" placeholder="请输入转账人姓名" style="width:200px;" ></el-input> 
+              <el-input clearable  v-else v-model.trim="detail.transferPeople" placeholder="请输入转账人姓名" style="width:200px;" ></el-input> 
             </el-form-item>
             <el-form-item  label="收款状态:" v-if="isCollectName">
               {{isCollectName}}

@@ -6,7 +6,7 @@
 		<el-form label-width="160px" style="width:1000px;" :model="params" :rules="rules" ref="form">
 			<el-form-item label="合作方预付金额度：" prop="prePayAmount">
 				<tip content="根据与合作方协议合同内标注的预付金进行如实填写，由财务复核！" style="width:260px;">
-					<el-input v-model="params.prePayAmount" style="width:230px;" :disabled="params.hasCheckAccount==='1'"></el-input>  元
+					<el-input clearable  v-model="params.prePayAmount" style="width:230px;" :disabled="params.hasCheckAccount==='1'"></el-input>  元
 				</tip>
 			</el-form-item>
       <el-form-item label="预警条件和方式：" prop="warnConfig">
@@ -26,7 +26,6 @@
 			</el-form-item>
 			<el-form-item label="模板类型：" prop="smsTemplateType">
 				<remote-select v-model="params.smsTemplateType" clearable placeholder="请选择模板类型" action="/systemApi/dict/getList" :query="{type:'smsTemplateType'}"  style="width:230px;" @change="smsTemplateTypeChange"></remote-select>
-                </el-form-item>
 			</el-form-item>
 			<el-form-item label="模板名称：" prop="smsTemplateStr">
         <el-select v-model="params.smsTemplateStr" clearable placeholder="请选择模板名称">
@@ -55,7 +54,7 @@
     		</el-table>
     	</el-form-item>
     	<el-form-item label="预警通知接收人：" prop="notifyPeople">
-          <el-input v-model.trim="params.notifyPeople" type="textarea" placeholder="接收号码间用英文','隔开" :rows="5"></el-input>
+          <el-input clearable  v-model.trim="params.notifyPeople" type="textarea" placeholder="接收号码间用英文','隔开" :rows="5"></el-input>
       </el-form-item>
 		</el-form>
     <el-button style="margin-top:20px;" type="primary" @click="save">保存</el-button>

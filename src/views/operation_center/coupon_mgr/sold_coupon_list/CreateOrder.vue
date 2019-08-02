@@ -46,6 +46,7 @@
           </el-form-item>
           <el-form-item label="销售数量:" prop="num">
             <el-input
+              clearable
               v-model.trim="element.couponInfo.num"
               placeholder="0"
               style="width:100px;"
@@ -55,6 +56,7 @@
           </el-form-item>
           <el-form-item label="销售总额:" prop="amount">
             <el-input
+              clearable
               v-model.trim="element.couponInfo.amount"
               placeholder="0.00"
               style="width:100px;"
@@ -63,6 +65,7 @@
           </el-form-item>
           <el-form-item label="销售单价:" prop="unitPrice">
             <el-input
+              clearable
               v-model.trim="element.couponInfo.unitPrice"
               placeholder="0.00"
               style="width:100px;"
@@ -71,6 +74,7 @@
           </el-form-item>
           <el-form-item label="电影券有效期:" prop="time">
             <el-date-picker
+              clearable
               unlink-panels
               v-model="element.couponInfo.time"
               type="daterange"
@@ -96,6 +100,7 @@
             v-if="element.couponInfo.type==2"
           >
             <el-input
+              clearable
               v-model.trim="element.couponInfo.canFreePrice"
               placeholder="0.00"
               style="width:100px;"
@@ -116,7 +121,7 @@
           :ref="'formInvoiceInfo_'+element.id"
         >
           <el-form-item label="发票类型:" prop="invoiceType">
-            <el-select v-model="element.invoiceInfo.invoiceType">
+            <el-select clearable v-model="element.invoiceInfo.invoiceType">
               <el-option
                 v-for="invoiceType in allInvoiceTypes"
                 :key="invoiceType.value"
@@ -130,6 +135,7 @@
           >
             <el-form-item label="发票抬头:" prop="title">
               <el-input
+                clearable
                 v-model.trim="element.invoiceInfo.title"
                 placeholder="输入发票抬头的信息"
                 style="width:200px;"
@@ -142,6 +148,7 @@
               v-if="element.invoiceInfo.invoiceType === '4' || element.invoiceInfo.invoiceType === '6' || element.invoiceInfo.invoiceType === '5'"
             >
               <el-input
+                clearable
                 v-model.trim="element.invoiceInfo.taxNo"
                 placeholder="请输入内容"
                 style="width:200px;"
@@ -153,6 +160,7 @@
               v-if="element.invoiceInfo.invoiceType === '6'"
             >
               <el-input
+                clearable
                 v-model.trim="element.invoiceInfo.companyAddress"
                 placeholder="请输入内容"
                 style="width:200px;"
@@ -164,6 +172,7 @@
               v-if="element.invoiceInfo.invoiceType === '6'"
             >
               <el-input
+                clearable
                 v-model.trim="element.invoiceInfo.companyMobile"
                 placeholder="请输入内容"
                 style="width:200px;"
@@ -171,6 +180,7 @@
             </el-form-item>
             <el-form-item label="开户银行:" prop="bank" v-if="element.invoiceInfo.invoiceType === '6'">
               <el-input
+                clearable
                 v-model.trim="element.invoiceInfo.bank"
                 placeholder="请输入内容"
                 style="width:200px;"
@@ -182,6 +192,7 @@
               v-if="element.invoiceInfo.invoiceType === '6'"
             >
               <el-input
+                clearable
                 v-model.trim="element.invoiceInfo.bankNo"
                 placeholder="请输入内容"
                 style="width:200px;"
@@ -195,6 +206,7 @@
               v-if="element.invoiceInfo.invoiceType === '2' || element.invoiceInfo.invoiceType === '3'"
             >
               <el-input
+                clearable
                 v-model.trim="element.invoiceInfo.idNumber"
                 placeholder="输入索要发票人身份证号码"
                 style="width:200px;"
@@ -207,6 +219,7 @@
               v-if="element.invoiceInfo.invoiceType === '3' || element.invoiceInfo.invoiceType === '5'"
             >
               <el-input
+                clearable
                 v-model.trim="element.invoiceInfo.receiveEmail"
                 placeholder="输入索要发票人电子邮箱"
                 style="width:200px;"
@@ -217,7 +230,7 @@
               prop="receiveType"
               v-if="element.invoiceInfo.invoiceType === '4' || element.invoiceInfo.invoiceType === '2' || element.invoiceInfo.invoiceType === '6'"
             >
-              <el-select v-model="element.invoiceInfo.receiveType">
+              <el-select clearable v-model="element.invoiceInfo.receiveType">
                 <el-option value="1" label="邮寄包邮"></el-option>
                 <el-option value="2" label="邮寄到付"></el-option>
               </el-select>
@@ -229,6 +242,7 @@
               v-if="element.invoiceInfo.invoiceType === '4' || element.invoiceInfo.invoiceType === '2' || element.invoiceInfo.invoiceType === '6'"
             >
               <el-input
+                clearable
                 v-model.trim="element.invoiceInfo.receiveName"
                 placeholder="输入快递收件人姓名"
                 style="width:200px;"
@@ -240,6 +254,7 @@
               v-if="element.invoiceInfo.invoiceType === '4' || element.invoiceInfo.invoiceType === '2' || element.invoiceInfo.invoiceType === '6'"
             >
               <el-input
+                clearable
                 v-model.trim="element.invoiceInfo.receiveMobile"
                 placeholder="输入快递收件人联系电话"
                 style="width:200px;"
@@ -251,6 +266,7 @@
               v-if="element.invoiceInfo.invoiceType === '4' || element.invoiceInfo.invoiceType === '2' || element.invoiceInfo.invoiceType === '6'"
             >
               <el-input
+                clearable
                 v-model.trim="element.invoiceInfo.receiveAddress"
                 placeholder="输入快递收件人收件地址"
                 style="width:200px;"
@@ -265,7 +281,7 @@
             </el-radio-group>
           </el-form-item>
           <el-form-item label="销售备注:" prop="remark">
-            <el-input v-model.trim="element.invoiceInfo.remark" type="textarea" :rows="5"></el-input>
+            <el-input clearable v-model.trim="element.invoiceInfo.remark" type="textarea" :rows="5"></el-input>
           </el-form-item>
           <!-- <el-form-item v-if="index === list.length - 1" style="text-align:center;margin-top:20px">
                         <el-button type="primary" @click="addNew">继续添加销售</el-button>

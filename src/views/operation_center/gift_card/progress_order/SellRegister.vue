@@ -62,7 +62,7 @@
             <!-- <div style="margin:20px 0;" v-if="$route.query.isActive">
               <span style="font-size:14px;line-height:1;vertical-align:top;">激活说明：</span>
               <span v-if="cardInfo.isActive==='1'">{{cardInfo.setActiveExplain}}</span>
-              <el-input v-else v-model.trim="cardInfo.setActiveExplain" type="textarea" :rows="5" :disabled="cardInfo.isActive !== '0'" placeholder="请输入您对此销售单的审核意见" style="display:inline-block;width:600px;"></el-input>
+              <el-input clearable v-else v-model.trim="cardInfo.setActiveExplain" type="textarea" :rows="5" :disabled="cardInfo.isActive !== '0'" placeholder="请输入您对此销售单的审核意见" style="display:inline-block;width:600px;"></el-input>
             </div>
             <div style="margin:20px 0;" v-if="$route.query.isActive && cardInfo.isActive === '1'">
               <span style="font-size:14px;vertical-align:top;">激活人：{{cardInfo.setActivePeople}}</span>
@@ -73,7 +73,7 @@
               <el-card shadow="never" style="width:800px;margin-top:20px;margin-bottom:15px;">
                 <el-form label-width="160px" label-position="right" style="width:1000px;">                  
                   <el-form-item label="激活说明：" v-if="$route.query.isActive && cardInfo.isActive === '0'">
-                    <el-input v-model.trim="cardInfo.setActiveExplain" type="textarea" :rows="5" :disabled="cardInfo.isActive !== '0'" placeholder="请输入您对此销售单的审核意见" style="display:inline-block;width:600px;"></el-input>
+                    <el-input clearable v-model.trim="cardInfo.setActiveExplain" type="textarea" :rows="5" :disabled="cardInfo.isActive !== '0'" placeholder="请输入您对此销售单的审核意见" style="display:inline-block;width:600px;"></el-input>
                   </el-form-item>
                   <el-form-item label="激活说明：" v-if="cardInfo.isActive === '1'">
                     <span v-if="cardInfo.isActive==='1'">{{cardInfo.setActiveExplain}}</span>

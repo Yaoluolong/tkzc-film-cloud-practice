@@ -2,10 +2,10 @@
     <div class="app-container">
             <el-form label-position="left" label-width="150px" ref="form" :rules="rules" :model="editData">
                 <el-form-item label="商家名称:" prop="name" style="width:30%" >
-                    <el-input v-model.trim="editData.name" placeholder="请输入积分平台商家名称,最多30个字符"></el-input>
+                    <el-input clearable  v-model.trim="editData.name" placeholder="请输入积分平台商家名称,最多30个字符"></el-input>
                 </el-form-item>
                 <el-form-item label="积分平台接口地址:" prop="requestUrl" style="width:50%">
-                     <el-input v-model.trim="editData.requestUrl" placeholder="请输入用于请求积分平台的接口地址"></el-input>
+                     <el-input clearable  v-model.trim="editData.requestUrl" placeholder="请输入用于请求积分平台的接口地址"></el-input>
                 </el-form-item>
                 <el-form-item label="积分平台版本类:" prop="edition">
                     <remote-select v-model="editData.edition" valueKey="value" labelKey="name" 
@@ -21,7 +21,7 @@
                         </div>
                             <div>
                                 <div v-show="showAddInput" style="margin-top:1%">
-                                    <el-input v-model="newParam" placeholder="输入请求接口的键值,例如:【key】=【value】" style="width:70%;float:left;margin-right:5%"></el-input>
+                                    <el-input clearable  v-model="newParam" placeholder="输入请求接口的键值,例如:【key】=【value】" style="width:70%;float:left;margin-right:5%"></el-input>
                                     <el-button type="success" @click="addParam()" icon="el-icon-check" ></el-button>
                                     <el-button type="danger" @click="showAddInput = false;newParam=''" icon="el-icon-delete" ></el-button>
                                 </div>  
@@ -35,7 +35,7 @@
                     <div>
                         <el-col :span="10" style="width:15%">
                             <el-form-item prop="ticketExchangePoint"  style="width:100%">
-                                <el-input placeholder="请输入影票点数"  v-model.trim="editData.ticketExchangePoint" ></el-input>
+                                <el-input clearable  placeholder="请输入影票点数"  v-model.trim="editData.ticketExchangePoint" ></el-input>
                             </el-form-item>
                         </el-col>
                         <el-col :span="5" style="width:2%">
@@ -43,7 +43,7 @@
                         </el-col>
                         <el-col :span="10" style="width:15%">
                             <el-form-item prop="ticketExchangeIntegral" style="width:100%">
-                                <el-input v-model.trim="editData.ticketExchangeIntegral" placeholder="请输入积分数" ></el-input>
+                                <el-input clearable  v-model.trim="editData.ticketExchangeIntegral" placeholder="请输入积分数" ></el-input>
                             </el-form-item>
                         </el-col> 
                     </div>
@@ -52,7 +52,7 @@
                     <div>
                         <el-col :span="10" style="width:15%">
                             <el-form-item prop="goodsExchangeMoney"  style="width:100%">
-                               <el-input v-model.trim="editData.goodsExchangeMoney" placeholder="请输入商品金额" ></el-input>
+                               <el-input clearable  v-model.trim="editData.goodsExchangeMoney" placeholder="请输入商品金额" ></el-input>
                             </el-form-item>
                         </el-col>
                         <el-col :span="5" style="width:2%">
@@ -60,7 +60,7 @@
                         </el-col>
                         <el-col :span="10" style="width:15%">
                             <el-form-item prop="goodsExchangeIntegral" style="width:100%">
-                                <el-input v-model.trim="editData.goodsExchangeIntegral" placeholder="请输入积分数"></el-input>
+                                <el-input clearable  v-model.trim="editData.goodsExchangeIntegral" placeholder="请输入积分数"></el-input>
                             </el-form-item>
                         </el-col>                         
                     </div>

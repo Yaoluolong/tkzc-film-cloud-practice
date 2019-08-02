@@ -6,10 +6,10 @@
     </el-tabs>
     <el-form inline label-width="120px">
       <el-form-item label="商家名称">
-        <el-input v-model="query.channelName" style="width:200px;" placeholder="输入商家名称模糊查询"></el-input>
+        <el-input clearable  v-model="query.channelName" style="width:200px;" placeholder="输入商家名称模糊查询"></el-input>
       </el-form-item>
       <el-form-item label="预警状态" v-if="query.checkStatus ==='1'">
-        <!-- <el-select v-model="query.warnStatus">
+        <!-- <el-select clearable v-model="query.warnStatus">
               <el-option label="全部" value="-1"></el-option>
               <el-option label="未触警" value="1"></el-option>
               <el-option label="已触警" value="2"></el-option>

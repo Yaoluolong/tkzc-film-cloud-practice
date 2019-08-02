@@ -15,7 +15,7 @@
                   <span>{{params.couponInfo.styleName}}</span>
                 </el-form-item>
                 <el-form-item label="电影券号">
-                  <div v-for="item in params.couponInfo.codeIdDetail">
+                  <div v-for="(item,index) in params.couponInfo.codeIdDetail" :key="index">
                     <span>{{item.left}}</span>
                     <span> －－ </span>
                     <span>{{item.right}}</span>
@@ -107,7 +107,7 @@
                     </el-radio-group>
                 </el-form-item>
                 <el-form-item label="销售备注:" prop="remark">
-                    <el-input v-model.trim="params.invoiceInfo.remark" type="textarea" :rows="5" disabled></el-input>
+                    <el-input clearable v-model.trim="params.invoiceInfo.remark" type="textarea" :rows="5" disabled></el-input>
                 </el-form-item>
             </el-form>
         </el-card>

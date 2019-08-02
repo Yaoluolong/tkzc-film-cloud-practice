@@ -2,13 +2,13 @@
   <div class="app-container">
     <el-form inline label-width="120px">
       <el-form-item label="销售订单号">
-        <el-input v-model="query.saleOrderNo" class="w230" placeholder="请输入销售订单号"></el-input>
+        <el-input clearable v-model="query.saleOrderNo" class="w230" placeholder="请输入销售订单号"></el-input>
       </el-form-item>
       <el-form-item label="批次号">
-        <el-input v-model="query.batchNo" class="w230" placeholder="请输入生成批次号"></el-input>
+        <el-input clearable v-model="query.batchNo" class="w230" placeholder="请输入生成批次号"></el-input>
       </el-form-item>
       <el-form-item label="导出类型">
-        <el-select v-model="query.type" class="w230">
+        <el-select clearable v-model="query.type" class="w230">
           <el-option
             v-for="item in options"
             :key="item.value"
@@ -43,8 +43,20 @@
         show-overflow-tooltip
       ></el-table-column>
       <el-table-column min-width="120" label="导出类型" align="center" prop="type"></el-table-column>
-      <el-table-column min-width="120" label="销售订单" align="center" prop="saleOrderNo" show-overflow-tooltip></el-table-column>
-      <el-table-column min-width="120" label="批次号" align="center" prop="batchNo" show-overflow-tooltip></el-table-column>
+      <el-table-column
+        min-width="120"
+        label="销售订单"
+        align="center"
+        prop="saleOrderNo"
+        show-overflow-tooltip
+      ></el-table-column>
+      <el-table-column
+        min-width="120"
+        label="批次号"
+        align="center"
+        prop="batchNo"
+        show-overflow-tooltip
+      ></el-table-column>
       <!-- <el-table-column min-width="250" label="导出备注" align="center" prop="remark"></el-table-column> -->
       <!-- <el-table-column min-width="120" label="状态" align="center" prop="statusName"></el-table-column> -->
       <el-table-column min-width="120" label="文件" align="center" fixed="right">
@@ -61,7 +73,11 @@
 </template>
 <script>
 import { realDeepClone } from '@/utils'
-import { getTaskMgrList, exportTaskMgr, deleteExportTask } from '@/api/systemSetting'
+import {
+  getTaskMgrList,
+  exportTaskMgr,
+  deleteExportTask
+} from '@/api/systemSetting'
 export default {
   name: 'task_mgr',
   data() {

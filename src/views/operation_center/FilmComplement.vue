@@ -4,7 +4,7 @@
       <span v-if="filmType==='1'" style="display:inline-block;">影片：{{item.name}},</span>
       <span style="display:inline-block;" v-if="outPriceRule">影票价格范围{{priceRuleName}}{{priceRuleValue}}元可使用券，</span>
       <span >需补差价&emsp;</span>
-      <el-input v-model="item.complementPrice" style="width:100px;" :disabled="disabled"></el-input>  元
+      <el-input clearable v-model="item.complementPrice" style="width:100px;" :disabled="disabled"></el-input>  元
     </div>
   </div>     
 </template>

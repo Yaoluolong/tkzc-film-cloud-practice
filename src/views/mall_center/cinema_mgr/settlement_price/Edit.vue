@@ -3,7 +3,7 @@
     <el-card>
       <el-form label-position="left" label-width="120px"  style="width:1000px;" :model="params" :rules="rules" ref="form">
         <el-form-item label="方案名称" prop="name" >
-            <el-input v-model.trim="params.name" placeholder="请输入策略分组名称，最多20个字" style="width:320px"></el-input>
+            <el-input clearable v-model.trim="params.name" placeholder="请输入策略分组名称，最多20个字" style="width:320px"></el-input>
         </el-form-item>
 
           <el-form-item label="票务系统商" prop="interfaceTypeId" >

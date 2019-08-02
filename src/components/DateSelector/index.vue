@@ -1,5 +1,5 @@
 <template>
-  <el-select v-model="value5" multiple  placeholder="请选择" v-bind="$attrs" v-on="$listeners">
+  <el-select clearable v-model="value5" multiple  placeholder="请选择" v-bind="$attrs" v-on="$listeners">
     <el-option
       v-for="item in options"
       :key="item.value"

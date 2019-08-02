@@ -3,13 +3,13 @@
     <el-table :data="params" size="mini" :show-header="false" >
         <el-table-column width="200" align="center" prop="left">
             <template slot-scope="{row}">
-              <el-input v-model="row.left" placeholder="请输入票券号区间" style="width:180px"  @blur="checkCodeId"></el-input>
+              <el-input clearable v-model="row.left" placeholder="请输入票券号区间" style="width:180px"  @blur="checkCodeId"></el-input>
             </template>
         </el-table-column>
         <span>至</span>
         <el-table-column width="200" align="center" prop="right">
             <template slot-scope="{row}">
-                <el-input v-model="row.right" placeholder="请输入票券号区间" style="width:180px" @blur="checkCodeId"></el-input>
+                <el-input clearable v-model="row.right" placeholder="请输入票券号区间" style="width:180px" @blur="checkCodeId"></el-input>
             </template>
         </el-table-column>
         <el-table-column width="100" align="center" label="" prop="oper">

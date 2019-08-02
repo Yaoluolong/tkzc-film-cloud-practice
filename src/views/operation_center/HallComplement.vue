@@ -1,11 +1,14 @@
 <template>
   <div>
     <div v-for="(item,index) in dataList" :key="index" style="margin-bottom:20px;">
-      <span style="display:inline-block;" v-if="outPriceRule">影票价格范围{{priceRuleName}}{{priceRuleValue}}元可使用券，需补差价</span>
+      <span
+        style="display:inline-block;"
+        v-if="outPriceRule"
+      >影票价格范围{{priceRuleName}}{{priceRuleValue}}元可使用券，需补差价</span>
       <span v-else>需补差价&emsp;</span>
-      <el-input v-model="item.complementPrice" style="width:100px;" :disabled="disabled"></el-input>  元
+      <el-input clearable v-model="item.complementPrice" style="width:100px;" :disabled="disabled"></el-input>元
     </div>
-  </div>     
+  </div>
 </template>
 <script>
 export default {
@@ -49,9 +52,15 @@ export default {
       if (this.getHall) {
         this.$set(this, 'dataList', [])
 
-        Object.keys(this.value).length > 0 ? Object.keys(this.value).map((el, k) => {
-          this.dataList.push({ value: el, name: el, complementPrice: this.value[el] })
-        }) : this.dataList.push({ value: '', name: '', complementPrice: '' })
+        Object.keys(this.value).length > 0
+          ? Object.keys(this.value).map((el, k) => {
+            this.dataList.push({
+              value: el,
+              name: el,
+              complementPrice: this.value[el]
+            })
+          })
+          : this.dataList.push({ value: '', name: '', complementPrice: '' })
       }
     }
   },

@@ -39,7 +39,7 @@
                 </el-date-picker>
             </el-form-item>
             <el-form-item label="实际预付金额度：" prop="prePayAmount">
-                <el-input v-model="query.prePayAmount" style="width:220px;"></el-input> 元
+                <el-input clearable  v-model="query.prePayAmount" style="width:220px;"></el-input> 元
             </el-form-item>
 		</el-form>
     <el-button style="margin-top:20px;" type="primary" @click="save">确认对账</el-button>

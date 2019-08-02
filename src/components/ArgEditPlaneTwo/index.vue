@@ -1,34 +1,45 @@
 <template>
   <title-plane class="arg-edit-plane">
-      <div class="tag-plane">
-        <el-table v-if="args && args.length > 0" :data="args">
-          <el-table-column label="请求键名" prop="key"></el-table-column>
-          <el-table-column label="请求参值" prop="value"></el-table-column>
-          <el-table-column  prop="value">
-             <template slot-scope="{row}">
-                <i class="el-icon-close" style="cursor: pointer;" @click="del(row.key)" title="取消"></i>
-                
-              </template>
-          </el-table-column>
-        </el-table>
+    <div class="tag-plane">
+      <el-table v-if="args && args.length > 0" :data="args">
+        <el-table-column label="请求键名" prop="key"></el-table-column>
+        <el-table-column label="请求参值" prop="value"></el-table-column>
+        <el-table-column prop="value">
+          <template slot-scope="{row}">
+            <i class="el-icon-close" style="cursor: pointer;" @click="del(row.key)" title="取消"></i>
+          </template>
+        </el-table-column>
+      </el-table>
+    </div>
+    <div class="arg-oper">
+      <div>
+        <el-button type="text" icon="el-icon-plus" v-if="isEditArg==false" @click="isEditArg=true">
+          新增键值
+          <el-tooltip placement="right" v-if="help">
+            <div slot="content" v-html="help"></div>
+            <i class="el-icon-question"></i>
+          </el-tooltip>
+        </el-button>
+        <div v-else>
+          <el-input
+            clearable
+            v-model.trim="newKey"
+            placeholder="输入请求接口键名,例如:[key]"
+            size="small"
+            style="width:200px"
+          ></el-input>
+          <el-input
+            clearable
+            v-model.trim="newValue"
+            placeholder="输入请求接口参值,例如:[url]"
+            size="small"
+            style="width:200px"
+          ></el-input>
+          <i class="el-icon-check" title="保存" @click="save"></i>
+          <i class="el-icon-close" title="取消" @click="cancel"></i>
+        </div>
       </div>
-      <div class="arg-oper">
-          <div>
-            <el-button type="text" icon="el-icon-plus" v-if="isEditArg==false" @click="isEditArg=true">新增键值
-               <el-tooltip placement="right" v-if="help">
-                <div slot="content" v-html="help"></div>
-                <i class="el-icon-question"></i>
-              </el-tooltip>
-            </el-button>
-            <div v-else>
-               <el-input v-model.trim="newKey"  placeholder="输入请求接口键名,例如:[key]" size="small" style="width:200px"></el-input>
-               <el-input v-model.trim="newValue"  placeholder="输入请求接口参值,例如:[url]" size="small" style="width:200px"></el-input>
-                 <i class="el-icon-check" title="保存" @click="save"></i>
-                  <i class="el-icon-close" title="取消" @click="cancel"></i>
-            </div>
-           
-          </div>
-      </div>
+    </div>
   </title-plane>
 </template>
 
@@ -150,6 +161,6 @@ export default {
   }
 }
 .el-table th {
-  background-color: "";
+  background-color: '';
 }
 </style>

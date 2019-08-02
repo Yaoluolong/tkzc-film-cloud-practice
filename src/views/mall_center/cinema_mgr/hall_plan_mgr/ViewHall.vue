@@ -15,7 +15,7 @@
             <el-table-column width="70"  label="座位数" align="center" prop="seatCount"></el-table-column>
             <el-table-column width="120"  label="影厅分类" align="center" prop="type" show-overflow-tooltip>
                 <template slot-scope="{row}">
-                    <el-select v-model="row.type" @change="setHallType(row.type,row.id)">
+                    <el-select clearable v-model="row.type" @change="setHallType(row.type,row.id)">
                         <el-option v-for="el in hallTypes" :key="el.value" :label="el.name" :value="el.value">
                         </el-option>
                     </el-select>

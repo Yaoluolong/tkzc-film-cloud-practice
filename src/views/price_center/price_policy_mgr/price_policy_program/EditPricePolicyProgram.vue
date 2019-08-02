@@ -9,7 +9,7 @@
       ref="form"
     >
       <el-form-item label="分组名称" prop="name">
-        <el-input v-model="params.name" placeholder="请输入策略分组名称，最多20个字" style="width:320px"></el-input>
+        <el-input clearable  v-model="params.name" placeholder="请输入策略分组名称，最多20个字" style="width:320px"></el-input>
       </el-form-item>
       <el-form-item label="定价类型" prop="priceRight">
         <remote-select

@@ -2,7 +2,7 @@
   <div>
     <div v-for="(item,index) in dataList" :key="index" style="margin-bottom:20px;">
       <span style="display:inline-block;width:300px;">{{item.name}}</span>
-      券补差面值  <el-input v-model="item.complementPrice" style="width:100px;"></el-input>  元
+      券补差面值  <el-input clearable v-model="item.complementPrice" style="width:100px;"></el-input>  元
     </div>
     <!-- <div>{{dataList}}</div>
     <div>{{outDataId}}</div> -->

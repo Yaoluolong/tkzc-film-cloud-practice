@@ -2,7 +2,7 @@
   <div class="app-container">
        <el-form inline label-width="120px">
             <el-form-item label="商家名称">
-                <el-input v-model.trim="query.name"></el-input>
+                <el-input clearable  v-model.trim="query.name"></el-input>
             </el-form-item>
             <el-form-item >
               <el-button type="primary" icon="el-icon-search"  @click="refreshTable">查询</el-button>

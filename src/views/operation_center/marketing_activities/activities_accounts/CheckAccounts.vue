@@ -25,15 +25,15 @@
 				{{params.useFee}}&emsp;元
 			</el-form-item>
 			<el-form-item label="本次活动结算金额：" prop="settlementPrice">
-				<el-input v-model="params.settlementPrice" style="width:100px" holdspace="0"></el-input>&emsp;元
+				<el-input clearable  v-model="params.settlementPrice" style="width:100px" holdspace="0"></el-input>&emsp;元
 			</el-form-item>
 			<el-form-item label="发票类型：" prop="invoiceType">
-	          	<el-select v-model="params.invoiceType"  style="width:300px;">
+	          	<el-select clearable v-model="params.invoiceType"  style="width:300px;">
 	              <el-option v-for="invoiceType in allInvoiceTypes" :key="invoiceType.value" :value="invoiceType.value" :label="invoiceType.name"></el-option>
 	          	</el-select>
 	      	</el-form-item>
 			<el-form-item label="对账备注：" prop="accountCentent" style="width:600px;">
-				<el-input type="textarea" :row="5" class="accountCentent" v-model="params.accountCentent"></el-input>
+				<el-input clearable  type="textarea" :row="5" class="accountCentent" v-model="params.accountCentent"></el-input>
 			</el-form-item>
 			<el-button style="margin-top:20px;" type="primary" @click="save">确认对账</el-button>
     		<el-button @click="cancel">取 消</el-button>	

@@ -45,6 +45,7 @@
         </el-form-item>
         <el-form-item label="销售数量:" prop="num">
           <el-input
+            clearable
             v-model.trim="params.cardInfo.num"
             placeholder="0"
             style="width:100px;"
@@ -53,12 +54,18 @@
           <span style="margin-left:20px;color:red">系统已根据您所填写的号码段自动统计出销售数量!</span>
         </el-form-item>
         <el-form-item label="销售总额:" prop="amount">
-          <el-input v-model.trim="params.cardInfo.amount" placeholder="0.00" style="width:100px;"></el-input>元
+          <el-input
+            clearable
+            v-model.trim="params.cardInfo.amount"
+            placeholder="0.00"
+            style="width:100px;"
+          ></el-input>元
           <span style="margin-left:20px;color:gray">只能是数值，且必须大于0</span>
         </el-form-item>
         <div>
           <el-form-item label="销售比例:" prop="scalePoint" style="display:inline-block">
             <el-input
+              clearable
               type="text"
               v-model="params.cardInfo.scalePrice"
               placeholder="票面金额单位元"
@@ -67,6 +74,7 @@
           </el-form-item>:
           <el-form-item prop="scalePoint" label-width="0px" style="display:inline-block">
             <el-input
+              clearable
               type="text"
               v-model="params.cardInfo.scalePoint"
               placeholder="卡内金额单位点"
@@ -77,12 +85,14 @@
         </div>
         <el-form-item label="卡内金额" prop="unitPrice" style="display:inline-block">
           <el-input
+            clearable
             type="text"
             v-model="params.cardInfo.unitPrice"
             placeholder="0"
             style="width:100px;"
           ></el-input>元，折合卡内点数:
           <el-input
+            clearable
             type="text"
             disabled
             :value="params.cardInfo.unitPrice * params.cardInfo.scalePoint / params.cardInfo.scalePrice"
@@ -92,6 +102,7 @@
         </el-form-item>
         <el-form-item label="电影卡有效期:" prop="time">
           <el-date-picker
+            clearable
             unlink-panels
             v-model="params.cardInfo.time"
             type="daterange"
@@ -116,7 +127,7 @@
         ref="formInvoiceInfo"
       >
         <el-form-item label="发票类型:" prop="invoiceType">
-          <el-select v-model="params.invoiceInfo.invoiceType">
+          <el-select clearable v-model="params.invoiceInfo.invoiceType">
             <el-option
               v-for="invoiceType in allInvoiceTypes"
               :key="invoiceType.value"
@@ -128,6 +139,7 @@
         <template v-if="params.invoiceInfo.invoiceType && params.invoiceInfo.invoiceType !== '1'">
           <el-form-item label="发票抬头:" prop="title">
             <el-input
+              clearable
               v-model.trim="params.invoiceInfo.title"
               placeholder="输入发票抬头的信息"
               style="width:200px;"
@@ -140,6 +152,7 @@
             v-if="params.invoiceInfo.invoiceType === '4' || params.invoiceInfo.invoiceType === '6' || params.invoiceInfo.invoiceType === '5'"
           >
             <el-input
+              clearable
               v-model.trim="params.invoiceInfo.taxNo"
               placeholder="请输入内容"
               style="width:200px;"
@@ -151,6 +164,7 @@
             v-if="params.invoiceInfo.invoiceType === '6'"
           >
             <el-input
+              clearable
               v-model.trim="params.invoiceInfo.companyAddress"
               placeholder="请输入内容"
               style="width:200px;"
@@ -162,6 +176,7 @@
             v-if="params.invoiceInfo.invoiceType === '6'"
           >
             <el-input
+              clearable
               v-model.trim="params.invoiceInfo.companyMobile"
               placeholder="请输入内容"
               style="width:200px;"
@@ -169,6 +184,7 @@
           </el-form-item>
           <el-form-item label="开户银行:" prop="bank" v-if="params.invoiceInfo.invoiceType === '6'">
             <el-input
+              clearable
               v-model.trim="params.invoiceInfo.bank"
               placeholder="请输入内容"
               style="width:200px;"
@@ -176,6 +192,7 @@
           </el-form-item>
           <el-form-item label="银行账号:" prop="bankNo" v-if="params.invoiceInfo.invoiceType === '6'">
             <el-input
+              clearable
               v-model.trim="params.invoiceInfo.bankNo"
               placeholder="请输入内容"
               style="width:200px;"
@@ -189,6 +206,7 @@
             v-if="params.invoiceInfo.invoiceType === '2' || params.invoiceInfo.invoiceType === '3'"
           >
             <el-input
+              clearable
               v-model.trim="params.invoiceInfo.idNumber"
               placeholder="输入索要发票人身份证号码"
               style="width:200px;"
@@ -201,6 +219,7 @@
             v-if="params.invoiceInfo.invoiceType === '3' || params.invoiceInfo.invoiceType === '5'"
           >
             <el-input
+              clearable
               v-model.trim="params.invoiceInfo.receiveEmail"
               placeholder="输入索要发票人电子邮箱"
               style="width:200px;"
@@ -211,7 +230,7 @@
             prop="receiveType"
             v-if="params.invoiceInfo.invoiceType === '4' || params.invoiceInfo.invoiceType === '2' || params.invoiceInfo.invoiceType === '6'"
           >
-            <el-select v-model="params.invoiceInfo.receiveType">
+            <el-select clearable v-model="params.invoiceInfo.receiveType">
               <el-option value="1" label="邮寄包邮"></el-option>
               <el-option value="2" label="邮寄到付"></el-option>
             </el-select>
@@ -223,6 +242,7 @@
             v-if="params.invoiceInfo.invoiceType === '4' || params.invoiceInfo.invoiceType === '2' || params.invoiceInfo.invoiceType === '6'"
           >
             <el-input
+              clearable
               v-model.trim="params.invoiceInfo.receiveName"
               placeholder="输入快递收件人姓名"
               style="width:200px;"
@@ -234,6 +254,7 @@
             v-if="params.invoiceInfo.invoiceType === '4' || params.invoiceInfo.invoiceType === '2' || params.invoiceInfo.invoiceType === '6'"
           >
             <el-input
+              clearable
               v-model.trim="params.invoiceInfo.receiveMobile"
               placeholder="输入快递收件人联系电话"
               style="width:200px;"
@@ -245,6 +266,7 @@
             v-if="params.invoiceInfo.invoiceType === '4' || params.invoiceInfo.invoiceType === '2' || params.invoiceInfo.invoiceType === '6'"
           >
             <el-input
+              clearable
               v-model.trim="params.invoiceInfo.receiveAddress"
               placeholder="输入快递收件人收件地址"
               style="width:200px;"
@@ -259,7 +281,7 @@
           </el-radio-group>
         </el-form-item>
         <el-form-item label="销售备注:" prop="remark">
-          <el-input v-model.trim="params.invoiceInfo.remark" type="textarea" :rows="5"></el-input>
+          <el-input clearable v-model.trim="params.invoiceInfo.remark" type="textarea" :rows="5"></el-input>
         </el-form-item>
       </el-form>
     </el-card>

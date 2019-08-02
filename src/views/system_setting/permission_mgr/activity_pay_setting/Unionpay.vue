@@ -5,13 +5,13 @@
             <p style="font-size:14px;font-weight:700">支付参数 :</p>
             <el-card class="box-card">
                 <el-form-item label="商户号" prop="account">
-                  <el-input v-model.trim="unionPayParam.configDetail.account" placeholder="请输入内容"></el-input>            
+                  <el-input clearable  v-model.trim="unionPayParam.configDetail.account" placeholder="请输入内容"></el-input>            
                 </el-form-item>
                 <el-form-item label="短秘钥目录" prop="shortKey">
-                  <el-input v-model.trim="unionPayParam.configDetail.shortKey" placeholder="请输入内容"></el-input>            
+                  <el-input clearable  v-model.trim="unionPayParam.configDetail.shortKey" placeholder="请输入内容"></el-input>            
                 </el-form-item>
                 <el-form-item label="秘钥密码" prop="secretPassword">
-                  <el-input v-model.trim="unionPayParam.configDetail.secretPassword" placeholder="请输入内容"></el-input>            
+                  <el-input clearable  v-model.trim="unionPayParam.configDetail.secretPassword" placeholder="请输入内容"></el-input>            
                 </el-form-item>             
             </el-card> 
           </el-form>        
