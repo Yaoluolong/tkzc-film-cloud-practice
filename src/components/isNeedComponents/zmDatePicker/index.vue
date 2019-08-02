@@ -41,7 +41,7 @@ export default {
     defaultChooseType: {
       type: Array,
       default() {
-        return ['yesterday', 'prve7Days', 'prve30Days']
+        return ['today', 'yesterday', 'prve7Days', 'prve30Days']
       }
     }
   },

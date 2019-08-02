@@ -117,8 +117,8 @@ export const orderColumns = context => {
       minWidth: 160
     },
     {
-      prop: 'deviceType',
-      label: '支付类型',
+      prop: 'channelName',
+      label: '渠道类型',
       minWidth: 120
     },
     {

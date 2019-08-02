@@ -20,7 +20,8 @@
       <el-form-item label="时间查询" class="wp100">
         <el-select clearable v-model="query.timeType" class="w150 vm">
           <el-option value="0" label="订单日期"></el-option>
-          <el-option value="1" label="退票时间"></el-option>
+          <el-option value="1" label="放映时间"></el-option>
+          <el-option value="2" label="退票时间"></el-option>
         </el-select>
         <zm-datePicker class="vm" @on-change="getTime"></zm-datePicker>
       </el-form-item>
@@ -102,6 +103,7 @@
       ref="multipleTable"
       :columns="columns"
       :fetch="loadList"
+      pk="orderId"
       :table-params="tableParams"
       :options="{mutilpleSelect:true}"
     ></zm-table>
