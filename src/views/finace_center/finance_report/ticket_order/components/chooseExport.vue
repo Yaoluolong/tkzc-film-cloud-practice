@@ -1,5 +1,11 @@
 <template>
-  <el-dialog title="导出订单" :visible="value" width="60%" @close="closeDialog" :close-on-click-modal="false">
+  <el-dialog
+    title="导出订单"
+    :visible="value"
+    width="60%"
+    @close="closeDialog"
+    :close-on-click-modal="false"
+  >
     <div class="waring-message" v-if="showWaring">
       自定义报表已生成，请前往
       <el-button type="text" @click="goTaskMgr">下载中心</el-button>，
@@ -24,7 +30,8 @@
     </div>
     <div slot="footer" class="dialog-footer tr">
       <el-button @click="goTaskMgr">查看已生成报表</el-button>
-      <el-button type="primary" @click="exportBtn" :disabled="loading">导出报表
+      <el-button type="primary" @click="exportBtn" :disabled="loading">
+        导出报表
         <i class="el-icon-loading" v-if="loading"></i>
       </el-button>
     </div>
@@ -99,8 +106,11 @@ export default {
       let ids = []
       switch (type) {
         case 'one':
-          parentItem.isAll = parentItem.ids.length === parentItem.children.length
-          parentItem.indeterminate = parentItem.ids.length > 0 && parentItem.ids.length < parentItem.children.length
+          parentItem.isAll =
+            parentItem.ids.length === parentItem.children.length
+          parentItem.indeterminate =
+            parentItem.ids.length > 0 &&
+            parentItem.ids.length < parentItem.children.length
           break
         case 'all':
           ids = getCanChooseIds(item.children, item.isAll)

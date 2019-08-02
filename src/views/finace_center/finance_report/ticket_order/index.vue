@@ -80,6 +80,7 @@
       <div>
         <el-form-item>
           <el-button type="primary" icon="el-icon-search" @click="onSearch">查询</el-button>
+          <el-button type="primary" icon="el-icon-plus" @click="orderQuery">订单高级查询</el-button>
           <el-button type="success" icon="el-icon-upload2" @click="exportOrders">导出订单</el-button>
           <el-button type="warning" icon="el-icon-refresh" @click="syncStatus">更新订单</el-button>
         </el-form-item>
@@ -113,6 +114,12 @@
       @cancel="closeExport"
       :export-params="exportParams"
     ></choose-export>
+    <order-query
+      v-model="orderQueryVisible"
+      @after-save="orderQueryAfterSave"
+      @cancel="closeOrderQuery"
+      :order-query-params="query"
+    ></order-query>
   </div>
 </template>
 
@@ -128,6 +135,7 @@ import { realDeepClone } from '@/utils'
 import CityCascader from '@/components/CityCascader'
 import QueryExtPlane from '@/components/QueryExtPlane'
 import chooseExport from './components/chooseExport'
+import orderQuery from './components/orderQuery'
 export default {
   name: 'ticket_order',
   components: {
@@ -135,11 +143,13 @@ export default {
     CityCascader,
     zmDatePicker,
     zmTable,
-    chooseExport
+    chooseExport,
+    orderQuery
   },
   mixins: [tableMixin],
   data() {
     return {
+      orderQueryVisible: false,
       exportVisible: false, // 打开导出窗口
       exportParams: {
         query: {},
@@ -217,6 +227,16 @@ export default {
     },
     closeExport() {
       this.exportVisible = false
+    },
+    orderQuery() {
+      this.orderQueryVisible = true
+    },
+    orderQueryAfterSave(msg) {
+      this.query = Object.assign({}, this.query, msg)
+      this.closeOrderQuery()
+    },
+    closeOrderQuery() {
+      this.orderQueryVisible = false
     },
     async syncStatus() {
       this.$confirm(
