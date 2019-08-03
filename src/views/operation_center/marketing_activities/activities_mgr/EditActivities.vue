@@ -68,7 +68,15 @@
         ></pic-upload>
       </el-form-item>
       <el-form-item label="活动区域:" prop="area">
-        <city-cascader
+        <el-input
+          clearable
+          v-model="area"
+          placeholder="选择地区模糊查询"
+          class="w170"
+          @change="onOperateClick('changeArea',$event)"
+          @focus="onOperateClick('area')"
+        ></el-input>
+        <!-- <city-cascader
           ref="city"
           v-model.trim="area"
           :rang="1"
@@ -76,7 +84,7 @@
           :clearable="true"
           placeholder="请选择"
           style="width:170px;"
-        ></city-cascader>
+        ></city-cascader>-->
       </el-form-item>
       <el-form-item label="活动对象:" prop="objects">
         <el-input
@@ -149,6 +157,13 @@
       <el-button style="margin-top:20px;" type="primary" @click="submitAudit" v-if="!look">提交审核</el-button>
       <el-button @click="cancel">取消</el-button>
     </el-form>
+    <query-city
+      v-model="areaVisible"
+      v-if="areaVisible"
+      :city-params="activityParams"
+      @cancel="onOperateClick('closeCity')"
+      @change="onOperateClick('saveArea',$event)"
+    ></query-city>
   </div>
 </template>
 <script>
@@ -159,6 +174,7 @@ import CityCascader from '@/components/CityCascader'
 import PanicBuying from '../activities_complate/PanicBuying'
 import BankSubsidy from '../activities_complate/BankSubsidy'
 import PlatformSubsidy from '../activities_complate/PlatformSubsidy'
+import queryCity from '@/components/isNeedComponents/addCinemaQuery/queryCity'
 import {
   createActivity,
   updateActivity,
@@ -175,7 +191,8 @@ export default {
     DateSelector,
     PanicBuying,
     BankSubsidy,
-    PlatformSubsidy
+    PlatformSubsidy,
+    queryCity
   },
   data() {
     const checkArea = (rule, value, cb) => {
@@ -212,6 +229,7 @@ export default {
       cb()
     }
     return {
+      areaVisible: false,
       activityParams: {
         name: '',
         provinceId: '',
@@ -235,7 +253,7 @@ export default {
         bankSubsidy: {},
         platformSubsidy: {}
       },
-      area: [],
+      area: '',
       time: [],
       weekTime: [],
       limitTime: ['08:00:00', '22:00:00'],
@@ -271,6 +289,29 @@ export default {
   },
   watch: {},
   methods: {
+    onOperateClick(type, val) {
+      switch (type) {
+        case 'area': // 打开地区
+          this.areaVisible = true
+          break
+        case 'changeArea': // 处理clear地区情况
+          if (!val) {
+            this.activityParams.provinceId = ''
+            this.activityParams.cityId = ''
+          }
+          break
+        case 'closeCity': // 关闭地区弹窗
+          this.areaVisible = false
+          break
+        case 'saveArea': // 保存选择地区
+          this.activityParams.provinceId = val.provinceId
+          this.activityParams.cityId = val.cityId
+          this.area =
+            val.provinceName +
+            (val.provinceName && val.cityName ? ',' : '') +
+            val.cityName
+      }
+    },
     typeChange(val) {
       if (val === '1') {
         /* this.$set(this.activityParams, 'bankSubsidy', {})
@@ -299,8 +340,11 @@ export default {
       this.activityParams.showTimeBegin = this.limitTime[0]
       this.activityParams.showTimeEnd = this.limitTime[1]
 
-      this.activityParams.provinceId = this.area[0]
-      this.activityParams.cityId = this.area[1]
+      this.activityParams.area = this.area
+      // this.activityParams.provinceId =
+      //   this.area && this.area.length ? this.area[0] : ''
+      // this.activityParams.cityId =
+      //   this.area && this.area.length ? this.area[1] : ''
 
       const params = this.activityParams
       if (params.type === '1') {
@@ -344,9 +388,9 @@ export default {
       this.activityParams.showTimeDays = this.weekTime.join(',')
       this.activityParams.showTimeBegin = this.limitTime[0]
       this.activityParams.showTimeEnd = this.limitTime[1]
-
-      this.activityParams.provinceId = this.area[0]
-      this.activityParams.cityId = this.area[1]
+      this.activityParams.area = this.area
+      // this.activityParams.provinceId = this.area[0]
+      // this.activityParams.cityId = this.area[1]
 
       this.$refs.form.validate(valid => {
         if (valid) {
@@ -388,7 +432,7 @@ export default {
       this.activityParams = await getActivityCompleteInfo({
         id: this.$route.query.id
       })
-
+      this.area = this.activityParams.area
       this.$set(this.time, 0, this.activityParams.startTime)
       this.$set(this.time, 1, this.activityParams.endTime)
       if (this.activityParams.showTimeDays.length > 0) {
@@ -399,8 +443,8 @@ export default {
       this.$set(this.limitTime, 0, this.activityParams.showTimeBegin)
       this.$set(this.limitTime, 1, this.activityParams.showTimeEnd)
 
-      this.$set(this.area, 0, this.activityParams.provinceId)
-      this.$set(this.area, 1, this.activityParams.cityId)
+      // this.$set(this.area, 0, this.activityParams.provinceId)
+      // this.$set(this.area, 1, this.activityParams.cityId)
       this.$nextTick(() => {
         this.showChild = true
       })

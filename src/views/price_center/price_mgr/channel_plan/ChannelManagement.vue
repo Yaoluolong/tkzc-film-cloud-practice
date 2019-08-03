@@ -43,7 +43,7 @@
             <el-table-column width="120"  label="当前影院票价" align="center" prop="settlementPrice" :formatter="priceFormatter"></el-table-column>
             <el-table-column width="120"  label="当前影院服务费" align="center" prop="servicePrice"  :formatter="priceFormatter"></el-table-column> -->
             <el-table-column min-width="120"  label="价格方案内票价" align="center" prop="settlementTicketPrice"  :formatter="priceFormatter"></el-table-column>
-            <el-table-column min-width="120"  label="价格方案内影院服务费" align="center" prop="revenueServiceFee"  :formatter="priceFormatter"></el-table-column>
+            <el-table-column min-width="120"  label="价格方案内影院服务费" align="center" prop="cinemaServiceFee"  :formatter="priceFormatter"></el-table-column>
             <el-table-column min-width="120"  label="智能定价调整价格" align="center" prop="autoServicePrice"  :formatter="priceFormatter"></el-table-column>
             <el-table-column min-width="120"  label="技术服务费" align="center" prop="technicalServicePrice"  :formatter="priceFormatter"></el-table-column>
             <el-table-column min-width="120"  label="票价调整额" align="center" prop="modifyTicketPrice"  :formatter="priceFormatter"></el-table-column>

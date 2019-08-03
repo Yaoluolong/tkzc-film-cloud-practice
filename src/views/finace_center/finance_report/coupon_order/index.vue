@@ -53,7 +53,7 @@
       <el-table-column min-width="110" label="剩余总数" align="center" prop="surplus"></el-table-column>
       <el-table-column min-width="100" label="使用率(%)" align="center" prop="usePercet"></el-table-column>
       <el-table-column min-width="100" label="兑付率(%)" align="center" prop="exchangePercet"></el-table-column>
-
+      <el-table-column min-width="120" label="消费订单总额" align="center" prop="exchangeAmount"></el-table-column>
       <el-table-column min-width="100" label="销售总数" align="center" prop="num"></el-table-column>
       <el-table-column min-width="100" label="激活数" align="center" prop="activeNum"></el-table-column>
       <el-table-column min-width="100" label="冻结数" align="center" prop="frozenNum"></el-table-column>

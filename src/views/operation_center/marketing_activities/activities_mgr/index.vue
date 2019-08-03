@@ -128,7 +128,7 @@
         prop="auditStatusStr"
         v-if="query.approvalStatus==='3'"
       ></el-table-column>
-      <el-table-column min-width="160" label="操作" align="center" prop="prev" fixed="right">
+      <el-table-column min-width="180" label="操作" align="center" prop="prev" fixed="right">
         <template slot-scope="{row}">
           <!-- 运行中 or 已结束 -->
           <el-button
