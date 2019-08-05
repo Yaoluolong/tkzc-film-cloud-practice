@@ -128,8 +128,7 @@ import { orderStatusType, orderColumns, showSumType } from './const'
 import zmDatePicker from '@/components/isNeedComponents/zmDatePicker'
 import tableMixin from '@/mixins/zmTableMixin'
 import zmTable from '@/components/isNeedComponents/zmTable'
-import { getOrderPageList } from '@/api/financeCenter'
-// getOrderStatus
+import { getOrderPageList, getOrderStatus } from '@/api/financeCenter'
 import { realDeepClone } from '@/utils'
 // exportData,
 import CityCascader from '@/components/CityCascader'
@@ -164,6 +163,7 @@ export default {
         channelType: '-1',
         interfaceType: ['-1']
       },
+      isRealQuery: {},
       area: ['', '', ''],
       sumData: {} // 统计数据
     }
@@ -193,6 +193,7 @@ export default {
       if (this.query.empty) delete this.query.empty
       const res = await getOrderPageList(this.assignQuery(this.query))
       this.initialTableData(res.data, res.count)
+      this.isRealQuery = { ... this.query }
       if (this.opened) this.getSumData()
     },
     getTime(msg) {
@@ -209,13 +210,13 @@ export default {
       this.getSumData()
     },
     async getSumData() {
-      const query = realDeepClone(this.query)
+      const query = realDeepClone(this.isRealQuery)
       query.requestType = 'sum'
       this.sumData = await getOrderPageList(query)
     },
     exportOrders() {
       this.exportVisible = true
-      const query = realDeepClone(this.query)
+      const query = realDeepClone(this.isRealQuery)
       this.exportParams.query = query
       this.exportParams.exportIds = this.getSelectionIds(false, 'orderId').join(
         ','
@@ -249,7 +250,7 @@ export default {
           text: '正在同步订单状态',
           spinner: 'el-icon-loading'
         })
-        const query = Object.assign({}, this.query)
+        const query = Object.assign({}, this.isRealQuery)
         query.requestType = 'syncStatus'
         query.page = 1
         query.pageSize = 10
@@ -269,6 +270,11 @@ export default {
         }
         func()
       })
+    },
+    async getOrderStatus(row) {
+      await getOrderStatus({ cinemaId: row.cinemaId, orderId: row.orderId })
+      this.$message.success('更新成功')
+      this.loadList()
     }
   }
 }

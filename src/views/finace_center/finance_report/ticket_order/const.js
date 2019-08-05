@@ -135,15 +135,23 @@ export const orderColumns = context => {
       button: true,
       label: '操作',
       fixed: 'right',
-      minWidth: 120,
+      minWidth: 200,
       render: (h, row) => {
         return (
-          <el-button
-            type='text'
-            on-click={() => context.$router.push({ path: '/finace_center/finance_report/ticket_order/order_detail', query: { id: row.orderId }})}
-          >
+          <div>
+            <el-button
+              type='text'
+              on-click={() => context.$router.push({ path: '/finace_center/finance_report/ticket_order/order_detail', query: { id: row.orderId }})}
+            >
             详情
-          </el-button>
+            </el-button>
+            <el-button
+              type='text'
+              on-click={() => context.getOrderStatus(row)}
+            >
+          同步订单状态
+            </el-button>
+          </div>
         )
       }
     }
