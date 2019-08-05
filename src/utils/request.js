@@ -59,6 +59,8 @@ service.interceptors.response.use(
             router.push('/login')
           })
         })*/
+      } else if (res.status === 30001) {
+        console.log(res.content)
       } else {
         // if (res.status === 1)
         Message({
