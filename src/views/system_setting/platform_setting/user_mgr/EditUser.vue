@@ -180,13 +180,9 @@ export default {
       const valid = await this.$refs.form.validate()
       if (!valid) return
       const params = Object.assign({}, this.params, {
-        accountRelationId: this.params.accountRelationId
-          ? this.params.accountRelationId.join(',')
-          : '',
-        customerId: this.params.customerId
-          ? this.params.customerId.join(',')
-          : '',
-        channelId: this.params.channelId ? this.params.channelId.join(',') : ''
+        accountRelationId: this.params.accountRelationId,
+        customerId: this.params.customerId,
+        channelId: this.params.channelId
       })
       await (params.id ? updateUser(params) : createUser(params))
       this.$message.success('保存成功')
