@@ -123,6 +123,11 @@ export default {
           { min: 11, max: 11, message: '手机号码必须是11位', trigger: 'blur' },
           { pattern: /^1\d{10}/, message: '手机号码格式错误', trigger: 'blur' }
         ],
+        email: {
+          type: 'email',
+          message: '请输入正确的邮箱！',
+          trigger: 'blur'
+        },
         userName: {
           required: true,
           max: 10,
