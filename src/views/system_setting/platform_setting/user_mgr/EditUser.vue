@@ -5,17 +5,17 @@
       <div style="margin-bottom:4%">平台用户基础信息</div>
       <el-form-item label="用户名" prop="userName" class="w600">
         <tip content="用于登录平台的账号">
-          <el-input clearable  v-model="params.userName" placeholder="请输入用户名,最多10个英文或数字字符"></el-input>
+          <el-input clearable v-model="params.userName" placeholder="请输入用户名,最多10个英文或数字字符"></el-input>
         </tip>
       </el-form-item>
       <el-form-item label="用户姓名" prop="realName" class="w600">
-        <el-input clearable  v-model="params.realName" placeholder="请输入用户姓名,最多10个字"></el-input>
+        <el-input clearable v-model="params.realName" placeholder="请输入用户姓名,最多10个字"></el-input>
       </el-form-item>
       <el-form-item label="邮箱地址" prop="email" class="w600">
-        <el-input clearable  v-model="params.email" placeholder="请输入邮箱地址"></el-input>
+        <el-input clearable v-model="params.email" placeholder="请输入邮箱地址"></el-input>
       </el-form-item>
       <el-form-item label="手机号码" prop="mobile" class="w600">
-        <el-input clearable  v-model="params.mobile" placeholder="请输入手机号码"></el-input>
+        <el-input clearable v-model="params.mobile" placeholder="请输入手机号码"></el-input>
       </el-form-item>
       <el-form-item label="用户类型" prop="type" placeholder="请选择用户类型" class="w600">
         <tip content="用户账户归属，用于登录时的依据可登录哪个PC后台！">
@@ -71,16 +71,22 @@
         <el-form-item label="关联影院" prop="cinemaId" class="wp100">
           <el-button type="primary" @click="onOperateClick('addCinema')" v-if="showAddbtn">添加影院</el-button>
         </el-form-item>
-        <add-cinema class="mb20" v-show="!showAddbtn" :chooseInfo="chooseInfo" ref="addCineam" @change="getChoosedId"></add-cinema>
+        <add-cinema
+          class="mb20"
+          v-show="!showAddbtn"
+          :chooseInfo="chooseInfo"
+          ref="addCineam"
+          @change="getChoosedId"
+        ></add-cinema>
       </div>
       <el-form-item label="登录密码" class="w600">
-        <el-input clearable  v-model="params.passWord" type="password" placeholder="请输入登录密码"></el-input>
+        <el-input clearable v-model="params.passWord" type="password" placeholder="请输入登录密码"></el-input>
       </el-form-item>
       <el-form-item label="确认密码" class="w600">
-        <el-input clearable  v-model="params.rePassWord" type="password" placeholder="请输入确认密码"></el-input>
+        <el-input clearable v-model="params.rePassWord" type="password" placeholder="请输入确认密码"></el-input>
       </el-form-item>
       <el-form-item label="备注信息" prop="remark" class="w600">
-        <el-input clearable  v-model="params.remark" type="textarea" :rows="4" placeholder="请输入内容"></el-input>
+        <el-input clearable v-model="params.remark" type="textarea" :rows="4" placeholder="请输入内容"></el-input>
       </el-form-item>
       <el-form-item style="text-align:center"></el-form-item>
     </el-form>
@@ -145,7 +151,11 @@ export default {
           message: '请选择关联业务员',
           trigger: 'change'
         },
-        cinemaId: { required: true, validator: cinemaIdValid, message: '请选择所属影院' },
+        cinemaId: {
+          required: true,
+          validator: cinemaIdValid,
+          message: '请选择所属影院'
+        },
         type: { required: true, message: '请选择用户类型', trigger: 'change' },
         passWord: [
           { required: true, message: '请输入登录密码', trigger: 'blur' },
@@ -180,9 +190,21 @@ export default {
       const valid = await this.$refs.form.validate()
       if (!valid) return
       const params = Object.assign({}, this.params, {
-        accountRelationId: this.params.accountRelationId,
-        customerId: this.params.customerId,
+        accountRelationId: this.params.accountRelationId
+          ? Array.isArray(this.params.accountRelationId)
+            ? this.params.accountRelationId.join(',')
+            : this.params.accountRelationId
+          : '',
+        customerId: this.params.customerId
+          ? Array.isArray(this.params.customerId)
+            ? this.params.customerId.join(',')
+            : this.params.customerId
+          : '',
         channelId: this.params.channelId
+          ? Array.isArray(this.params.channelId)
+            ? this.params.channelId.join(',')
+            : this.params.channelId
+          : ''
       })
       await (params.id ? updateUser(params) : createUser(params))
       this.$message.success('保存成功')
