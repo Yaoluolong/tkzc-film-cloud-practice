@@ -28,13 +28,13 @@
             v-for="item in orderInfo.ticketInfo"
             :key="item.name"
           >{{item.name}}：{{item.value}}</div>
-          <div class="item">系统商类型：{{orderInfo.interfaceType}}</div>
+          <div class="item">系统商名称：{{orderInfo.interfaceType}}</div>
           <div class="item">购票手机号：{{orderInfo.mobile}}</div>
           <div class="item">系统商手机号：{{orderInfo.mobile}}</div>
           <div class="item">退票时间：{{orderInfo.backTicketTime||''}}</div>
           <div class="item">订单时间：{{orderInfo.orderTime}}</div>
           <div class="item">支付时间：{{orderInfo.successTime}}</div>
-          <div class="item">会员绑定手机号{{orderInfo.mobile}}</div>
+          <div class="item">会员绑定手机号：{{orderInfo.bindingMobile}}</div>
         </div>
       </el-collapse-item>
       <el-collapse-item name="3" title="订单基础金额">
