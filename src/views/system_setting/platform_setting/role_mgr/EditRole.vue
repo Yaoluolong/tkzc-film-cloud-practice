@@ -97,10 +97,10 @@ export default {
         const subMenus2 = await getMenuListByParentIds(subIds)
         let allSubMenu = []
         subMenus.forEach(e => {
-          // 如果没有子菜单不会显示在列表中
+          // 如果没有子菜单不会显示在列表中-------分销商菜单大部分只有两级，所以也要显示
           if (e.children && e.children.length) {
             e.children.forEach(k => {
-              const foundMenu = subMenus2.find(p => p.id === k.id)
+              const foundMenu = subMenus2.find(p => p.id === k.id) || k
               if (foundMenu) {
                 foundMenu.name = e.name + '---' + foundMenu.name
                 allSubMenu.push(foundMenu)
