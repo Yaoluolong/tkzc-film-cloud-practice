@@ -87,14 +87,14 @@ export default {
       if (menuIds.length === 0) {
         this.subMenus = []
       } else {
-        const subMenus = await getMenuListByParentIds(menuIds)
+        const subMenus = menuIds ? await getMenuListByParentIds(menuIds) : []
         let subIds = []
         subMenus.forEach(e => {
           if (e.children && e.children.length) {
             subIds = subIds.concat(e.children.map(k => k.id))
           }
         })
-        const subMenus2 = await getMenuListByParentIds(subIds)
+        const subMenus2 = subIds ? await getMenuListByParentIds(subIds) : []
         let allSubMenu = []
         subMenus.forEach(e => {
           // 如果没有子菜单不会显示在列表中-------分销商菜单大部分只有两级，所以也要显示
