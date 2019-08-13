@@ -7,10 +7,10 @@
             <el-form-item label="适用电影券销售订单:" label-width="160px">
               <span>{{params.orderNo}}</span>
             </el-form-item>
-            <el-form-item label="券不可用时段:">
+            <el-form-item label="券不可用场次时段:">
               <span>{{params.dateLimitType ==='1'? '不限制':'指定时间'}}</span>
             </el-form-item>
-            <el-form-item label="券不可用时间:" v-if="params.dateLimitType !=='1'">
+            <el-form-item label="券不可用场次时间:" v-if="params.dateLimitType !=='1'">
               <span v-if="params.timeType==='day'">每天</span>
               <span v-else-if="params.timeType==='week'">每周</span>
               <span v-else>不限制</span>
@@ -18,7 +18,7 @@
               <span v-if="params.timeType!=='-1'">{{params.stime}}--{{params.etime}}</span>
             </el-form-item>
             <el-form-item label="可用商家:">
-              <div v-for="channel in params.channelList">
+              <div v-for="(channel,index) in params.channelList" :key="index">
                 <div>{{channel.name}}</div>
               </div>
             </el-form-item>
@@ -29,7 +29,7 @@
               <el-form-item label="兑换方式："  :prop="'ruleList.'+index+'.settlementType'">
                  <span v-if="rule.settlementType==='1'">根据影厅</span>
                  <span v-else-if="rule.settlementType==='2'">根据制式</span>
-                 <span v-else="rule.settlementType==='3'">根据影片</span>
+                 <span v-else-if="rule.settlementType==='3'">根据影片</span>
               </el-form-item>
               <el-form-item label="选择影厅："  :prop="'ruleList.'+index+'.hallType'" v-if="params.cinemaGroupId && rule.settlementType === '1'" style="width:300px;">
                   <span>{{rule.hallTypeName}}</span>
@@ -41,7 +41,7 @@
                 <el-radio v-model="rule.filmType" label="-1" disabled>全部影片</el-radio>
                 <el-radio v-model="rule.filmType" label="1" disabled>指定影片</el-radio>
                 <div style="border:1px solid #ebeef5;width:800px;padding: 10px 20px;" v-if="rule.filmType === '1'">
-                  <div v-for="v in rule.filmList">
+                  <div v-for="(v,index) in rule.filmList" :key="index">
                     影片名称：<span>{{v.name}}</span>
                   </div>
                 </div>                

@@ -26,6 +26,7 @@ export default {
         cinemaList: [],
         channelId: '',
         channelList: [],
+        dateLimitType: '1',
         time: [],
         startTime: '',
         endTime: '',

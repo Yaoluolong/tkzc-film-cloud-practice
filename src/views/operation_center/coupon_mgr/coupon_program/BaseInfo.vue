@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <el-form
-      label-width="120px"
+      label-width="140px"
       style="width:1200px;"
       :model="params"
       :rules="rules"
@@ -25,14 +25,14 @@
           <el-input clearable v-model="params.orderNo" placeholder="请输入电影券销售单号" style="width:320px;"></el-input>
           <span style="font-size:14px;color:rgb(142, 142, 142);margin-left:8px;">这里的规则时间指的是影片的放映场次时间</span>
       </el-form-item>-->
-      <el-form-item label="券不可用时段" class="dateTimeLimit" prop="dateLimitType">
+      <el-form-item label-width="140px" label="券不可用场次时段" class="dateTimeLimit" prop="dateLimitType">
         <el-select clearable v-model="params.dateLimitType" style="width:320px;margin-bottom:20px;">
           <el-option label="不限制" value="1"></el-option>
           <el-option label="指定时间" value="2"></el-option>
         </el-select>
-        <span style="margin-left:20px;color:gray">电影券不可用时段默认是“不限制”，代表都可用！</span>
+        <span style="margin-left:20px;color:gray">电影券不可用场次时段默认是“不限制”，代表都可用！</span>
       </el-form-item>
-      <el-form-item label="券不可用时间" prop="time" v-if="params.dateLimitType==='2'">
+      <el-form-item label="券不可用场次时间" prop="time" v-if="params.dateLimitType==='2'">
         <el-date-picker
           unlink-panels
           v-model="params.time"
@@ -303,7 +303,7 @@ export default {
         },
         dateLimitType: {
           required: true,
-          message: '请选择券不可用时段',
+          message: '请选择券不可用场次时段',
           trigger: ['blur', 'change']
         },
         time: {

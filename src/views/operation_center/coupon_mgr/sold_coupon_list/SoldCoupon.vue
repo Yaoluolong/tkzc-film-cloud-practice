@@ -191,7 +191,7 @@
         <span>使用规则设置</span>
       </div>
       <el-form
-        label-width="140px"
+        label-width="150px"
         label-position="left"
         style="width:1000px;"
         :model="programInfo"
@@ -216,7 +216,7 @@
             :disabled="programInfoIsAllowEdit"
           ></el-input>
         </el-form-item>
-        <el-form-item label="券不可用时段" class="dateTimeLimit" prop="dateLimitType">
+        <el-form-item label="券不可用场次时段" class="dateTimeLimit" prop="dateLimitType">
           <el-select
             clearable
             v-model="programInfo.dateLimitType"
@@ -226,9 +226,9 @@
             <el-option label="不限制" value="1"></el-option>
             <el-option label="指定时间" value="2"></el-option>
           </el-select>
-          <span style="margin-left:20px;color:gray">电影券不可用时段默认是“不限制”，代表都可用！</span>
+          <span style="margin-left:20px;color:gray">电影券不可用场次时段默认是“不限制”，代表都可用！</span>
         </el-form-item>
-        <el-form-item label="不可用时段区间" prop="time" v-if="programInfo.dateLimitType==='2'">
+        <el-form-item label="不可用场次时段区间" prop="time" v-if="programInfo.dateLimitType==='2'">
           <el-date-picker
             clearable
             unlink-panels
@@ -867,7 +867,7 @@ export default {
         },
         dateLimitType: {
           required: true,
-          message: '请输入券不可用时段',
+          message: '请输入券不可用场次时段',
           trigger: 'blur'
         },
         time: { required: true, validator: checkTime, trigger: 'blur' },
