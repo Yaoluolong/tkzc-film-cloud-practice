@@ -131,14 +131,14 @@
         >{{programInfo.statusName}}</span>
       </div>
       <el-card shadow="never" class="mt20 mb15">
-        <el-form label-width="140px" label-position="right" class="wp100" :model="programInfo">
+        <el-form label-width="160px" label-position="right" class="wp100" :model="programInfo">
           <el-form-item label="规则名称:">
             <span>{{programInfo.name}}</span>
           </el-form-item>
-          <el-form-item label="不可用时段:">
+          <el-form-item label="不可用场次时段:">
             <span>{{programInfo.dateLimitType==='1'?'不限制':'指定时间'}}</span>
           </el-form-item>
-          <el-form-item label="不可用时段区间:" v-if="programInfo.dateLimitType==='2'">
+          <el-form-item label="不可用场次时段区间:" v-if="programInfo.dateLimitType==='2'">
             <span>{{programInfo.startTime}} -- {{programInfo.endTime}}</span>&emsp;
             <span v-if="programInfo.timeType==='day'">每天</span>
             <span v-else-if="programInfo.timeType==='week'">每周</span>
