@@ -218,14 +218,17 @@
           </el-col>
         </el-row>
       </el-card>
+      <use-rule :order-no="data.saleOrderNo"></use-rule>
     </div>
   </div>
 </template>
 
 <script>
 import { getSoldCouponInfo } from '@/api/operationCenter'
+import useRule from './useRule'
 export default {
   name: 'card_detail',
+  components: { useRule },
   data() {
     return {
       data: {
