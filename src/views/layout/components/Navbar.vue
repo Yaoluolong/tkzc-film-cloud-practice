@@ -18,7 +18,9 @@
       <i class="el-icon-logout" title="安全退出" @click="logout"></i>
     </li>
     <li class="menu-wapper split">
-      <i class="el-icon-msg" title="我的消息" @click="$router.push({name:'message_list'})"></i>
+      <el-badge :value="messageCount" class="item">
+       <i class="el-icon-msg" title="我的消息" @click="$router.push({name:'message_list'})"></i>
+      </el-badge>
     </li>
     <li class="menu-wapper split">
       <i class="el-icon-clean" title="清楚缓存" @click="clearCache"></i>
@@ -35,7 +37,7 @@ import { mapGetters } from 'vuex'
 import { clearCache } from '@/api/systemSetting'
 export default {
   computed: {
-    ...mapGetters(['sidebar', 'avatar', 'name', 'permission_routers'])
+    ...mapGetters(['sidebar', 'avatar', 'name', 'permission_routers', 'messageCount'])
   },
   methods: {
     toggleSideBar() {

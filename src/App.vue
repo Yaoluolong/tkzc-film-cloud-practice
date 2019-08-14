@@ -6,8 +6,11 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+import webSocketMixin from '@/mixins/webSocketMixin'
 export default {
   name: 'App',
+  mixins: [webSocketMixin],
   provide() {
     return {
       reload: this.reload
@@ -18,12 +21,28 @@ export default {
       isRouterAlive: true
     }
   },
+  created() {
+    this.initWebSocket()
+  },
   methods: {
+    ...mapActions(['setMessageCount', 'setMessage']),
     reload() {
       this.isRouterAlive = false
       this.$nextTick(function() {
         this.isRouterAlive = true
       })
+    },
+    webSocketOnMessage(e) {
+      const obj = e && e.data && JSON.parse(e.data)
+      const data = obj.data
+      if (data) {
+        this.setMessage(data.list)
+        this.setMessageCount(data.count)
+      }
+      console.log(data)
+    },
+    readMessage(data) {
+      this.webSocketSend(data)
     }
   }
 }
