@@ -27,6 +27,14 @@
         <el-form-item label="客户名称:" prop="customer">
           <customer-selector v-model="cardInfo.customer"></customer-selector>
         </el-form-item>
+        <el-form-item label="业务员所属公司:" prop="companyId">
+          <zm-select
+            class="vm w320"
+            v-model="cardInfo.companyId"
+            select-type="companyList"
+            placeholder="请选择业务员所属公司"
+          ></zm-select>
+        </el-form-item>
         <el-form-item label="电影卡种类" prop="type" style="display:inline-block;width: 450px;">
           <remote-select
             v-model="cardInfo.type"
@@ -335,6 +343,7 @@
 </template>
 <script>
 import { mapGetters } from 'vuex'
+import zmSelect from '@/components/isNeedComponents/zmSelect'
 import {
   getInvoiceTypeList,
   getCardOrderInfo,
@@ -349,6 +358,7 @@ import { isPositive } from '@/utils/validate'
 export default {
   name: 'sold_card',
   components: {
+    zmSelect,
     CustomerSelector,
     CouponTypeIdSelector,
     PriceArea,
@@ -399,11 +409,17 @@ export default {
       cardInfo: {
         type: '1',
         scalePrice: 1,
-        scalePoint: 10
+        scalePoint: 10,
+        companyId: ''
       },
       invoiceInfo: {},
       payInfo: {},
       cardInfoRules: {
+        companyId: {
+          required: true,
+          message: '请选择业务员所属公司',
+          trigger: 'change'
+        },
         customer: {
           required: true,
           message: '请输入营销客户',
@@ -623,6 +639,11 @@ export default {
       this.closeTab(true)
       // this.$router.push('/operation_center/gift_card/sold_card_list')
     }
+  },
+  mounted() {
+    this.$nextTick(() => {
+      this.$refs.cardInfoForm.clearValidate()
+    })
   },
   async created() {
     if (this.$route.query.orderNo) {
