@@ -137,16 +137,18 @@
         show-overflow-tooltip
         prop="startTime"
       >
-        <template slot-scope="{row}">{{row.startTime}}--{{row.endTime}}</template>
+        <template slot-scope="{row}">{{row.startTime}}~{{row.endTime}}</template>
       </el-table-column>
 
-      <el-table-column
-        min-width="80"
-        label="排期数"
-        align="center"
-        show-overflow-tooltip
-        prop="schCount"
-      ></el-table-column>
+      <el-table-column min-width="120" align="center" show-overflow-tooltip prop="schCount">
+        <template slot="header" slot-scope="scope">
+          <span @click="changeSort(scope)">
+            <span>排期数</span> 
+            <i class="el-icon-sort-up" :class="{primary:sortType==='1'}"></i>
+            <i class="el-icon-sort-down" :class="{primary:sortType==='2'}"></i>
+          </span>
+        </template>
+      </el-table-column>
 
       <el-table-column
         width="180"
@@ -210,7 +212,8 @@ export default {
       },
       cinemaType: 'normal', // 影院类型 normal 正常  abnormal  异常
       area: ['', ''],
-      multipleSelection: []
+      multipleSelection: [],
+      sortType: '0'
     }
   },
   methods: {
@@ -228,10 +231,17 @@ export default {
       this.refreshTable()
       this.$forceUpdate()
     },
+    changeSort(scope) {
+      console.log('scope', scope)
+      const sum = ['0', '1', '2']
+      this.sortType = this.sortType !== sum[sum.length - 1] ? sum[+this.sortType + 1] : sum[0]
+      this.refreshTable()
+    },
     queryTable(query) {
       query.provinceId = this.area[0]
       query.cityId = this.area[1]
       query.countyId = this.area[2]
+      query.orderType = this.sortType
       const req = realDeepClone(query)
       return getCinemaPageList(req)
     },
