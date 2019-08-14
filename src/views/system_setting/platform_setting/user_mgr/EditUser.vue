@@ -79,10 +79,10 @@
           @change="getChoosedId"
         ></add-cinema>
       </div>
-      <el-form-item label="登录密码" class="w600">
+      <el-form-item label="登录密码" class="w600" :prop="params.id?'passWord':'newPassWord'">
         <el-input clearable v-model="params.passWord" type="password" placeholder="请输入登录密码"></el-input>
       </el-form-item>
-      <el-form-item label="确认密码" class="w600">
+      <el-form-item label="确认密码" class="w600" :prop="params.id?'rePassWord':'newRePassWord'">
         <el-input clearable v-model="params.rePassWord" type="password" placeholder="请输入确认密码"></el-input>
       </el-form-item>
       <el-form-item label="备注信息" prop="remark" class="w600">
@@ -107,6 +107,20 @@ export default {
     const cinemaIdValid = (rule, value, callback) => {
       if (!this.params.cinemaId) {
         callback(new Error('请选择影院'))
+      } else {
+        callback()
+      }
+    }
+    const passWordValid = (rule, value, callback) => {
+      if (!/^[^\u4e00-\u9fa5]{6,20}$/.test(value)) {
+        callback(new Error('密码必须为6-20位非中文字符'))
+      } else {
+        callback()
+      }
+    }
+    const rePasswordValid = (rule, value, callback) => {
+      if (value !== this.params.passWord) {
+        callback(new Error('两次输入的密码不一样'))
       } else {
         callback()
       }
@@ -162,13 +176,21 @@ export default {
           message: '请选择所属影院'
         },
         type: { required: true, message: '请选择用户类型', trigger: 'change' },
-        passWord: [
-          { required: true, message: '请输入登录密码', trigger: 'blur' },
-          { min: 6, message: '长度至少6位', trigger: 'blur' }
+        passWord: { validator: passWordValid, trigger: 'blur' },
+        newPassWord: [
+          { required: true, message: '请输入登陆密码', trigger: 'blur' },
+          {
+            validator: passWordValid,
+            trigger: 'blur'
+          }
         ],
-        rePassWord: [
-          { required: true, message: '请输入确认密码', trigger: 'blur' },
-          { min: 6, message: '长度至少6位', trigger: 'blur' }
+        rePassWord: { validator: rePasswordValid, trigger: 'blur' },
+        newRePassWord: [
+          { required: true, message: '请再次输入登陆密码', trigger: 'blur' },
+          {
+            validator: passWordValid,
+            trigger: 'blur'
+          }
         ]
       }
     }
