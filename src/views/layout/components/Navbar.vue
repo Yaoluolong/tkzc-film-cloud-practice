@@ -18,8 +18,8 @@
       <i class="el-icon-logout" title="安全退出" @click="logout"></i>
     </li>
     <li class="menu-wapper split">
-      <el-badge :value="messageCount" class="item">
-       <i class="el-icon-msg" title="我的消息" @click="$router.push({name:'message_list'})"></i>
+      <el-badge :value="messageCount" >
+       <i class="el-icon-msg lh60"  title="我的消息" @click="$router.push({name:'message_list'})"></i>
       </el-badge>
     </li>
     <li class="menu-wapper split">

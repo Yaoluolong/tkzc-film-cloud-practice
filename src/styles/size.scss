@@ -38,6 +38,9 @@ $distance-map: (
     padding-top: $v + px;
     padding-bottom: $v + px;
   }
+  .lh#{$v} {
+    line-height: $v + px;
+  }
 }
 
 // font-sizeai
