@@ -22,6 +22,8 @@ export default {
     }
   },
   created() {
+    console.log(this.$bus)
+    this.$bus.$on('$$readMessage', this.readMessage)
     this.initWebSocket()
   },
   methods: {
@@ -33,6 +35,7 @@ export default {
       })
     },
     webSocketOnMessage(e) {
+      console.log('获取', e)
       const obj = e && e.data && JSON.parse(e.data)
       const data = obj.data
       if (data) {

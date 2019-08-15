@@ -31,6 +31,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+import webSocketMixin from '@/mixins/webSocketMixin'
 import { getPageList, read } from '@/api/systemMessage'
 import zmTable from '@/components/isNeedComponents/zmTable'
 import tableMixin from '@/mixins/zmTableMixin'
@@ -40,7 +42,7 @@ import { messageColumns } from './const'
 import detailPanel from '@/mixins/detailPanel'
 export default {
   name: 'message_center',
-  mixins: [tableMixin, detailPanel],
+  mixins: [tableMixin, detailPanel, webSocketMixin],
   components: { zmTable, zmPanel, coupon_apply },
   data() {
     return {
@@ -56,6 +58,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['setMessageCount', 'setMessage']),
     async loadList() {
       this.loading = true
       const res = await getPageList(this.assignQuery(this.query))
@@ -75,13 +78,12 @@ export default {
           ? JSON.parse(row.param)
           : row.param
         : {}
-      console.log(param)
       try {
         await read({ id: row.id })
+        this.$bus.$on('$$readMessage', this.readMessage)
         this.loadList()
       } catch (error) {
-        console.log(error)
-        return
+        return error
       }
       this.detailParams.id = param.id
       this.detailParams.status = param.status
@@ -90,6 +92,18 @@ export default {
     },
     onOperateClick() {
       this.$refs[this.detailParams.componentsName].submit()
+    },
+    readMessage(data) {
+      this.webSocketSend(data)
+    },
+    webSocketOnMessage(e) {
+      const obj = e && e.data && JSON.parse(e.data)
+      const data = obj.data
+      if (data) {
+        this.setMessage(data.list)
+        this.setMessageCount(data.count)
+      }
+      console.log(data)
     }
   }
 }

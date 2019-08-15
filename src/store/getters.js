@@ -12,6 +12,7 @@ const getters = {
   cachedViews: state => state.tagsView.cachedViews,
   permission_routers: state => state.permission.routers,
   addRouters: state => state.permission.addRouters,
+  message: state => state.socket.message,
   messageCount: state => state.socket.messageCount
 }
 export default getters
