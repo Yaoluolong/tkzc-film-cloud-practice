@@ -54,6 +54,10 @@ export function deleteCouponType(ids) {
 export function getCouponApplyPageList(params) {
   return request.get('/systemApi/resellerCouponApplication/getPageList', { params: params })
 }
+// 获取分销商下拉列表
+export function getResellerList(params) {
+  return request.get('/systemApi/systemAccount/getResellerList', { params: params })
+}
 // 获取券申请详情
 export function getCouponApplyInfo(params) {
   return request.get('/systemApi/resellerCouponApplication/getInfo', { params: params })

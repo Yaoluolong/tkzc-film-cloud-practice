@@ -1,5 +1,5 @@
 import { getCompanyList } from '@/api/systemSetting'
-import { getCustomerList, getMemberList } from '@/api/operationCenter'
+import { getCustomerList, getMemberList, getResellerList } from '@/api/operationCenter'
 import { getChannelList } from '@/api/mallCenter'
 // 接口类型,name默认name,id默认value
 export const apiType = {
@@ -16,5 +16,8 @@ export const apiType = {
   },
   channelList: { // 商家
     selectApi: getChannelList
+  },
+  getResellerList: { // 分销商下拉列表
+    selectApi: getResellerList
   }
 }

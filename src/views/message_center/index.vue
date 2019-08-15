@@ -2,60 +2,84 @@
   <div class="app-container">
     <div class="container-heard mb20">消息中心</div>
     <div class="container-body">
-      <el-table
-        class="wp100 message-table"
-        :data="tableDate"
-        v-loading="listLoading"
-        element-loading-text="给我一点时间"
-        :show-header="false"
-        fit
-        highlight-current-row
-      >
-        <el-table-column width="50" align="center">
-          <template slot-scope="{row}">
-            <span :class="+row.isRead===0?'danger':'default'">●</span>
-          </template>
-        </el-table-column>
-        <el-table-column align="left" prop="message" show-overflow-tooltip />
-        <el-table-column width="100" align="left">
-          <template slot-scope="{row}">
-            <el-button type="text" @click="operDetail(row)">【查看详情】</el-button>
-          </template>
-        </el-table-column>
-        <el-table-column width="120" align="right" prop="operTime" />
-      </el-table>
+      <zm-table
+        :columns="columns"
+        :fetch="loadList"
+        :table-params="tableParams"
+        :options="{showHeader:false,border:false,loading:loading}"
+      ></zm-table>
     </div>
+    <zm-panel title="查看申请详情" :visible.sync="detailPanelShow" @change="closeDetaliPanel">
+      <component
+        :is="detailParams.componentsName"
+        :ref="detailParams.componentsName"
+        :id="detailParams.id"
+        :detail-params="detailParams"
+        @save-after="saveAfter"
+        @cancel="closeDetaliPanel"
+      />
+      <div slot="footer" class="footer-button">
+        <el-button @click="closeDetaliPanel">{{+detailParams.status!==0?'关闭':'取消'}}</el-button>
+        <el-button
+          type="primary"
+          @click="onOperateClick('subApply')"
+          v-if="+detailParams.status===0"
+        >确定</el-button>
+      </div>
+    </zm-panel>
   </div>
 </template>
 
 <script>
+import { getPageList } from '@/api/systemMessage'
+import zmTable from '@/components/isNeedComponents/zmTable'
+import tableMixin from '@/mixins/zmTableMixin'
+import zmPanel from '@/components/isNeedComponents/zmPanel'
+import coupon_apply from '@/views/operation_center/coupon_mgr/coupon_apply/detail'
+import { messageColumns } from './const'
+import detailPanel from '@/mixins/detailPanel'
 export default {
   name: 'message_center',
+  mixins: [tableMixin, detailPanel],
+  components: { zmTable, zmPanel, coupon_apply },
   data() {
     return {
-      tableDate: [
-        {
-          message:
-            '您有一条【分销商名称】发起的“【券申请流程名称】”券申请待处理。',
-          link: '',
-          isRead: 0,
-          operTime: '20:29:10'
-        }
-      ],
-      listLoading: false
+      detailPanelShow: false,
+      loading: false,
+      listLoading: false,
+      query: {}
+    }
+  },
+  computed: {
+    columns() {
+      return messageColumns(this)
     }
   },
   methods: {
+    async loadList() {
+      this.loading = true
+      const res = await getPageList(this.assignQuery(this.query))
+      this.initialTableData(res.data, res.count)
+      this.loading = false
+    },
+    closeDetaliPanel() {
+      this.detailPanelShow = false
+    },
+    saveAfter() {
+      this.closeDetaliPanel()
+      this.$router.push({ name: this.detailParams.componentsName })
+    },
     operDetail(row) {
-      //   this.$router.push({ name: '', params: row })
+      const param = row.param ? typeof row.param === 'string' ? JSON.parse(row.param) : row.param : {}
+      console.log(param)
+      this.detailParams.id = param.id
+      this.detailParams.status = param.status
+      this.detailParams.componentsName = 'coupon_apply'
+      this.detailPanelShow = true
+    },
+    onOperateClick() {
+      this.$refs[this.detailParams.componentsName].submit()
     }
   }
 }
 </script>
-
-<style scoped>
-.message-table {
-  border: 1px solid #ebeef5;
-  border-bottom: none;
-}
-</style>

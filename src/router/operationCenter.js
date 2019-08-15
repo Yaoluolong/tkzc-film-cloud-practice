@@ -557,6 +557,79 @@ export default [
         meta: { title: '补充活动款对账', icon: '' }
       }
     ]
+  },
+  {
+    path: 'earlyWarning_monitor_center',
+    component: Layout,
+    meta: { title: '预警监测中心', icon: 'huiyuan' },
+    children: [
+      {
+        path: 'capital_pool',
+        name: 'capital_pool',
+        component: () => import('@/views/operation_center/earlyWarning_monitor_center/capital_pool'),
+        meta: { title: '资金池监测', icon: '' }
+      },
+      {
+        path: 'cinema',
+        name: 'cinema',
+        component: () => import('@/views/operation_center/earlyWarning_monitor_center/cinema'),
+        meta: { title: '影院监测', icon: '' }
+      },
+      {
+        path: 'couponCard_distributor',
+        name: 'couponCard_distributor',
+        component: () => import('@/views/operation_center/earlyWarning_monitor_center/couponCard_distributor'),
+        meta: { title: '卡券分销商监测', icon: '' }
+      },
+      {
+        path: 'marketing _activities',
+        name: 'marketing _activities',
+        component: () => import('@/views/operation_center/earlyWarning_monitor_center/marketing _activities'),
+        meta: { title: '营销活动监测', icon: '' }
+      },
+      {
+        path: 'member',
+        name: 'member',
+        component: () => import('@/views/operation_center/earlyWarning_monitor_center/member'),
+        meta: { title: '会员监测', icon: '' }
+      }
+    ]
+  },
+  {
+    path: 'earlyWarning_set_mgr',
+    component: Layout,
+    meta: { title: '预警配置管理', icon: 'huiyuan' },
+    children: [
+      {
+        path: 'capital_pool',
+        name: 'capital_pool',
+        component: () => import('@/views/operation_center/earlyWarning_set_mgr/capital_pool'),
+        meta: { title: '资金池预警配置', icon: '' }
+      },
+      {
+        path: 'cinema',
+        name: 'cinema',
+        component: () => import('@/views/operation_center/earlyWarning_set_mgr/cinema'),
+        meta: { title: '影院预警配置', icon: '' }
+      },
+      {
+        path: 'couponCard_distributor',
+        name: 'couponCard_distributor',
+        component: () => import('@/views/operation_center/earlyWarning_set_mgr/couponCard_distributor'),
+        meta: { title: '卡券分销商预警配置', icon: '' }
+      },
+      {
+        path: 'marketing _activities',
+        name: 'marketing _activities',
+        component: () => import('@/views/operation_center/earlyWarning_set_mgr/marketing _activities'),
+        meta: { title: '营销活动预警配置', icon: '' }
+      },
+      {
+        path: 'member',
+        name: 'member',
+        component: () => import('@/views/operation_center/earlyWarning_set_mgr/member'),
+        meta: { title: '会员预警配置', icon: '' }
+      }
+    ]
   }
-
 ]

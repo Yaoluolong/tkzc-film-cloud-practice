@@ -2,12 +2,12 @@
   <div class="app-container">
     <el-form inline label-width="120px">
       <el-form-item label="分销商名称">
-        <customer-selector
-          v-model="query.customer"
-          access-type="couponLimit"
-          select-style="width:230px"
-          :isAddNew="false"
-        ></customer-selector>
+        <zm-select
+            class="w230"
+            v-model="query.customer"
+            select-type="getResellerList"
+            placeholder="请选择分销商名称"
+          ></zm-select>
       </el-form-item>
       <el-form-item label="券申请名称">
         <el-input clearable v-model="query.name"  placeholder="请输入券申请名称" class="w230"></el-input>
@@ -82,6 +82,7 @@
   </div>
 </template>
 <script>
+import zmSelect from '@/components/isNeedComponents/zmSelect'
 import { getCouponApplyPageList } from '@/api/operationCenter'
 import CustomerSelector from '@/components/CustomerSelector'
 import zmTable from '@/components/isNeedComponents/zmTable'
@@ -91,7 +92,7 @@ import detail from './detail'
 import { couponApplyColumns } from './const'
 export default {
   name: 'coupon_apply_list',
-  components: { zmTable, zmPanel, CustomerSelector, detail },
+  components: { zmSelect, zmTable, zmPanel, CustomerSelector, detail },
   mixins: [tableMixin],
   computed: {
     columns() {

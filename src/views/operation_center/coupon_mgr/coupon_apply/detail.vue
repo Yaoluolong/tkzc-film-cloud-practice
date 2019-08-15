@@ -10,7 +10,7 @@
     <p class="fs14 fb">申请处理</p>
     <div>
       <el-form label-width="100px" :model="params" :rules="rules" ref="form">
-        <el-form-item label="处理方式：" prop="manageType" v-if="+detailParams.status===0">
+        <el-form-item label="处理方式：" prop="manageType" v-if="+info.status===0">
           <el-radio-group v-model="params.manageType">
             <el-radio :label="'1'">接收</el-radio>
             <el-radio :label="'0'">拒绝</el-radio>
@@ -20,14 +20,14 @@
           <span>处理方式：</span>
           <span>{{info.statusName}}</span>
         </div>
-        <div class="w400 fs14 mb20" v-if="+detailParams.status!==0">
+        <div class="w400 fs14 mb20" v-if="+info.status!==0">
           <span>处理时间：</span>
           <span>{{info.handleTime}}</span>
         </div>
         <el-form-item
           label="备注："
           prop="approvalContent"
-          v-if="+detailParams.status===0&&+params.manageType===0"
+          v-if="+info.status===0&&+params.manageType===0"
         >
           <el-input
           clearable 
@@ -38,11 +38,11 @@
             placeholder="请输入拒绝理由，不超过300个字"
           ></el-input>
         </el-form-item>
-        <div class="w400 fs14 mb20" v-if="+detailParams.status===2">
+        <div class="w400 fs14 mb20" v-if="+info.status===2">
           <span>备注：</span>
           <span>{{info.approvalContent}}</span>
         </div>
-        <div class="w400 fs14 mb20" v-if="+detailParams.status===1||+detailParams.status===3">
+        <div class="w400 fs14 mb20" v-if="+info.status===1||+info.status===3">
           <span>销售订单号：</span>
           <el-button type="text" @click="goSale(info)">{{info.orderNo}}</el-button>
         </div>
