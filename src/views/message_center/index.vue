@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { getPageList } from '@/api/systemMessage'
+import { getPageList, read } from '@/api/systemMessage'
 import zmTable from '@/components/isNeedComponents/zmTable'
 import tableMixin from '@/mixins/zmTableMixin'
 import zmPanel from '@/components/isNeedComponents/zmPanel'
@@ -69,9 +69,20 @@ export default {
       this.closeDetaliPanel()
       this.$router.push({ name: this.detailParams.componentsName })
     },
-    operDetail(row) {
-      const param = row.param ? typeof row.param === 'string' ? JSON.parse(row.param) : row.param : {}
+    async operDetail(row) {
+      const param = row.param
+        ? typeof row.param === 'string'
+          ? JSON.parse(row.param)
+          : row.param
+        : {}
       console.log(param)
+      try {
+        await read({ id: row.id })
+        this.loadList()
+      } catch (error) {
+        console.log(error)
+        return
+      }
       this.detailParams.id = param.id
       this.detailParams.status = param.status
       this.detailParams.componentsName = 'coupon_apply'
