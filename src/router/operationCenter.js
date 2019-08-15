@@ -601,32 +601,32 @@ export default [
     meta: { title: '预警配置管理', icon: 'huiyuan' },
     children: [
       {
-        path: 'capital_pool',
-        name: 'capital_pool',
+        path: 'capital_pool_set',
+        name: 'capital_pool_set',
         component: () => import('@/views/operation_center/earlyWarning_set_mgr/capital_pool'),
         meta: { title: '资金池预警配置', icon: '' }
       },
       {
-        path: 'cinema',
-        name: 'cinema',
+        path: 'cinema_set',
+        name: 'cinema_set',
         component: () => import('@/views/operation_center/earlyWarning_set_mgr/cinema'),
         meta: { title: '影院预警配置', icon: '' }
       },
       {
-        path: 'couponCard_distributor',
-        name: 'couponCard_distributor',
+        path: 'couponCard_distributor_set',
+        name: 'couponCard_distributor_set',
         component: () => import('@/views/operation_center/earlyWarning_set_mgr/couponCard_distributor'),
         meta: { title: '卡券分销商预警配置', icon: '' }
       },
       {
-        path: 'marketing _activities',
-        name: 'marketing _activities',
+        path: 'marketing _activities_set',
+        name: 'marketing _activities_set',
         component: () => import('@/views/operation_center/earlyWarning_set_mgr/marketing _activities'),
         meta: { title: '营销活动预警配置', icon: '' }
       },
       {
-        path: 'member',
-        name: 'member',
+        path: 'member_set',
+        name: 'member_set',
         component: () => import('@/views/operation_center/earlyWarning_set_mgr/member'),
         meta: { title: '会员预警配置', icon: '' }
       }
