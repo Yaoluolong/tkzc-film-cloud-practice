@@ -1,6 +1,5 @@
 <template>
   <div class="app-container">
-    {{params.channelId}}
     <el-form label-width="120px" :model="params" :rules="rules" ref="form">
       <div style="margin-bottom:4%">平台用户基础信息</div>
       <el-form-item label="用户名" prop="userName" class="w600">
