@@ -111,14 +111,18 @@ export default {
       }
     }
     const passWordValid = (rule, value, callback) => {
-      if (!/^[^\u4e00-\u9fa5]{6,20}$/.test(value)) {
+      if (!this.params.id && !this.params.passWord) {
+        callback(new Error('请输入登陆密码'))
+      } else if (!/^[^\u4e00-\u9fa5]{6,20}$/.test(this.params.passWord)) {
         callback(new Error('密码必须为6-20位非中文字符'))
       } else {
         callback()
       }
     }
     const rePasswordValid = (rule, value, callback) => {
-      if (value !== this.params.passWord) {
+      if (!this.params.id && !this.params.rePassWord) {
+        callback(new Error('请再次输入登陆密码'))
+      } else if (this.params.rePassWord !== this.params.passWord) {
         callback(new Error('两次输入的密码不一样'))
       } else {
         callback()
@@ -176,21 +180,18 @@ export default {
         },
         type: { required: true, message: '请选择用户类型', trigger: 'change' },
         passWord: { validator: passWordValid, trigger: 'blur' },
-        newPassWord: [
-          { required: true, message: '请输入登陆密码', trigger: 'blur' },
-          {
-            validator: passWordValid,
-            trigger: 'blur'
-          }
-        ],
+        newPassWord: {
+          required: true,
+          validator: passWordValid,
+          trigger: 'blur'
+        },
+
         rePassWord: { validator: rePasswordValid, trigger: 'blur' },
-        newRePassWord: [
-          { required: true, message: '请再次输入登陆密码', trigger: 'blur' },
-          {
-            validator: passWordValid,
-            trigger: 'blur'
-          }
-        ]
+        newRePassWord: {
+          required: true,
+          validator: rePasswordValid,
+          trigger: 'blur'
+        }
       }
     }
   },
