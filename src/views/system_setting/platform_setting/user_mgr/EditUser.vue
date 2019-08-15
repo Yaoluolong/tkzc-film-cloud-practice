@@ -113,7 +113,7 @@ export default {
     const passWordValid = (rule, value, callback) => {
       if (!this.params.id && !this.params.passWord) {
         callback(new Error('请输入登陆密码'))
-      } else if (!/^[^\u4e00-\u9fa5]{6,20}$/.test(this.params.passWord)) {
+      } else if (this.params.passWord && !/^[^\u4e00-\u9fa5]{6,20}$/.test(this.params.passWord)) {
         callback(new Error('密码必须为6-20位非中文字符'))
       } else {
         callback()
@@ -185,7 +185,6 @@ export default {
           validator: passWordValid,
           trigger: 'blur'
         },
-
         rePassWord: { validator: rePasswordValid, trigger: 'blur' },
         newRePassWord: {
           required: true,
