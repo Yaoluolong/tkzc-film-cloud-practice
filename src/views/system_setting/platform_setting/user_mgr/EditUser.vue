@@ -179,17 +179,17 @@ export default {
           message: '请选择所属影院'
         },
         type: { required: true, message: '请选择用户类型', trigger: 'change' },
-        passWord: { validator: passWordValid, trigger: 'blur' },
+        passWord: { validator: passWordValid, trigger: 'change' },
         newPassWord: {
           required: true,
           validator: passWordValid,
-          trigger: 'blur'
+          trigger: 'change'
         },
-        rePassWord: { validator: rePasswordValid, trigger: 'blur' },
+        rePassWord: { validator: rePasswordValid, trigger: 'change' },
         newRePassWord: {
           required: true,
           validator: rePasswordValid,
-          trigger: 'blur'
+          trigger: 'change'
         }
       }
     }
